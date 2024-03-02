@@ -54,7 +54,7 @@ const buttonStyles = plugin(function ({ addUtilities, theme }) {
         color: theme(`colors.${hoverColor}`, "currentColor"),
         borderColor: theme(`colors.${hoverBorderColor}`, "transparent"),
         boxShadow: theme("boxShadow.metallicEdgesMd"),
-        textShadow: theme("textShadow.lightTextShadow"),
+        textShadow: theme("textShadow.textShadow"),
         "-webkit-text-stroke-width": hoverTextStrokeWidth,
         "-webkit-text-stroke-color": theme(
           `colors.${hoverBorderColor}`,
@@ -91,9 +91,9 @@ const buttonStyles = plugin(function ({ addUtilities, theme }) {
       "col.700", // bgColor
       "col.100", // color
       "col.500", // borderColor
-      "col.300", // hoverBgColor
-      "col.900", // hoverColor
-      "col.970" //hoverBorderColor
+      "col.500", // hoverBgColor
+      "col.100", // hoverColor
+      "col.270" //hoverBorderColor
     ),
     ".smallButtonStyles": generateButtonStyles(
       "1.6vh", // fontSize
@@ -101,29 +101,29 @@ const buttonStyles = plugin(function ({ addUtilities, theme }) {
       "col.700", // bgColor
       "col.100", // color
       "col.500", // borderColor
-      "col.300", // hoverBgColor
-      "col.900", // hoverColor
-      "col.970" //hoverBorderColor
+      "col.500", // hoverBgColor
+      "col.100", // hoverColor
+      "col.270" //hoverBorderColor
     ),
     ".negativeButtonStyles": generateButtonStyles(
       "2.1vh", // fontSize
       "3.5vh", // height
-      "red.400", // bgColor
+      "col.300", // bgColor
       "col.100", // color
-      "red.800", // borderColor
-      "col.200", // hoverBgColor
-      "red.800", // hoverColor
-      "red.800" //hoverBorderColor
+      "col.800", // borderColor
+      "col.500", // hoverBgColor
+      "col.100", // hoverColor
+      "col.100" //hoverBorderColor
     ),
     ".smallNegativeButtonStyles": generateButtonStyles(
       "1.6vh", // fontSize
       "2.9vh", // height
-      "red.400", // bgColor
+      "col.300", // bgColor
       "col.100", // color
-      "red.800", // borderColor
-      "col.200", // hoverBgColor
-      "red.800", // hoverColor
-      "red.800" //hoverBorderColor
+      "col.800", // borderColor
+      "col.500", // hoverBgColor
+      "col.100", // hoverColor
+      "col.100" //hoverBorderColor
     ),
     ".unstyledButtonStyles": generateUnstyledButtonStyles("2.1vh", "3.5vh"),
     ".smallUnstyledButtonStyles": generateUnstyledButtonStyles(
@@ -333,104 +333,104 @@ export default {
     extend: {
       colors: {
         col: {
-          100: "rgba(228, 237, 245, 1)",
-          110: "rgba(228, 237, 245, 0.1)",
-          120: "rgba(228, 237, 245, 0.2)",
-          130: "rgba(228, 237, 245, 0.3)",
-          140: "rgba(228, 237, 245, 0.4)",
-          150: "rgba(228, 237, 245, 0.5)",
-          160: "rgba(228, 237, 245, 0.6)",
-          170: "rgba(228, 237, 245, 0.7)",
-          180: "rgba(228, 237, 245, 0.8)",
-          190: "rgba(228, 237, 245, 0.9)",
+          100: "rgba(255, 238, 222, 1)",
+          110: "rgba(255, 238, 222, 0.1)",
+          120: "rgba(255, 238, 222, 0.2)",
+          130: "rgba(255, 238, 222, 0.3)",
+          140: "rgba(255, 238, 222, 0.4)",
+          150: "rgba(255, 238, 222, 0.5)",
+          160: "rgba(255, 238, 222, 0.6)",
+          170: "rgba(255, 238, 222, 0.7)",
+          180: "rgba(255, 238, 222, 0.8)",
+          190: "rgba(255, 238, 222, 0.9)",
 
-          200: "rgba(208, 226, 242, 1)",
-          210: "rgba(208, 226, 242, 0.1)",
-          220: "rgba(208, 226, 242, 0.2)",
-          230: "rgba(208, 226, 242, 0.3)",
-          240: "rgba(208, 226, 242, 0.4)",
-          250: "rgba(208, 226, 242, 0.5)",
-          260: "rgba(208, 226, 242, 0.6)",
-          270: "rgba(208, 226, 242, 0.7)",
-          280: "rgba(208, 226, 242, 0.8)",
-          290: "rgba(208, 226, 242, 0.9)",
+          200: "rgba(242, 181, 128, 1)",
+          210: "rgba(242, 181, 128, 0.1)",
+          220: "rgba(242, 181, 128, 0.2)",
+          230: "rgba(242, 181, 128, 0.3)",
+          240: "rgba(242, 181, 128, 0.4)",
+          250: "rgba(242, 181, 128, 0.5)",
+          260: "rgba(242, 181, 128, 0.6)",
+          270: "rgba(242, 181, 128, 0.7)",
+          280: "rgba(242, 181, 128, 0.8)",
+          290: "rgba(242, 181, 128, 0.9)",
 
-          300: "rgba(217, 181, 173, 1)",
-          310: "rgba(217, 181, 173, 0.1)",
-          320: "rgba(217, 181, 173, 0.2)",
-          330: "rgba(217, 181, 173, 0.3)",
-          340: "rgba(217, 181, 173, 0.4)",
-          350: "rgba(217, 181, 173, 0.5)",
-          360: "rgba(217, 181, 173, 0.6)",
-          370: "rgba(217, 181, 173, 0.7)",
-          380: "rgba(217, 181, 173, 0.8)",
-          390: "rgba(217, 181, 173, 0.9)",
+          300: "rgba(242, 125, 114, 1)",
+          310: "rgba(242, 125, 114, 0.1)",
+          320: "rgba(242, 125, 114, 0.2)",
+          330: "rgba(242, 125, 114, 0.3)",
+          340: "rgba(242, 125, 114, 0.4)",
+          350: "rgba(242, 125, 114, 0.5)",
+          360: "rgba(242, 125, 114, 0.6)",
+          370: "rgba(242, 125, 114, 0.7)",
+          380: "rgba(242, 125, 114, 0.8)",
+          390: "rgba(242, 125, 114, 0.9)",
 
-          400: "rgba(167, 189, 217, 1)",
-          410: "rgba(167, 189, 217, 0.1)",
-          420: "rgba(167, 189, 217, 0.2)",
-          430: "rgba(167, 189, 217, 0.3)",
-          440: "rgba(167, 189, 217, 0.4)",
-          450: "rgba(167, 189, 217, 0.5)",
-          460: "rgba(167, 189, 217, 0.6)",
-          470: "rgba(167, 189, 217, 0.7)",
-          480: "rgba(167, 189, 217, 0.8)",
-          490: "rgba(167, 189, 217, 0.9)",
+          400: "rgba(201, 133, 73, 1)",
+          410: "rgba(201, 133, 73, 0.1)",
+          420: "rgba(201, 133, 73, 0.2)",
+          430: "rgba(201, 133, 73, 0.3)",
+          440: "rgba(201, 133, 73, 0.4)",
+          450: "rgba(201, 133, 73, 0.5)",
+          460: "rgba(201, 133, 73, 0.6)",
+          470: "rgba(201, 133, 73, 0.7)",
+          480: "rgba(201, 133, 73, 0.8)",
+          490: "rgba(201, 133, 73, 0.9)",
 
-          500: "rgba(84, 123, 171, 1)",
-          510: "rgba(84, 123, 171, 0.1)",
-          520: "rgba(84, 123, 171, 0.2)",
-          530: "rgba(84, 123, 171, 0.3)",
-          540: "rgba(84, 123, 171, 0.4)",
-          550: "rgba(84, 123, 171, 0.5)",
-          560: "rgba(84, 123, 171, 0.6)",
-          570: "rgba(84, 123, 171, 0.7)",
-          580: "rgba(84, 123, 171, 0.8)",
-          590: "rgba(84, 123, 171, 0.9)",
+          500: "rgba(156, 104, 146, 1)",
+          510: "rgba(156, 104, 146, 0.1)",
+          520: "rgba(156, 104, 146, 0.2)",
+          530: "rgba(156, 104, 146, 0.3)",
+          540: "rgba(156, 104, 146, 0.4)",
+          550: "rgba(156, 104, 146, 0.5)",
+          560: "rgba(156, 104, 146, 0.6)",
+          570: "rgba(156, 104, 146, 0.7)",
+          580: "rgba(156, 104, 146, 0.8)",
+          590: "rgba(156, 104, 146, 0.9)",
 
-          600: "rgba(97, 116, 140, 1)",
-          610: "rgba(97, 116, 140, 0.1)",
-          620: "rgba(97, 116, 140, 0.2)",
-          630: "rgba(97, 116, 140, 0.3)",
-          640: "rgba(97, 116, 140, 0.4)",
-          650: "rgba(97, 116, 140, 0.5)",
-          660: "rgba(97, 116, 140, 0.6)",
-          670: "rgba(97, 116, 140, 0.7)",
-          680: "rgba(97, 116, 140, 0.8)",
-          690: "rgba(97, 116, 140, 0.9)",
+          600: "rgba(3, 115, 140, 1)",
+          610: "rgba(3, 115, 140, 0.1)",
+          620: "rgba(3, 115, 140, 0.2)",
+          630: "rgba(3, 115, 140, 0.3)",
+          640: "rgba(3, 115, 140, 0.4)",
+          650: "rgba(3, 115, 140, 0.5)",
+          660: "rgba(3, 115, 140, 0.6)",
+          670: "rgba(3, 115, 140, 0.7)",
+          680: "rgba(3, 115, 140, 0.8)",
+          690: "rgba(3, 115, 140, 0.9)",
 
-          700: "rgba(41, 60, 84, 1)",
-          710: "rgba(41, 60, 84, 0.1)",
-          720: "rgba(41, 60, 84, 0.2)",
-          730: "rgba(41, 60, 84, 0.3)",
-          740: "rgba(41, 60, 84, 0.4)",
-          750: "rgba(41, 60, 84, 0.5)",
-          760: "rgba(41, 60, 84, 0.6)",
-          770: "rgba(41, 60, 84, 0.7)",
-          780: "rgba(41, 60, 84, 0.8)",
-          790: "rgba(41, 60, 84, 0.9)",
+          700: "rgba(2, 83, 115, 1)",
+          710: "rgba(2, 83, 115, 0.1)",
+          720: "rgba(2, 83, 115, 0.2)",
+          730: "rgba(2, 83, 115, 0.3)",
+          740: "rgba(2, 83, 115, 0.4)",
+          750: "rgba(2, 83, 115, 0.5)",
+          760: "rgba(2, 83, 115, 0.6)",
+          770: "rgba(2, 83, 115, 0.7)",
+          780: "rgba(2, 83, 115, 0.8)",
+          790: "rgba(2, 83, 115, 0.9)",
 
-          800: "rgba(1, 42, 94, 1)",
-          810: "rgba(1, 42, 94, 0.1)",
-          820: "rgba(1, 42, 94, 0.2)",
-          830: "rgba(1, 42, 94, 0.3)",
-          840: "rgba(1, 42, 94, 0.4)",
-          850: "rgba(1, 42, 94, 0.5)",
-          860: "rgba(1, 42, 94, 0.6)",
-          870: "rgba(1, 42, 94, 0.7)",
-          880: "rgba(1, 42, 94, 0.8)",
-          890: "rgba(1, 42, 94, 0.9)",
+          800: "rgba(69, 35, 62, 1)",
+          810: "rgba(69, 35, 62, 0.1)",
+          820: "rgba(69, 35, 62, 0.2)",
+          830: "rgba(69, 35, 62, 0.3)",
+          840: "rgba(69, 35, 62, 0.4)",
+          850: "rgba(69, 35, 62, 0.5)",
+          860: "rgba(69, 35, 62, 0.6)",
+          870: "rgba(69, 35, 62, 0.7)",
+          880: "rgba(69, 35, 62, 0.8)",
+          890: "rgba(69, 35, 62, 0.9)",
 
-          900: "rgba(1, 17, 38, 1)",
-          910: "rgba(1, 17, 38, 0.1)",
-          920: "rgba(1, 17, 38, 0.2)",
-          930: "rgba(1, 17, 38, 0.3)",
-          940: "rgba(1, 17, 38, 0.4)",
-          950: "rgba(1, 17, 38, 0.5)",
-          960: "rgba(1, 17, 38, 0.6)",
-          970: "rgba(1, 17, 38, 0.7)",
-          980: "rgba(1, 17, 38, 0.8)",
-          990: "rgba(1, 17, 38, 0.9)",
+          900: "rgba(3, 37, 51, 1)",
+          910: "rgba(3, 37, 51, 0.1)",
+          920: "rgba(3, 37, 51, 0.2)",
+          930: "rgba(3, 37, 51, 0.3)",
+          940: "rgba(3, 37, 51, 0.4)",
+          950: "rgba(3, 37, 51, 0.5)",
+          960: "rgba(3, 37, 51, 0.6)",
+          970: "rgba(3, 37, 51, 0.7)",
+          980: "rgba(3, 37, 51, 0.8)",
+          990: "rgba(3, 37, 51, 0.9)",
         },
       },
       width: {
@@ -1815,7 +1815,7 @@ export default {
         metallicEdgesSm:
           "#000 0.05vh 0.05vh 0.05vh, black 0px 0px 0.2vh, #FFF 0px 0px 0.1vh, #FFF 0px 0px 0.2vh, #FFF 0px 0px 0.3vh, #FFF 0px 0px 0.4vh, #FFF 0px 0px 0.5vh, 0.8vh 0.2vh 0.6vh rgba(0,0,0,0);",
         metallicEdgesMd:
-          "#000 0.1vh 0.1vh 0.1vh, white 0px 0px 0.1vh, rgb(208, 226, 242) 0px 0px 0.2vh, #00FFFF 0px 0px 0.3vh, #FFF 0px 0px 0.4vh, #e3fcf9 0px 0px 0.5vh, #e3fcf9 0px 0px 0.6vh, 0.8vh 0.2vh 0.6vh rgba(0,0,0,0);",
+          "#000 0.1vh 0.1vh 0.1vh, white 0px 0px 0.1vh, rgb(242, 181, 128) 0px 0px 0.2vh, #00FFFF 0px 0px 0.3vh, #FFF 0px 0px 0.4vh, #e3fcf9 0px 0px 0.5vh, #e3fcf9 0px 0px 0.6vh, 0.8vh 0.2vh 0.6vh rgba(0,0,0,0);",
         metallicEdgesLg:
           "#000 0.2vh 0.2vh 0.2vh, white 0px 0px 0.2vh, #00FFFF 0px 0px 4px, #00FFFF 0px 0px 6px, #FFF 0px 0px 8px, #d5f5f0 0px 0px 1vh, #d5f5f0 0px 0px 1.2vh, 0.8vh 0.2vh 0.6vh rgba(0,0,0,0);",
         metallicEdgesXl:
@@ -1831,7 +1831,7 @@ export default {
         textFog:
           "0 0 0.5vh #000, 0 0 1vh #000, 0 0 1.5vh #000, 0 0 1vh #000, 0 0 3vh #000, 0 0 4vh #575757, 0 0 5.5vh #5E5E5E, 0 0 7.5vh #000, 0.2vh 0.2vh 0.2vh rgba(0,0,0,0);",
         textGlow:
-          "#00FFFF 0px 0px 0.5vh, #00FFFF 0px 0px 1vh, #FFF 0px 0px 1.5vh, rgb(208, 226, 242) 0px 0px 1vh, rgb(208, 226, 242) 0px 0px 1vh, 0.8vh 0.2vh 0.6vh rgba(0,0,0,0);",
+          "#00FFFF 0px 0px 0.5vh, #00FFFF 0px 0px 1vh, #FFF 0px 0px 1.5vh, rgb(242, 181, 128) 0px 0px 1vh, rgb(242, 181, 128) 0px 0px 1vh, 0.8vh 0.2vh 0.6vh rgba(0,0,0,0);",
         boldText:
           "#000 0.05vh 0.05vh 0.05vh, black 0px 0px 0.5vh,  #FFF 0px 0px 0.2vh, #FFF 0px 0px 0.3vh, #FFF 0px 0px 1.2vh, #FFF 0px 0px 0.4vh, #FFF 0px 0px 0.5vh, 0.8vh 0.2vh 0.6vh rgba(0,0,0,0);",
         boldTextGlow:
@@ -1881,10 +1881,10 @@ export default {
         480: "rgba(255, 171, 100, 0.8)",
         490: "rgba(255, 171, 100, 0.9)",
 
-        500: "rgba(84, 123, 171, 1)",
-        570: "rgba(84, 123, 171, 0.7)",
-        580: "rgba(84, 123, 171, 0.8)",
-        590: "rgba(84, 123, 171, 0.9)",
+        500: "rgba(156, 104, 146, 1)",
+        570: "rgba(156, 104, 146, 0.7)",
+        580: "rgba(156, 104, 146, 0.8)",
+        590: "rgba(156, 104, 146, 0.9)",
 
         black: "#000",
 
@@ -1911,221 +1911,221 @@ export default {
       backgroundImage: {
         // FadeOut Gradients
         fadeOut900Op07:
-          "radial-gradient(circle, rgba(1, 17, 38, 0.7), rgba(1, 17, 38, 0))",
+          "radial-gradient(circle, rgba(3, 37, 51, 0.7), rgba(3, 37, 51, 0))",
         fadeOut900Op05:
-          "radial-gradient(circle, rgba(1, 17, 38, 0.5), rgba(1, 17, 38, 0))",
+          "radial-gradient(circle, rgba(3, 37, 51, 0.5), rgba(3, 37, 51, 0))",
         fadeOut900Op03:
-          "radial-gradient(circle, rgba(1, 17, 38, 0.3), rgba(1, 17, 38, 0))",
+          "radial-gradient(circle, rgba(3, 37, 51, 0.3), rgba(3, 37, 51, 0))",
         fadeOut800Op07:
-          "radial-gradient(circle, rgba(1, 42, 94, 0.7), rgba(1, 42, 94, 0))",
+          "radial-gradient(circle, rgba(69, 35, 62, 0.7), rgba(69, 35, 62, 0))",
         fadeOut800Op05:
-          "radial-gradient(circle, rgba(1, 42, 94, 0.5), rgba(1, 42, 94, 0))",
+          "radial-gradient(circle, rgba(69, 35, 62, 0.5), rgba(69, 35, 62, 0))",
         fadeOut800Op03:
-          "radial-gradient(circle, rgba(1, 42, 94, 0.3), rgba(1, 42, 94, 0))",
+          "radial-gradient(circle, rgba(69, 35, 62, 0.3), rgba(69, 35, 62, 0))",
         fadeOut700Op07:
-          "radial-gradient(circle, rgba(41, 60, 84, 0.7), rgba(41, 60, 84, 0))",
+          "radial-gradient(circle, rgba(2, 83, 115, 0.7), rgba(2, 83, 115, 0))",
         fadeOut700Op05:
-          "radial-gradient(circle, rgba(41, 60, 84, 0.5), rgba(41, 60, 84, 0))",
+          "radial-gradient(circle, rgba(2, 83, 115, 0.5), rgba(2, 83, 115, 0))",
         fadeOut700Op03:
-          "radial-gradient(circle, rgba(41, 60, 84, 0.3), rgba(41, 60, 84, 0))",
+          "radial-gradient(circle, rgba(2, 83, 115, 0.3), rgba(2, 83, 115, 0))",
         fadeOut600Op07:
-          "radial-gradient(circle, rgba(97, 116, 140, 0.7), rgba(97, 116, 140, 0))",
+          "radial-gradient(circle, rgba(3, 115, 140, 0.7), rgba(3, 115, 140, 0))",
         fadeOut600Op05:
-          "radial-gradient(circle, rgba(97, 116, 140, 0.5), rgba(97, 116, 140, 0))",
+          "radial-gradient(circle, rgba(3, 115, 140, 0.5), rgba(3, 115, 140, 0))",
         fadeOut600Op03:
-          "radial-gradient(circle, rgba(97, 116, 140, 0.3), rgba(97, 116, 140, 0))",
+          "radial-gradient(circle, rgba(3, 115, 140, 0.3), rgba(3, 115, 140, 0))",
         fadeOut500Op07:
-          "radial-gradient(circle, rgba(84, 123, 171, 0.7), rgba(84, 123, 171, 0))",
+          "radial-gradient(circle, rgba(156, 104, 146, 0.7), rgba(156, 104, 146, 0))",
         fadeOut500Op05:
-          "radial-gradient(circle, rgba(84, 123, 171, 0.5), rgba(84, 123, 171, 0))",
+          "radial-gradient(circle, rgba(156, 104, 146, 0.5), rgba(156, 104, 146, 0))",
         fadeOut500Op03:
-          "radial-gradient(circle, rgba(84, 123, 171, 0.3), rgba(84, 123, 171, 0))",
+          "radial-gradient(circle, rgba(156, 104, 146, 0.3), rgba(156, 104, 146, 0))",
         fadeOut400Op07:
-          "radial-gradient(circle, rgba(167, 189, 217, 0.7), rgba(167, 189, 217, 0))",
+          "radial-gradient(circle, rgba(201, 133, 73, 0.7), rgba(201, 133, 73, 0))",
         fadeOut400Op05:
-          "radial-gradient(circle, rgba(167, 189, 217, 0.5), rgba(167, 189, 217, 0))",
+          "radial-gradient(circle, rgba(201, 133, 73, 0.5), rgba(201, 133, 73, 0))",
         fadeOut400Op03:
-          "radial-gradient(circle, rgba(167, 189, 217, 0.3), rgba(167, 189, 217, 0))",
+          "radial-gradient(circle, rgba(201, 133, 73, 0.3), rgba(201, 133, 73, 0))",
         fadeOut300Op07:
-          "radial-gradient(circle, rgba(217, 181, 173, 0.7), rgba(217, 181, 173, 0))",
+          "radial-gradient(circle, rgba(242, 125, 114, 0.7), rgba(242, 125, 114, 0))",
         fadeOut300Op05:
-          "radial-gradient(circle, rgba(217, 181, 173, 0.5), rgba(217, 181, 173, 0))",
+          "radial-gradient(circle, rgba(242, 125, 114, 0.5), rgba(242, 125, 114, 0))",
         fadeOut300Op03:
-          "radial-gradient(circle, rgba(217, 181, 173, 0.3), rgba(217, 181, 173, 0))",
+          "radial-gradient(circle, rgba(242, 125, 114, 0.3), rgba(242, 125, 114, 0))",
         fadeOut200Op07:
-          "radial-gradient(circle, rgba(208, 226, 242, 0.7), rgba(208, 226, 242, 0))",
+          "radial-gradient(circle, rgba(242, 181, 128, 0.7), rgba(242, 181, 128, 0))",
         fadeOut200Op05:
-          "radial-gradient(circle, rgba(208, 226, 242, 0.5), rgba(208, 226, 242, 0))",
+          "radial-gradient(circle, rgba(242, 181, 128, 0.5), rgba(242, 181, 128, 0))",
         fadeOut200Op03:
-          "radial-gradient(circle, rgba(208, 226, 242, 0.3), rgba(208, 226, 242, 0))",
+          "radial-gradient(circle, rgba(242, 181, 128, 0.3), rgba(242, 181, 128, 0))",
         fadeOut100Op07:
-          "radial-gradient(circle, rgba(228, 237, 245, 0.7), rgba(228, 237, 245, 0))",
+          "radial-gradient(circle, rgba(255, 238, 222, 0.7), rgba(255, 238, 222, 0))",
         fadeOut100Op05:
-          "radial-gradient(circle, rgba(228, 237, 245, 0.5), rgba(228, 237, 245, 0))",
+          "radial-gradient(circle, rgba(255, 238, 222, 0.5), rgba(255, 238, 222, 0))",
         fadeOut100Op03:
-          "radial-gradient(circle, rgba(228, 237, 245, 0.3), rgba(228, 237, 245, 0))",
+          "radial-gradient(circle, rgba(255, 238, 222, 0.3), rgba(255, 238, 222, 0))",
         // Linear Gradients
         linear1:
-          "linear-gradient(to top, rgba(228, 237, 245, 1), rgba(208, 226, 242, 1))",
+          "linear-gradient(to top, rgba(255, 238, 222, 1), rgba(242, 181, 128, 1))",
         linear1op25:
-          "linear-gradient(to top, rgba(228, 237, 245, 0.25), rgba(208, 226, 242, 0.25))",
+          "linear-gradient(to top, rgba(255, 238, 222, 0.25), rgba(242, 181, 128, 0.25))",
         linear1op50:
-          "linear-gradient(to top, rgba(228, 237, 245, 0.5), rgba(208, 226, 242, 0.5))",
+          "linear-gradient(to top, rgba(255, 238, 222, 0.5), rgba(242, 181, 128, 0.5))",
         linear1op75:
-          "linear-gradient(to top, rgba(228, 237, 245, 0.75), rgba(208, 226, 242, 0.75))",
+          "linear-gradient(to top, rgba(255, 238, 222, 0.75), rgba(242, 181, 128, 0.75))",
 
         linear2:
-          "linear-gradient(to bottom, rgba(217, 181, 173, 1), rgba(167, 189, 217, 1))",
+          "linear-gradient(to bottom, rgba(242, 125, 114, 1), rgba(201, 133, 73, 1))",
         linear2op25:
-          "linear-gradient(to bottom, rgba(217, 181, 173, 0.25), rgba(167, 189, 217, 0.25))",
+          "linear-gradient(to bottom, rgba(242, 125, 114, 0.25), rgba(201, 133, 73, 0.25))",
         linear2op50:
-          "linear-gradient(to bottom, rgba(217, 181, 173, 0.5), rgba(167, 189, 217, 0.5))",
+          "linear-gradient(to bottom, rgba(242, 125, 114, 0.5), rgba(201, 133, 73, 0.5))",
         linear2op75:
-          "linear-gradient(to bottom, rgba(217, 181, 173, 0.75), rgba(167, 189, 217, 0.75))",
+          "linear-gradient(to bottom, rgba(242, 125, 114, 0.75), rgba(201, 133, 73, 0.75))",
 
         linear3:
-          "linear-gradient(to right, rgba(84, 123, 171, 1), rgba(97, 116, 140, 1))",
+          "linear-gradient(to right, rgba(156, 104, 146, 1), rgba(3, 115, 140, 1))",
         linear3op25:
-          "linear-gradient(to right, rgba(84, 123, 171, 0.25), rgba(97, 116, 140, 0.25))",
+          "linear-gradient(to right, rgba(156, 104, 146, 0.25), rgba(3, 115, 140, 0.25))",
         linear3op50:
-          "linear-gradient(to right, rgba(84, 123, 171, 0.5), rgba(97, 116, 140, 0.5))",
+          "linear-gradient(to right, rgba(156, 104, 146, 0.5), rgba(3, 115, 140, 0.5))",
         linear3op75:
-          "linear-gradient(to right, rgba(84, 123, 171, 0.75), rgba(97, 116, 140, 0.75))",
+          "linear-gradient(to right, rgba(156, 104, 146, 0.75), rgba(3, 115, 140, 0.75))",
 
         linear4:
-          "linear-gradient(to left, rgba(41, 60, 84, 1), rgba(97, 116, 140, 1))",
+          "linear-gradient(to left, rgba(2, 83, 115, 1), rgba(3, 115, 140, 1))",
         linear4op25:
-          "linear-gradient(to left, rgba(41, 60, 84, 0.25), rgba(97, 116, 140, 0.25))",
+          "linear-gradient(to left, rgba(2, 83, 115, 0.25), rgba(3, 115, 140, 0.25))",
         linear4op50:
-          "linear-gradient(to left, rgba(41, 60, 84, 0.5), rgba(97, 116, 140, 0.5))",
+          "linear-gradient(to left, rgba(2, 83, 115, 0.5), rgba(3, 115, 140, 0.5))",
         linear4op75:
-          "linear-gradient(to left, rgba(41, 60, 84, 0.75), rgba(97, 116, 140, 0.75))",
+          "linear-gradient(to left, rgba(2, 83, 115, 0.75), rgba(3, 115, 140, 0.75))",
 
         linear5:
-          "linear-gradient(to top, rgba(97, 116, 140, 1), rgba(41, 60, 84, 1))",
+          "linear-gradient(to top, rgba(3, 115, 140, 1), rgba(2, 83, 115, 1))",
         linear5op25:
-          "linear-gradient(to top, rgba(97, 116, 140, 0.25), rgba(41, 60, 84, 0.25))",
+          "linear-gradient(to top, rgba(3, 115, 140, 0.25), rgba(2, 83, 115, 0.25))",
         linear5op50:
-          "linear-gradient(to top, rgba(97, 116, 140, 0.5), rgba(41, 60, 84, 0.5))",
+          "linear-gradient(to top, rgba(3, 115, 140, 0.5), rgba(2, 83, 115, 0.5))",
         linear5op75:
-          "linear-gradient(to top, rgba(97, 116, 140, 0.75), rgba(41, 60, 84, 0.75))",
+          "linear-gradient(to top, rgba(3, 115, 140, 0.75), rgba(2, 83, 115, 0.75))",
 
         linear6:
-          "linear-gradient(to bottom, rgba(1, 42, 94, 1), rgba(1, 17, 38, 1))",
+          "linear-gradient(to bottom, rgba(69, 35, 62, 1), rgba(3, 37, 51, 1))",
         linear6op25:
-          "linear-gradient(to bottom, rgba(1, 42, 94, 0.25), rgba(1, 17, 38, 0.25))",
+          "linear-gradient(to bottom, rgba(69, 35, 62, 0.25), rgba(3, 37, 51, 0.25))",
         linear6op50:
-          "linear-gradient(to bottom, rgba(1, 42, 94, 0.5), rgba(1, 17, 38, 0.5))",
+          "linear-gradient(to bottom, rgba(69, 35, 62, 0.5), rgba(3, 37, 51, 0.5))",
         linear6op75:
-          "linear-gradient(to bottom, rgba(1, 42, 94, 0.75), rgba(1, 17, 38, 0.75))",
+          "linear-gradient(to bottom, rgba(69, 35, 62, 0.75), rgba(3, 37, 51, 0.75))",
 
         // Diagonal Gradients
         diagonal1:
-          "linear-gradient(45deg, rgba(228, 237, 245, 1), rgba(217, 181, 173, 1))",
+          "linear-gradient(45deg, rgba(255, 238, 222, 1), rgba(242, 125, 114, 1))",
         diagonal1op25:
-          "linear-gradient(45deg, rgba(228, 237, 245, 0.25), rgba(217, 181, 173, 0.25))",
+          "linear-gradient(45deg, rgba(255, 238, 222, 0.25), rgba(242, 125, 114, 0.25))",
         diagonal1op50:
-          "linear-gradient(45deg, rgba(228, 237, 245, 0.5), rgba(217, 181, 173, 0.5))",
+          "linear-gradient(45deg, rgba(255, 238, 222, 0.5), rgba(242, 125, 114, 0.5))",
         diagonal1op75:
-          "linear-gradient(45deg, rgba(228, 237, 245, 0.75), rgba(217, 181, 173, 0.75))",
+          "linear-gradient(45deg, rgba(255, 238, 222, 0.75), rgba(242, 125, 114, 0.75))",
 
         diagonal2:
-          "linear-gradient(45deg, rgba(208, 226, 242, 1), rgba(167, 189, 217, 1))",
+          "linear-gradient(45deg, rgba(242, 181, 128, 1), rgba(201, 133, 73, 1))",
         diagonal2op25:
-          "linear-gradient(45deg, rgba(208, 226, 242, 0.25), rgba(167, 189, 217, 0.25))",
+          "linear-gradient(45deg, rgba(242, 181, 128, 0.25), rgba(201, 133, 73, 0.25))",
         diagonal2op50:
-          "linear-gradient(45deg, rgba(208, 226, 242, 0.5), rgba(167, 189, 217, 0.5))",
+          "linear-gradient(45deg, rgba(242, 181, 128, 0.5), rgba(201, 133, 73, 0.5))",
         diagonal2op75:
-          "linear-gradient(45deg, rgba(208, 226, 242, 0.75), rgba(167, 189, 217, 0.75))",
+          "linear-gradient(45deg, rgba(242, 181, 128, 0.75), rgba(201, 133, 73, 0.75))",
 
         diagonal3:
-          "linear-gradient(45deg, rgba(84, 123, 171, 1), rgba(41, 60, 84, 1))",
+          "linear-gradient(45deg, rgba(156, 104, 146, 1), rgba(2, 83, 115, 1))",
         diagonal3op25:
-          "linear-gradient(45deg, rgba(84, 123, 171, 0.25), rgba(41, 60, 84, 0.25))",
+          "linear-gradient(45deg, rgba(156, 104, 146, 0.25), rgba(2, 83, 115, 0.25))",
         diagonal3op50:
-          "linear-gradient(45deg, rgba(84, 123, 171, 0.5), rgba(41, 60, 84, 0.5))",
+          "linear-gradient(45deg, rgba(156, 104, 146, 0.5), rgba(2, 83, 115, 0.5))",
         diagonal3op75:
-          "linear-gradient(45deg, rgba(84, 123, 171, 0.75), rgba(41, 60, 84, 0.75))",
+          "linear-gradient(45deg, rgba(156, 104, 146, 0.75), rgba(2, 83, 115, 0.75))",
 
         diagonal4:
-          "linear-gradient(45deg, rgba(97, 116, 140, 1), rgba(1, 42, 94, 1))",
+          "linear-gradient(45deg, rgba(3, 115, 140, 1), rgba(69, 35, 62, 1))",
         diagonal4op25:
-          "linear-gradient(45deg, rgba(97, 116, 140, 0.25), rgba(1, 42, 94, 0.25))",
+          "linear-gradient(45deg, rgba(3, 115, 140, 0.25), rgba(69, 35, 62, 0.25))",
         diagonal4op50:
-          "linear-gradient(45deg, rgba(97, 116, 140, 0.5), rgba(1, 42, 94, 0.5))",
+          "linear-gradient(45deg, rgba(3, 115, 140, 0.5), rgba(69, 35, 62, 0.5))",
         diagonal4op75:
-          "linear-gradient(45deg, rgba(97, 116, 140, 0.75), rgba(1, 42, 94, 0.75))",
+          "linear-gradient(45deg, rgba(3, 115, 140, 0.75), rgba(69, 35, 62, 0.75))",
 
         diagonal5:
-          "linear-gradient(45deg, rgba(217, 181, 173, 1), rgba(84, 123, 171, 1))",
+          "linear-gradient(45deg, rgba(242, 125, 114, 1), rgba(156, 104, 146, 1))",
         diagonal5op25:
-          "linear-gradient(45deg, rgba(217, 181, 173, 0.25), rgba(84, 123, 171, 0.25))",
+          "linear-gradient(45deg, rgba(242, 125, 114, 0.25), rgba(156, 104, 146, 0.25))",
         diagonal5op50:
-          "linear-gradient(45deg, rgba(217, 181, 173, 0.5), rgba(84, 123, 171, 0.5))",
+          "linear-gradient(45deg, rgba(242, 125, 114, 0.5), rgba(156, 104, 146, 0.5))",
         diagonal5op75:
-          "linear-gradient(45deg, rgba(217, 181, 173, 0.75), rgba(84, 123, 171, 0.75))",
+          "linear-gradient(45deg, rgba(242, 125, 114, 0.75), rgba(156, 104, 146, 0.75))",
 
         diagonal6:
-          "linear-gradient(45deg, rgba(167, 189, 217, 1), rgba(97, 116, 140, 1))",
+          "linear-gradient(45deg, rgba(201, 133, 73, 1), rgba(3, 115, 140, 1))",
         diagonal6op25:
-          "linear-gradient(45deg, rgba(167, 189, 217, 0.25), rgba(97, 116, 140, 0.25))",
+          "linear-gradient(45deg, rgba(201, 133, 73, 0.25), rgba(3, 115, 140, 0.25))",
         diagonal6op50:
-          "linear-gradient(45deg, rgba(167, 189, 217, 0.5), rgba(97, 116, 140, 0.5))",
+          "linear-gradient(45deg, rgba(201, 133, 73, 0.5), rgba(3, 115, 140, 0.5))",
         diagonal6op75:
-          "linear-gradient(45deg, rgba(167, 189, 217, 0.75), rgba(97, 116, 140, 0.75))",
+          "linear-gradient(45deg, rgba(201, 133, 73, 0.75), rgba(3, 115, 140, 0.75))",
 
         // Radial Gradients
         radial1:
-          "radial-gradient(circle, rgba(208, 226, 242, 1) 0%, rgba(167, 189, 217, 1) 100%)",
+          "radial-gradient(circle, rgba(242, 181, 128, 1) 0%, rgba(201, 133, 73, 1) 100%)",
         radial1op25:
-          "radial-gradient(circle, rgba(208, 226, 242, 0.25) 0%, rgba(167, 189, 217, 0.25) 100%)",
+          "radial-gradient(circle, rgba(242, 181, 128, 0.25) 0%, rgba(201, 133, 73, 0.25) 100%)",
         radial1op50:
-          "radial-gradient(circle, rgba(208, 226, 242, 0.5) 0%, rgba(167, 189, 217, 0.5) 100%)",
+          "radial-gradient(circle, rgba(242, 181, 128, 0.5) 0%, rgba(201, 133, 73, 0.5) 100%)",
         radial1op75:
-          "radial-gradient(circle, rgba(208, 226, 242, 0.75) 0%, rgba(167, 189, 217, 0.75) 100%)",
+          "radial-gradient(circle, rgba(242, 181, 128, 0.75) 0%, rgba(201, 133, 73, 0.75) 100%)",
 
         radial2:
-          "radial-gradient(circle, rgba(217, 181, 173, 1) 0%, rgba(167, 189, 217, 1) 100%)",
+          "radial-gradient(circle, rgba(242, 125, 114, 1) 0%, rgba(201, 133, 73, 1) 100%)",
         radial2op25:
-          "radial-gradient(circle, rgba(217, 181, 173, 0.25) 0%, rgba(167, 189, 217, 0.25) 100%)",
+          "radial-gradient(circle, rgba(242, 125, 114, 0.25) 0%, rgba(201, 133, 73, 0.25) 100%)",
         radial2op50:
-          "radial-gradient(circle, rgba(217, 181, 173, 0.5) 0%, rgba(167, 189, 217, 0.5) 100%)",
+          "radial-gradient(circle, rgba(242, 125, 114, 0.5) 0%, rgba(201, 133, 73, 0.5) 100%)",
         radial2op75:
-          "radial-gradient(circle, rgba(217, 181, 173, 0.75) 0%, rgba(167, 189, 217, 0.75) 100%)",
+          "radial-gradient(circle, rgba(242, 125, 114, 0.75) 0%, rgba(201, 133, 73, 0.75) 100%)",
 
         radial3:
-          "radial-gradient(circle, rgba(84, 123, 171, 1) 0%, rgba(97, 116, 140, 1) 100%)",
+          "radial-gradient(circle, rgba(156, 104, 146, 1) 0%, rgba(3, 115, 140, 1) 100%)",
         radial3op25:
-          "radial-gradient(circle, rgba(84, 123, 171, 0.25) 0%, rgba(97, 116, 140, 0.25) 100%)",
+          "radial-gradient(circle, rgba(156, 104, 146, 0.25) 0%, rgba(3, 115, 140, 0.25) 100%)",
         radial3op50:
-          "radial-gradient(circle, rgba(84, 123, 171, 0.5) 0%, rgba(97, 116, 140, 0.5) 100%)",
+          "radial-gradient(circle, rgba(156, 104, 146, 0.5) 0%, rgba(3, 115, 140, 0.5) 100%)",
         radial3op75:
-          "radial-gradient(circle, rgba(84, 123, 171, 0.75) 0%, rgba(97, 116, 140, 0.75) 100%)",
+          "radial-gradient(circle, rgba(156, 104, 146, 0.75) 0%, rgba(3, 115, 140, 0.75) 100%)",
 
         radial4:
-          "radial-gradient(circle, rgba(167, 189, 217, 1) 0%, rgba(208, 226, 242, 1) 100%)",
+          "radial-gradient(circle, rgba(201, 133, 73, 1) 0%, rgba(242, 181, 128, 1) 100%)",
         radial4op25:
-          "radial-gradient(circle, rgba(167, 189, 217, 0.25) 0%, rgba(208, 226, 242, 0.25) 100%)",
+          "radial-gradient(circle, rgba(201, 133, 73, 0.25) 0%, rgba(242, 181, 128, 0.25) 100%)",
         radial4op50:
-          "radial-gradient(circle, rgba(167, 189, 217, 0.5) 0%, rgba(208, 226, 242, 0.5) 100%)",
+          "radial-gradient(circle, rgba(201, 133, 73, 0.5) 0%, rgba(242, 181, 128, 0.5) 100%)",
         radial4op75:
-          "radial-gradient(circle, rgba(167, 189, 217, 0.75) 0%, rgba(208, 226, 242, 0.75) 100%)",
+          "radial-gradient(circle, rgba(201, 133, 73, 0.75) 0%, rgba(242, 181, 128, 0.75) 100%)",
 
         radial5:
-          "radial-gradient(circle, rgba(84, 123, 171, 1) 0%, rgba(217, 181, 173, 1) 100%)",
+          "radial-gradient(circle, rgba(156, 104, 146, 1) 0%, rgba(242, 125, 114, 1) 100%)",
         radial5op50:
-          "radial-gradient(circle, rgba(84, 123, 171, 0.5) 0%, rgba(217, 181, 173, 0.5) 100%)",
+          "radial-gradient(circle, rgba(156, 104, 146, 0.5) 0%, rgba(242, 125, 114, 0.5) 100%)",
         radial5op75:
-          "radial-gradient(circle, rgba(84, 123, 171, 0.75) 0%, rgba(217, 181, 173, 0.75) 100%)",
+          "radial-gradient(circle, rgba(156, 104, 146, 0.75) 0%, rgba(242, 125, 114, 0.75) 100%)",
 
         radial6:
-          "radial-gradient(circle, rgba(41, 60, 84, 1) 0%, rgba(1, 42, 94, 1) 100%)",
+          "radial-gradient(circle, rgba(2, 83, 115, 1) 0%, rgba(69, 35, 62, 1) 100%)",
         radial6op25:
-          "radial-gradient(circle, rgba(41, 60, 84, 0.25) 0%, rgba(1, 42, 94, 0.25) 100%)",
+          "radial-gradient(circle, rgba(2, 83, 115, 0.25) 0%, rgba(69, 35, 62, 0.25) 100%)",
         radial6op50:
-          "radial-gradient(circle, rgba(41, 60, 84, 0.5) 0%, rgba(1, 42, 94, 0.5) 100%)",
+          "radial-gradient(circle, rgba(2, 83, 115, 0.5) 0%, rgba(69, 35, 62, 0.5) 100%)",
         radial6op75:
-          "radial-gradient(circle, rgba(41, 60, 84, 0.75) 0%, rgba(1, 42, 94, 0.75) 100%)",
+          "radial-gradient(circle, rgba(2, 83, 115, 0.75) 0%, rgba(69, 35, 62, 0.75) 100%)",
       },
       borderRadius: {
         xxs: "0.3vh",
@@ -2222,34 +2222,34 @@ export default {
           transition: "all 1000ms ease-in-out",
         },
         ".transition-1100": {
-          transition: "all 1000ms ease-in-out",
+          transition: "all 1100ms ease-in-out",
         },
         ".transition-1200": {
-          transition: "all 1000ms ease-in-out",
+          transition: "all 1200ms ease-in-out",
         },
         ".transition-1300": {
-          transition: "all 1000ms ease-in-out",
+          transition: "all 1300ms ease-in-out",
         },
         ".transition-1400": {
-          transition: "all 1000ms ease-in-out",
+          transition: "all 1400ms ease-in-out",
         },
         ".transition-1500": {
-          transition: "all 1000ms ease-in-out",
+          transition: "all 1500ms ease-in-out",
         },
         ".transition-1600": {
-          transition: "all 1000ms ease-in-out",
+          transition: "all 1600ms ease-in-out",
         },
         ".transition-1700": {
-          transition: "all 1000ms ease-in-out",
+          transition: "all 1700ms ease-in-out",
         },
         ".transition-1800": {
-          transition: "all 1000ms ease-in-out",
+          transition: "all 1800ms ease-in-out",
         },
         ".transition-1900": {
-          transition: "all 1000ms ease-in-out",
+          transition: "all 1900ms ease-in-out",
         },
         ".transition-2000": {
-          transition: "all 1000ms ease-in-out",
+          transition: "all 2000ms ease-in-out",
         },
       };
       addUtilities(transitionUtilities, ["responsive", "hover", "focus"]);
@@ -2394,13 +2394,13 @@ export default {
           flexDirection: "column",
           alignItems: "center",
           fontFamily: '"Lato", sans-serif',
-          backgroundImage: "url('/images/sitebackground.png')",
+          // backgroundImage: "url('/images/sitebackground.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
         },
         a: {
-          color: theme("colors.col.600"),
+          color: theme("colors.col.800"),
           textShadow: theme("textShadow.lightTextShadow"),
           textStrokeColor: theme("colors.col.900"),
           textStrokeWidth: "0.2vh",

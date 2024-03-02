@@ -17,7 +17,7 @@ export default function Index() {
       <Transition className="w-full h-full justify-center items-center">
         <VStack>
           <Text className="font-cursive boldTextGlow text-col-900 text-stroke-8-170 text-[10vh] ">
-            Aceternity Animation
+            Aceternity and ShadCN UI
           </Text>
           <Text className="text-col-100 text-2xl textShadow">
             Fun with code that moves!
