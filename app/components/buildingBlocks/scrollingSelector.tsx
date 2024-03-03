@@ -34,9 +34,9 @@ export default function ScrollingSelector({
 
   const handleButtonStyle = ({ option }: { option: string }) => {
     if (option === selected) {
-      return `bg-col-200 font-[600] text-stroke-3-900 text-col-900 lightTextShadow hover:bg-col-400 hover:text-col-900`;
+      return `bg-col-600 font-[600] text-stroke-3-100 text-col-100 textShadow hover:bg-col-600;`;
     } else {
-      return `bg-col-950 text-col-100 font-[400] hover:bg-col-600 hover:text-col-900 transition-500`;
+      return `bg-col-800 border-970-md text-col-100 font-[400] hover:bg-col-600 transition-400`;
     }
   };
 

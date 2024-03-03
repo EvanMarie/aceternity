@@ -236,6 +236,7 @@ export default function AnimationsOne() {
           heading="Animations"
           bg="bg-col-500"
           border="border-980-md"
+          showClose={false}
         />
       </Flex>
       <Flex className="justify-center items-center w-65% h-[70vh]">
