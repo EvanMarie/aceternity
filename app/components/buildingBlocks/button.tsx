@@ -25,6 +25,7 @@ export default function Button({
   iconStyle,
   isLoading,
   isDisabled,
+  target,
   type = "normal",
   width = "w-fit",
   height,
@@ -40,6 +41,7 @@ export default function Button({
   iconStyle?: string;
   isLoading?: boolean;
   isDisabled?: boolean;
+  target?: string;
   htmlType?: "button" | "submit" | "reset";
   to?: string;
   width?: string;
@@ -141,7 +143,7 @@ export default function Button({
   return (
     <>
       {to ? (
-        <NavLink to={to}>
+        <NavLink to={to} target={target ? target : undefined}>
           <ButtonInsides />
         </NavLink>
       ) : (

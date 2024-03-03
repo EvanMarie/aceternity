@@ -8,17 +8,15 @@ import {
 } from "@remix-run/react";
 import "tailwind.css";
 import LayoutContainer from "./components/buildingBlocks/layoutContainer";
+import MainNavDemo from "./routes/design+/components/mainNavDemo";
+import MainNav from "./components/main/mainNav";
 
 // import { AnimatePresence } from "framer-motion";
 
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Waiting+for+the+Sunrise&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Indie+Flower&display=swap",
   },
 ];
 

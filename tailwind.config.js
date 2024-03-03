@@ -19,6 +19,10 @@ const plugin = require("tailwindcss/plugin");
 //   addUtilities(utilities, ["responsive", "hover"]);
 // });
 
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
+
 const buttonStyles = plugin(function ({ addUtilities, theme }) {
   // Base styles for all buttons, excluding shadow properties
   const baseButtonStyles = {
@@ -327,8 +331,20 @@ const customBordersPlugin = plugin(function ({ addUtilities, theme }) {
   addUtilities(borderUtilities, ["responsive", "hover"]);
 });
 
+const addVariablesForColors = plugin(function ({ addBase, theme }) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+});
+
 export default {
   content: ["./app/**/*.{tsx,ts,jsx,js}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -1738,8 +1754,8 @@ export default {
         115: "1.15",
       },
       fontFamily: {
-        sans: ["Lato", "sans-serif"],
-        cursive: ["Waiting for the Sunrise", "cursive"],
+        sans: ["Dosis", "sans-serif"],
+        cursive: ["Indie Flower", "cursive"],
       },
       fontSize: {
         xxs: ["1.2vh", { lineHeight: "1.8vh" }],
@@ -2393,7 +2409,7 @@ export default {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          fontFamily: '"Lato", sans-serif',
+          fontFamily: '"Dosis", sans-serif',
           // backgroundImage: "url('/images/sitebackground.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -2422,7 +2438,7 @@ export default {
         },
       });
     }),
-
+    addVariablesForColors,
     typographyPlugin,
     customBackgroundsPlugin,
     buttonStyles,

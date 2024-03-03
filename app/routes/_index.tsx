@@ -1,5 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { NavLink } from "@remix-run/react";
+import Button from "~/components/buildingBlocks/button";
+import HStack from "~/components/buildingBlocks/hStack";
 import LayoutContainer from "~/components/buildingBlocks/layoutContainer";
 import Text from "~/components/buildingBlocks/text";
 import Transition from "~/components/buildingBlocks/transition";
@@ -17,17 +19,21 @@ export default function Index() {
       <Transition className="w-full h-full justify-center items-center">
         <VStack>
           <Text className="font-cursive boldTextGlow text-col-900 text-stroke-8-170 text-[10vh] ">
-            Aceternity and ShadCN UI
+            GSAP Animation
           </Text>
           <Text className="text-col-100 text-2xl textShadow">
             Fun with code that moves!
           </Text>
-
-          <NavLink to="/design">
-            <Text className="p-[1.5vh] bg-100-linear3op25 text-col-900 shadowBroadNormal hover:bg-400-diagonal3op75 transition-400">
-              Design Options
-            </Text>
-          </NavLink>
+          <HStack>
+            {" "}
+            <Button to="/design" buttonText="Design" />
+            <Button to="/animations" buttonText="Animations" />
+            <Button
+              to="https://gsap.com/docs/v3/"
+              target="_blank"
+              buttonText="GSAP Docs"
+            />
+          </HStack>
         </VStack>
       </Transition>
     </LayoutContainer>

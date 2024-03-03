@@ -1,14 +1,7 @@
-/* eslint-disable react/no-unescaped-entities */
-import LayoutContainer from "~/components/buildingBlocks/layoutContainer";
-import VStack from "~/components/buildingBlocks/vStack";
-import VStackFull from "~/components/buildingBlocks/vStackFull";
-
-export default function TextRoute() {
+export default function TestPage() {
   return (
-    <LayoutContainer>
-      <VStack className="h-fit p-[2vh] bg-col-200 text-col-900 overflow-y-auto hover:bg-col-900 hover:text-col-200 transition-1000">
-        This
-      </VStack>
-    </LayoutContainer>
+    <div>
+      <div className="text-3xl">Test Page</div>
+    </div>
   );
 }
