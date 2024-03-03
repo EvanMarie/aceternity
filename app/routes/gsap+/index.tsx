@@ -1,14 +1,8 @@
 import gsap from "gsap";
 import { createElement, useCallback, useEffect, useRef, useState } from "react";
-import Box from "~/components/buildingBlocks/box";
 import Flex from "~/components/buildingBlocks/flex";
 import FlexFull from "~/components/buildingBlocks/flexFull";
-import Text from "~/components/buildingBlocks/text";
-import VStack from "~/components/buildingBlocks/vStack";
-import VStackFull from "~/components/buildingBlocks/vStackFull";
-import Wrap from "~/components/buildingBlocks/wrap";
 import AnimationExample from "./components/animationExample";
-import HStackFull from "~/components/buildingBlocks/hStackFull";
 import ScrollingSelector from "~/components/buildingBlocks/scrollingSelector";
 import StaggerAnimationExample from "./components/staggerExample";
 
@@ -177,30 +171,6 @@ tl.to("#animation", { duration: 1, x: 100 })
   );
 }
 
-export function ScrollTrigger() {
-  useEffect(() => {
-    gsap.to("#animation", {
-      scrollTrigger: "#nine",
-      x: 200,
-      duration: 3,
-    });
-  }, []);
-
-  return (
-    <AnimationExample
-      id="animation"
-      text="Scroll Trigger"
-      heading="Scroll Trigger"
-      description="Start an animation when an element enters the viewport."
-      code={`gsap.to("#animation", {
-  scrollTrigger: "#animation",
-  x: 400,
-  duration: 3,
-});`}
-    />
-  );
-}
-
 interface Animation {
   name: string;
   component: React.FC<any>;
@@ -242,10 +212,6 @@ const animations: Animation[] = [
   {
     name: "Timeline",
     component: Timeline,
-  },
-  {
-    name: "Scroll Trigger",
-    component: ScrollTrigger,
   },
 ];
 

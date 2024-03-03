@@ -1,12 +1,12 @@
 import { Outlet } from "@remix-run/react";
 import LayoutContainer from "~/components/buildingBlocks/layoutContainer";
-import MainNav from "~/components/main/mainNav";
+import GSAPNav from "~/routes/gsap+/components/gsapNav";
 
 export default function RouteIndex() {
   return (
     <LayoutContainer>
       {" "}
-      <MainNav />
+      <GSAPNav />
       <LayoutContainer className="pt-nav">
         <Outlet />
       </LayoutContainer>

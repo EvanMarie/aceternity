@@ -1,5 +1,4 @@
 import type { MetaFunction } from "@remix-run/node";
-import { NavLink } from "@remix-run/react";
 import Button from "~/components/buildingBlocks/button";
 import HStack from "~/components/buildingBlocks/hStack";
 import LayoutContainer from "~/components/buildingBlocks/layoutContainer";
@@ -27,7 +26,8 @@ export default function Index() {
           <HStack>
             {" "}
             <Button to="/design" buttonText="Design" />
-            <Button to="/animations" buttonText="Animations" />
+            <Button to="/css" buttonText="CSS Animation" />
+            <Button to="/gsap" buttonText="GSAP Animations" />
             <Button
               to="https://gsap.com/docs/v3/"
               target="_blank"

@@ -2155,6 +2155,158 @@ export default {
         xxxl: "4vh",
         full: "100%",
       },
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+        fadeInUp: {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        fadeInDown: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        fadeInRight: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        fadeInLeft: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        fadeOutUp: {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-100%)" },
+        },
+        fadeOutDown: {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(100%)" },
+        },
+        fadeOutRight: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+        fadeOutLeft: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        scaleUp: {
+          "0%": { transform: "scale(0)" },
+          "100%": { transform: "scale(1)" },
+        },
+        scaleDown: {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(0)" },
+        },
+        scaleUpLeft: {
+          "0%": { transform: "scale(0)" },
+          "100%": { transform: "scale(1)" },
+        },
+        scaleUpRight: {
+          "0%": { transform: "scale(0)" },
+          "100%": { transform: "scale(1)" },
+        },
+        scaleDownLeft: {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(0)" },
+        },
+        scaleDownRight: {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(0)" },
+        },
+        slideInUp: {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        slideInDown: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        slideInRight: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        slideInLeft: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        slideOutUp: {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-100%)" },
+        },
+        slideOutDown: {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(100%)" },
+        },
+        slideUpLeft: {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-100%) translateX(-100%)" },
+        },
+        slideUpRight: {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-100%) translateX(100%)" },
+        },
+        slideDownLeft: {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(100%) translateX(-100%)" },
+        },
+        slideDownRight: {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(100%) translateX(100%)" },
+        },
+        zoomIn: {
+          "0%": { transform: "scale(0)" },
+          "100%": { transform: "scale(1)" },
+        },
+        heartbeat: {
+          "0%": { transform: "scale(1)" },
+          "14%": { transform: "scale(1.3)" },
+          "28%": { transform: "scale(1)" },
+          "42%": { transform: "scale(1.3)" },
+          "70%": { transform: "scale(1)" },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 1s ease-in-out infinite",
+        fadeIn: "fadeIn 0.5s ease-out",
+        fadeOut: "fadeOut 0.5s ease-out",
+        fadeInUp: "fadeInUp 0.5s ease-out",
+        fadeInDown: "fadeInDown 0.5s ease-out",
+        fadeInRight: "fadeInRight 0.5s ease-out",
+        fadeInLeft: "fadeInLeft 0.5s ease-out",
+        fadeOutUp: "fadeOutUp 0.5s ease-out",
+        fadeOutDown: "fadeOutDown 0.5s ease-out",
+        fadeOutRight: "fadeOutRight 0.5s ease-out",
+        fadeOutLeft: "fadeOutLeft 0.5s ease-out",
+        scaleUp: "scaleUp 0.5s ease-out",
+        scaleDown: "scaleDown 0.5s ease-out",
+        scaleUpLeft: "scaleUpLeft 0.5s ease-out",
+        scaleUpRight: "scaleUpRight 0.5s ease-out",
+        scaleDownLeft: "scaleDownLeft 0.5s ease-out",
+        scaleDownRight: "scaleDownRight 0.5s ease-out",
+        slideInUp: "slideInUp 0.5s ease-out",
+        slideInDown: "slideInDown 0.5s ease-out",
+        slideInRight: "slideInRight 0.5s ease-out",
+        slideInLeft: "slideInLeft 0.5s ease-out",
+        slideOutUp: "slideOutUp 0.5s ease-out",
+        slideOutDown: "slideOutDown 0.5s ease-out",
+        slideUpLeft: "slideUpLeft 0.5s ease-out",
+        slideUpRight: "slideUpRight 0.5s ease-out",
+        slideDownLeft: "slideDownLeft 0.5s ease-out",
+        slideDownRight: "slideDownRight 0.5s ease-out",
+        zoomIn: "zoomIn 0.5s ease-out",
+        heartbeat: "heartbeat 2s ease-in-out infinite",
+      },
     },
   },
   variants: {

@@ -9,7 +9,7 @@ import {
 import "tailwind.css";
 import LayoutContainer from "./components/buildingBlocks/layoutContainer";
 import MainNavDemo from "./routes/design+/components/mainNavDemo";
-import MainNav from "./components/main/mainNav";
+import MainNav from "./routes/gsap+/components/gsapNav";
 
 // import { AnimatePresence } from "framer-motion";
 
@@ -29,7 +29,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body style={{ background: "#333" }}>
         <LayoutContainer className="bg-col-880">
           <Outlet />
           <ScrollRestoration />
