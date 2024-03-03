@@ -5,6 +5,9 @@ import CSSAnimationExample from "./components/cssAnimationExample";
 import Flex from "~/components/buildingBlocks/flex";
 import ScrollingSelector from "~/components/buildingBlocks/scrollingSelector";
 import { useCallback, useState } from "react";
+import IconButton from "~/components/buildingBlocks/iconButton";
+import { StopIcon } from "styles";
+import Box from "~/components/buildingBlocks/box";
 
 export default function AnimationsOne() {
   const animations = [
@@ -24,25 +27,6 @@ export default function AnimationsOne() {
     "animate-fadeOutDown",
     "animate-fadeOutLeft",
     "animate-fadeOutRight",
-    "animate-scaleUp",
-    "animate-scaleDown",
-    "animate-scaleUpLeft",
-    "animate-scaleUpRight",
-    "animate-scaleDownLeft",
-    "animate-scaleDownRight",
-    "animate-rotate",
-    "animate-rotateUp",
-    "animate-rotateDown",
-    "animate-rotateLeft",
-    "animate-rotateRight",
-    "animate-slideUp",
-    "animate-slideDown",
-    "animate-slideLeft",
-    "animate-slideRight",
-    "animate-slideUpLeft",
-    "animate-slideUpRight",
-    "animate-slideDownLeft",
-    "animate-slideDownRight",
     "animate-hueRotate",
     "animate-hueRotateUp",
     "animate-hueRotateDown",
@@ -57,6 +41,25 @@ export default function AnimationsOne() {
     "animate-rippleUpRight",
     "animate-rippleDownLeft",
     "animate-rippleDownRight",
+    "animate-rotate",
+    "animate-rotateUp",
+    "animate-rotateDown",
+    "animate-rotateLeft",
+    "animate-rotateRight",
+    "animate-scaleUp",
+    "animate-scaleDown",
+    "animate-scaleUpLeft",
+    "animate-scaleUpRight",
+    "animate-scaleDownLeft",
+    "animate-scaleDownRight",
+    "animate-slideUp",
+    "animate-slideDown",
+    "animate-slideLeft",
+    "animate-slideRight",
+    "animate-slideUpLeft",
+    "animate-slideUpRight",
+    "animate-slideDownLeft",
+    "animate-slideDownRight",
     "animate-vibrate",
     "animate-vibrateUp",
     "animate-vibrateDown",
@@ -90,7 +93,13 @@ export default function AnimationsOne() {
         />
       </Flex>
       <Flex className="justify-center items-center w-65% h-[70vh] px-[8vh]">
-        <FlexFull className="h-full bg-col-200">
+        <FlexFull className="h-full bg-col-200 relative">
+          <Box className="absolute bottom-[1vh] left-[1vh]">
+            <IconButton
+              icon={StopIcon}
+              onClick={() => setCurrentAnimationIndex(0)}
+            />
+          </Box>
           <CSSAnimationExample animation={animations[currentAnimationIndex]} />
         </FlexFull>
       </Flex>
