@@ -19,10 +19,6 @@ const plugin = require("tailwindcss/plugin");
 //   addUtilities(utilities, ["responsive", "hover"]);
 // });
 
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
-
 const buttonStyles = plugin(function ({ addUtilities, theme }) {
   // Base styles for all buttons, excluding shadow properties
   const baseButtonStyles = {
@@ -2498,6 +2494,12 @@ export default {
         vibrateDownLeft: "vibrateDownLeft 1.5s infinite",
         vibrateDownRight: "vibrateDownRight 1.5s infinite",
       },
+    },
+    transitionTimingFunction: {
+      elastic: "cubic-bezier(0.68, -0.55, 0.27, 1.55)", // Example of an elastic easing
+      // Add more custom timing functions here
+      custom1: "cubic-bezier(...)", // Replace '...' with your values
+      custom2: "cubic-bezier(...)", // Replace '...' with your values
     },
   },
   variants: {
