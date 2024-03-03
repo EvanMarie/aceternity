@@ -16,9 +16,12 @@ export default function Index() {
   return (
     <LayoutContainer>
       <Transition className="w-full h-full justify-center items-center">
-        <VStack>
+        <VStack className="text-center">
           <Text className="font-cursive boldTextGlow text-col-900 text-stroke-8-170 text-[10vh] ">
-            GSAP Animation
+            CSS, Tailwind, and
+          </Text>
+          <Text className="font-cursive boldTextGlow text-col-900 text-stroke-8-170 text-[10vh] ">
+            GSAP Animations
           </Text>
           <Text className="text-col-100 text-2xl textShadow">
             Fun with code that moves!
@@ -26,8 +29,8 @@ export default function Index() {
           <HStack>
             {" "}
             <Button to="/design" buttonText="Design" />
-            <Button to="/css" buttonText="CSS Animation" />
-            <Button to="/gsap" buttonText="GSAP Animations" />
+            <Button to="/css" buttonText="CSS & Tailwind" />
+            <Button to="/gsap" buttonText="GSAP" />
             <Button
               to="https://gsap.com/docs/v3/"
               target="_blank"

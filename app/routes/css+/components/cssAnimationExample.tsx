@@ -1,3 +1,5 @@
+import Text from "~/components/buildingBlocks/text";
+
 interface CSSAnimationExampleProps {
   bg?: string;
   animation?: string;
@@ -27,9 +29,11 @@ export default function CSSAnimationExample({
     <div className="flex justify-center items-center h-full w-full">
       <div className="flex justify-center items-center h-[50vh] w-[50vh]">
         <div
-          className={`h-[10vh] w-[15vh] ${bg} shadowBroadNormal border-970-md justify-center items-center ${animation} ${duration} ${delay} ${iterationCount} ${direction} ${timingFunction} ${fillMode} ${playState} ${display}`}
+          className={`h-[10vh] w-[25vh] ${bg} shadowBroadNormal border-970-md justify-center items-center ${animation} ${duration} ${delay} ${iterationCount} ${direction} ${timingFunction} ${fillMode} ${playState} ${display}`}
         >
-          {animation.replace("animate-", "")}
+          <Text className="text-xl-loose font-semibold lightTextShadow">
+            {animation.replace("animate-", "")}
+          </Text>
         </div>
       </div>
     </div>

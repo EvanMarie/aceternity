@@ -5,6 +5,9 @@ import FlexFull from "~/components/buildingBlocks/flexFull";
 import AnimationExample from "./components/animationExample";
 import ScrollingSelector from "~/components/buildingBlocks/scrollingSelector";
 import StaggerAnimationExample from "./components/staggerExample";
+import HorizontalScrollingSelector from "~/components/buildingBlocks/horizontalScrollingSelector";
+import Heading from "~/components/buildingBlocks/headingText";
+import VStackFull from "~/components/buildingBlocks/vStackFull";
 
 export function FadeIn() {
   useEffect(() => {
@@ -224,9 +227,20 @@ export default function AnimationsOne() {
   }, []);
 
   return (
-    <FlexFull className="justify-center items-center">
-      <Flex className="w-35% h-[70vh] px-[2vh]">
-        <ScrollingSelector
+    <VStackFull className="justify-evenly items-center h-full">
+      <FlexFull className="h-15% items-center justify-center">
+        <Flex className="bg-col-900 h-fit px-[2vh] py-[1vh] shadowBroadNormal">
+          <Heading
+            color="text-col-100"
+            text="GSAP Introduction"
+            shadow="textShadow"
+            layout="text-xxl-loose"
+          />
+        </Flex>
+      </FlexFull>
+      <Flex className="h-15% justify-center items-center w-full md:w-85% xl:w-65% px-[8vh]">
+        <HorizontalScrollingSelector
+          showCurrent={false}
           selectedOnTop={false}
           options={animations.map((anim) => anim.name)}
           setExternalSelection={handleAnimationChange}
@@ -235,11 +249,13 @@ export default function AnimationsOne() {
           bg="bg-col-500"
           border="border-980-md"
           showClose={false}
+          buttonClassName="text-nowrap"
         />
       </Flex>
+
       <Flex className="justify-center items-center w-65% h-[70vh]">
         {createElement(animations[currentAnimationIndex].component)}
       </Flex>
-    </FlexFull>
+    </VStackFull>
   );
 }

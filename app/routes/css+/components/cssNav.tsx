@@ -9,7 +9,8 @@ export default function CSSNav() {
     <NavContainer>
       <HStackFull className="px-[1vh] justify-between">
         <IconButton icon={HomeIcon} type="smallNormal" to="/" />
-        <Button to="/css" buttonText="Tailwind" />
+        <Button to="/css" buttonText="CSS" />
+        <Button to="/css/tailwind" buttonText="Tailwind" />
         <Button
           to="https://developer.mozilla.org/en-US/docs/Web/CSS/animation"
           target="_blank"
