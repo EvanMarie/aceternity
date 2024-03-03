@@ -227,7 +227,7 @@ export default function AnimationsOne() {
 
   return (
     <FlexFull className="justify-center items-center">
-      <Flex className="w-35% h-[70vh]">
+      <Flex className="w-35% h-[70vh] px-[2vh]">
         <ScrollingSelector
           selectedOnTop={false}
           options={animations.map((anim) => anim.name)}
