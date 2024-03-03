@@ -90,7 +90,7 @@ function ExampleDescription({
 export function CSSExampleOne() {
   return (
     <CSSAnimationExample
-      label="Example 1:"
+      label="Example 1: default"
       notes={
         <DescriptionContainer>
           <ExampleDescription
@@ -120,7 +120,7 @@ export function CSSExampleOne() {
 export function CSSExampleTwo() {
   return (
     <CSSAnimationExample
-      label="Example 2:"
+      label="Example 2: linear"
       notes={
         <DescriptionContainer>
           <ExampleDescription description="Same as example 1, but with timing function ease-linear" />
@@ -143,7 +143,7 @@ export function CSSExampleTwo() {
 export function CSSExampleThree() {
   return (
     <CSSAnimationExample
-      label="Example 3:"
+      label="Example 3: ease-in-out"
       notes={
         <DescriptionContainer>
           <ExampleDescription description="Same as above, but this time with ease-in-out" />
@@ -163,20 +163,20 @@ export function CSSExampleThree() {
 export function CSSExampleFour() {
   return (
     <CSSAnimationExample
-      label="Example 4:"
+      label="Example 4: elastic"
       notes={
         <DescriptionContainer>
           <ExampleDescription description="Custom Transition" />
-          <ExampleDescription description="Use Chrome dev tools to see the cubic-bezier function and edit the transition curve. For example, this animation has cubic-bezier(0, 0.14, 0, 1.04)" />
+          <ExampleDescription description="Use Chrome dev tools to see the cubic-bezier function and edit the transition curve. For example, this animation has an elastic timing function" />
           <ExampleDescription
             label="Child:"
-            description="cubic-bezier(0, 0.14, 0, 1.04)"
+            description="ease-elastic (defined in tailwind.config.js in the timing functions plugin)"
           />
         </DescriptionContainer>
       }
     >
       <ExampleParent className="group cursor-pointer">
-        <ExampleChild className="transition-transform duration-1000 transform group-hover:translate-x-[100%] cubic-bezier(0, 0.14, 0, 1.04)">
+        <ExampleChild className="transition-transform duration-1000 transform group-hover:translate-x-[100%] ease-elastic">
           Child
         </ExampleChild>
       </ExampleParent>
