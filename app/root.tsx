@@ -16,7 +16,7 @@ import MainNav from "./components/main/mainNav";
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Indie+Flower&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Indie+Flower&family=Nova+Mono&display=swap",
   },
 ];
 

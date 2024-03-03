@@ -1756,6 +1756,7 @@ export default {
       fontFamily: {
         sans: ["Dosis", "sans-serif"],
         cursive: ["Indie Flower", "cursive"],
+        fontFamily: ["Nova Mono", "monospace"],
       },
       fontSize: {
         xxs: ["1.2vh", { lineHeight: "1.8vh" }],
