@@ -1,7 +1,7 @@
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import FlexFullResponsiveHalf from "~/components/buildingBlocks/flexResponsiveHalf";
 import Wrap from "~/components/buildingBlocks/wrap";
-import CSSAnimationExample from "./components/cssAnimationExample";
+import TailwindAnimationExample from "./components/tailwindAnimationExample";
 import Flex from "~/components/buildingBlocks/flex";
 import ScrollingSelector from "~/components/buildingBlocks/scrollingSelector";
 import { useCallback, useState } from "react";
@@ -123,7 +123,7 @@ export default function AnimationsOne() {
                   onClick={() => setCurrentAnimation("none")}
                 />
               </Box>
-              <CSSAnimationExample animation={actualClassName} />
+              <TailwindAnimationExample animation={actualClassName} />
             </FlexFull>
           </Flex>
         </FlexFull>

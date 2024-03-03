@@ -1,41 +1,27 @@
-import Text from "~/components/buildingBlocks/text";
-
-interface CSSAnimationExampleProps {
-  bg?: string;
-  animation?: string;
-  duration?: string;
-  delay?: string;
-  iterationCount?: string;
-  direction?: string;
-  timingFunction?: string;
-  fillMode?: string;
-  playState?: string;
-  display?: string;
-}
+import Flex from "~/components/buildingBlocks/flex";
+import FlexFull from "~/components/buildingBlocks/flexFull";
+import Transition from "~/components/buildingBlocks/transition";
+import { CSSExampleOne } from "./cssAnimationExampleComponents";
 
 export default function CSSAnimationExample({
-  bg = "bg-col-500",
-  animation = "animate-bounce",
-  duration = "duration-1s",
-  delay = "delay-0s",
-  iterationCount = "iteration-count-infinite",
-  direction = "direction-normal",
-  timingFunction = "timing-function-ease",
-  fillMode = "fill-mode-none",
-  playState = "play-state-running",
-  display = "flex",
-}: CSSAnimationExampleProps) {
+  notes,
+  children,
+}: {
+  notes: React.ReactNode;
+  children: React.ReactNode;
+}) {
   return (
-    <div className="flex justify-center items-center h-full w-full">
-      <div className="flex justify-center items-center h-[50vh] w-[50vh]">
-        <div
-          className={`h-[10vh] w-[25vh] ${bg} shadowBroadNormal border-970-md justify-center items-center ${animation} ${duration} ${delay} ${iterationCount} ${direction} ${timingFunction} ${fillMode} ${playState} ${display}`}
-        >
-          <Text className="text-xl-loose font-semibold lightTextShadow">
-            {animation.replace("animate-", "")}
-          </Text>
-        </div>
-      </div>
-    </div>
+    <FlexFull className="h-fit flex-col lg:flex-row bg-col-700 shadowBroadNormal border-970-md ">
+      <Flex className="justify-center p-[1vh] w-full lg:w-1/2">
+        <FlexFull className="h-full p-[1vh] text-col-100 bg-col-900 shadowBroadNormal border-970-md ">
+          {notes}
+        </FlexFull>
+      </Flex>
+      <FlexFull className="h-full p-[1vh] w-full lg:w-1/2">
+        <FlexFull className="justify-center p-[1vh]  bg-col-200 shadowBroadNormal border-970-md ">
+          {children}
+        </FlexFull>
+      </FlexFull>
+    </FlexFull>
   );
 }
