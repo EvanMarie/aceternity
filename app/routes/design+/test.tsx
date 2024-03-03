@@ -1,7 +1,7 @@
 export default function TestPage() {
   return (
     <div>
-      <div className="text-3xl">Test Page</div>
+      <h1>Test Page</h1>
     </div>
   );
 }

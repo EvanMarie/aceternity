@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { createElement, useCallback, useEffect, useState } from "react";
+import { createElement, useCallback, useEffect, useRef, useState } from "react";
 import Box from "~/components/buildingBlocks/box";
 import Flex from "~/components/buildingBlocks/flex";
 import FlexFull from "~/components/buildingBlocks/flexFull";
@@ -10,6 +10,7 @@ import Wrap from "~/components/buildingBlocks/wrap";
 import AnimationExample from "./components/animationExample";
 import HStackFull from "~/components/buildingBlocks/hStackFull";
 import ScrollingSelector from "~/components/buildingBlocks/scrollingSelector";
+import StaggerAnimationExample from "./components/staggerExample";
 
 export function FadeIn() {
   useEffect(() => {
@@ -18,7 +19,7 @@ export function FadeIn() {
   return (
     <AnimationExample
       id="animation"
-      text="Example 1"
+      text="Fade In"
       animationClass="opacity-0"
       heading="Fade In"
       description="A simple fade-in animation where an element gradually becomes visible."
@@ -29,22 +30,22 @@ export function FadeIn() {
 
 export function HorizontalMovement() {
   useEffect(() => {
-    gsap.to("#animation", { duration: 2, x: 50, opacity: 1 });
+    gsap.to("#animation", { duration: 2, x: 150, opacity: 1 });
   }, []);
 
   return (
     <AnimationExample
       id="animation"
-      text="Example 2"
-      heading="Horizontal Movement"
+      text="X-Axis Movement"
+      heading="Horizontal X-Axis Movement"
       description="Animate an element to move horizontally across the screen."
       animationClass="opacity-0"
-      code='gsap.to("#animation", { duration: 2, x: 50, opacity: 1 });'
+      code='gsap.to("#animation", { duration: 2, x: 150, opacity: 1 });'
     />
   );
 }
 
-export function Scaling() {
+export function ScaleOut() {
   useEffect(() => {
     gsap.to("#animation", { duration: 1.5, scale: 0.4 });
   }, []);
@@ -52,10 +53,26 @@ export function Scaling() {
   return (
     <AnimationExample
       id="animation"
-      text="Example 3"
+      text="Scale Out"
       heading="Scaling"
       description="Animate an element to increase or decrease in size."
       code='gsap.to("#animation", { duration: 1.5, scale: 0.4 });'
+    />
+  );
+}
+
+export function ScaleIn() {
+  useEffect(() => {
+    gsap.to("#animation", { duration: 1.5, scale: 1.4 });
+  }, []);
+
+  return (
+    <AnimationExample
+      id="animation"
+      text="Scale In"
+      heading="Scaling"
+      description="Animate an element to increase in size."
+      code='gsap.to("#animation", { duration: 1.5, scale: 1.4 });'
     />
   );
 }
@@ -68,7 +85,7 @@ export function Rotation() {
   return (
     <AnimationExample
       id="animation"
-      text="Example 4"
+      text="Rotation"
       heading="Rotation"
       description="Rotate an element around its center point."
       code='gsap.to("#animation", { duration: 2, rotation: 360 });'
@@ -84,7 +101,7 @@ export function Easing() {
   return (
     <AnimationExample
       id="animation"
-      text="Example 5"
+      text="Easing"
       heading="Easing"
       description="Easing functions can make animations more natural by accelerating or decelerating the motion."
       code='gsap.to("#animation", { duration: 2, x: 100, ease: "elastic.out(1, 0.3)" });'
@@ -92,21 +109,35 @@ export function Easing() {
   );
 }
 
-export function Staggering() {
-  useEffect(() => {
-    gsap.to("#animation", { duration: 0.5, opacity: 1, stagger: 0.2 });
-  }, []);
+export const Stagger: React.FC = () => {
+  const animationParams = {
+    duration: 0.5,
+    opacity: 1,
+    stagger: 0.5,
+  };
+
+  const items = [
+    { id: "Item 1", bg: "bg-col-900" },
+    { id: "Item 2", bg: "bg-col-800" },
+    { id: "Item 3", bg: "bg-col-700" },
+    { id: "Item 4", bg: "bg-col-600" },
+    { id: "Item 5", bg: "bg-col-500" },
+  ];
 
   return (
     <AnimationExample
-      id="animation"
-      text="Example 6"
+      isMulti
       heading="Staggering"
       description="Staggering allows you to animate multiple elements with a delay between each one."
-      code='gsap.to("animation", { duration: 0.5, opacity: 1, stagger: 0.2 });'
-    />
+      code={`gsap.to("#animation-<ITEM>", { duration: 0.5, opacity: 1, stagger: 0.5 });`}
+    >
+      <StaggerAnimationExample
+        items={items}
+        animationParams={animationParams}
+      />
+    </AnimationExample>
   );
-}
+};
 
 export function RepeatAndYoyo() {
   useEffect(() => {
@@ -116,7 +147,7 @@ export function RepeatAndYoyo() {
   return (
     <AnimationExample
       id="animation"
-      text="Example 7"
+      text="Repeat & Yoyo"
       heading="Repeat and Yoyo"
       description="Repeat an animation a number of times and reverse it each time."
       code='gsap.to("#animation", { duration: 1, x: 100, repeat: 3, yoyo: true });'
@@ -135,7 +166,7 @@ export function Timeline() {
   return (
     <AnimationExample
       id="animation"
-      text="Example 8"
+      text="Multiple"
       heading="Timeline"
       description="A timeline allows you to sequence multiple animations."
       code={`let tl = gsap.timeline();
@@ -158,7 +189,7 @@ export function ScrollTrigger() {
   return (
     <AnimationExample
       id="animation"
-      text="Example 9"
+      text="Scroll Trigger"
       heading="Scroll Trigger"
       description="Start an animation when an element enters the viewport."
       code={`gsap.to("#animation", {
@@ -185,8 +216,12 @@ const animations: Animation[] = [
     component: HorizontalMovement,
   },
   {
-    name: "Scaling",
-    component: Scaling,
+    name: "Scale In",
+    component: ScaleIn,
+  },
+  {
+    name: "Scale Out",
+    component: ScaleOut,
   },
   {
     name: "Rotation",
@@ -197,8 +232,8 @@ const animations: Animation[] = [
     component: Easing,
   },
   {
-    name: "Staggering",
-    component: Staggering,
+    name: "Stagger",
+    component: Stagger,
   },
   {
     name: "Repeat and Yoyo",
@@ -217,11 +252,8 @@ const animations: Animation[] = [
 export default function AnimationsOne() {
   const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
 
-  // Correctly use useCallback to ensure the function is properly memoized
   const handleAnimationChange = useCallback((selectedOption: string) => {
-    // Find the index of the animation based on the selected option's name
     const index = animations.findIndex((anim) => anim.name === selectedOption);
-    // Update the state with the new index
     setCurrentAnimationIndex(index);
   }, []);
 
@@ -231,7 +263,7 @@ export default function AnimationsOne() {
         <ScrollingSelector
           selectedOnTop={false}
           options={animations.map((anim) => anim.name)}
-          setExternalSelection={handleAnimationChange} // Correctly pass the function here
+          setExternalSelection={handleAnimationChange}
           selectedOption={animations[currentAnimationIndex].name}
           heading="Animations"
           bg="bg-col-500"
