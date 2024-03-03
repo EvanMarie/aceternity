@@ -26,10 +26,6 @@ export default function ScrollingSelector({
   showClose?: boolean;
 }) {
   const [selected, setSelected] = useState(selectedOption || undefined);
-  function handleStatusSelect(option: string) {
-    setSelected(option);
-    setExternalSelection ? setExternalSelection(option) : null;
-  }
 
   const selectedOnTopOptions = selected
     ? [selected, ...options.filter((option) => option !== selected)]
@@ -43,6 +39,13 @@ export default function ScrollingSelector({
       return `bg-col-950 text-col-100 font-[400] hover:bg-col-600 hover:text-col-900 transition-500`;
     }
   };
+
+  function handleStatusSelect(option: string) {
+    setSelected(option);
+    if (setExternalSelection) {
+      setExternalSelection(option);
+    }
+  }
 
   return (
     <FlexFull className={`${bg} ${border}`}>
