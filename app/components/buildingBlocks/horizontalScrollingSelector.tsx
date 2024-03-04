@@ -76,7 +76,7 @@ export default function HorizontalScrollingSelector({
         >
           <Box className="w-full max-w-full pb-[0.5vh]">
             <HStackFull
-              className={`max-w-maxpx-[2vh] py-[1vh]`}
+              className={`max-w-maxpx-[2vh] py-[1vh] px-[1.5vh]`}
               gap="gap-[1vh]"
             >
               {mapSelections.map((option) => (

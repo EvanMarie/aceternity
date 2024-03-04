@@ -14,7 +14,7 @@ export default function CSSAnimationExample({
 }) {
   return (
     <VStackFull
-      className="bg-col-700 shadowBroadNormal border-970-md xl:w-80%"
+      className="bg-col-700 shadowBroadNormal border-970-md xl:w-80% "
       align="items-start"
       gap="gap-[0px]"
     >
