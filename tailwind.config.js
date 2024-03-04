@@ -14,13 +14,81 @@ const {
 //   addUtilities(utilities, ["responsive", "hover"]);
 // });
 
-// const NameOfPlugin = plugin(function ({ addUtilities }) {
-//   const utilities = {
-//     ".className": { styles },
-//   };
+const transformStyles = plugin(function ({ addUtilities }) {
+  const utilities = {
+    ".transform-style-3d": {
+      transformStyle: "preserve-3d",
+    },
+    // Add more custom utilities as needed
+  };
+  addUtilities(utilities, ["responsive", "hover"]);
+});
 
-//   addUtilities(utilities, ["responsive", "hover"]);
-// });
+const backfaceVisibilityPlugin = plugin(function ({ addUtilities }) {
+  const utilities = {
+    ".backface-visible": {
+      "backface-visibility": "visible",
+    },
+    ".backface-hidden": {
+      "backface-visibility": "hidden",
+    },
+  };
+
+  addUtilities(utilities, ["responsive", "hover"]);
+});
+
+const perspectivePlugin = plugin(function ({ addUtilities }) {
+  const utilities = {
+    ".perspective-80": { perspective: "30vh" },
+    ".perspective-80": { perspective: "40vh" },
+    ".perspective-50": { perspective: "50vh" },
+    ".perspective-60": { perspective: "60vh" },
+    ".perspective-70": { perspective: "70vh" },
+    ".perspective-80": { perspective: "80vh" },
+    ".perspective-90": { perspective: "90vh" },
+    ".perspective-100": { perspective: "100vh" },
+    ".perspective-110": { perspective: "110vh" },
+    ".perspective-120": { perspective: "120vh" },
+    ".perspective-130": { perspective: "130vh" },
+    ".perspective-140": { perspective: "140vh" },
+    ".perspective-150": { perspective: "150vh" },
+    ".perspective-160": { perspective: "160vh" },
+    ".perspective-170": { perspective: "170vh" },
+    ".perspective-180": { perspective: "180vh" },
+    ".perspective-190": { perspective: "190vh" },
+    ".perspective-200": { perspective: "200vh" },
+  };
+
+  addUtilities(utilities, ["responsive", "hover"]);
+});
+
+const rotateYPlugin = plugin(function ({ addUtilities }) {
+  const utilities = {
+    ".rotate-y-0": {
+      transform: "rotateY(0deg)",
+    },
+    ".rotate-y-15": {
+      transform: "rotateY(15deg)",
+    },
+    ".rotate-y-45": {
+      transform: "rotateY(45deg)",
+    },
+    ".rotate-y-60": {
+      transform: "rotateY(60deg)",
+    },
+    ".rotate-y-90": {
+      transform: "rotateY(90deg)",
+    },
+    ".rotate-y-105": {
+      transform: "rotateY(105deg)",
+    },
+    ".rotate-y-180": {
+      transform: "rotateY(180deg)",
+    },
+  };
+
+  addUtilities(utilities, ["responsive", "hover"]);
+});
 
 const transitionTimingFunctionsPlugin = plugin(function ({
   addUtilities,
@@ -2623,9 +2691,6 @@ export default {
         2900: "2900ms",
         3000: "3000ms",
       },
-      perspective: {
-        1000: "1000px",
-      },
     },
   },
 
@@ -2917,5 +2982,9 @@ export default {
     buttonStyles,
     customBordersPlugin,
     transitionTimingFunctionsPlugin,
+    perspectivePlugin,
+    rotateYPlugin,
+    backfaceVisibilityPlugin,
+    transformStyles,
   ],
 };

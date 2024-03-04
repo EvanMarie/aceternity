@@ -14,6 +14,7 @@ import Button from "~/components/buildingBlocks/button";
 import Modal from "~/components/buildingBlocks/modal";
 import Box from "~/components/buildingBlocks/box";
 import CubicBezierExplained from "./components/cubicBezierExplaned";
+import DescriptionModal from "./components/descriptionModal";
 
 type TimingFunctionKey = keyof typeof functionDetails;
 
@@ -216,13 +217,9 @@ export default function CSSAnimation() {
             />
           </FlexFull>
           <VStack className="bg-col-900 p-[2vh] shadowBroadLoose border-970-md w-full lg:w-50% relative">
-            <Box className="absolute bottom-[1vh] right-[1vh]">
-              <Button
-                buttonText="read more"
-                type="smallNormal"
-                onClick={() => setModalOpen(true)}
-              />
-            </Box>
+            <DescriptionModal>
+              <CubicBezierExplained />
+            </DescriptionModal>
             <Heading
               text="Cubic Bezier Timing Functions"
               layout="text-xl-normal"
@@ -284,14 +281,6 @@ export default function CSSAnimation() {
           </CSSAnimationExample>
         </VStackFull>
       </Transition>
-      <Modal
-        isOpen={modalOpen}
-        setModalOpen={setModalOpen}
-        onClose={() => setModalOpen(false)}
-        modalSize="w-full h-full lg:w-80% h-90% xl:w-60%"
-      >
-        <CubicBezierExplained />
-      </Modal>
     </>
   );
 }
