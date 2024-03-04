@@ -10,8 +10,14 @@ import Flex from "~/components/buildingBlocks/flex";
 import VStack from "~/components/buildingBlocks/vStack";
 import HStack from "~/components/buildingBlocks/hStack";
 import { useCallback, useState } from "react";
+import Button from "~/components/buildingBlocks/button";
+import Modal from "~/components/buildingBlocks/modal";
+import Box from "~/components/buildingBlocks/box";
+import CubicBezierExplained from "./components/cubicBezierExplaned";
 
-const timingFunctions = [
+type TimingFunctionKey = keyof typeof functionDetails;
+
+const timingFunctions: TimingFunctionKey[] = [
   "ease",
   "ease-in",
   "ease-out",
@@ -50,7 +56,12 @@ const timingFunctions = [
 ];
 
 const functionDetails = {
-  "ease": "cubic-bezier(0.42, 0, 0.58, 1)",
+  "ease-snail-pace": "cubic-bezier(0.2, 0.1, 0.3, 0.2)",
+  "ease-bounce-out": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+  "ease-elastic-start": "cubic-bezier(0.75, -0.5, 0.25, 1.75)",
+  "ease-sharp-snap": "cubic-bezier(0.9, 0.1, 0.1, 0.1)",
+  "ease-slow-mo": "cubic-bezier(0.05, 0.85, 0.15, 1)",
+  ease: "cubic-bezier(0.42, 0, 0.58, 1)",
   "ease-linear": "cubic-bezier(0, 0, 1, 1)",
   "ease-in": "cubic-bezier(0.42, 0, 1, 1)",
   "ease-out": "cubic-bezier(0, 0, 0.58, 1)",
@@ -87,8 +98,8 @@ const functionDetails = {
   "slow-mo": "cubic-bezier(0.05, 0.85, 0.15, 1)",
 };
 
-function ExampleParent({
-  w = "w-[50vh]",
+export function ExampleParent({
+  w = "w-full",
   h = "h-[25vh]",
   bg = "bg-col-500",
   children,
@@ -120,10 +131,10 @@ function ExampleParent({
   );
 }
 
-function ExampleChild({
+export function ExampleChild({
   w = "w-50%",
-  h = "h-50%",
-  bg = "bg-col-600",
+  h = "h-70%",
+  bg = "bg-col-300",
   children,
   className,
   style,
@@ -149,15 +160,19 @@ function ExampleChild({
   );
 }
 
-function DescriptionContainer({ children }: { children: React.ReactNode }) {
+export function DescriptionContainer({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <VStack gap="gap-[0px]" align="items-start">
+    <VStack gap="gap-[1vh]" align="items-start">
       {children}
     </VStack>
   );
 }
 
-function ExampleDescription({
+export function ExampleDescription({
   label,
   description,
 }: {
@@ -173,7 +188,7 @@ function ExampleDescription({
   }
 
   return (
-    <HStack gap="gap-[0.5vh]">
+    <HStack gap="gap-[0.5vh] items-start">
       {label && <Label>{label}</Label>}
       <TailwindCSS>{description}</TailwindCSS>
     </HStack>
@@ -181,63 +196,102 @@ function ExampleDescription({
 }
 
 export default function CSSAnimation() {
-  const [currentTimingFunction, setCurrentTimingFunction] = useState("ease");
+  const [currentTimingFunction, setCurrentTimingFunction] =
+    useState<TimingFunctionKey>("ease");
+  const [modalOpen, setModalOpen] = useState(false);
   const handleAnimationChange = useCallback((selectedOption: string) => {
-    setCurrentTimingFunction(selectedOption);
+    setCurrentTimingFunction(selectedOption as TimingFunctionKey);
   }, []);
   return (
-    <Transition className="w-full h-full">
-      <VStackFull className="h-full overflow-y-auto p-[2vh]" gap="gap-[5vh]">
-        <FlexFull className="px-[2vh] pt-[1vh] justify-center">
-          <Heading
-            text="Default & Custom Timing Functions"
-            layout="text-too-big-normal"
-            shadow="textShadow"
-            color="text-col-100"
-            className="py-[0.7vh]"
-          />
-        </FlexFull>
+    <>
+      <Transition className="w-full h-full">
+        <VStackFull className="h-full overflow-y-auto p-[2vh]" gap="gap-[3vh]">
+          <FlexFull className="px-[2vh] pt-[1vh] justify-center">
+            <Heading
+              text="Default & Custom Timing Functions"
+              layout="text-too-big-normal"
+              shadow="textShadow"
+              color="text-col-100"
+              className="py-[0.7vh]"
+            />
+          </FlexFull>
+          <VStack className="bg-col-900 p-[2vh] shadowBroadLoose border-970-md w-full lg:w-50% relative">
+            <Box className="absolute bottom-[1vh] right-[1vh]">
+              <Button
+                buttonText="read more"
+                type="smallNormal"
+                onClick={() => setModalOpen(true)}
+              />
+            </Box>
+            <Heading
+              text="Cubic Bezier Timing Functions"
+              layout="text-xl-normal"
+              shadow="textShadow"
+              color="text-col-100"
+              className="py-[0.7vh]"
+            />
+            <Text className="text-col-100">
+              Cubic Bezier curves are defined by four points: P0, P1, P2, and
+              P3. In the context of CSS animations and transitions, these points
+              are used to define the speed curve of the animation. The
+              cubic-bezier function in CSS is specifically defined by the
+              coordinates of two of these points: P1 and P2. P0 and P3 are
+              implicitly defined (P0 is always (0,0) and P3 is always (1,1) for
+              CSS transitions and animations), as they represent the start and
+              end of the transition, respectively.
+            </Text>
+          </VStack>
 
-        <FlexFull className="h-15% justify-center items-center md:w-85% xl:w-80% px-[8vh]">
-          <HorizontalScrollingSelector
-            showCurrent={false}
-            selectedOnTop={false}
-            options={timingFunctions}
-            setExternalSelection={handleAnimationChange}
-            selectedOption={currentTimingFunction}
-            heading="CSS Timing Functions in Tailwind"
-            bg="bg-col-500"
-            border="border-980-md"
-            showClose={false}
-            buttonClassName="text-nowrap"
-          />
-        </FlexFull>
-        <CSSAnimationExample
-          notes={
-            <DescriptionContainer>
-              <ExampleDescription
-                label="Parent:"
-                description="className=group cursor-pointer"
-              />
-              <ExampleDescription
-                label="Child:"
-                description={`className=transition-transform duration-[1500ms] transform group-hover:translate-x-[100%] ${currentTimingFunction}`}
-              />
-            </DescriptionContainer>
-          }
-        >
-          <ExampleParent className="group cursor-pointer">
-            <ExampleChild
-              className={`transition-transform duration-[1500ms] transform group-hover:translate-x-[100%] ${currentTimingFunction}`}
-            >
-              <Text className="text-lg-loose font-semibold">
-                {currentTimingFunction}
-              </Text>
-              <Text>{functionDetails[currentTimingFunction]}</Text>
-            </ExampleChild>
-          </ExampleParent>
-        </CSSAnimationExample>
-      </VStackFull>
-    </Transition>
+          <FlexFull className="h-20% justify-center items-center xl:w-80%">
+            <HorizontalScrollingSelector
+              showCurrent={false}
+              selectedOnTop={false}
+              options={timingFunctions}
+              setExternalSelection={handleAnimationChange}
+              selectedOption={currentTimingFunction}
+              heading="CSS Timing Functions in Tailwind"
+              bg="bg-col-500"
+              border="border-980-md"
+              showClose={false}
+              buttonClassName="text-nowrap"
+            />
+          </FlexFull>
+          <CSSAnimationExample
+            notes={
+              <DescriptionContainer>
+                <ExampleDescription label="Tailwind classNames: " />
+                <ExampleDescription
+                  label="Parent:"
+                  description="className = group cursor-pointer"
+                />
+                <ExampleDescription
+                  label="Child:"
+                  description={`className = transition-transform duration-[1500ms] transform group-hover:translate-x-[100%] ${currentTimingFunction}`}
+                />
+              </DescriptionContainer>
+            }
+          >
+            <ExampleParent className="group cursor-pointer">
+              <ExampleChild
+                className={`transition-transform duration-[1500ms] transform group-hover:translate-x-[100%] ${currentTimingFunction}`}
+              >
+                <Text className="text-lg-loose font-semibold">
+                  {currentTimingFunction}
+                </Text>
+                <Text>{functionDetails[currentTimingFunction]}</Text>
+              </ExampleChild>
+            </ExampleParent>
+          </CSSAnimationExample>
+        </VStackFull>
+      </Transition>
+      <Modal
+        isOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        onClose={() => setModalOpen(false)}
+        modalSize="w-full h-full lg:w-80% h-90% xl:w-60%"
+      >
+        <CubicBezierExplained />
+      </Modal>
+    </>
   );
 }

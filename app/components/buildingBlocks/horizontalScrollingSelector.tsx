@@ -59,7 +59,7 @@ export default function HorizontalScrollingSelector({
   };
 
   return (
-    <FlexFull className={`${bg} ${border} shadowBroadNormal`}>
+    <FlexFull className={`${bg} ${border} shadowBroadNormal `}>
       <VStackFull className={heading ? `px-[2vh] p-[1vh]` : "p-[0.5vh]"}>
         {heading && (
           <FlexFull className="h-fit">
