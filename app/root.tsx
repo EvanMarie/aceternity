@@ -11,8 +11,6 @@ import LayoutContainer from "./components/buildingBlocks/layoutContainer";
 import MainNavDemo from "./routes/design+/components/mainNavDemo";
 import MainNav from "./routes/gsap+/components/gsapNav";
 
-// import { AnimatePresence } from "framer-motion";
-
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
