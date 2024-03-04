@@ -7,7 +7,7 @@ import FlashcardExplained from "./components/flashcardExplained";
 export default function AdvancedAnimations() {
   return (
     <FlexFull className="h-full overflow-y-auto md:w-80% xl:w-70%">
-      <VStackFull className="items-center p-[2vh]">
+      <VStackFull className="items-center p-[2vh]" gap="gap-[3vh]">
         <ComponentExample
           title="3D Flashcard"
           descriptionContent={<FlashcardExplained />}
