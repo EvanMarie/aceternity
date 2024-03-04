@@ -17,16 +17,16 @@ export default function Index() {
     <LayoutContainer>
       <Transition className="w-full h-full justify-center items-center">
         <VStack className="text-center">
-          <Text className="font-cursive boldTextGlow text-col-900 text-stroke-8-170 text-[10vh] ">
+          <Text className="font-cursive boldTextGlow text-col-900 text-stroke-8-170 text-[10vh] animate-slideInRight">
             CSS, Tailwind, and
           </Text>
-          <Text className="font-cursive boldTextGlow text-col-900 text-stroke-8-170 text-[10vh] ">
+          <Text className="font-cursive boldTextGlow text-col-900 text-stroke-8-170 text-[10vh] animate-slideInLeft delay-1500">
             GSAP Animations
           </Text>
-          <Text className="text-col-100 text-2xl textShadow">
+          <Text className="text-col-100 text-2xl textShadow animate-zoomIn">
             Fun with code that moves!
           </Text>
-          <HStack>
+          <HStack className="animate-slideInUp50vh duration-2200">
             {" "}
             <Button to="/design" buttonText="Design" />
             <Button to="/css" buttonText="CSS & Tailwind" />
