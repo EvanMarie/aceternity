@@ -2623,6 +2623,9 @@ export default {
         2900: "2900ms",
         3000: "3000ms",
       },
+      perspective: {
+        1000: "1000px",
+      },
     },
   },
 

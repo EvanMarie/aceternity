@@ -12,12 +12,12 @@ interface TextProps {
 
 export default function Heading({
   text,
-  layout = "text-md-normal",
+  layout = "text-xl-normal",
   noOfLines = 1,
-  shadow = "boldTextGlow",
+  shadow = "textShadow",
   className,
   isCursive = true,
-  color = "text-col-900",
+  color = "text-col-100",
 }: TextProps) {
   const style: React.CSSProperties = {};
 

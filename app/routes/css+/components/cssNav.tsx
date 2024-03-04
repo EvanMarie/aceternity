@@ -9,12 +9,26 @@ export default function CSSNav() {
     <NavContainer>
       <HStackFull className="px-[1vh] justify-between">
         <IconButton icon={HomeIcon} type="smallNormal" to="/" />
-        <Button to="/css/timing-functions" buttonText="Timing Functions" />
-        <Button to="/css/element-animations" buttonText="Element Animations" />
+        <Button
+          to="/css/timing-functions"
+          buttonText="Timing Functions"
+          type="smallNormal"
+        />
+        <Button
+          to="/css/element-animations"
+          buttonText="Keyframes"
+          type="smallNormal"
+        />
+        <Button
+          to="/css/advanced-animations"
+          buttonText="Components"
+          type="smallNormal"
+        />
         <Button
           to="https://developer.mozilla.org/en-US/docs/Web/CSS/animation"
           target="_blank"
           buttonText="MDN Docs"
+          type="smallNormal"
         />
       </HStackFull>
     </NavContainer>
