@@ -2183,36 +2183,36 @@ export default {
           "100%": { opacity: "0" },
         },
         fadeInUp: {
-          "0%": { opacity: 0, transform: "translateY(100%)" },
+          "0%": { opacity: 0, transform: "translateY(200%)" },
           "100%": { opacity: 1, transform: "translateY(0)" },
         },
         fadeInDown: {
-          "0%": { opacity: 0, transform: "translateY(-100%)" },
+          "0%": { opacity: 0, transform: "translateY(-200%)" },
           "100%": { opacity: 1, transform: "translateY(0)" },
         },
         fadeInRight: {
-          "0%": { opacity: 0, transform: "translateX(100%)" },
+          "0%": { opacity: 0, transform: "translateX(200%)" },
           "100%": { opacity: 1, transform: "translateX(0)" },
         },
         fadeInLeft: {
-          "0%": { opacity: 0, transform: "translateX(-100%)" },
+          "0%": { opacity: 0, transform: "translateX(-200%)" },
           "100%": { opacity: 1, transform: "translateX(0)" },
         },
         fadeOutUp: {
           "0%": { opacity: 1, transform: "translateY(0)" },
-          "100%": { opacity: 0, transform: "translateY(-100%)" },
+          "100%": { opacity: 0, transform: "translateY(-200%)" },
         },
         fadeOutDown: {
           "0%": { opacity: 1, transform: "translateY(0)" },
-          "100%": { opacity: 0, transform: "translateY(100%)" },
+          "100%": { opacity: 0, transform: "translateY(200%)" },
         },
         fadeOutRight: {
           "0%": { opacity: 1, transform: "translateX(0)" },
-          "100%": { opacity: 0, transform: "translateX(100%)" },
+          "100%": { opacity: 0, transform: "translateX(200%)" },
         },
         fadeOutLeft: {
           "0%": { opacity: 1, transform: "translateX(0)" },
-          "100%": { opacity: 0, transform: "translateX(-100%)" },
+          "100%": { opacity: 0, transform: "translateX(-200%)" },
         },
         rotate: {
           from: { transform: "rotate(0deg)" },
@@ -2244,38 +2244,38 @@ export default {
         },
         scaleUpLeft: {
           "0%": { transform: "scale(0) translateX(0)" },
-          "100%": { transform: "scale(1) translateX(-50%)" },
+          "100%": { transform: "scale(1) translateX(-200%) translateY(-200%)" },
         },
         scaleUpRight: {
           "0%": { transform: "scale(0) translateX(0)" },
-          "100%": { transform: "scale(1) translateX(50%)" },
+          "100%": { transform: "scale(1) translateX(200%) translateY(-200%)" },
         },
         scaleDownLeft: {
           "0%": { transform: "scale(1) translateX(0)" },
-          "100%": { transform: "scale(0) translateX(-50%)" },
+          "100%": { transform: "scale(0) translateX(-200%) translateY(200%)" },
         },
         scaleDownRight: {
           "0%": { transform: "scale(1) translateX(0)" },
-          "100%": { transform: "scale(0) translateX(50%)" },
+          "100%": { transform: "scale(0) translateX(200%) translateY(200%)" },
         },
         slideUp: {
           "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(-200%)" },
         },
         slideDown: {
           "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(200%)" },
         },
         slideLeft: {
           "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(-200%)" },
         },
         slideRight: {
           "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(200%)" },
         },
         slideInUp: {
-          "0%": { transform: "translateY(100%)" },
+          "0%": { transform: "translateY(200%)" },
           "100%": { transform: "translateY(0)" },
         },
         slideInUp50vh: {
@@ -2283,40 +2283,40 @@ export default {
           "100%": { transform: "translateY(0)" },
         },
         slideInDown: {
-          "0%": { transform: "translateY(-100%)" },
+          "0%": { transform: "translateY(-200%)" },
           "100%": { transform: "translateY(0)" },
         },
         slideInRight: {
-          "0%": { transform: "translateX(100%)" },
+          "0%": { transform: "translateX(200%)" },
           "100%": { transform: "translateX(0)" },
         },
         slideInLeft: {
-          "0%": { transform: "translateX(-100%)" },
+          "0%": { transform: "translateX(-200%)" },
           "100%": { transform: "translateX(0)" },
         },
         slideOutUp: {
           "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(-200%)" },
         },
         slideOutDown: {
           "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(200%)" },
         },
         slideUpLeft: {
           "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(-100%) translateX(-100%)" },
+          "100%": { transform: "translateY(-200%) translateX(-200%)" },
         },
         slideUpRight: {
           "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(-100%) translateX(100%)" },
+          "100%": { transform: "translateY(-200%) translateX(200%)" },
         },
         slideDownLeft: {
           "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(100%) translateX(-100%)" },
+          "100%": { transform: "translateY(200%) translateX(-200%)" },
         },
         slideDownRight: {
           "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(100%) translateX(100%)" },
+          "100%": { transform: "translateY(200%) translateX(200%)" },
         },
         zoomIn: {
           "0%": { transform: "scale(0)" },
