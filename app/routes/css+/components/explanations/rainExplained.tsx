@@ -1,18 +1,19 @@
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import Text from "~/components/buildingBlocks/text";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
-import DescriptionModalContent, {
-  headingStyles,
-  sectionStyles,
-  textStyles,
-} from "../descriptionModalContent";
+import DescriptionModalContent from "../descriptionModalContent";
 import HL from "~/components/buildingBlocks/highlight";
 import CodeExample from "~/components/buildingBlocks/codeExample";
+import {
+  CSSHeading,
+  CSSSection,
+  CSSText,
+} from "~/components/main/formattingComponents";
 
 export default function RainExplained() {
   return (
     <DescriptionModalContent heading="Animated Rain">
-      <VStackFull className={sectionStyles}>
+      <CSSSection>
         <CodeExample>
           {`export default function Rain({
   rainColor = "bg-cyan-400",
@@ -47,82 +48,80 @@ export default function RainExplained() {
   );
 }`}
         </CodeExample>
-      </VStackFull>
+      </CSSSection>
 
-      <Text className={headingStyles}>1. Component Structure and Props</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
-          Props: The component accepts two optional props:
-        </Text>
-        <VStackFull className={sectionStyles}>
-          <Text className={textStyles}>
+      <CSSHeading>1. Component Structure and Props</CSSHeading>
+      <CSSSection>
+        <CSSText>Props: The component accepts two optional props:</CSSText>
+        <CSSSection>
+          <CSSText>
             <HL>rainColor</HL>: A string that sets the color of the raindrops
             using Tailwind CSS color utilities. It defaults to "bg-cyan-400",
             giving the raindrops a cyan color.
-          </Text>
-          <Text className={textStyles}>
+          </CSSText>
+          <CSSText>
             <HL>numDrops</HL>: A number specifying the total count of raindrops
             to be generated. It defaults to 75, striking a balance between
             visual density and performance.
-          </Text>
-        </VStackFull>
-        <Text className={textStyles}>
+          </CSSText>
+        </CSSSection>
+        <CSSText>
           <HL>Box Container</HL>: The Box component acts as the container for
           the raindrops. It's styled to be full width and height, with overflow
           hidden to ensure that any raindrops moving outside its bounds are not
           visible. This creates the illusion that rain is falling within the
           container's confines.
-        </Text>
-      </VStackFull>
+        </CSSText>
+      </CSSSection>
 
-      <Text className={headingStyles}>2. Dynamic Raindrop Generation</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+      <CSSHeading>2. Dynamic Raindrop Generation</CSSHeading>
+      <CSSSection>
+        <CSSText>
           <HL>Raindrop Elements</HL>: making an array of the number of drops,
           the component dynamically generates an array of numDrops elements.
           Each element is represented by a div with styles and classes applied
           to simulate a raindrop.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>
           <HL>Random Sizes</HL>: The width and height of each raindrop are
           randomized within specified ranges to create variability among the
           raindrops. This is achieved through JavaScript's Math.random()
           function, ensuring each raindrop appears unique.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>
           <HL>Styling</HL>: Raindrops are absolutely positioned within the
           container, allowing them to move independently. The rainColor prop is
           used to dynamically assign a background color class from Tailwind CSS.
           Additional classes like shadow-lg and a custom rounded-raindrop class
           (defined in the project's Tailwind configuration) are applied to
           enhance the visual appearance of the raindrops.
-        </Text>
-      </VStackFull>
-      <Text className={headingStyles}>3. Animation</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+        </CSSText>
+      </CSSSection>
+      <CSSHeading>3. Animation</CSSHeading>
+      <CSSSection>
+        <CSSText>
           <HL>CSS Animation</HL>: The animate-rain class applies a custom CSS
           animation (defined elsewhere in the project) to each raindrop, making
           it fall from the top of the container to the bottom. This simulates
           the falling motion of rain.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>
           <HL>Random Animation Properties</HL>: Each raindrop's animation
           duration and delay are randomized to create a more natural and less
           uniform falling effect. This prevents all raindrops from falling at
           the same speed and starting at the same time.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>
           <HL>Inline Style Customization</HL>: The randomization of width,
           height, animation duration, and delay, along with the raindrop's
           starting position (top: -4rem to start above the viewable area) and
           horizontal position (left), are applied directly through inline styles
           for each raindrop.
-        </Text>
-      </VStackFull>
-      <Text className={headingStyles}>4. Conclusion</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+        </CSSText>
+      </CSSSection>
+      <CSSHeading>4. Conclusion</CSSHeading>
+      <CSSSection>
+        <CSSText>
           The Rain component exemplifies how to use React with Tailwind CSS to
           create dynamic, customizable, and visually appealing effects. Using
           Tailwind's utility classes for styling and incorporating randomness in
@@ -131,8 +130,8 @@ export default function RainExplained() {
           experience of a web application but also demonstrates the power of
           combining React's component-based architecture with Tailwind CSS's
           styling capabilities.
-        </Text>
-      </VStackFull>
+        </CSSText>
+      </CSSSection>
     </DescriptionModalContent>
   );
 }

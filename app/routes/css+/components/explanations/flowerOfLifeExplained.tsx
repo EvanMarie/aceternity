@@ -1,18 +1,19 @@
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import Text from "~/components/buildingBlocks/text";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
-import DescriptionModalContent, {
-  headingStyles,
-  sectionStyles,
-  textStyles,
-} from "../descriptionModalContent";
+import DescriptionModalContent from "../descriptionModalContent";
 import CodeExample from "~/components/buildingBlocks/codeExample";
 import HL from "~/components/buildingBlocks/highlight";
+import {
+  CSSHeading,
+  CSSSection,
+  CSSText,
+} from "~/components/main/formattingComponents";
 
 export default function FlowerOfLifeExplained() {
   return (
     <DescriptionModalContent heading="Pulsating Flower of Life">
-      <VStackFull className={sectionStyles}>
+      <CSSSection>
         <CodeExample>{`export default function FlowerOfLife() {
     const radius = 23; // Determines circle size
     const centerX = 55; // Central X position within SVG coordinate system (must be half of viewbox width)
@@ -68,115 +69,115 @@ export default function FlowerOfLifeExplained() {
     );
     }
           `}</CodeExample>
-      </VStackFull>
+      </CSSSection>
 
-      <Text className={headingStyles}>1. Central Concept</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+      <CSSHeading>1. Central Concept</CSSHeading>
+      <CSSSection>
+        <CSSText>
           The Flower of Life is a geometrical shape consisting of several evenly
           spaced, overlapping circles arranged in a flower-like pattern with a
           sixfold symmetry, like a hexagon. The pattern is significant in
           various cultures and is often associated with sacred geometry.
-        </Text>
-      </VStackFull>
-      <Text className={headingStyles}>2. Component Breakdown</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+        </CSSText>
+      </CSSSection>
+      <CSSHeading>2. Component Breakdown</CSSHeading>
+      <CSSSection>
+        <CSSText>
           <HL>SVG Container</HL>: The component encapsulates an SVG element
           defined by a viewBox of 0 0 110 110, which ensures that the SVG
           content is scalable and can dynamically adjust to different sizes. The
           SVG's width and height are set relative to the viewport width (30vw),
           making the component responsive and adaptable to different screen
           sizes.
-        </Text>
-        <Text className={textStyles}>Circles Definition:</Text>
-        <VStackFull className={sectionStyles}>
-          <Text className={textStyles}>
+        </CSSText>
+        <CSSText>Circles Definition:</CSSText>
+        <CSSSection>
+          <CSSText>
             <HL>Encompassing Circle</HL>: A large circle with a radius defined
             as twice that of the smaller circles, creating a boundary that
             encapsulates the entire design. This circle serves as a visual
             anchor for the pattern.
-          </Text>
-          <Text className={textStyles}>
+          </CSSText>
+          <CSSText>
             <HL>Central Circle</HL>: Positioned at the center of the SVG, it
             acts as the core from which the pattern radiates. Its radius is a
             key parameter that influences the size of all other circles in the
             pattern.
-          </Text>
-          <Text className={textStyles}>
+          </CSSText>
+          <CSSText>
             <HL>Surrounding Circles</HL>: Six circles are evenly distributed
             around the central circle, with their positions calculated using
             trigonometric functions based on the central circle's radius. These
             circles are essential for forming the characteristic Flower of Life
             pattern.
-          </Text>
-        </VStackFull>
-      </VStackFull>
-      <Text className={headingStyles}>3. Styling:</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+          </CSSText>
+        </CSSSection>
+      </CSSSection>
+      <CSSHeading>3. Styling:</CSSHeading>
+      <CSSSection>
+        <CSSText>
           <HL>Colors</HL>: Two distinct colors differentiate the encompassing
           circle from the central and surrounding circles, adding depth and
           visual interest to the pattern.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>
           <HL>Stroke Width and ClassNames</HL>: Custom classes and stroke widths
           are applied to enhance the visual appearance of the circles, providing
           them with distinct borders and integrating them into the overall
           design theme of the component.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>
           <HL>Animation</HL>: A subtle pulsing animation is applied to each
           circle, creating a dynamic and engaging visual effect. The animation
           is defined using Tailwind CSS's animate utility with custom
           parameters, ensuring that each circle pulsates at a slightly different
           rate, adding to the vibrancy of the design.
-        </Text>
-      </VStackFull>
+        </CSSText>
+      </CSSSection>
 
-      <Text className={textStyles}>4. Center Component</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+      <CSSText>4. Center Component</CSSText>
+      <CSSSection>
+        <CSSText>
           The <HL>Center</HL> component is used as a wrapper to center the SVG
           element within its parent container. This component likely employs CSS
           flexbox or grid to align its children centrally both horizontally and
           vertically, ensuring that the Flower of Life pattern is prominently
           and aesthetically displayed.
-        </Text>
-      </VStackFull>
+        </CSSText>
+      </CSSSection>
 
-      <Text className={headingStyles}>5. Purpose and Use</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+      <CSSHeading>5. Purpose and Use</CSSHeading>
+      <CSSSection>
+        <CSSText>
           This component can serve multiple purposes, from being a decorative
           visual element in a web application to illustrating concepts of
           geometry, symmetry, and harmony. Its responsive design ensures it can
           adapt to various display contexts, making it a versatile addition to
           any web project.
-        </Text>
-      </VStackFull>
-      <Text className={headingStyles}>6. Implementation Highlights</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+        </CSSText>
+      </CSSSection>
+      <CSSHeading>6. Implementation Highlights</CSSHeading>
+      <CSSSection>
+        <CSSText>
           The use of SVG for rendering the pattern ensures crisp, scalable
           graphics that remain high-quality regardless of screen size or
           resolution.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>
           The dynamic calculation of circle positions based on geometric
           principles showcases the power of mathematics in creating visually
           appealing designs.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>
           The integration of animations via Tailwind CSS enhances user
           engagement and brings the static design to life.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>
           This FlowerOfLife component is an excellent example of combining
           technology, design, and cultural significance to create a meaningful
           and beautiful web element.
-        </Text>
-      </VStackFull>
+        </CSSText>
+      </CSSSection>
     </DescriptionModalContent>
   );
 }

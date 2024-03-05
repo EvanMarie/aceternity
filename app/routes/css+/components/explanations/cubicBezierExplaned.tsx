@@ -1,109 +1,104 @@
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import Text from "~/components/buildingBlocks/text";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
-import DescriptionModalContent, {
-  headingStyles,
-  sectionStyles,
-  textStyles,
-} from "../descriptionModalContent";
+import DescriptionModalContent from "../descriptionModalContent";
+import {
+  CSSHeading,
+  CSSSection,
+  CSSText,
+} from "~/components/main/formattingComponents";
 
 export default function CubicBezierExplained() {
   return (
     <DescriptionModalContent>
-      <Text className={headingStyles}>
+      <CSSHeading>
         The cubic-bezier function is represented as cubic-bezier(x1, y1, x2,
         y2), where:
-      </Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
-          - x1 and y1 are the coordinates of point P1.
-        </Text>
-        <Text className={textStyles}>
-          - x2 and y2 are the coordinates of point P2.
-        </Text>
-      </VStackFull>
-      <Text className={headingStyles}>Understanding the Coordinates</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+      </CSSHeading>
+      <CSSSection>
+        <CSSText>- x1 and y1 are the coordinates of point P1.</CSSText>
+        <CSSText>- x2 and y2 are the coordinates of point P2.</CSSText>
+      </CSSSection>
+      <CSSHeading>Understanding the Coordinates</CSSHeading>
+      <CSSSection>
+        <CSSText>
           - x1, x2 (Control Points for Time): These values represent the time of
           the animation. Since this is a Bezier curve that progresses over time
           from 0 to 1 (start to end), both x values are typically within the 0
           to 1 range. Manipulating these values changes how the speed of the
           animation progresses over time.
-        </Text>
-        <VStackFull className="px-[4vh]">
-          <Text className={textStyles}>
+        </CSSText>
+        <CSSSection>
+          <CSSText>
             - A value closer to 0 means the effect starts more slowly.
-          </Text>
-          <Text className={textStyles}>
+          </CSSText>
+          <CSSText>
             - A value closer to 1 means the effect starts more quickly.
-          </Text>
-        </VStackFull>
-        <Text className={textStyles}>
+          </CSSText>
+        </CSSSection>
+        <CSSText>
           - y1, y2 (Control Points for Progress): These values represent the
           progression of the animation effect itself, such as moving an element,
           fading in, scaling, etc. They can technically be outside the 0 to 1
           range, which allows for effects like overshooting (where the element
           goes beyond its final state and then settles back) or bouncing.
-        </Text>
+        </CSSText>
         <FlexFull className="px-[4vh]">
-          <Text className={textStyles}>
+          <CSSText>
             - A value less than 0 or greater than 1 can create non-linear, and
             sometimes extreme, progressions like elastic or bounce effects.
-          </Text>
+          </CSSText>
         </FlexFull>
-      </VStackFull>
-      <Text className={headingStyles}>Visual Interpretation</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+      </CSSSection>
+      <CSSHeading>Visual Interpretation</CSSHeading>
+      <CSSSection>
+        <CSSText>
           - Start (P0) at (0,0): The animation's starting point.
-        </Text>
-        <Text className={textStyles}>
-          - End (P3) at (1,1): The animation's ending point.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>- End (P3) at (1,1): The animation's ending point.</CSSText>
+        <CSSText>
           - First Control Point (P1) at (x1, y1): Influences the initial part of
           the animation. Adjusting y1 above 1 can make the animation start by
           moving faster than its end state, creating a "bounce" effect.
           Adjusting x1 influences how quickly this initial part progresses.
-        </Text>
-        <Text className={textStyles}>
+        </CSSText>
+        <CSSText>
           - Second Control Point (P2) at (x2, y2): Influences the latter part of
           the animation. Similar to P1, but for the ending portion of the
           animation. Adjusting y2 below 0 can create an effect where the
           animation "pulls back" before completing.
-        </Text>
-      </VStackFull>
-      <Text className={headingStyles}>Example</Text>
-      <VStackFull className={sectionStyles}>
-        <Text className={textStyles}>
+        </CSSText>
+      </CSSSection>
+      <CSSHeading>Example</CSSHeading>
+      <CSSSection>
+        <CSSText>
           For cubic-bezier(0.68, -0.55, 0.27, 1.55), this defines a curve where:
-        </Text>
-        <VStackFull className={sectionStyles}>
-          <Text className={textStyles}>
+        </CSSText>
+        <CSSSection>
+          <CSSText>
             - The animation starts off quickly (since x1 is fairly high at
             0.68).
-          </Text>
-          <Text className={textStyles}>
+          </CSSText>
+          <CSSText>
             - Initially, it moves backward a little (y1 is -0.55, allowing for
             an "overshoot" backwards).
-          </Text>
-          <Text className={textStyles}>
+          </CSSText>
+          <CSSText>
             - Then, it slows down towards the middle (x2 is 0.27, indicating a
             slower progression in the middle).
-          </Text>
-          <Text className={textStyles}>
+          </CSSText>
+          <CSSText>
             - Finally, it overshoots its ending before settling (y2 is 1.55,
             indicating an "elastic" effect that goes beyond the final state
             before completing).
-          </Text>
-          <Text className={textStyles}>
+          </CSSText>
+          <CSSText>
             - This particular curve would be used for dynamic,
             attention-grabbing animations, such as a bouncing ball or an elastic
             effect.
-          </Text>
-        </VStackFull>
-      </VStackFull>
+          </CSSText>
+        </CSSSection>
+      </CSSSection>
     </DescriptionModalContent>
   );
 }

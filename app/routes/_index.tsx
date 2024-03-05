@@ -30,12 +30,8 @@ export default function Index() {
             {" "}
             <Button to="/design" buttonText="Design" />
             <Button to="/css" buttonText="CSS & Tailwind" />
+            <Button to="/svg" buttonText="SVG" />
             <Button to="/gsap" buttonText="GSAP" />
-            <Button
-              to="https://gsap.com/docs/v3/"
-              target="_blank"
-              buttonText="GSAP Docs"
-            />
           </HStack>
         </VStack>
       </Transition>
