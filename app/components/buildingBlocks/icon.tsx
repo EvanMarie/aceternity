@@ -39,7 +39,7 @@ export default function Icon({
     <div
       role="button"
       tabIndex={0}
-      className={`${rounded} ${w} ${h} ${pos} ${t} ${b} ${r} ${l} ${containerClassName}`}
+      className={`cursor-default ${rounded} ${w} ${h} ${pos} ${t} ${b} ${r} ${l} ${containerClassName}`}
       onClick={onClick}
       onKeyDown={handleKeyDown}
     >

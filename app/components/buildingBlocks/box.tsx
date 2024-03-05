@@ -28,7 +28,7 @@ const Box = React.forwardRef<HTMLDivElement, BoxProps>(
       <div
         role="button"
         tabIndex={0}
-        className={` ${className}`}
+        className={`cursor-default ${className} `}
         style={{ ...style }}
         onClick={onClick}
         onKeyDown={onKeyDown}

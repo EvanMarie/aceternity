@@ -20,7 +20,10 @@ export default function AdvancedAnimations() {
         >
           <FlashCard />
         </ComponentExample>
-        <ComponentExample title="Rain" descriptionContent={<RainExplained />}>
+        <ComponentExample
+          title="Rain Window"
+          descriptionContent={<RainExplained />}
+        >
           <Flex className="w-[60vh] h-[40vh] bg-100-linear6op75 insetShadowXl">
             <Rain />
           </Flex>

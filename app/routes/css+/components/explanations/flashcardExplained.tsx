@@ -8,10 +8,32 @@ import DescriptionModalContent, {
 } from "../descriptionModalContent";
 import HL from "~/components/buildingBlocks/highlight";
 import Heading from "~/components/buildingBlocks/headingText";
+import CodeExample from "~/components/buildingBlocks/codeExample";
 
 export default function FlashcardExplained() {
   return (
     <DescriptionModalContent heading="3D Flashcard">
+      <VStackFull className={sectionStyles}>
+        <CodeExample>
+          {`export default function FlashCard() {
+  const cardDimensions = "h-[35vh] w-[40vh]";
+  return (
+    <Box className="perspective-100 group">
+      <Box
+        className={\`\${cardDimensions} transition-transform duration-1000 transform-style-3d group-hover:rotate-y-180\`}
+      >
+        <Center className="h-full w-full absolute inset-0 bg-col-800 text-col-100 textShadow backface-hidden shadowBroadLoose text-xl-normal">
+          Front Content
+        </Center>
+        <Center className="h-full w-full absolute inset-0 bg-col-500 text-col-100 textShadow backface-hidden rotate-y-180 shadowBroadLoose text-xl-normal">
+          Back Content
+        </Center>
+      </Box>
+    </Box>
+  );
+}`}
+        </CodeExample>
+      </VStackFull>
       <Text className={headingStyles}>1. Setting Up the Perspective</Text>
       <VStackFull className={sectionStyles}>
         <Text className={textStyles}>
