@@ -1,6 +1,6 @@
 import Center from "~/components/buildingBlocks/center";
 
-// Example Remix component with SVG circles correctly scaled and positioned
+
 export default function FlowerOfLife() {
   const radius = 23; // Determines circle size
   const centerX = 55; // Central X position within SVG coordinate system (must be half of viewbox width)
@@ -14,8 +14,8 @@ export default function FlowerOfLife() {
     <Center className="w-fit h-fit">
       <svg
         viewBox="0 0 110 110" // Adjusted for a scalable drawing area
-        width="30vw"
-        height="30vw"
+        width="50vw"
+        height="50vw"
         className="border-970-md bg-900-linear6op75 shadowBroadNormal"
       >
         {/* Large Encompassing Circle */}

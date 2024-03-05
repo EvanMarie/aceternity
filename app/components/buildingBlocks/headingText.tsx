@@ -12,7 +12,7 @@ interface TextProps {
 
 export default function Heading({
   text,
-  layout = "text-xl-normal",
+  layout = "text-xl-loose",
   noOfLines = 1,
   shadow = "textShadow",
   className,

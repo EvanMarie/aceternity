@@ -6,6 +6,8 @@ import FlashcardExplained from "./components/explanations/flashcardExplained";
 import Rain from "./components/advancedExamples/rain";
 import Flex from "~/components/buildingBlocks/flex";
 import RainExplained from "./components/explanations/rainExplained";
+import FlowerOfLife from "../design+/test";
+import FlowerOfLifeExplained from "./components/explanations/flowerOfLifeExplained";
 
 export default function AdvancedAnimations() {
   return (
@@ -27,6 +29,12 @@ export default function AdvancedAnimations() {
           <Flex className="w-[60vh] h-[40vh] bg-100-linear6op75 insetShadowXl">
             <Rain />
           </Flex>
+        </ComponentExample>
+        <ComponentExample
+          title="Flower of Life"
+          descriptionContent={<FlowerOfLifeExplained />}
+        >
+          <FlowerOfLife />
         </ComponentExample>
       </VStackFull>
     </FlexFull>

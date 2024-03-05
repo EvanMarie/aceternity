@@ -2525,6 +2525,12 @@ export default {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(100vh)" },
         },
+
+        scaleAndFade: {
+          "0%, 100%": { opacity: 0.5, transform: "scale(0.8)" },
+          "50%": { opacity: 1, transform: "scale(1)" },
+        },
+        
       },
       animation: {
         wiggle: "wiggle 1.5s ease-in-out infinite",

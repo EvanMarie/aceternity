@@ -24,7 +24,7 @@ export default function DescriptionModal({
         isOpen={modalOpen}
         setModalOpen={setModalOpen}
         onClose={() => setModalOpen(false)}
-        modalSize="w-full h-full lg:w-80% h-90% xl:w-60%"
+        modalSize="w-full h-full lg:w-80% h-90% xl:w-70% xxl:w-60%"
       >
         {children}
       </Modal>

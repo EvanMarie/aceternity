@@ -21,7 +21,11 @@ export default function DescriptionModalContent({
         {heading && (
           <FlexFull className="justify-center">
             <Flex className="px-[2vh] py-[1vh] shadowBroadNormal border-970-md bg-col-990">
-              <Heading text={heading} layout="text-xxl-normal" />
+              <Heading
+                text={heading}
+                layout="text-xxl-normal"
+                className="py-[0.5vh]"
+              />
             </Flex>
           </FlexFull>
         )}

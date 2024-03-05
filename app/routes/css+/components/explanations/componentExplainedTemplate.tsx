@@ -6,10 +6,12 @@ import DescriptionModalContent, {
   sectionStyles,
   textStyles,
 } from "../descriptionModalContent";
+import CodeExample from "~/components/buildingBlocks/codeExample";
 
 export default function ComponentExplainedTemplate() {
   return (
     <DescriptionModalContent heading="heading">
+      <CodeExample>code</CodeExample>
       <Text className={headingStyles}></Text>
       <VStackFull className={sectionStyles}>
         <Text className={textStyles}></Text>
