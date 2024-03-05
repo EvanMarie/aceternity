@@ -39,8 +39,8 @@ const backfaceVisibilityPlugin = plugin(function ({ addUtilities }) {
 
 const perspectivePlugin = plugin(function ({ addUtilities }) {
   const utilities = {
-    ".perspective-80": { perspective: "30vh" },
-    ".perspective-80": { perspective: "40vh" },
+    ".perspective-30": { perspective: "30vh" },
+    ".perspective-40": { perspective: "40vh" },
     ".perspective-50": { perspective: "50vh" },
     ".perspective-60": { perspective: "60vh" },
     ".perspective-70": { perspective: "70vh" },
@@ -2525,12 +2525,6 @@ export default {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(100vh)" },
         },
-
-        scaleAndFade: {
-          "0%, 100%": { opacity: 0.5, transform: "scale(0.8)" },
-          "50%": { opacity: 1, transform: "scale(1)" },
-        },
-        
       },
       animation: {
         wiggle: "wiggle 1.5s ease-in-out infinite",

@@ -9,14 +9,15 @@ export default function SVGNav() {
     <NavContainer>
       <HStackFull className="px-[1vh] justify-between">
         <IconButton icon={HomeIcon} type="smallNormal" to="/" />
-
-        <Button to="/svg/intro" buttonText="Intro" type="smallNormal" />
-        {/* <Button
+        <HStackFull className="h-full items-center justify-around">
+          <Button to="/svg" buttonText="Intro" type="smallNormal" />
+          {/* <Button
           to=""
           target="_blank"
           buttonText=" Docs"
           type="smallNormal"
         /> */}
+        </HStackFull>
       </HStackFull>
     </NavContainer>
   );

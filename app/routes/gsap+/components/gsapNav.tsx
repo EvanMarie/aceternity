@@ -9,12 +9,14 @@ export default function GSAPNav() {
     <NavContainer>
       <HStackFull className="px-[1vh] justify-between">
         <IconButton icon={HomeIcon} type="smallNormal" to="/" />
-        <Button to="/gsap" buttonText="Intro" />{" "}
-        <Button
-          to="https://gsap.com/docs/v3/"
-          target="_blank"
-          buttonText="GSAP Docs"
-        />
+        <HStackFull className="h-full items-center justify-around">
+          <Button to="/gsap" buttonText="Intro" />{" "}
+          <Button
+            to="https://gsap.com/docs/v3/"
+            target="_blank"
+            buttonText="GSAP Docs"
+          />
+        </HStackFull>
       </HStackFull>
     </NavContainer>
   );
