@@ -2236,6 +2236,7 @@ export default {
         xxl: "3vh",
         xxxl: "4vh",
         full: "100%",
+        raindrop: "50% 50% 50% 50% / 60% 60% 40% 40%",
       },
       keyframes: {
         wiggle: {
@@ -2520,6 +2521,10 @@ export default {
           "10%, 30%, 50%, 70%, 90%": { transform: "translate(1vh, 1vh)" },
           "20%, 40%, 60%, 80%": { transform: "translate(-1vh, -1vh)" },
         },
+        raindrop: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100vh)" },
+        },
       },
       animation: {
         wiggle: "wiggle 1.5s ease-in-out infinite",
@@ -2584,6 +2589,7 @@ export default {
         vibrateUpRight: "vibrateUpRight 1.5s infinite",
         vibrateDownLeft: "vibrateDownLeft 1.5s infinite",
         vibrateDownRight: "vibrateDownRight 1.5s infinite",
+        rain: "raindrop 1s linear infinite",
       },
       transitionTimingFunction: {
         elastic: "cubic-bezier(0.68, -0.55, 0.27, 1.55)",

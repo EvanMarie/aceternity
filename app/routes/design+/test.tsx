@@ -1,14 +1,19 @@
-import Flex from "~/components/buildingBlocks/flex";
-import AnimationExample from "../gsap+/components/animationExample";
-import FlexFull from "~/components/buildingBlocks/flexFull";
+import Box from "~/components/buildingBlocks/box";
+import CodeDisplay from "~/components/buildingBlocks/code";
+import LayoutContainer from "~/components/buildingBlocks/layoutContainer";
+import VStackFull from "~/components/buildingBlocks/vStackFull";
+import { rainEffectCode } from "../css+/components/codeFiles/rain";
 
-export default function TestPage() {
+export default function Test() {
   return (
-    <FlexFull className="w-full justify-center">
-      <AnimationExample
-        animationClass="animate-slideInLeft"
-        style={{ animationDelay: "3s" }}
-      />
-    </FlexFull>
+    <LayoutContainer className="justify-center p-[4vh] bg-col-170">
+      <VStackFull>
+        <Box className="w-[4vh] h-[8vh] bg-cyan-400 rounded-raindrop" />
+        <div>
+          <h2>Rain Effect Code Snippet</h2>
+          <CodeDisplay codeString={rainEffectCode} language="typescript" />
+        </div>
+      </VStackFull>
+    </LayoutContainer>
   );
 }

@@ -5,7 +5,7 @@ import DescriptionModalContent, {
   headingStyles,
   sectionStyles,
   textStyles,
-} from "./descriptionModalContent";
+} from "../descriptionModalContent";
 
 export default function CubicBezierExplained() {
   return (

@@ -5,11 +5,11 @@ import DescriptionModalContent, {
   headingStyles,
   sectionStyles,
   textStyles,
-} from "./descriptionModalContent";
+} from "../descriptionModalContent";
 
 export default function ComponentExplainedTemplate() {
   return (
-    <DescriptionModalContent>
+    <DescriptionModalContent heading="heading">
       <Text className={headingStyles}></Text>
       <VStackFull className={sectionStyles}>
         <Text className={textStyles}></Text>

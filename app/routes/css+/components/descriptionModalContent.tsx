@@ -13,7 +13,7 @@ export default function DescriptionModalContent({
   heading,
 }: {
   children: React.ReactNode;
-  heading: string;
+  heading?: string;
 }) {
   return (
     <FlexFull className="px-[4vh] py-[2vh] bg-col-200 h-full overflow-y-auto insetShadowLg">

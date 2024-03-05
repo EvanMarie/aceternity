@@ -33,11 +33,11 @@ export default function Heading({
     : `${layout} ${color} ${shadow} ${className}`;
 
   return (
-    <h1
+    <div
       className={`${layout} ${shadow} ${textClassName} px-[1vh]`}
       style={style}
     >
       {text}
-    </h1>
+    </div>
   );
 }

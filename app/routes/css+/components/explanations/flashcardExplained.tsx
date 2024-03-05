@@ -5,7 +5,7 @@ import DescriptionModalContent, {
   headingStyles,
   sectionStyles,
   textStyles,
-} from "./descriptionModalContent";
+} from "../descriptionModalContent";
 import HL from "~/components/buildingBlocks/highlight";
 import Heading from "~/components/buildingBlocks/headingText";
 

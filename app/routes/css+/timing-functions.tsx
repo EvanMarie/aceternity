@@ -13,7 +13,7 @@ import { useCallback, useState } from "react";
 import Button from "~/components/buildingBlocks/button";
 import Modal from "~/components/buildingBlocks/modal";
 import Box from "~/components/buildingBlocks/box";
-import CubicBezierExplained from "./components/cubicBezierExplaned";
+import CubicBezierExplained from "./components/explanations/cubicBezierExplaned";
 import DescriptionModal from "./components/descriptionModal";
 
 type TimingFunctionKey = keyof typeof functionDetails;
