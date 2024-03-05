@@ -26,8 +26,7 @@ export default function SVGIntro() {
       headingColor="bg-col-890"
     >
       <FlexFull className="justify-center">
-        <VStack className="w-full lg:w-90% xl:w-80%">
-          <CodeExample>code</CodeExample>
+        <VStack className="w-full lg:w-90% xl:w-80%" align="items-start">
           <SVGHeading>Understanding SVGs</SVGHeading>
           <SVGSection>
             <SVGText>What is SVG?</SVGText>
@@ -84,7 +83,7 @@ export default function SVGIntro() {
                       cy="10vh"
                       r="8vh"
                       stroke="cyan"
-                      stroke-width="0.2vh"
+                      strokeWidth="0.2vh"
                       fill="deeppink"
                     />
                   </svg>
@@ -93,7 +92,7 @@ export default function SVGIntro() {
               description={
                 <CodeExample>{`<svg width="20vh" height="20vh" xmlns="http://www.w3.org/2000/svg">
   <circle cx="10vh" cy="10vh" r="8vh" stroke="cyan" 
-    stroke-width="0.2vh" fill="deeppink" />
+    strokeWidth="0.2vh" fill="deeppink" />
 </svg>`}</CodeExample>
               }
             />
@@ -146,7 +145,7 @@ export default function SVGIntro() {
                 circle's outline (stroke) to cyan.
               </SVGText>
               <SVGText>
-                <HL>stroke-width="0.2vh"</HL>: Defines the thickness of the
+                <HL>strokeWidth="0.2vh"</HL>: Defines the thickness of the
                 stroke around the circle. The stroke width is set to 0.2vh,
                 making it responsive to the viewport height like the other
                 dimensions.
@@ -169,59 +168,55 @@ export default function SVGIntro() {
             </SVGSection>
           </SVGSection>
           <SVGText></SVGText>
+
+          <SVGHeading>Creating Interactive SVG Animations</SVGHeading>
           <SVGSection>
-            <SVGText>Creating Interactive SVG Animations</SVGText>
-            <SVGSection>
-              <SVGText>Why Framer Motion?</SVGText>
-              <SVGSection>
-                <SVGText>
-                  Framer Motion is a powerful and easy-to-use library for React
-                  and Remix that simplifies creating animations and interactive
-                  UIs. It provides a set of components that can animate your
-                  elements, including SVGs, with minimal code, offering high
-                  performance and a plethora of animation features like
-                  keyframes, spring physics, and gesture animations.
-                </SVGText>
-              </SVGSection>
-              <SVGText>
-                <HL>Animating an SVG Circle</HL>: Convert the SVG circle element
-                into a motion component. You can directly replace <circle />{" "}
-                with <HL>&lt;motion.circle&gt;</HL> to start using animation
-                props.
-              </SVGText>
-              <SVGSection>
-                <SVGExample
-                  description="Code"
-                  example={
-                    <svg
-                      width="20vh"
-                      height="20vh"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <motion.circle
-                        cx="10vh"
-                        cy="10vh"
-                        r="8vh"
-                        stroke="cyan"
-                        strokeWidth="0.2vh"
-                        fill="deeppink"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 260,
-                          damping: 20,
-                        }}
-                      />
-                    </svg>
-                  }
-                ></SVGExample>
-                <SVGText></SVGText>
-                <SVGText></SVGText>
-                <SVGText></SVGText>
-                <SVGText></SVGText>
-              </SVGSection>
-            </SVGSection>
+            <SVGText>Why Framer Motion?</SVGText>
+            <SVGText>
+              Framer Motion is a powerful and easy-to-use library for React and
+              Remix that simplifies creating animations and interactive UIs. It
+              provides a set of components that can animate your elements,
+              including SVGs, with minimal code, offering high performance and a
+              plethora of animation features like keyframes, spring physics, and
+              gesture animations.
+            </SVGText>
+
+            <SVGText>
+              <HL>Animating an SVG Circle</HL>: Convert the SVG circle element
+              into a motion component. You can directly replace <circle /> with{" "}
+              <HL>&lt;motion.circle&gt;</HL> to start using animation props.
+            </SVGText>
+
+            <SVGExample
+              description="Code"
+              example={
+                <svg
+                  width="20vh"
+                  height="20vh"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <motion.circle
+                    cx="10vh"
+                    cy="10vh"
+                    r="8vh"
+                    stroke="cyan"
+                    strokeWidth="0.2vh"
+                    fill="deeppink"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 20,
+                    }}
+                  />
+                </svg>
+              }
+            ></SVGExample>
+            <SVGText></SVGText>
+            <SVGText></SVGText>
+            <SVGText></SVGText>
+            <SVGText></SVGText>
           </SVGSection>
         </VStack>
       </FlexFull>
