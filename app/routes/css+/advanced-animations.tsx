@@ -6,7 +6,7 @@ import FlashcardExplained from "./components/explanations/flashcardExplained";
 import Rain from "./components/advancedExamples/rain";
 import Flex from "~/components/buildingBlocks/flex";
 import RainExplained from "./components/explanations/rainExplained";
-import FlowerOfLife from "../design+/test";
+import FlowerOfLife from "./components/advancedExamples/flowerOfLife";
 import FlowerOfLifeExplained from "./components/explanations/flowerOfLifeExplained";
 import Transition from "~/components/buildingBlocks/transition";
 

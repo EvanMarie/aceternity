@@ -54,10 +54,20 @@ export function SVGExample({
 }) {
   return (
     <FlexFull className="justify-center">
-      <FlexFull className="flex-col md:flex-row bg-col-900 p-[1vh] shadowBroadNormal gap-[1vh] xl:w-80%">
+      <FlexFull className="flex-col md:flex-row  p-[1vh] gap-[1vh] xl:w-80%">
         <Center className="w-full h-full md:w-40%">{example}</Center>
         <Center className="w-full h-full md:w-60%">{description}</Center>
       </FlexFull>
+    </FlexFull>
+  );
+}
+
+export function SVGContainer({ children }: { children?: React.ReactNode }) {
+  return (
+    <FlexFull className="justify-center">
+      <Flex className=" bg-col-990 shadowBroadNormal border-900-md">
+        {children}
+      </Flex>
     </FlexFull>
   );
 }
