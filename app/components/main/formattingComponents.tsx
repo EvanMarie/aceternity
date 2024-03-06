@@ -55,8 +55,8 @@ export function SVGExample({
   return (
     <FlexFull className="justify-center">
       <FlexFull className="flex-col md:flex-row bg-col-900 p-[1vh] shadowBroadNormal gap-[1vh] xl:w-80%">
-        <Center className="w-full h-full">{example}</Center>
-        <Center className="w-full h-full">{description}</Center>
+        <Center className="w-full h-full md:w-40%">{example}</Center>
+        <Center className="w-full h-full md:w-60%">{description}</Center>
       </FlexFull>
     </FlexFull>
   );

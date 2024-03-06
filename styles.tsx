@@ -6,6 +6,7 @@ import {
   FaAward,
   FaCat,
   FaEye,
+  FaEyeSlash,
   FaPlusSquare,
   FaRegSave,
   FaSearch,
@@ -113,3 +114,4 @@ export const ReturnPathIcon = IoReturnUpBackOutline;
 export const ExpandIcon = BsArrowsAngleExpand;
 export const HomeIcon = IoHomeOutline;
 export const StopIcon = FaStopCircle;
+export const HideIcon = FaEyeSlash;

@@ -1,7 +1,6 @@
 import CodeExample from "~/components/buildingBlocks/codeExample";
 import DescriptionModalContent from "../css+/components/descriptionModalContent";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
-import Text from "~/components/buildingBlocks/text";
 import HL from "~/components/buildingBlocks/highlight";
 import {
   SVGExample,
@@ -9,10 +8,8 @@ import {
   SVGSection,
   SVGText,
 } from "~/components/main/formattingComponents";
-import VStack from "~/components/buildingBlocks/vStack";
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import Flex from "~/components/buildingBlocks/flex";
-import { motion } from "framer-motion";
 
 export const svgTextStyles = "text-lg-normal";
 export const svgheadingStyles =
@@ -26,7 +23,7 @@ export default function SVGIntro() {
       headingColor="bg-col-890"
     >
       <FlexFull className="justify-center">
-        <VStack className="w-full lg:w-90% xl:w-80%" align="items-start">
+        <VStackFull className="lg:w-90% xl:w-80%" align="items-start">
           <SVGHeading>Understanding SVGs</SVGHeading>
           <SVGSection>
             <SVGText>What is SVG?</SVGText>
@@ -167,58 +164,7 @@ export default function SVGIntro() {
               </SVGText>
             </SVGSection>
           </SVGSection>
-          <SVGText></SVGText>
-
-          <SVGHeading>Creating Interactive SVG Animations</SVGHeading>
-          <SVGSection>
-            <SVGText>Why Framer Motion?</SVGText>
-            <SVGText>
-              Framer Motion is a powerful and easy-to-use library for React and
-              Remix that simplifies creating animations and interactive UIs. It
-              provides a set of components that can animate your elements,
-              including SVGs, with minimal code, offering high performance and a
-              plethora of animation features like keyframes, spring physics, and
-              gesture animations.
-            </SVGText>
-
-            <SVGText>
-              <HL>Animating an SVG Circle</HL>: Convert the SVG circle element
-              into a motion component. You can directly replace <circle /> with{" "}
-              <HL>&lt;motion.circle&gt;</HL> to start using animation props.
-            </SVGText>
-
-            <SVGExample
-              description="Code"
-              example={
-                <svg
-                  width="20vh"
-                  height="20vh"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <motion.circle
-                    cx="10vh"
-                    cy="10vh"
-                    r="8vh"
-                    stroke="cyan"
-                    strokeWidth="0.2vh"
-                    fill="deeppink"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 20,
-                    }}
-                  />
-                </svg>
-              }
-            ></SVGExample>
-            <SVGText></SVGText>
-            <SVGText></SVGText>
-            <SVGText></SVGText>
-            <SVGText></SVGText>
-          </SVGSection>
-        </VStack>
+        </VStackFull>
       </FlexFull>
     </DescriptionModalContent>
   );

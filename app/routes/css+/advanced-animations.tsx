@@ -8,35 +8,38 @@ import Flex from "~/components/buildingBlocks/flex";
 import RainExplained from "./components/explanations/rainExplained";
 import FlowerOfLife from "../design+/test";
 import FlowerOfLifeExplained from "./components/explanations/flowerOfLifeExplained";
+import Transition from "~/components/buildingBlocks/transition";
 
 export default function AdvancedAnimations() {
   return (
-    <FlexFull className="h-full overflow-y-auto justify-center">
-      <VStackFull
-        className="md:w-80% xl:w-70% items-center p-[2vh] h-fit"
-        gap="gap-[3vh]"
-      >
-        <ComponentExample
-          title="3D Flashcard"
-          descriptionContent={<FlashcardExplained />}
+    <Transition className="w-full h-full">
+      <FlexFull className="h-full overflow-y-auto justify-center">
+        <VStackFull
+          className="md:w-80% xl:w-70% items-center p-[2vh] h-fit"
+          gap="gap-[3vh]"
         >
-          <FlashCard />
-        </ComponentExample>
-        <ComponentExample
-          title="Rain Window"
-          descriptionContent={<RainExplained />}
-        >
-          <Flex className="w-[60vh] h-[40vh] bg-100-linear6op75 insetShadowXl">
-            <Rain />
-          </Flex>
-        </ComponentExample>
-        <ComponentExample
-          title="Flower of Life"
-          descriptionContent={<FlowerOfLifeExplained />}
-        >
-          <FlowerOfLife />
-        </ComponentExample>
-      </VStackFull>
-    </FlexFull>
+          <ComponentExample
+            title="3D Flashcard"
+            descriptionContent={<FlashcardExplained />}
+          >
+            <FlashCard />
+          </ComponentExample>
+          <ComponentExample
+            title="Rain Window"
+            descriptionContent={<RainExplained />}
+          >
+            <Flex className="w-[60vh] h-[40vh] bg-100-linear6op75 insetShadowXl">
+              <Rain />
+            </Flex>
+          </ComponentExample>
+          <ComponentExample
+            title="Flower of Life"
+            descriptionContent={<FlowerOfLifeExplained />}
+          >
+            <FlowerOfLife />
+          </ComponentExample>
+        </VStackFull>
+      </FlexFull>
+    </Transition>
   );
 }

@@ -11,6 +11,11 @@ export default function SVGNav() {
         <IconButton icon={HomeIcon} type="smallNormal" to="/" />
         <HStackFull className="h-full items-center justify-around">
           <Button to="/svg" buttonText="Intro" type="smallNormal" />
+          <Button
+            to="/svg/framer-motion-intro"
+            buttonText="Framer Motion"
+            type="smallNormal"
+          />
           {/* <Button
           to=""
           target="_blank"
