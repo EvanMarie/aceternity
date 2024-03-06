@@ -1,57 +1,53 @@
 import Center from "~/components/buildingBlocks/center";
+import { motion } from "framer-motion";
+import Flex from "~/components/buildingBlocks/flex";
+import VStack from "~/components/buildingBlocks/vStack";
 
-// Example Remix component with SVG circles correctly scaled and positioned
-export default function FlowerOfLife() {
-  const radius = 23; // Determines circle size
-  const centerX = 55; // Central X position within SVG coordinate system (must be half of viewbox width)
-  const centerY = 55; //
-  const encompassingRadius = 2 * radius; // Radius for the encompassing circle
+export default function Test() {
+  function PathContainer({ children }: { children: React.ReactNode }) {
+    return (
+      <Center className="p-[2vh] bg-col-900 shadowBroadLoose border-800-md">
+        {children}
+      </Center>
+    );
+  }
 
-  // Convert numerical values for SVG attributes, keeping the SVG scalable
-  const smallCircleColor = "deeppink";
-  const largerCircleColor = "cyan";
   return (
-    <Center className="w-fit h-fit">
-      <svg
-        viewBox="0 0 110 110" // Adjusted for a scalable drawing area
-        width="30vw"
-        height="30vw"
-        className="border-970-md bg-900-linear6op75 shadowBroadNormal"
-      >
-        {/* Large Encompassing Circle */}
-        <circle
-          cx={centerX}
-          cy={centerY}
-          r={encompassingRadius}
-          fill="none"
-          stroke={largerCircleColor}
-          strokeWidth="0.6"
-          className="text-col-600 shadowBroadNormal animate-[pulse_3s_ease-in-out_infinite]"
-        />
-        {/* Central Circle */}
-        <circle
-          cx={centerX}
-          cy={centerY}
-          r={radius}
-          fill="none"
-          stroke={smallCircleColor}
-          strokeWidth="0.5" // Adjust stroke width for visibility
-          className="text-col-600 shadowBroadNormal animate-[pulse_2.5s_ease-in-out_infinite]"
-        />
-        {/* Surrounding Circles */}
-        {[0, 60, 120, 180, 240, 300].map((angle, index) => (
-          <circle
-            key={index}
-            cx={centerX + Math.cos((angle * Math.PI) / 180) * radius}
-            cy={centerY + Math.sin((angle * Math.PI) / 180) * radius}
-            r={radius}
-            fill="none"
-            stroke={smallCircleColor}
-            strokeWidth="0.6"
-            className="text-col-600 shadowBroadNormal animate-[pulse_3.5s_ease-in-out_infinite]"
-          />
-        ))}
-      </svg>
+    <Center className="w-full h-full overflow-y-auto">
+      <VStack className="h-fit">
+        <PathContainer>
+          <svg width="30vw" height="20vh" xmlns="http://www.w3.org/2000/svg">
+            <motion.path
+              d="M.4 84.1s127.4 188 267.7 3 247.3 0 247.3 0" // Initial path
+              fill="transparent"
+              stroke="cyan"
+              strokeWidth="3"
+              initial={{ pathLength: 0 }} // Start with the path not drawn
+              animate={{ pathLength: 1 }} // Animate to fully drawn
+              transition={{
+                duration: 5,
+                ease: "easeInOut",
+              }}
+            />
+          </svg>
+        </PathContainer>
+        <PathContainer>
+          <svg width="25vw" height="50vh" xmlns="http://www.w3.org/2000/svg">
+            <motion.path
+              d="M1.1 77.8c101.7-101.7 266.5-101.7 368.2 0 81.3 81.3 81.3 213.2 0 294.5-65.1 65.1-170.6 65.1-235.6 0-52.1-52.1-52.1-136.5 0-188.5 41.6-41.6 109.2-41.6 150.8 0 33.3 33.3 33.3 87.3 0 120.6-26.7 26.7-69.9 26.7-96.5 0-21.3-21.3-21.3-55.9 0-77.2 17.1-17.1 44.7-17.1 61.8 0 13.6 13.6 13.6 35.8 0 49.4-10.9 10.9-28.6 10.9-39.5 0-8.7-8.7-8.7-22.9 0-31.6 7-7 18.3-7 25.3 0"
+              fill="transparent"
+              stroke="cyan"
+              strokeWidth="3"
+              initial={{ pathLength: 0 }} // Start with the path not drawn
+              animate={{ pathLength: 1 }} // Animate to fully drawn
+              transition={{
+                duration: 3,
+                ease: "easeInOut",
+              }}
+            />
+          </svg>
+        </PathContainer>
+      </VStack>
     </Center>
   );
 }
