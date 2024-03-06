@@ -16,6 +16,11 @@ export default function SVGNav() {
             buttonText="Framer Motion"
             type="smallNormal"
           />
+          <Button
+            to="/svg/svg-paths-intro"
+            buttonText="SVG Paths"
+            type="smallNormal"
+          />
           {/* <Button
           to=""
           target="_blank"
