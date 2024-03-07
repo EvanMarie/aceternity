@@ -1,5 +1,7 @@
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import SVGMultiPaths from "../svg+/components/multiPath";
+import Flex from "~/components/buildingBlocks/flex";
+import Center from "~/components/buildingBlocks/center";
 
 export default function Test() {
   const claudePaths = [
@@ -133,8 +135,10 @@ export default function Test() {
   ];
 
   return (
-    <FlexFull className="h-full justify-center items-center overflow-y-auto bg-600-linear6op75">
-      <SVGMultiPaths paths={paths} />
-    </FlexFull>
+    <Center className="w-full h-full justify-center items-center overflow-y-auto bg-100-diagonal5op50">
+      <Center className="w-[50vh] h-[50vh] bg-100-linear6op75 shadowBroadNormal">
+        This
+      </Center>
+    </Center>
   );
 }

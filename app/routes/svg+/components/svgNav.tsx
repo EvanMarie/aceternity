@@ -26,6 +26,12 @@ export default function SVGNav() {
             buttonText="Playground"
             type="smallNormal"
           />
+          <Button
+            to="https://www.framer.com/motion/introduction/"
+            buttonText="Docs"
+            type="smallNormal"
+            target="_blank"
+          />
         </HStackFull>
       </HStackFull>
     </NavContainer>
