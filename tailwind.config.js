@@ -2529,6 +2529,25 @@ export default {
           "0%": { transform: "scale(0)", opacity: 0 },
           "100%": { transform: "scale(1)", opacity: 1 },
         },
+        floatDown: {
+          "0%": {
+            transform: "translateY(-100px) rotate(0deg)",
+            opacity: 1,
+          },
+          "25%": {
+            transform: "translateY(0) rotate(90deg) translateX(50px)",
+          },
+          "50%": {
+            transform: "translateY(100px) rotate(180deg) translateX(-30px)",
+          },
+          "75%": {
+            transform: "translateY(200px) rotate(270deg) translateX(70px)",
+          },
+          "100%": {
+            transform: " translateY(300px) rotate(360deg) translateX(-20px)",
+            opacity: 0,
+          },
+        },
       },
       animation: {
         wiggle: "wiggle 1.5s ease-in-out infinite",
@@ -2595,6 +2614,7 @@ export default {
         vibrateDownRight: "vibrateDownRight 1.5s infinite",
         rain: "raindrop 1s linear infinite",
         scaleFadeIn: "scaleFadeIn 4s ease-out",
+        floatDown: "floatDown 3s ease-in-out",
       },
       transitionTimingFunction: {
         elastic: "cubic-bezier(0.68, -0.55, 0.27, 1.55)",

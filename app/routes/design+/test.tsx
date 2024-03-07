@@ -2,6 +2,13 @@ import FlexFull from "~/components/buildingBlocks/flexFull";
 import SVGMultiPaths from "../svg+/components/multiPath";
 import Flex from "~/components/buildingBlocks/flex";
 import Center from "~/components/buildingBlocks/center";
+import AnimatedCircle from "./animatedCircle";
+import VStackFull from "~/components/buildingBlocks/vStackFull";
+import DrawCircle from "./drawCircle";
+import Button from "~/components/buildingBlocks/button";
+import Box from "~/components/buildingBlocks/box";
+import Transition from "~/components/buildingBlocks/transition";
+import FloatDown from "./floatDown";
 
 export default function Test() {
   const claudePaths = [
@@ -134,11 +141,35 @@ export default function Test() {
     },
   ];
 
+  function ExampleContainer({ children }: { children: React.ReactNode }) {
+    return (
+      <Flex className="shadowBroadNormal">
+        <Center className="w-[40vh] h-[40vh] bg-100-linear6op75 insetShadowXL relative">
+          {children}
+        </Center>
+      </Flex>
+    );
+  }
+
   return (
-    <Center className="w-full h-full justify-center items-center overflow-y-auto bg-100-diagonal5op50">
-      <Center className="w-[50vh] h-[50vh] bg-100-linear6op75 shadowBroadNormal">
-        This
-      </Center>
-    </Center>
+    <FlexFull className="h-full justify-center overflow-y-auto bg-100-diagonal5op50 py-[2vh]">
+      <VStackFull className="h-fit">
+        <ExampleContainer>
+          <AnimatedCircle />
+        </ExampleContainer>
+        <ExampleContainer>
+          <Center className="w-full h-full absolute top-0 right-0">
+            <DrawCircle />
+          </Center>
+
+          <Flex className="absolute top-50% left-50% animate-scaleFadeIn p-[2vh] bg-white shadowBroadNormal">
+            SOME CIRCLE!
+          </Flex>
+        </ExampleContainer>
+        <ExampleContainer>
+          <FloatDown />
+        </ExampleContainer>
+      </VStackFull>
+    </FlexFull>
   );
 }
