@@ -41,7 +41,7 @@ const generateRandomValues = (
   );
 };
 
-const FloatDown: React.FC<FloatDownProps> = ({
+export default function FloatDown({
   containerHeight = "h-[40vh]",
   containerWidth = "w-[40vh]",
   containerBg = "bg-100-radial6op75",
@@ -59,7 +59,7 @@ const FloatDown: React.FC<FloatDownProps> = ({
   minDuration = 5,
   maxDuration = 23,
   durationMultiplier = 20,
-}) => {
+}: FloatDownProps) {
   const numMovements =
     Math.floor(Math.random() * (maxMovements - minMovements + 1)) +
     minMovements;
@@ -122,6 +122,4 @@ const FloatDown: React.FC<FloatDownProps> = ({
       </Center>
     </Flex>
   );
-};
-
-export default FloatDown;
+}

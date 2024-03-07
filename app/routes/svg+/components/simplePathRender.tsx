@@ -1,30 +1,26 @@
-import { useAnimation } from "framer-motion";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useAnimation, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import VStack from "~/components/buildingBlocks/vStack";
 import FlexFull from "~/components/buildingBlocks/flexFull";
-import { SVGHeading } from "~/components/main/formattingComponents";
 import HStackFull from "~/components/buildingBlocks/hStackFull";
 import Button from "~/components/buildingBlocks/button";
 import CodeModal from "./codeModal";
 import Flex from "~/components/buildingBlocks/flex";
 import { RefreshIcon } from "styles";
+import { SVGHeading } from "~/components/main/formattingComponents";
 
-export function TriggerAnimation({
+export function SimplePathRender({
   path = "M.4 84.1s127.4 188 267.7 3 247.3 0 247.3 0",
   viewBox = "0 0 450 450",
-  width = "40vh",
-  height = "40vh",
   stroke = "0.5vh",
   duration = 5,
   timingFunction = "easeInOut",
   title,
-  color = "deeppink",
+  color = "cyan",
 }: {
   path?: string;
   viewBox?: string;
-  height?: string;
-  width?: string;
   stroke?: string;
   duration?: number;
   timingFunction?: string;
@@ -39,7 +35,7 @@ export function TriggerAnimation({
       pathLength: 1,
       transition: { duration, ease: timingFunction },
     });
-  }, [animationKey, controls, duration]);
+  }, [animationKey, controls, duration, timingFunction]);
 
   const handleClickAnimation = () => {
     setAnimationKey((prevKey) => prevKey + 1);
@@ -59,23 +55,22 @@ export function TriggerAnimation({
     color: string;
   }) {
     return (
-      <div className="flex justify-center items-center w-full h-full">
-        <svg
-          viewBox={viewBox}
-          width="auto"
-          height="100%"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <motion.path
-            d={path}
-            fill="transparent"
-            stroke={color}
-            strokeWidth={stroke}
-            initial={{ pathLength: 0 }}
-            animate={controls}
-          />
-        </svg>
-      </div>
+      <svg
+        viewBox={viewBox}
+        preserveAspectRatio="xMidYMid meet"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-full"
+      >
+        <motion.path
+          d={path}
+          fill="transparent"
+          stroke={color}
+          strokeWidth={stroke}
+          initial={{ pathLength: 0 }}
+          animate={controls}
+          filter="drop-shadow(0.4vh 0.4vh 0.4vh rgba(255, 255, 255, 0.7))"
+        />
+      </svg>
     );
   }
 
@@ -98,7 +93,7 @@ export function TriggerAnimation({
         />
         <CodeModal code={path} title={title ? title : ""} />
       </HStackFull>
-      <Flex className={`p-[1vh] ${width} ${height} justify-center`}>
+      <Flex className={`p-[1vh] h-full items-center justify-center `}>
         <MapPath
           key={animationKey}
           path={path}

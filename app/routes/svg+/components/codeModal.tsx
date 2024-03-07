@@ -12,9 +12,11 @@ import { SVGHeading } from "~/components/main/formattingComponents";
 export default function CodeModal({
   code,
   title,
+  isPath = true,
 }: {
   code: string;
   title: string;
+  isPath?: boolean;
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   return (
@@ -23,7 +25,7 @@ export default function CodeModal({
         <Button
           iconLeft={CodeIcon}
           onClick={() => setModalOpen(true)}
-          buttonText="View Path"
+          buttonText={isPath ? "View Path" : "View Code"}
           type="smallNormal"
         />
       </Box>
@@ -31,16 +33,20 @@ export default function CodeModal({
         isOpen={modalOpen}
         setModalOpen={setModalOpen}
         onClose={() => setModalOpen(false)}
-        modalSize="w-full h-fit max-h-90% sm:w-80% md:w-70% lg:w-60% xl:w-50% 2xl:w-40%"
+        modalSize="w-full h-fit max-h-[90vh] sm:w-80% md:w-70% lg:w-60% xl:w-50% 2xl:w-40%"
       >
-        <Center className="w-full h-full p-[1vh] text-col-100 bg-col-700 py-[2vh]">
-          <VStackFull gap="gap-[2vh]">
+        <FlexFull className=" h-full max-h-[70vh] p-[1vh] text-col-100 py-[2vh] bg-col-700 ">
+          <VStackFull gap="gap-[2vh]" className="overflow-y-hidden">
             <SVGHeading>{title}</SVGHeading>
             <FlexFull className="h-full overflow-y-auto">
-              <CodeExample>d="{code}"</CodeExample>
+              <FlexFull className="h-fit py-[1vh] px-[2vh]">
+                <CodeExample>
+                  {isPath && "d="}"{code}"
+                </CodeExample>
+              </FlexFull>
             </FlexFull>
           </VStackFull>
-        </Center>
+        </FlexFull>
       </Modal>
     </>
   );
