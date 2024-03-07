@@ -1,11 +1,12 @@
 import Wrap from "~/components/buildingBlocks/wrap";
 import DescriptionModalContent from "../css+/components/descriptionModalContent";
 import { TriggerAnimation } from "./components/triggerAnimation";
+import SVGTiming from "./components/svg-animation-timing";
 
 export default function SVGPathExamples() {
   return (
     <DescriptionModalContent
-      heading="SVG Path Exaples"
+      heading="SVG Path Playground"
       bg="bg-linear2op50"
       headingColor="bg-col-890"
     >
@@ -40,6 +41,7 @@ export default function SVGPathExamples() {
           title="Peace Symbol"
         />
       </Wrap>
+      <SVGTiming />
     </DescriptionModalContent>
   );
 }

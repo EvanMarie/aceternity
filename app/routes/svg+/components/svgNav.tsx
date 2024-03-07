@@ -13,25 +13,19 @@ export default function SVGNav() {
           <Button to="/svg" buttonText="Intro" type="smallNormal" />
           <Button
             to="/svg/framer-motion-intro"
-            buttonText="Framer Motion"
+            buttonText="Framer"
             type="smallNormal"
           />
           <Button
             to="/svg/svg-paths-intro"
-            buttonText="SVG Paths"
+            buttonText="Paths"
             type="smallNormal"
           />
           <Button
             to="/svg/svg-path-examples"
-            buttonText="Path Examples"
+            buttonText="Playground"
             type="smallNormal"
           />
-          {/* <Button
-          to=""
-          target="_blank"
-          buttonText=" Docs"
-          type="smallNormal"
-        /> */}
         </HStackFull>
       </HStackFull>
     </NavContainer>

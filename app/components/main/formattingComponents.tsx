@@ -30,10 +30,18 @@ export function CSSSection({ children }: { children?: React.ReactNode }) {
   );
 }
 
-export function SVGHeading({ children }: { children?: React.ReactNode }) {
+export function SVGHeading({
+  children,
+  className,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) {
   const svgHeadingStyles =
     "text-xl-loose font-semibold textShadow text-col-100";
-  return <Text className={svgHeadingStyles}>{children}</Text>;
+  return (
+    <Text className={className ? className : svgHeadingStyles}>{children}</Text>
+  );
 }
 
 export function SVGText({ children }: { children?: React.ReactNode }) {
