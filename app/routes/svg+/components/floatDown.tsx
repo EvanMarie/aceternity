@@ -1,4 +1,6 @@
 import { motion, Variants } from "framer-motion";
+import Center from "~/components/buildingBlocks/center";
+import Flex from "~/components/buildingBlocks/flex";
 
 interface Circle {
   x: number;
@@ -9,7 +11,13 @@ interface Circle {
 }
 
 interface FloatDownProps {
+  containerWidth?: string;
+  containerHeight?: string;
+  containerBg?: string;
+  containerShadow?: string;
+  containerBorder?: string;
   numCircles?: number;
+  circleColor?: string;
   maxMovements?: number;
   minMovements?: number;
   minDuration?: number;
@@ -34,7 +42,13 @@ const generateRandomValues = (
 };
 
 const FloatDown: React.FC<FloatDownProps> = ({
-  numCircles = 100,
+  containerHeight = "h-[40vh]",
+  containerWidth = "w-[40vh]",
+  containerBg = "bg-100-radial6op75",
+  containerShadow = "insetShadowXL",
+  containerBorder = "border-970-md",
+  numCircles = 88,
+  circleColor = "cyan",
   minMovements = 4,
   maxMovements = 8,
   viewBoxHeight = 1000,
@@ -42,7 +56,7 @@ const FloatDown: React.FC<FloatDownProps> = ({
   circleRadius = 20,
   horizontalMax = 200,
   verticalMax = 40,
-  minDuration = 2,
+  minDuration = 5,
   maxDuration = 23,
   durationMultiplier = 20,
 }) => {
@@ -84,23 +98,29 @@ const FloatDown: React.FC<FloatDownProps> = ({
   }));
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <svg
-        viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-        className="w-full h-full"
+    <Flex className="shadowBroadNormal">
+      <Center
+        className={`${containerHeight} ${containerWidth} ${containerBg} ${containerShadow} relative ${containerBorder}`}
       >
-        {circles.map((circle) => (
-          <motion.circle
-            key={circle.key}
-            initial="initial"
-            animate="animate"
-            variants={circleVariants}
-            fill="cyan"
-            custom={circle}
-          />
-        ))}
-      </svg>
-    </div>
+        <div className="w-full h-full flex items-center justify-center">
+          <svg
+            viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+            className="w-full h-full"
+          >
+            {circles.map((circle) => (
+              <motion.circle
+                key={circle.key}
+                initial="initial"
+                animate="animate"
+                variants={circleVariants}
+                fill={circleColor}
+                custom={circle}
+              />
+            ))}
+          </svg>
+        </div>
+      </Center>
+    </Flex>
   );
 };
 

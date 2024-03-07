@@ -8,7 +8,7 @@ import DrawCircle from "./drawCircle";
 import Button from "~/components/buildingBlocks/button";
 import Box from "~/components/buildingBlocks/box";
 import Transition from "~/components/buildingBlocks/transition";
-import FloatDown from "./floatDown";
+import FloatDown from "../svg+/components/floatDown";
 
 export default function Test() {
   const claudePaths = [
@@ -144,7 +144,7 @@ export default function Test() {
   function ExampleContainer({ children }: { children: React.ReactNode }) {
     return (
       <Flex className="shadowBroadNormal">
-        <Center className="w-[40vh] h-[40vh] bg-100-linear6op75 insetShadowXL relative border-970-md">
+        <Center className="w-[40vh] h-[40vh] bg-100-radial6op75 insetShadowXL relative border-970-md">
           {children}
         </Center>
       </Flex>
