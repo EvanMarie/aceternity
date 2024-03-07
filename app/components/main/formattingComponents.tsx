@@ -1,8 +1,14 @@
+import { useEffect, useState } from "react";
 import Center from "../buildingBlocks/center";
 import Flex from "../buildingBlocks/flex";
 import FlexFull from "../buildingBlocks/flexFull";
 import Text from "../buildingBlocks/text";
 import VStackFull from "../buildingBlocks/vStackFull";
+import { motion, useAnimation } from "framer-motion";
+import VStack from "../buildingBlocks/vStack";
+import Button from "../buildingBlocks/button";
+import HStackFull from "../buildingBlocks/hStackFull";
+import CodeModal from "~/routes/svg+/components/codeModal";
 
 export function CSSHeading({ children }: { children?: React.ReactNode }) {
   const headingStyles = "text-xl-loose font-semibold lightTextShadow";

@@ -21,6 +21,11 @@ export default function SVGNav() {
             buttonText="SVG Paths"
             type="smallNormal"
           />
+          <Button
+            to="/svg/svg-path-examples"
+            buttonText="Path Examples"
+            type="smallNormal"
+          />
           {/* <Button
           to=""
           target="_blank"

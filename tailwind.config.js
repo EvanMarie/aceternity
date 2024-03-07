@@ -2525,6 +2525,10 @@ export default {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(100vh)" },
         },
+        scaleFadeIn: {
+          "0%": { transform: "scale(0)", opacity: 0 },
+          "100%": { transform: "scale(1)", opacity: 1 },
+        },
       },
       animation: {
         wiggle: "wiggle 1.5s ease-in-out infinite",
@@ -2590,6 +2594,7 @@ export default {
         vibrateDownLeft: "vibrateDownLeft 1.5s infinite",
         vibrateDownRight: "vibrateDownRight 1.5s infinite",
         rain: "raindrop 1s linear infinite",
+        scaleFadeIn: "scaleFadeIn 4s ease-out",
       },
       transitionTimingFunction: {
         elastic: "cubic-bezier(0.68, -0.55, 0.27, 1.55)",

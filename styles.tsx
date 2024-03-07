@@ -5,6 +5,7 @@ import {
   FaAppleAlt,
   FaAward,
   FaCat,
+  FaCode,
   FaEye,
   FaEyeSlash,
   FaPlusSquare,
@@ -27,7 +28,7 @@ import {
   IoLocationOutline,
   IoReturnUpBackOutline,
 } from "react-icons/io5";
-import { LuBox, LuListChecks, LuStarOff } from "react-icons/lu";
+import { LuBox, LuListChecks, LuRefreshCw, LuStarOff } from "react-icons/lu";
 import {
   MdCategory,
   MdDoneAll,
@@ -115,3 +116,5 @@ export const ExpandIcon = BsArrowsAngleExpand;
 export const HomeIcon = IoHomeOutline;
 export const StopIcon = FaStopCircle;
 export const HideIcon = FaEyeSlash;
+export const CodeIcon = FaCode;
+export const RefreshIcon = LuRefreshCw;

@@ -29,28 +29,6 @@ export default function FramerMotionIntro() {
     >
       <FlexFull className="justify-center">
         <VStackFull className="lg:w-90% xl:w-80%" align="items-start">
-          {/* <svg width="25vh" height="25vh" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M10 10 H 190 V 190 H 10 Z"
-              fill="deeppink"
-              stroke="cyan"
-              strokeWidth="4"
-            />
-          </svg>
-          <svg width="25vh" height="25vh" xmlns="http://www.w3.org/2000/svg">
-            <motion.path
-              d="M10 10 H 190 V 190 H 10 Z" // Initial path
-              fill="deeppink"
-              stroke="cyan"
-              strokeWidth="4"
-              initial={{ pathLength: 0 }} // Start with the path not drawn
-              animate={{ pathLength: 1 }} // Animate to fully drawn
-              transition={{
-                duration: 5,
-                ease: "easeInOut",
-              }}
-            />
-          </svg> */}
           <SVGHeading>Understanding SVG Paths</SVGHeading>
 
           <SVGSection>
@@ -255,40 +233,42 @@ export default function FramerMotionIntro() {
             />
             <SVGText>
               SVG path commands within the d attribute typically use coordinate
-              values that do not directly support viewport units like vh
-              (viewport height) or vw (viewport width), because these commands
-              are interpreted in the SVG's own coordinate system, which defaults
-              to pixels. However, you can design an SVG's overall dimensions
-              using vh and vw to make the SVG container responsive, and then
-              draw paths within this responsive container.
+              values that do not directly support viewport units like{" "}
+              <HL>vh</HL> (viewport height) or <HL>vw</HL> (viewport width),
+              because these commands are interpreted in the SVG's own coordinate
+              system, which defaults to pixels. However, you can design an SVG's
+              overall dimensions using <HL>vh</HL> and <HL>vw</HL> to make the
+              SVG container responsive, and then draw paths within this
+              responsive container.
             </SVGText>
             <SVGText>
-              Although the d attribute itself doesn't use vh or vw, the effect
-              of using viewport units on the SVG element can be demonstrated by
-              scaling the SVG container. Here's how you can create a responsive
-              SVG that scales with the viewport, with a path inside.
+              Although the d attribute itself doesn't use <HL>vh</HL> or{" "}
+              <HL>vw</HL>, the effect of using viewport units on the SVG element
+              can be demonstrated by scaling the SVG container. Here's how you
+              can create a responsive SVG that scales with the viewport, with a
+              path inside.
             </SVGText>{" "}
             <SVGText>
-              SVG Container: The width and height of the SVG are set to 50vw and
-              50vh, respectively. This means the SVG will take up 50% of the
-              viewport width and 50% of the viewport height, making it
-              responsive to the size of the viewport.
+              <HL>SVG Container</HL>: The width and height of the SVG are set to
+              40vw and 40vh, respectively. This means the SVG will take up 40%
+              of the viewport height in both direcitons, making it responsive to
+              the size of the viewport.
             </SVGText>
             <SVGText>
-              viewBox Attribute: The viewBox attribute is set to 0 0 100 100,
-              which defines the coordinate system used inside the SVG. This
-              allows the path inside to scale fluidly within the SVG container.
-              The viewBox makes it possible to define paths using "virtual"
-              pixels that scale with the container, rather than directly using
-              vh or vw in the path data.
+              <HL>viewBox Attribute</HL>: The viewBox attribute is set to{" "}
+              <HL>0 0 100 100</HL>, which defines the coordinate system used
+              inside the SVG. This allows the path inside to scale fluidly
+              within the SVG container. The <HL>viewBox</HL> makes it possible
+              to define paths using "virtual" pixels that scale with the
+              container, rather than directly using vh or vw in the path data.
             </SVGText>{" "}
             <SVGText>
-              Path Command: The path command M10,10 L90,10 L90,90 L10,90 Z draws
-              a square within this coordinate system. Regardless of the actual
-              size of the SVG on the screen (which scales with the viewport
-              because of vw and vh), the path coordinates are defined in terms
-              of the viewBox dimensions, allowing the path to scale
-              proportionally within the SVG container.
+              <HL>Path Command</HL>: The path command draws a square within this
+              coordinate system. Regardless of the actual size of the SVG on the
+              screen (which scales with the viewport because of vw and vh), the
+              path coordinates are defined in terms of the <HL>viewBox</HL>{" "}
+              dimensions, allowing the path to scale proportionally within the
+              SVG container.
             </SVGText>
             <SVGText>
               By using vw and vh on the SVG element and a suitable viewBox, you
@@ -299,33 +279,73 @@ export default function FramerMotionIntro() {
               great on any device.
             </SVGText>
             <Divider />
-            <SVGHeading></SVGHeading>
-            <SVGText></SVGText>
-            <SVGText></SVGText>
-            <SVGText></SVGText>
-            <SVGText></SVGText>
-            <SVGText></SVGText>
-            <SVGText></SVGText>
-          </SVGSection>
-          <SVGSection></SVGSection>
-          <SVGHeading></SVGHeading>
-          <SVGSection>
-            <SVGText></SVGText>
-
-            <CodeExample>this</CodeExample>
-
-            <VStackFull className="min-h-[25vh]">this</VStackFull>
-
-            <SVGText></SVGText>
-
-            <VStackFull className="px-[2vh]">
-              <SVGText></SVGText>
-              <SVGText></SVGText>
-              <SVGText></SVGText>
-            </VStackFull>
-            <SVGHeading></SVGHeading>
-            <SVGText></SVGText>
-            <SVGText></SVGText>
+            <SVGHeading>The viewBox attribute</SVGHeading>
+            <SVGText>
+              The viewBox attribute in an SVG element is a critical feature for
+              creating scalable graphics. It defines the aspect ratio and the
+              portion of the canvas to be displayed. The viewBox attribute
+              consists of four space-separated values:
+            </SVGText>
+            <CodeExample>{`<svg viewBox="min-x min-y width height">`}</CodeExample>
+            <SVGText>
+              - <HL>min-x</HL>: The x-coordinate of the top-left corner of the
+              viewBox.
+            </SVGText>
+            <SVGText>
+              - <HL>min-y</HL>: The y-coordinate of the top-left corner of the
+              viewBox.
+            </SVGText>
+            <SVGText>
+              - <HL>width</HL>: The width of the viewBox.
+            </SVGText>
+            <SVGText>
+              - <HL>height</HL>: The height of the viewBox.
+            </SVGText>
+            <SVGText>
+              The viewBox attribute defines the coordinate system used within
+              the SVG, allowing you to define paths and other elements using
+              these coordinates. This makes it possible to create graphics that
+              scale fluidly with the size of the SVG container, ensuring they
+              look great on any device.
+            </SVGText>
+            <Divider />
+            <SVGHeading>
+              Adjusting the viewBox and SVG Content Coordinates
+            </SVGHeading>
+            <SVGText>
+              Centering an SVG animation (or any SVG content) within its
+              container or the viewBox involves understanding how the SVG
+              coordinate system works and using it to your advantage. There are
+              two main strategies to consider.
+            </SVGText>
+            <SVGText>
+              If your animation or graphic is not centered in the SVG canvas,
+              you can adjust the viewBox and the coordinates of your SVG content
+              to center it. The viewBox attribute creates a virtual canvas,
+              allowing you to control which part of the SVG content is visible
+              and how it's scaled.
+            </SVGText>
+            <SVGText>
+              - Understand Your Content's Dimensions: Determine the width and
+              height of the content you want to center.
+            </SVGText>
+            <SVGText>
+              - Adjust viewBox Accordingly: Set the viewBox such that your
+              content is centered within this virtual canvas. This might involve
+              changing the minX and minY values to shift the visible area.
+            </SVGText>
+            <CodeExample>{`<svg width="200px" height="200px" viewBox="-50 -50 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Your centered content here -->
+</svg>`}</CodeExample>
+            <SVGText>
+              Centering SVG content involves understanding both the SVG
+              coordinate system (via the viewBox) and CSS layout techniques.
+              Adjusting the viewBox can center content within the SVG canvas,
+              while CSS or SVG transformations (e.g., transform: translate) can
+              help center the SVG within its container or elements within the
+              SVG. The right approach depends on whether you're adjusting the
+              overall SVG or individual elements and animations within it.
+            </SVGText>
           </SVGSection>
         </VStackFull>
       </FlexFull>

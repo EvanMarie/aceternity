@@ -38,6 +38,7 @@ svg {
 
 p {
   padding: 0.2rem;
+  font-size: inherit;
 }
 
 ol {
