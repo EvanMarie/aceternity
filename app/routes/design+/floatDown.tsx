@@ -12,11 +12,14 @@ interface FloatDownProps {
   numCircles?: number;
   maxMovements?: number;
   minMovements?: number;
-  duration?: number;
+  minDuration?: number;
+  maxDuration?: number;
   viewBoxWidth?: number;
   viewBoxHeight?: number;
   circleRadius?: number;
   horizontalMax?: number;
+  verticalMax?: number;
+  durationMultiplier?: number;
 }
 
 const generateRandomValues = (
@@ -32,15 +35,21 @@ const generateRandomValues = (
 
 const FloatDown: React.FC<FloatDownProps> = ({
   numCircles = 100,
-  minMovements = 2,
-  maxMovements = 4,
+  minMovements = 4,
+  maxMovements = 8,
   viewBoxHeight = 1000,
   viewBoxWidth = 1000,
   circleRadius = 20,
-  horizontalMax = 100,
-  duration = 20,
+  horizontalMax = 200,
+  verticalMax = 40,
+  minDuration = 2,
+  maxDuration = 23,
+  durationMultiplier = 20,
 }) => {
-  const numMovements = Math.floor(Math.random() * maxMovements) + minMovements;
+  const numMovements =
+    Math.floor(Math.random() * (maxMovements - minMovements + 1)) +
+    minMovements;
+
   const circleVariants: Variants = {
     initial: (custom: Circle) => ({
       cx: custom.x,
@@ -55,7 +64,7 @@ const FloatDown: React.FC<FloatDownProps> = ({
       transition: {
         duration: custom.duration,
         ease: "easeInOut",
-        times: [0, 0.25, 0.5, 0.75, 1],
+        times: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
         loop: Infinity,
         delay: custom.delay,
         filter: "drop-shadow(2vh 2vh 2vh rgba(0, 0, 0, 1))",
@@ -65,9 +74,12 @@ const FloatDown: React.FC<FloatDownProps> = ({
 
   const circles: Circle[] = Array.from({ length: numCircles }, (_, index) => ({
     x: Math.random() * viewBoxWidth,
-    y: [-60, ...generateRandomValues(4, -100, 100)],
-    duration: Math.random() * 5 + 5,
-    delay: Math.random() * 10,
+    y: [
+      -60,
+      ...generateRandomValues(numMovements - 1, -verticalMax, verticalMax),
+    ],
+    duration: Math.random() * (maxDuration - minDuration) + minDuration,
+    delay: Math.random() * durationMultiplier,
     key: index,
   }));
 

@@ -144,7 +144,7 @@ export default function Test() {
   function ExampleContainer({ children }: { children: React.ReactNode }) {
     return (
       <Flex className="shadowBroadNormal">
-        <Center className="w-[40vh] h-[40vh] bg-100-linear6op75 insetShadowXL relative">
+        <Center className="w-[40vh] h-[40vh] bg-100-linear6op75 insetShadowXL relative border-970-md">
           {children}
         </Center>
       </Flex>
@@ -162,7 +162,7 @@ export default function Test() {
             <DrawCircle />
           </Center>
 
-          <Flex className="absolute top-50% left-50% animate-scaleFadeIn p-[2vh] bg-white shadowBroadNormal">
+          <Flex className="absolute top-50% left-50% animate-scaleFadeIn p-[2vh] bg-100-linear2op50 shadowBroadNormal border-970-sm">
             SOME CIRCLE!
           </Flex>
         </ExampleContainer>
