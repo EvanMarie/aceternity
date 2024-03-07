@@ -16,33 +16,9 @@ import { SVGHeading } from "~/components/main/formattingComponents";
 import Heading from "~/components/buildingBlocks/headingText";
 import Text from "~/components/buildingBlocks/text";
 import HL from "~/components/buildingBlocks/highlight";
+import SVGMultiPaths from "../svg+/components/multiPath";
 
 export default function Test() {
-  const eases = [
-    "none",
-    "anticipate",
-    "backIn",
-    "backOut",
-    "backInOut",
-    "circIn",
-    "circOut",
-    "circInOut",
-    "easeIn",
-    "easeOut",
-    "easeInOut",
-  ];
-
-  const speeds = [
-    { speed: "too slow", multiplier: 3 },
-    { speed: "slowish", multiplier: 2 },
-    { speed: "normal", multiplier: 1 },
-    { speed: "fastish", multiplier: 0.75 },
-    { speed: "fast", multiplier: 0.5 },
-    { speed: "too fast", multiplier: 0.25 },
-  ];
-  const [ease, setEase] = useState("");
-  const [animationKey, setAnimationKey] = useState(0);
-  const [speed, setSpeed] = useState("normal");
   const paths = [
     {
       path: "M1 1 V 199 H 199 V 0 Z",
@@ -115,112 +91,9 @@ export default function Test() {
       strokeWidth: 0.6,
     },
   ];
-  const currentMultiplier =
-    speeds.find((s) => s.speed === speed)?.multiplier || 1;
-  const handleEase = (e: string) => {
-    setEase("");
-    setAnimationKey((prevKey) => prevKey + 1); // Increment the animation key
-    setEase(e);
-  };
-
   return (
     <FlexFull className="h-full justify-center overflow-y-auto bg-600-linear6op75">
-      <VStack className="h-full justify-center" gap="gap-[3vh]">
-        <VStackFull gap="gap-[2vh]">
-          <Wrap className="w-90% p-[1vh] shadowBroadNormal justify-evenly gap-x-[3vh] gap-y-[1vh] bg-col-970 items-center">
-            <SVGHeading>
-              <HL color="text-cyan-200">Timing Functions: </HL>
-            </SVGHeading>
-            {eases.map((e, i) => (
-              <Flex
-                key={i}
-                onClick={() => handleEase(e)}
-                className="text-lg-tight w-10% justify-center hover:cursor-pointer"
-              >
-                <Text
-                  className={
-                    ease === e
-                      ? "text-cyan-200 font-semibol px-[0.5vh] metallicEdgesSm textShadow"
-                      : "text-col-100 textShadow"
-                  }
-                >
-                  {e}
-                </Text>
-              </Flex>
-            ))}
-          </Wrap>
-          <HStack className="justify-center items-center text-lg-tight gap-[2vh] w-90% p-[1vh] shadowBroadNormal bg-col-970">
-            {" "}
-            <SVGHeading>
-              <HL color="text-cyan-200">Speed: </HL>
-            </SVGHeading>
-            {speeds.map((s, i) => (
-              <Flex
-                onClick={() => setSpeed(s.speed)}
-                className="text-lg-tight w-12% justify-center flex-shrink-0 hover:cursor-pointer"
-              >
-                <Text
-                  className={
-                    speed === s.speed
-                      ? "text-cyan-200 font-semibol px-[0.5vh] metallicEdgesSm textShadow"
-                      : "text-col-100 textShadow"
-                  }
-                >
-                  {s.speed}
-                </Text>
-              </Flex>
-            ))}
-          </HStack>
-        </VStackFull>
-        <Box className="h-[70vh] w-[70vh]">
-          {" "}
-          {ease && ease !== "none" && (
-            <Center className="h-[70vh] w-[70vh] bg-500-radial5op50 border-900-md shadowBroadNormal animate-fadeIn ">
-              <Center className="w-full h-full insetShadowXl">
-                <Box className="shadowBroadNormal">
-                  <svg
-                    width="70vh"
-                    height="70vh"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 200 200"
-                  >
-                    {paths.map((path, i) => (
-                      <motion.path
-                        key={`${animationKey}-${i}`}
-                        d={path.path}
-                        fill="transparent"
-                        stroke="#520a3e"
-                        strokeWidth={path.strokeWidth}
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{
-                          duration: path.duration * currentMultiplier,
-
-                          ease: ease,
-                          delay: path.delay || 0,
-                        }}
-                      />
-                    ))}
-                  </svg>
-                </Box>
-              </Center>
-            </Center>
-          )}
-          {ease === "none" && (
-            <Center className="h-[70vh] w-[70vh] bg-500-radial5op50 border-900-md shadowBroadNormal animate-fadeIn ">
-              <Center className="w-full h-full insetShadowXl">
-                <Heading
-                  text="This is fun, right?!"
-                  className="py-[1vh] text-stroke-10-800"
-                  layout="text-[7vh]"
-                  shadow="boldTextGlow"
-                  color="text-col-800"
-                />
-              </Center>
-            </Center>
-          )}
-        </Box>
-      </VStack>
+      <SVGMultiPaths paths={paths} />
     </FlexFull>
   );
 }
