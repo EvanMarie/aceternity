@@ -152,8 +152,10 @@ export default function Test() {
   }
 
   return (
-    <FlexFull className="h-full justify-center overflow-y-auto bg-100-diagonal5op50 py-[2vh]">
+    <FlexFull className="h-full py-[2vh] justify-center overflow-y-auto bg-100-diagonal5op50 ">
       <VStackFull className="h-fit">
+        <FloatDown />
+
         <ExampleContainer>
           <AnimatedCircle />
         </ExampleContainer>
@@ -165,9 +167,6 @@ export default function Test() {
           <Flex className="absolute top-50% left-50% animate-scaleFadeIn p-[2vh] bg-100-linear2op50 shadowBroadNormal border-970-sm">
             SOME CIRCLE!
           </Flex>
-        </ExampleContainer>
-        <ExampleContainer>
-          <FloatDown />
         </ExampleContainer>
       </VStackFull>
     </FlexFull>
