@@ -53,7 +53,7 @@ export default function FloatDownExperiements() {
     setAnimationKey((prevKey) => prevKey + 1);
   };
 
-  const animations = ["shimmer", "bouncy", "none"];
+  const animations = ["animatedBorder", "bouncy", "none"];
   const activeStyle =
     "text-cyan-200 font-semibol px-[0.5vh] metallicEdgesSm textShadow";
   const inactiveStyle = "text-col-100 textShadow";
@@ -70,6 +70,25 @@ export default function FloatDownExperiements() {
     setMaxDelay(value);
   };
   const [maxDelay, setMaxDelay] = useState(5);
+  const [minCircleMovements, setMinCircleMovements] = useState(4);
+  const [maxCircleMovements, setMaxCircleMovements] = useState(8);
+  const [radiusMax, setRadiusMax] = useState(20);
+  const [radiusMin, setRadiusMin] = useState(5);
+  const [horizontalMin, setHorizontalMin] = useState(5);
+  const [horizontalMax, setHorizontalMax] = useState(200);
+  const [verticalMin, setVerticalMin] = useState(1);
+  const [verticalMax, setVerticalMax] = useState(5);
+  const [minDuration, setMinDuration] = useState(5);
+  const [maxDuration, setMaxDuration] = useState(23);
+  const [maxAnimationDuration, setMaxAnimationDuration] = useState(5);
+  const [minAnimationDuration, setMinAnimationDuration] = useState(2);
+  const [animatedBorderColor, setAnimatedBorderColor] = useState("#ffffff");
+  const [animatedBorderOpacity, setAnimatedBorderOpacity] = useState(1);
+  const [minAnimatedBorderWidth, setMinAnimatedBorderWidth] = useState(0.8);
+  const [maxAnimatedBorderWidth, setMaxAnimatedBorderWidth] = useState(8);
+  const [maxAnimatedBorderDelay, setMaxAnimatedBorderDelay] = useState(2);
+  const [minBouncyScale, setMinBouncyScale] = useState(0.5);
+  const [maxBouncyScale, setMaxBouncyScale] = useState(2);
 
   // Function to add a new color to the array
   const [newColor, setNewColor] = useState("#ffffff"); // Step 1: State for new color
@@ -112,29 +131,38 @@ export default function FloatDownExperiements() {
           <VStack className="h-fit pb-[2vh] px-[1vh]" gap="gap-[3vh]">
             <VStackFull gap="gap-[1vh]">
               <Heading text="Fun with Floating Circles" className="py-[1vh]" />
-              <Wrap className="w-90% p-[1vh] shadowBroadNormal justify-evenly gap-x-[3vh] gap-y-[1vh] bg-col-970 items-center">
-                <Text className={headingStyles}>Animation:</Text>
-                {animations.map((e, i) => (
-                  <Flex
-                    key={i}
-                    onClick={() => setAnimation(e)}
-                    className={buttonStyles}
-                  >
-                    <Text
-                      className={e === animation ? activeStyle : inactiveStyle}
+              <Wrap className="gap-[2vh]">
+                <Wrap className="w-fit p-[1vh] shadowBroadNormal justify-evenly gap-x-[3vh] gap-y-[1vh] bg-col-970 items-center">
+                  <Text className={headingStyles}>Animation:</Text>
+                  {animations.map((e, i) => (
+                    <Flex
+                      key={i}
+                      onClick={() => setAnimation(e)}
+                      className={buttonStyles}
                     >
-                      {e}
-                    </Text>
-                  </Flex>
-                ))}
+                      <Text
+                        className={
+                          e === animation ? activeStyle : inactiveStyle
+                        }
+                      >
+                        {e}
+                      </Text>
+                    </Flex>
+                  ))}
+                </Wrap>
+                <Button
+                  iconLeft={IoColorPaletteOutline}
+                  onClick={() => setModalOpen(true)}
+                  buttonText="colors"
+                />
               </Wrap>
-              <Wrap className="w-full gap-[3vh] items-center space-evenly">
+              <Wrap className="w-full gap-x-[3vh] sm:gap-y-[0.5vh] md:gap-y-[1vh] items-center justify-evenly">
                 <Slider
                   min={0}
                   max={100}
                   value={numCircles}
                   onChange={handleNumCircles}
-                  label="# circles"
+                  label="circle count"
                 />
                 <Slider
                   min={0}
@@ -143,11 +171,131 @@ export default function FloatDownExperiements() {
                   onChange={handleMaxDelay}
                   label="max delay"
                 />
-
-                <Button
-                  iconLeft={IoColorPaletteOutline}
-                  onClick={() => setModalOpen(true)}
-                  buttonText="colors"
+                <Slider
+                  min={0}
+                  max={40}
+                  value={minCircleMovements}
+                  onChange={setMinCircleMovements}
+                  label="min movements"
+                />
+                <Slider
+                  min={0}
+                  max={40}
+                  value={maxCircleMovements}
+                  onChange={setMaxCircleMovements}
+                  label="max movements"
+                />
+                <Slider
+                  min={0}
+                  max={500}
+                  value={radiusMin}
+                  onChange={setRadiusMin}
+                  label="min radius"
+                />
+                <Slider
+                  min={0}
+                  max={500}
+                  value={radiusMax}
+                  onChange={setRadiusMax}
+                  label="max radius"
+                />
+                <Slider
+                  min={-500}
+                  max={500}
+                  value={horizontalMin}
+                  onChange={setHorizontalMin}
+                  label="horizontal min"
+                />
+                <Slider
+                  min={-500}
+                  max={500}
+                  value={horizontalMax}
+                  onChange={setHorizontalMax}
+                  label="horizontal max"
+                />
+                <Slider
+                  min={-500}
+                  max={500}
+                  value={verticalMin}
+                  onChange={setVerticalMin}
+                  label="vertical min"
+                />
+                <Slider
+                  min={-500}
+                  max={500}
+                  value={verticalMax}
+                  onChange={setVerticalMax}
+                  label="vertical max"
+                />
+                <Slider
+                  min={0}
+                  max={100}
+                  value={minDuration}
+                  onChange={setMinDuration}
+                  label="min duration"
+                />
+                <Slider
+                  min={0}
+                  max={100}
+                  value={maxDuration}
+                  onChange={setMaxDuration}
+                  label="max duration"
+                />
+                <Slider
+                  min={0}
+                  max={100}
+                  value={minAnimationDuration}
+                  onChange={setMinAnimationDuration}
+                  label="min anim duration"
+                />
+                <Slider
+                  min={0}
+                  max={100}
+                  value={maxAnimationDuration}
+                  onChange={setMaxAnimationDuration}
+                  label="max anim duration"
+                />
+                <Slider
+                  min={0}
+                  max={1}
+                  value={animatedBorderOpacity}
+                  onChange={setAnimatedBorderOpacity}
+                  label="border opacity"
+                />
+                <Slider
+                  min={0}
+                  max={20}
+                  value={minAnimatedBorderWidth}
+                  onChange={setMinAnimatedBorderWidth}
+                  label="min border width"
+                />
+                <Slider
+                  min={0}
+                  max={10}
+                  value={maxAnimatedBorderWidth}
+                  onChange={setMaxAnimatedBorderWidth}
+                  label="max border width"
+                />
+                <Slider
+                  min={0}
+                  max={10}
+                  value={maxAnimatedBorderDelay}
+                  onChange={setMaxAnimatedBorderDelay}
+                  label="max border delay"
+                />
+                <Slider
+                  min={0.1}
+                  max={20}
+                  value={minBouncyScale}
+                  onChange={setMinBouncyScale}
+                  label="min bouncy scale"
+                />
+                <Slider
+                  min={0.1}
+                  max={20}
+                  value={maxBouncyScale}
+                  onChange={setMaxBouncyScale}
+                  label="max bouncy scale"
                 />
               </Wrap>
             </VStackFull>
@@ -166,17 +314,38 @@ export default function FloatDownExperiements() {
                   endAt={85}
                   key={animationKey}
                   containerBg={componentBackground}
-                  containerHeight="h-[25vh] sm:h-[35vh] m:h-[40vh] lg:h-[45vh]"
-                  containerWidth="w-[90vw] sm:w-[85vw] md:w-[70vw] lg:w-[80vh]"
-                  viewBoxHeight={1000}
+                  containerHeight="h-[90vw] sm:h-[70vw] md:h-[60vh] lg:h-[65vh]"
+                  containerWidth="w-[90vw] sm:w-[70vw] md:w-[60vh] lg:w-[80vh]"
+                  viewBoxHeight={2000}
                   viewBoxWidth={2000}
-                  circleAnimation={animation as "shimmer" | "bouncy" | "none"}
+                  circleAnimation={
+                    animation as "animatedBorder" | "bouncy" | "none"
+                  }
                   numCircles={numCircles}
                   maxDelay={maxDelay}
                   circleColor={circleColor}
                   circleColors={
                     circleMultiColors.length > 0 ? circleMultiColors : undefined
                   }
+                  maxMovements={maxCircleMovements}
+                  minMovements={minCircleMovements}
+                  radiusMax={radiusMax}
+                  radiusMin={radiusMin}
+                  horizontalMin={horizontalMin}
+                  horizontalMax={horizontalMax}
+                  verticalMin={verticalMin}
+                  verticalMax={verticalMax}
+                  minDuration={minDuration}
+                  maxDuration={maxDuration}
+                  maxCircleAnimationDuration={maxAnimationDuration}
+                  minCircleAnimationDuration={minAnimationDuration}
+                  animatedBorderColor={animatedBorderColor}
+                  animatedBorderOpacity={animatedBorderOpacity}
+                  minAnimatedBorderWidth={minAnimatedBorderWidth}
+                  maxAnimatedBorderWidth={maxAnimatedBorderWidth}
+                  maxAnimatedBorderDelay={maxAnimatedBorderDelay}
+                  minBouncyScale={minBouncyScale}
+                  maxBouncyScale={maxBouncyScale}
                 />
               </Center>
             </FlexFull>

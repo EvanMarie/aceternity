@@ -9,7 +9,7 @@ interface Circle {
   delay: number;
   key: number;
   animationDuration: number;
-  shimmerDelay: number;
+  animatedBorderDelay: number;
 }
 
 interface FloatDownProps {
@@ -35,18 +35,20 @@ interface FloatDownProps {
   radiusMax?: number;
   radiusMin?: number;
   horizontalMax?: number;
+  horizontalMin?: number;
+  verticalMin?: number;
   verticalMax?: number;
   durationMultiplier?: number;
-  shimmerColor?: string;
-  shimmerOpacity?: number;
-  maxShimmerDelay?: number;
+  animatedBorderColor?: string;
+  animatedBorderOpacity?: number;
+  maxAnimatedBorderDelay?: number;
   maxCircleAnimationDuration?: number;
   minCircleAnimationDuration?: number;
   minBouncyScale?: number;
   maxBouncyScale?: number;
-  minShimmerWidth?: number;
-  maxShimmerWidth?: number;
-  circleAnimation?: "bouncy" | "shimmer" | "none";
+  minAnimatedBorderWidth?: number;
+  maxAnimatedBorderWidth?: number;
+  circleAnimation?: "bouncy" | "animatedBorder" | "none";
   circleShadow?: string;
 }
 
@@ -83,17 +85,19 @@ export default function FloatDown({
   radiusMin = 5,
   horizontalMax = 200,
   verticalMax = 5,
+  horizontalMin = 5,
+  verticalMin = 1,
   minDuration = 5,
   maxDuration = 23,
-  shimmerColor = "deeppink",
-  shimmerOpacity = 1,
   maxCircleAnimationDuration = 5,
   minCircleAnimationDuration = 2,
+  animatedBorderColor = "white",
+  animatedBorderOpacity = 1,
+  minAnimatedBorderWidth = 0.8,
+  maxAnimatedBorderWidth = 8,
+  maxAnimatedBorderDelay = 2,
   minBouncyScale = 0.5,
   maxBouncyScale = 2,
-  minShimmerWidth = 0.8,
-  maxShimmerWidth = 8,
-  maxShimmerDelay = 2,
   circleAnimation = "none",
   circleShadow = "drop-shadow(2vh 2vh 2vh rgba(0, 0, 0, 1))",
 }: FloatDownProps) {
@@ -117,9 +121,10 @@ export default function FloatDown({
     Math.random() * (maxCircleAnimationDuration - minCircleAnimationDuration) +
     minCircleAnimationDuration;
 
-  const shimmerWidth =
-    circleAnimation === "shimmer"
-      ? Math.random() * (maxShimmerWidth - minShimmerWidth) + minShimmerWidth
+  const animatedBorderWidth =
+    circleAnimation === "animatedBorder"
+      ? Math.random() * (maxAnimatedBorderWidth - minAnimatedBorderWidth) +
+        minAnimatedBorderWidth
       : 0;
 
   const circleVariants: Variants = {
@@ -132,7 +137,7 @@ export default function FloatDown({
 
     animate: (custom: Circle) => ({
       cy: viewBoxHeight + endAt,
-      x: generateRandomValues(numMovements, -horizontalMax, horizontalMax),
+      x: generateRandomValues(numMovements, horizontalMin, horizontalMax),
       y: custom.y,
       transition: {
         duration: custom.duration,
@@ -143,11 +148,11 @@ export default function FloatDown({
         filter: { circleShadow },
       },
     }),
-    shimmer: (custom: Circle) => ({
-      strokeOpacity: [shimmerOpacity, 0],
+    animatedBorder: (custom: Circle) => ({
+      strokeOpacity: [animatedBorderOpacity, 0],
       transition: {
         duration: circleAnimationDuration,
-        delay: custom.shimmerDelay,
+        delay: custom.animatedBorderDelay,
         repeat: repeat,
         repeatType: repeatType, // use reverse for best
       },
@@ -168,7 +173,7 @@ export default function FloatDown({
       Math.random() *
         (maxCircleAnimationDuration - minCircleAnimationDuration) +
       minCircleAnimationDuration;
-    const shimmerDelay = Math.random() * (maxShimmerDelay || 5);
+    const animatedBorderDelay = Math.random() * (maxAnimatedBorderDelay || 5);
     let delay = Math.random() * maxDelay; // Assign a random delay based on maxDelay
 
     // Ensure the first circle has a delay of 0
@@ -180,13 +185,13 @@ export default function FloatDown({
       x: Math.random() * viewBoxWidth,
       y: [
         startFrom,
-        ...generateRandomValues(numMovements - 1, -verticalMax, verticalMax),
+        ...generateRandomValues(numMovements - 1, verticalMin, verticalMax),
       ],
       key: index,
       duration: Math.random() * (maxDuration - minDuration) + minDuration,
       delay,
       animationDuration,
-      shimmerDelay,
+      animatedBorderDelay,
     };
   });
 
@@ -216,16 +221,16 @@ export default function FloatDown({
                 initial="initial"
                 animate={[
                   "animate",
-                  circleAnimation === "shimmer"
-                    ? "shimmer"
+                  circleAnimation === "animatedBorder"
+                    ? "animatedBorder"
                     : circleAnimation === "bouncy"
                     ? "bouncy"
                     : "",
                 ]}
                 variants={circleVariants}
                 fill={circleColors ? getRandomColor() : circleColor}
-                stroke={shimmerColor ? shimmerColor : circleColor}
-                strokeWidth={shimmerWidth ? shimmerWidth : 0.2}
+                stroke={animatedBorderColor ? animatedBorderColor : circleColor}
+                strokeWidth={animatedBorderWidth ? animatedBorderWidth : 0.2}
                 custom={circle}
               />
             ))}

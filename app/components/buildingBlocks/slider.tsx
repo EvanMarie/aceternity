@@ -7,6 +7,7 @@ import Text from "./text";
 interface SliderProps {
   label?: string;
   direction?: "flex-col" | "flex-row";
+  labelColor?: string;
   min?: number;
   max?: number;
   value?: number;
@@ -19,17 +20,18 @@ const Slider: React.FC<SliderProps> = ({
   min = 0,
   max = 100,
   value,
+  labelColor = "text-cyan-200",
   onChange,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(Number(event.target.value));
   };
-
+  const step = max - min <= 10 ? 0.1 : 1;
   return (
     <Flex className={`${direction} gap-[0px]`}>
       {label && (
-        <HStack className="text-md-tight text-col-100 justify-center">
-          <Text>{label}: </Text>
+        <HStack className="text-sm-tight md:text-md-tight text-col-100 justify-center">
+          <Text className={`${labelColor}`}>{label}: </Text>
           <Text>{value}</Text>
         </HStack>
       )}
@@ -40,6 +42,7 @@ const Slider: React.FC<SliderProps> = ({
           min={min}
           max={max}
           value={value}
+          step={step}
           onChange={handleChange}
           className="slider h-[0.5vh] w-full cursor-pointer appearance-none  bg-col-300 dark:bg-gray-700 focus:outline-none focus:ring focus:ring-col-400 shadowBroadTight"
         />{" "}
