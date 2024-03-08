@@ -84,6 +84,27 @@ export default function FloatDownExperiements() {
     );
   };
 
+  const backgroundChoices = [
+    "bg-100-radial6op75",
+    "bg-100-linear2op75",
+    "bg-100-radial3op75",
+    "bg-300-linear6op75",
+    "bg-100-radial4op75",
+    "bg-400-radial5op75",
+    "bg-500-linear6op75",
+    "bg-600-diagonal5op75",
+    "bg-600-linear6op75",
+    "bg-800-linear2op75",
+    "bg-900-linear1op75",
+    "bg-100-radial4op25",
+    "bg-100-radial3op75",
+    "bg-300-linear3op75",
+    "bg-100-radial3op50",
+    "bg-500-diagonal4op50",
+  ];
+  const [componentBackground, setComponentBackground] =
+    useState("bg-100-radial6op75");
+
   return (
     <>
       <FlexFull className="justify-center">
@@ -144,6 +165,7 @@ export default function FloatDownExperiements() {
                   startFrom={-50}
                   endAt={85}
                   key={animationKey}
+                  containerBg={componentBackground}
                   containerHeight="h-[25vh] sm:h-[35vh] m:h-[40vh] lg:h-[45vh]"
                   containerWidth="w-[90vw] sm:w-[85vw] md:w-[70vw] lg:w-[80vh]"
                   viewBoxHeight={1000}
@@ -168,11 +190,14 @@ export default function FloatDownExperiements() {
         onClose={() => setModalOpen(false)}
         modalSize="w-[35vh] h-[80vh] "
       >
-        <VStackFull className="h-full bg-col-700 text-col-100">
+        <VStackFull
+          className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100"
+          gap="gap-[0px]"
+        >
           <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
             <Text className="text-lg-loose">Circle Colors: </Text>
           </FlexFull>
-          <VStackFull>
+          <VStackFull className="py-[1vh]">
             {circleMultiColors.map((color, index) => (
               <HStackFull key={index} className="px-[1vh] justify-between ">
                 <Text className="w-25%">{`color ${index + 1}`}</Text>
@@ -196,14 +221,16 @@ export default function FloatDownExperiements() {
               </HStackFull>
             ))}
           </VStackFull>
-          <FlexFull className="bg-col-900 rounded-none py-[0.5vh] px-[1.5vh]">
-            <HStackFull className="justify-evenly py-[0.5vh]">
-              <input
-                type="color"
-                value={newColor}
-                onChange={(e) => setNewColor(e.target.value)}
-                className="cursor-pointer"
-              />
+          <FlexFull className="py-[0.5vh] px-[1.5vh] bg-col-950 rounded-none">
+            <HStackFull className="justify-evenly  py-[1vh]  ">
+              <Box className="shadowBroadNormal">
+                <input
+                  type="color"
+                  value={newColor}
+                  onChange={(e) => setNewColor(e.target.value)}
+                  className="cursor-pointer"
+                />
+              </Box>
               <Button
                 onClick={handleAddNewColor}
                 iconLeft={PlusIcon}
@@ -211,6 +238,27 @@ export default function FloatDownExperiements() {
               />
             </HStackFull>
           </FlexFull>
+          <FlexFull className="bg-col-900 rounded-none py-[0.5vh] px-[1vh]">
+            <Text className="text-lg-loose">Background: </Text>
+          </FlexFull>
+          <Wrap className="w-full p-[1vh] gap-[1.5vh] justify-evenly">
+            {backgroundChoices.map((bg, index) => (
+              <Flex className={`p-[0.5vh] `}>
+                <Box className="shadowBroadNormal">
+                  <Box
+                    key={index}
+                    className={`${bg} h-[5vh] w-[5vh] text-transparent hover:cursor-pointer hover:metallicEdgesSm transition-300 ${
+                      bg === componentBackground &&
+                      "metallicEdgesLg hover:metallicEdgesLg"
+                    }`}
+                    onClick={() => setComponentBackground(bg)}
+                  >
+                    .
+                  </Box>
+                </Box>
+              </Flex>
+            ))}
+          </Wrap>
         </VStackFull>
       </Modal>
     </>
