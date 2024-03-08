@@ -24,6 +24,7 @@ interface FloatDownProps {
   repeat?: number;
   repeatType?: "reverse" | "mirror";
   circleColor?: string;
+  circleColors?: string[];
   maxMovements?: number;
   minMovements?: number;
   minDuration?: number;
@@ -67,6 +68,7 @@ export default function FloatDown({
   containerShadow = "insetShadowXL",
   containerBorder = "border-970-md",
   numCircles = 53,
+  circleColors,
   startFrom = -30,
   endAt = 30,
   maxDelay = 5,
@@ -83,7 +85,6 @@ export default function FloatDown({
   verticalMax = 5,
   minDuration = 5,
   maxDuration = 23,
-  durationMultiplier = 20,
   shimmerColor = "deeppink",
   shimmerOpacity = 1,
   maxCircleAnimationDuration = 5,
@@ -192,6 +193,13 @@ export default function FloatDown({
   // Shuffle the circles to randomize which one gets the delay of 0
   const shuffledCircles = shuffleArray(circles);
 
+  const getRandomColor = () => {
+    if (circleColors) {
+      return circleColors[Math.floor(Math.random() * circleColors.length)];
+    }
+    return circleColor;
+  };
+
   return (
     <Flex className="shadowBroadNormal">
       <Center
@@ -215,7 +223,7 @@ export default function FloatDown({
                     : "",
                 ]}
                 variants={circleVariants}
-                fill={circleColor}
+                fill={circleColors ? getRandomColor() : circleColor}
                 stroke={shimmerColor ? shimmerColor : circleColor}
                 strokeWidth={shimmerWidth ? shimmerWidth : 0.2}
                 custom={circle}
