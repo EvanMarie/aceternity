@@ -20,6 +20,7 @@ interface FloatDownProps {
   containerBorder?: string;
   numCircles?: number;
   startFrom?: number;
+  endAt?: number;
   repeat?: number;
   repeatType?: "reverse" | "mirror";
   circleColor?: string;
@@ -67,6 +68,7 @@ export default function FloatDown({
   containerBorder = "border-970-md",
   numCircles = 53,
   startFrom = -30,
+  endAt = 30,
   maxDelay = 5,
   repeat = Infinity,
   repeatType = "mirror",
@@ -107,7 +109,6 @@ export default function FloatDown({
       ? Math.random() * (maxShimmerWidth - minShimmerWidth) + minShimmerWidth
       : 0;
 
-  const delay = generateRandomValues(1, 0, maxDelay);
   const circleVariants: Variants = {
     initial: (custom: Circle) => ({
       cx: custom.x,
@@ -117,7 +118,7 @@ export default function FloatDown({
     }),
 
     animate: (custom: Circle) => ({
-      cy: viewBoxHeight + 60,
+      cy: viewBoxHeight + endAt,
       x: generateRandomValues(numMovements, -horizontalMax, horizontalMax),
       y: custom.y,
       transition: {
@@ -125,7 +126,7 @@ export default function FloatDown({
         ease: "easeInOut",
         times: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
         loop: repeat,
-        delay: custom.delay,
+        delay: 0,
         filter: { circleShadow },
       },
     }),
@@ -133,8 +134,7 @@ export default function FloatDown({
       strokeOpacity: [shimmerOpacity, 0],
       transition: {
         duration: circleAnimationDuration,
-        // delay: custom.shimmerDelay,
-        delay: delay[0],
+        delay: custom.shimmerDelay,
         repeat: repeat,
         repeatType: repeatType, // use reverse for best
       },
