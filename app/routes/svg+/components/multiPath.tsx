@@ -13,6 +13,10 @@ export type Path = {
   strokeWidth?: number | string;
   ease?: string;
   repeat?: number;
+  zIndex?: number;
+  scaleDelay?: number;
+  scaleDuration?: number;
+  scaleAmount?: number;
 };
 
 export default function SVGMultiPaths({
@@ -28,6 +32,8 @@ export default function SVGMultiPaths({
   viewBox?: string;
   containerClassName?: string;
 }) {
+  const sortedPaths = paths.sort((a, b) => (a.zIndex || 0) - (b.zIndex || 0));
+
   return (
     <Flex className={`${height} ${width} ${containerClassName}`}>
       <svg
@@ -36,7 +42,7 @@ export default function SVGMultiPaths({
         xmlns="http://www.w3.org/2000/svg"
         viewBox={viewBox}
       >
-        {paths.map((path, i) => (
+        {sortedPaths.map((path, i) => (
           <motion.path
             key={i}
             d={path.path}
@@ -44,7 +50,11 @@ export default function SVGMultiPaths({
             stroke={path.stroke || "#000000"}
             strokeWidth={path.strokeWidth}
             initial={{ pathLength: 0, fillOpacity: 0 }}
-            animate={{ pathLength: 1, fillOpacity: path.fillOpacity || 1 }}
+            animate={{
+              pathLength: 1,
+              fillOpacity: path.fillOpacity || 1,
+              scale: [1, path.scaleAmount || 1.2, 1],
+            }}
             transition={{
               pathLength: {
                 duration: path.duration || 1,
@@ -59,6 +69,15 @@ export default function SVGMultiPaths({
                   (path.delay || 0) +
                   (path.duration || 1) +
                   (path.fillDelay || 0),
+              },
+              scale: {
+                duration: path.scaleDuration || 0,
+                delay:
+                  (path.delay || 0) +
+                  (path.duration || 1) +
+                  (path.fillDelay || 0) +
+                  (path.fillDuration || 0) +
+                  (path.scaleDelay || 0),
               },
             }}
           />

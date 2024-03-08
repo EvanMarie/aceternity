@@ -74,17 +74,17 @@ export default function FloatDown({
   minDuration = 5,
   maxDuration = 23,
   durationMultiplier = 20,
-  shimmerColor = "red",
+  shimmerColor = "white",
   shimmerOpacity = 1,
   maxCircleAnimationDuration = 5,
   minCircleAnimationDuration = 0.5,
-  minGlowScale = 0.8,
-  maxGlowScale = 1.2,
+  minGlowScale = 0.5,
+  maxGlowScale = 5,
   minShimmerWidth = 1,
   maxShimmerWidth = 5,
   minPulsateScale = 0.4,
   maxPulsateScale = 1.6,
-  circleAnimation = "none",
+  circleAnimation = "shimmer",
 }: FloatDownProps) {
   const numMovements =
     Math.floor(Math.random() * (maxMovements - minMovements + 1)) +
