@@ -9,6 +9,7 @@ import Button from "~/components/buildingBlocks/button";
 import Box from "~/components/buildingBlocks/box";
 import Transition from "~/components/buildingBlocks/transition";
 import FloatDown from "../svg+/components/floatDown";
+import FloatDownExperiements from "../svg+/components/floatDownExperiments";
 
 export default function Test() {
   const claudePaths = [
@@ -141,7 +142,7 @@ export default function Test() {
     },
   ];
 
-  const yinYangPaths: Path = [
+  const yinYangPaths: Path[] = [
     //The outer circle path.
     {
       path: "m503.25624,109.244c118.32979,0 214.32568,89.20398 214.32568,197.8227c0,108.61877 -95.9959,196.73646 -214.32568,196.73646c-118.32984,0 -214.32574,88.20264 -214.32574,196.82133c0,108.61874 95.9959,196.73646 214.32574,196.73646c236.65957,0 428.74377,-176.32039 428.74377,-393.55782c0,-217.23746 -192.0842,-393.55774 -428.74377,-393.55774l0,-1.00139z",
@@ -220,10 +221,10 @@ export default function Test() {
   }
 
   return (
-    <FlexFull className="h-full py-[2vh] justify-center overflow-y-auto bg-100-diagonal5op50 ">
+    <FlexFull className="h-full py-[1vh] justify-center overflow-y-auto bg-100-diagonal5op50 ">
       <VStackFull className="h-fit">
-        <FloatDown />
-        <ExampleContainer width="w-[70vh]" height="h-[70vh]">
+        <FloatDownExperiements />
+        {/* <ExampleContainer width="w-[70vh]" height="h-[70vh]">
           <SVGMultiPaths paths={yinYangPaths} viewBox="0 0 1000 1000" />
         </ExampleContainer>
 
@@ -241,7 +242,7 @@ export default function Test() {
         </ExampleContainer>
         <ExampleContainer>
           <SVGMultiPaths paths={gptPaths} viewBox="0 0 1000 1000" />
-        </ExampleContainer>
+        </ExampleContainer> */}
       </VStackFull>
     </FlexFull>
   );

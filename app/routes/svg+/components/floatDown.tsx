@@ -9,7 +9,7 @@ interface Circle {
   delay: number;
   key: number;
   animationDuration: number;
-  pulsateScale: number;
+  shimmerDelay: number;
 }
 
 interface FloatDownProps {
@@ -19,11 +19,15 @@ interface FloatDownProps {
   containerShadow?: string;
   containerBorder?: string;
   numCircles?: number;
+  startFrom?: number;
+  repeat?: number;
+  repeatType?: "reverse" | "mirror";
   circleColor?: string;
   maxMovements?: number;
   minMovements?: number;
   minDuration?: number;
   maxDuration?: number;
+  maxDelay?: number;
   viewBoxWidth?: number;
   viewBoxHeight?: number;
   radiusMax?: number;
@@ -33,15 +37,15 @@ interface FloatDownProps {
   durationMultiplier?: number;
   shimmerColor?: string;
   shimmerOpacity?: number;
+  maxShimmerDelay?: number;
   maxCircleAnimationDuration?: number;
   minCircleAnimationDuration?: number;
-  minGlowScale?: number;
-  maxGlowScale?: number;
+  minBouncyScale?: number;
+  maxBouncyScale?: number;
   minShimmerWidth?: number;
   maxShimmerWidth?: number;
-  minPulsateScale?: number;
-  maxPulsateScale?: number;
-  circleAnimation?: "pulsate" | "glow" | "shimmer" | "none";
+  circleAnimation?: "bouncy" | "shimmer" | "none";
+  circleShadow?: string;
 }
 
 const generateRandomValues = (
@@ -62,6 +66,10 @@ export default function FloatDown({
   containerShadow = "insetShadowXL",
   containerBorder = "border-970-md",
   numCircles = 53,
+  startFrom = -30,
+  maxDelay = 5,
+  repeat = Infinity,
+  repeatType = "mirror",
   circleColor = "cyan",
   minMovements = 4,
   maxMovements = 8,
@@ -70,21 +78,21 @@ export default function FloatDown({
   radiusMax = 20,
   radiusMin = 5,
   horizontalMax = 200,
-  verticalMax = 20,
+  verticalMax = 5,
   minDuration = 5,
   maxDuration = 23,
   durationMultiplier = 20,
-  shimmerColor = "white",
+  shimmerColor = "deeppink",
   shimmerOpacity = 1,
   maxCircleAnimationDuration = 5,
-  minCircleAnimationDuration = 0.5,
-  minGlowScale = 0.5,
-  maxGlowScale = 5,
-  minShimmerWidth = 1,
-  maxShimmerWidth = 5,
-  minPulsateScale = 0.4,
-  maxPulsateScale = 1.6,
-  circleAnimation = "shimmer",
+  minCircleAnimationDuration = 2,
+  minBouncyScale = 0.5,
+  maxBouncyScale = 2,
+  minShimmerWidth = 0.8,
+  maxShimmerWidth = 8,
+  maxShimmerDelay = 2,
+  circleAnimation = "none",
+  circleShadow = "drop-shadow(2vh 2vh 2vh rgba(0, 0, 0, 1))",
 }: FloatDownProps) {
   const numMovements =
     Math.floor(Math.random() * (maxMovements - minMovements + 1)) +
@@ -93,21 +101,21 @@ export default function FloatDown({
   const circleAnimationDuration =
     Math.random() * (maxCircleAnimationDuration - minCircleAnimationDuration) +
     minCircleAnimationDuration;
-  const pulsateScale =
-    circleAnimation === "pulsate"
-      ? Math.random() * (maxPulsateScale - minPulsateScale) + minPulsateScale
-      : 0;
+
   const shimmerWidth =
     circleAnimation === "shimmer"
       ? Math.random() * (maxShimmerWidth - minShimmerWidth) + minShimmerWidth
       : 0;
+
+  const delay = generateRandomValues(1, 0, maxDelay);
   const circleVariants: Variants = {
     initial: (custom: Circle) => ({
       cx: custom.x,
       cy: custom.y[0],
       r: generateRandomValues(1, radiusMin, radiusMax),
-      filter: "drop-shadow(2vh 2vh 2vh rgba(0, 0, 0, 1))",
+      filter: circleShadow,
     }),
+
     animate: (custom: Circle) => ({
       cy: viewBoxHeight + 60,
       x: generateRandomValues(numMovements, -horizontalMax, horizontalMax),
@@ -116,59 +124,49 @@ export default function FloatDown({
         duration: custom.duration,
         ease: "easeInOut",
         times: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-        loop: Infinity,
+        loop: repeat,
         delay: custom.delay,
-        filter: "drop-shadow(2vh 2vh 2vh rgba(0, 0, 0, 1))",
+        filter: { circleShadow },
       },
     }),
-    shimmer: {
+    shimmer: (custom: Circle) => ({
       strokeOpacity: [shimmerOpacity, 0],
       transition: {
         duration: circleAnimationDuration,
-        repeat: Infinity,
-        repeatType: "reverse",
-      },
-    },
-    pulsate: (custom: Circle) => ({
-      scale: [1, custom.pulsateScale],
-      transition: {
-        duration: custom.animationDuration,
-        repeat: Infinity,
-        repeatType: "reverse",
+        // delay: custom.shimmerDelay,
+        delay: delay[0],
+        repeat: repeat,
+        repeatType: repeatType, // use reverse for best
       },
     }),
-    glow: (custom: Circle) => ({
-      scale: [minGlowScale, maxGlowScale],
+    bouncy: (custom: Circle) => ({
+      scale: [minBouncyScale, maxBouncyScale],
       transition: {
         duration: custom.animationDuration,
-        repeat: Infinity,
-        repeatType: "mirror",
+        repeat: repeat,
+        repeatType: repeatType, // use mirror for best
         ease: "easeInOut",
       },
     }),
   };
 
   const circles: Circle[] = Array.from({ length: numCircles }, (_, index) => {
-    const pulsateScale =
-      circleAnimation === "pulsate"
-        ? Math.random() * (maxPulsateScale - minPulsateScale) + minPulsateScale
-        : 0;
     const animationDuration =
       Math.random() *
         (maxCircleAnimationDuration - minCircleAnimationDuration) +
       minCircleAnimationDuration;
-
+    const shimmerDelay = Math.random() * (maxShimmerDelay || 5);
     return {
       x: Math.random() * viewBoxWidth,
       y: [
-        -60,
+        startFrom,
         ...generateRandomValues(numMovements - 1, -verticalMax, verticalMax),
       ],
       key: index,
       duration: Math.random() * (maxDuration - minDuration) + minDuration,
       delay: Math.random() * durationMultiplier,
       animationDuration,
-      pulsateScale,
+      shimmerDelay,
     };
   });
 
@@ -188,12 +186,10 @@ export default function FloatDown({
                 initial="initial"
                 animate={[
                   "animate",
-                  circleAnimation === "pulsate"
-                    ? "pulsate"
-                    : circleAnimation === "shimmer"
+                  circleAnimation === "shimmer"
                     ? "shimmer"
-                    : circleAnimation === "glow"
-                    ? "glow"
+                    : circleAnimation === "bouncy"
+                    ? "bouncy"
                     : "",
                 ]}
                 variants={circleVariants}
