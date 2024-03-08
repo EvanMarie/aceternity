@@ -8,7 +8,7 @@ import Wrap from "~/components/buildingBlocks/wrap";
 import Heading from "~/components/buildingBlocks/headingText";
 import FloatDown from "./floatDown";
 import IconButton from "~/components/buildingBlocks/iconButton";
-import { RefreshIcon } from "styles";
+import { CloseIcon, PlusIcon, RefreshIcon } from "styles";
 import Box from "~/components/buildingBlocks/box";
 import Text from "~/components/buildingBlocks/text";
 import Slider from "~/components/buildingBlocks/slider";
@@ -16,14 +16,15 @@ import HStack from "~/components/buildingBlocks/hStack";
 import Button from "~/components/buildingBlocks/button";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import Modal from "~/components/buildingBlocks/modal";
+import HStackFull from "~/components/buildingBlocks/hStackFull";
 
 export default function FloatDownExperiements() {
   const [animationKey, setAnimationKey] = useState(0);
-  const [circleColor, setCircleColor] = useState("#00FFFF");
+  const [circleColor, setCircleColor] = useState("#00ffff");
   const [modalOpen, setModalOpen] = useState(false);
   const [circleMultiColors, setCircleMultiColors] = useState<string[]>([
     "#00FFFF",
-  ]); // Step 1: Moved here
+  ]);
 
   function ColorPicker({
     onChange,
@@ -31,7 +32,7 @@ export default function FloatDownExperiements() {
     value,
   }: {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    label: string;
+    label?: string;
     value: string;
   }) {
     const [color, setColor] = useState("#00FFFF");
@@ -70,11 +71,17 @@ export default function FloatDownExperiements() {
   };
   const [maxDelay, setMaxDelay] = useState(5);
 
-  const addNewColor = () => {
-    const [circleMultiColors, setCircleMultiColors] = useState<string[]>([
-      "#00FFFF",
-    ]);
-    setCircleMultiColors([...circleMultiColors, "#ffffff"]);
+  // Function to add a new color to the array
+  const [newColor, setNewColor] = useState("#ffffff"); // Step 1: State for new color
+  const handleAddNewColor = () => {
+    setCircleMultiColors([...circleMultiColors, newColor]);
+  };
+
+  // Function to remove a color from the array
+  const handleRemoveColor = (indexToRemove: number) => {
+    setCircleMultiColors(
+      circleMultiColors.filter((_, index) => index !== indexToRemove)
+    );
   };
 
   return (
@@ -115,15 +122,11 @@ export default function FloatDownExperiements() {
                   onChange={handleMaxDelay}
                   label="max delay"
                 />
-                <ColorPicker
-                  label="circle color"
-                  value={circleColor}
-                  onChange={(e) => setCircleColor(e.target.value)}
-                />
+
                 <Button
                   iconLeft={IoColorPaletteOutline}
                   onClick={() => setModalOpen(true)}
-                  buttonText="multi-color"
+                  buttonText="colors"
                 />
               </Wrap>
             </VStackFull>
@@ -163,34 +166,51 @@ export default function FloatDownExperiements() {
         isOpen={modalOpen}
         setModalOpen={setModalOpen}
         onClose={() => setModalOpen(false)}
-        modalSize="w-full h-full sm:h-90% w-90% md:w-80% lg:w-70% xl:w-60% 2xl:w-50%"
+        modalSize="w-[35vh] h-[80vh] "
       >
-        <VStackFull className="h-full bg-col-700 text-col-100 p-4">
-          <Text className="text-lg-loose mb-4">Use Multiple Colors:</Text>
-          {circleMultiColors.map((color, index) => (
-            <HStack>
-              <Text></Text>
-              <Box className="h-[4vh] w-[4vh]"></Box>
-            </HStack>
-          ))}
-          <HStack>
-            <input
-              key={index}
-              type="color"
-              value={color}
-              onChange={(e) => {
-                const newColors = [...circleMultiColors];
-                newColors[index] = e.target.value;
-                setCircleMultiColors(newColors);
-              }}
-              className="w-[5vh] h-[3vh] cursor-pointer mb-2"
-            />
-            <Button
-              onClick={addNewColor}
-              type="smallNormal"
-              buttonText="Add New Color"
-            />
-          </HStack>
+        <VStackFull className="h-full bg-col-700 text-col-100">
+          <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
+            <Text className="text-lg-loose">Circle Colors: </Text>
+          </FlexFull>
+          <VStackFull>
+            {circleMultiColors.map((color, index) => (
+              <HStackFull key={index} className="px-[1vh] justify-between ">
+                <Text className="w-25%">{`color ${index + 1}`}</Text>
+                <Flex className="w-25%">
+                  <Box
+                    className="w-70% h-[3vh] rounded-md border-970-sm shadowBroadTight"
+                    style={{ backgroundColor: color }}
+                  />
+                </Flex>
+                <Flex className="w-25%">
+                  <Text>{color}</Text>
+                </Flex>
+                <Flex className="w-25% justify-center">
+                  <IconButton
+                    onClick={() => handleRemoveColor(index)}
+                    icon={CloseIcon}
+                    type="unstyled"
+                    iconClassName="text-[2.5vh] cursor-pointer hover:text-cyan-200"
+                  />
+                </Flex>
+              </HStackFull>
+            ))}
+          </VStackFull>
+          <FlexFull className="bg-col-900 rounded-none py-[0.5vh] px-[1.5vh]">
+            <HStackFull className="justify-evenly py-[0.5vh]">
+              <input
+                type="color"
+                value={newColor}
+                onChange={(e) => setNewColor(e.target.value)}
+                className="cursor-pointer"
+              />
+              <Button
+                onClick={handleAddNewColor}
+                iconLeft={PlusIcon}
+                buttonText="add color"
+              />
+            </HStackFull>
+          </FlexFull>
         </VStackFull>
       </Modal>
     </>

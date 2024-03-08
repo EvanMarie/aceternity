@@ -282,3 +282,22 @@ ol li {
   cursor: pointer;
   box-shadow: 0.2vh 0.2vh 0.2vh rgba(0, 0, 0, 0.8);
 }
+
+input[type="color"] {
+  border: 2px solid #555;
+  border-radius: 0.7vh;
+  width: 4vh; /* Custom width */
+  height: 4vh; /* Custom height */
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 5px;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
