@@ -6,8 +6,11 @@ export type Path = {
   delay?: number;
   duration?: number;
   fill?: string;
+  fillDelay?: number;
+  fillDuration?: number;
+  fillOpacity?: number;
   stroke?: string;
-  strokeWidth?: number;
+  strokeWidth?: number | string;
   ease?: string;
   repeat?: number;
 };
@@ -40,14 +43,23 @@ export default function SVGMultiPaths({
             fill={path.fill ? path.fill : "transparent"}
             stroke={path.stroke || "#000000"}
             strokeWidth={path.strokeWidth}
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
+            initial={{ pathLength: 0, fillOpacity: 0 }}
+            animate={{ pathLength: 1, fillOpacity: path.fillOpacity || 1 }}
             transition={{
-              duration: path.duration || 1,
-              ease: path.ease || "easeInOut",
-              delay: path.delay || 0,
-              repeat: path.repeat || 0,
-              repeatType: path.repeat ? "reverse" : "mirror",
+              pathLength: {
+                duration: path.duration || 1,
+                ease: path.ease || "easeInOut",
+                delay: path.delay || 0,
+                repeat: path.repeat || 0,
+                repeatType: path.repeat ? "reverse" : "mirror",
+              },
+              fillOpacity: {
+                duration: path.fillDuration || 0.5,
+                delay:
+                  (path.delay || 0) +
+                  (path.duration || 1) +
+                  (path.fillDelay || 0),
+              },
             }}
           />
         ))}

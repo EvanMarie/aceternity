@@ -24,7 +24,8 @@ interface FloatDownProps {
   maxDuration?: number;
   viewBoxWidth?: number;
   viewBoxHeight?: number;
-  circleRadius?: number;
+  radiusMax?: number;
+  radiusMin?: number;
   horizontalMax?: number;
   verticalMax?: number;
   durationMultiplier?: number;
@@ -53,7 +54,8 @@ export default function FloatDown({
   maxMovements = 8,
   viewBoxHeight = 1000,
   viewBoxWidth = 1000,
-  circleRadius = 20,
+  radiusMax = 20,
+  radiusMin = 5,
   horizontalMax = 200,
   verticalMax = 40,
   minDuration = 5,
@@ -68,7 +70,7 @@ export default function FloatDown({
     initial: (custom: Circle) => ({
       cx: custom.x,
       cy: custom.y[0],
-      r: circleRadius,
+      r: generateRandomValues(1, radiusMin, radiusMax),
       filter: "drop-shadow(2vh 2vh 2vh rgba(0, 0, 0, 1))",
     }),
     animate: (custom: Circle) => ({
