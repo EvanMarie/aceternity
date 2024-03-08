@@ -262,3 +262,23 @@ ol li {
     /* Top shadow */ 4px 4px 10px rgba(255, 255, 255, 1); /* White glow */
   color: transparent;
 }
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.5vh;
+  height: 1.5vh;
+  border-radius: 0.75vh;
+  background: rgb(84, 123, 171); /* Adjust the color to match your design */
+  cursor: pointer;
+  box-shadow: 0.2vh 0.2vh 0.2vh rgba(0, 0, 0, 0.8);
+}
+
+.slider::-moz-range-thumb {
+  width: 1.5vh;
+  height: 1.5vh;
+  border-radius: 0.75vh;
+  background: rgb(84, 123, 171);
+  cursor: pointer;
+  box-shadow: 0.2vh 0.2vh 0.2vh rgba(0, 0, 0, 0.8);
+}

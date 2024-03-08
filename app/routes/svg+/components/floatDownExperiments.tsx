@@ -11,6 +11,7 @@ import IconButton from "~/components/buildingBlocks/iconButton";
 import { RefreshIcon } from "styles";
 import Box from "~/components/buildingBlocks/box";
 import Text from "~/components/buildingBlocks/text";
+import Slider from "~/components/buildingBlocks/slider";
 
 export default function FloatDownExperiements() {
   const [animationKey, setAnimationKey] = useState(0);
@@ -26,8 +27,12 @@ export default function FloatDownExperiements() {
   const [animation, setAnimation] = useState("none");
   const headingStyles = "text-cyan-200  text-md-normal md:text-lg-normal";
   const buttonStyles =
-    "text-sm-tight md:text-lg-tight md:px-[1vh] justify-center flex-shrink-0 hover:cursor-pointer";
+    "text-sm-tight md:text-md-tight md:px-[1vh] justify-center flex-shrink-0 hover:cursor-pointer";
+  const [numCircles, setNumCircles] = useState(50); // Default value
 
+  const handleSliderChange = (value: number) => {
+    setNumCircles(value);
+  };
   return (
     <FlexFull className="justify-center">
       <Flex className="w-95% xxl:w-80% h-fit justify-center overflow-y-auto bg-600-linear6op75">
@@ -35,6 +40,7 @@ export default function FloatDownExperiements() {
           <VStackFull gap="gap-[2vh]">
             <Heading text="Fun with Floating Circles" className="py-[1vh]" />
             <Wrap className="w-90% p-[1vh] shadowBroadNormal justify-evenly gap-x-[3vh] gap-y-[1vh] bg-col-970 items-center">
+              <Text className={headingStyles}>Animation:</Text>
               {animations.map((e, i) => (
                 <Flex
                   key={i}
@@ -49,10 +55,19 @@ export default function FloatDownExperiements() {
                 </Flex>
               ))}
             </Wrap>
+            <Wrap className="w-full">
+              <Slider
+                min={0}
+                max={100}
+                value={numCircles}
+                onChange={handleSliderChange}
+                label="# Circles"
+              />
+            </Wrap>
           </VStackFull>
           <FlexFull className="justify-center">
             {" "}
-            <Center className="w-fit h-fit insetShadowXl relative">
+            <Center className=" h-fit insetShadowXl relative">
               <Box className="absolute top-[1vh] right-[1vh] z-10">
                 <IconButton
                   onClick={handleReanimate}
@@ -64,11 +79,12 @@ export default function FloatDownExperiements() {
                 startFrom={-50}
                 endAt={80}
                 key={animationKey}
-                containerHeight="h-[50vh]"
-                containerWidth="w-full md:w-[90vh]"
+                containerHeight="h-[25vh] sm:h-[35vh] m:h-[40vh] lg:h-[45vh]"
+                containerWidth="w-[90vw] sm:w-[85vw] md:w-[70vw] lg:w-[80vh]"
                 viewBoxHeight={1000}
                 viewBoxWidth={2000}
                 circleAnimation={animation as "shimmer" | "bouncy" | "none"}
+                numCircles={numCircles}
               />
             </Center>
           </FlexFull>

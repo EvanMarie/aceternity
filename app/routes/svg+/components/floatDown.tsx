@@ -96,6 +96,18 @@ export default function FloatDown({
   circleAnimation = "none",
   circleShadow = "drop-shadow(2vh 2vh 2vh rgba(0, 0, 0, 1))",
 }: FloatDownProps) {
+  function shuffleArray<T>(array: T[]): T[] {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ]; // Swap elements
+    }
+    return shuffledArray;
+  }
+
   const numMovements =
     Math.floor(Math.random() * (maxMovements - minMovements + 1)) +
     minMovements;
@@ -126,7 +138,7 @@ export default function FloatDown({
         ease: "easeInOut",
         times: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
         loop: repeat,
-        delay: 0,
+        delay: custom.delay,
         filter: { circleShadow },
       },
     }),
@@ -156,6 +168,13 @@ export default function FloatDown({
         (maxCircleAnimationDuration - minCircleAnimationDuration) +
       minCircleAnimationDuration;
     const shimmerDelay = Math.random() * (maxShimmerDelay || 5);
+    let delay = Math.random() * maxDelay; // Assign a random delay based on maxDelay
+
+    // Ensure the first circle has a delay of 0
+    if (index === 0) {
+      delay = 0;
+    }
+
     return {
       x: Math.random() * viewBoxWidth,
       y: [
@@ -164,11 +183,14 @@ export default function FloatDown({
       ],
       key: index,
       duration: Math.random() * (maxDuration - minDuration) + minDuration,
-      delay: Math.random() * durationMultiplier,
+      delay,
       animationDuration,
       shimmerDelay,
     };
   });
+
+  // Shuffle the circles to randomize which one gets the delay of 0
+  const shuffledCircles = shuffleArray(circles);
 
   return (
     <Flex className="shadowBroadNormal">
@@ -180,7 +202,7 @@ export default function FloatDown({
             viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
             className="w-full h-full"
           >
-            {circles.map((circle) => (
+            {shuffledCircles.map((circle) => (
               <motion.circle
                 key={circle.key}
                 initial="initial"
