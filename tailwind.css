@@ -269,7 +269,7 @@ ol li {
   width: 1.5vh;
   height: 1.5vh;
   border-radius: 0.75vh;
-  background: rgb(84, 123, 171); /* Adjust the color to match your design */
+  background: rgb(84, 123, 171);
   cursor: pointer;
   box-shadow: 0.2vh 0.2vh 0.2vh rgba(0, 0, 0, 0.8);
 }

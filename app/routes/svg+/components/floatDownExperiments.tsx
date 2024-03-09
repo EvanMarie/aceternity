@@ -23,6 +23,7 @@ export default function FloatDownExperiements() {
   // Default settings
   const defaultSettings = {
     circleColor: "#00FFFF",
+    circleMultiColors: ["#34d2eb", "#ab95fc", "#f783f0", "#fff89c"],
     numCircles: 50,
     maxDelay: 5,
     minCircleMovements: 4,
@@ -51,6 +52,7 @@ export default function FloatDownExperiements() {
 
   const resetSettingsToDefault = () => {
     setCircleColor(defaultSettings.circleColor);
+    setCircleMultiColors(defaultSettings.circleMultiColors);
     setNumCircles(defaultSettings.numCircles);
     setMaxDelay(defaultSettings.maxDelay);
     setMinCircleMovements(defaultSettings.minCircleMovements);
