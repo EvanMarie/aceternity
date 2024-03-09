@@ -17,6 +17,7 @@ import Button from "~/components/buildingBlocks/button";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import Modal from "~/components/buildingBlocks/modal";
 import HStackFull from "~/components/buildingBlocks/hStackFull";
+import { VscDebugRestart } from "react-icons/vsc";
 
 export default function FloatDownExperiements() {
   // Default settings
@@ -365,6 +366,7 @@ export default function FloatDownExperiements() {
               <VStack>
                 <VStack gap="gap-[1vh]">
                   <HStackFull className="h-full items-center justify-between">
+                    <Box className="text-transparent">this</Box>
                     <Heading
                       text="Fun with Floating Circles"
                       className="py-[1vh]"
@@ -432,7 +434,7 @@ export default function FloatDownExperiements() {
                   <Box className="absolute top-[1vh] right-[1vh] z-10">
                     <IconButton
                       onClick={handleReanimate}
-                      icon={RefreshIcon}
+                      icon={VscDebugRestart}
                       type="smallNormal"
                     />
                   </Box>
