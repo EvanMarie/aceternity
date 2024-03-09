@@ -3,6 +3,8 @@ import React from "react";
 import Flex from "./flex";
 import HStack from "./hStack";
 import Text from "./text";
+import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
+import IconButton from "./iconButton";
 
 interface SliderProps {
   label?: string;
@@ -11,6 +13,7 @@ interface SliderProps {
   min?: number;
   max?: number;
   value?: number;
+  labelTextSizes?: string;
   onChange: (value: number) => void;
 }
 
@@ -20,22 +23,44 @@ const Slider: React.FC<SliderProps> = ({
   min = 0,
   max = 100,
   value,
-  labelColor = "text-cyan-200",
+  labelColor = "text-cyan-200 textShadow",
+  labelTextSizes = "text-sm-tight md:text-md-tight",
   onChange,
 }) => {
+  const sliderValue = value ?? min;
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(Number(event.target.value));
   };
-  const step = max - min <= 10 ? 0.1 : 1;
+  const step = max - min <= 5 ? 0.1 : 1;
+
+  // Increment and decrement now use sliderValue
+  const incrementValue = () => {
+    const newValue = Math.min(sliderValue + step, max); // Use sliderValue
+    onChange(newValue);
+  };
+
+  const decrementValue = () => {
+    const newValue = Math.max(sliderValue - step, min); // Use sliderValue
+    onChange(newValue);
+  };
+
   return (
     <Flex className={`${direction} gap-[0px]`}>
       {label && (
-        <HStack className="text-sm-tight md:text-md-tight text-col-100 justify-center">
+        <HStack
+          className={` ${labelTextSizes} text-col-100 justify-center whitespace-nowrap`}
+        >
           <Text className={`${labelColor}`}>{label}: </Text>
           <Text>{value}</Text>
         </HStack>
       )}
       <Flex className="items-center space-x-2">
+        <IconButton
+          type="smallUnstyled"
+          icon={FiMinusCircle}
+          onClick={decrementValue}
+        />
         <span className="text-sm text-col-100">{min}</span>
         <input
           type="range"
@@ -47,6 +72,11 @@ const Slider: React.FC<SliderProps> = ({
           className="slider h-[0.5vh] w-full cursor-pointer appearance-none  bg-col-300 dark:bg-gray-700 focus:outline-none focus:ring focus:ring-col-400 shadowBroadTight"
         />{" "}
         <span className="text-sm text-col-100">{max}</span>
+        <IconButton
+          type="smallUnstyled"
+          icon={FiPlusCircle}
+          onClick={incrementValue}
+        />
       </Flex>
     </Flex>
   );

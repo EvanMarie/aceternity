@@ -86,7 +86,7 @@ export default function IconButton({
     return (
       <Tooltip label={label} placement={tooltipPlacement}>
         <Flex
-          className={`${iconButtonSize} ${buttonClass} ${containerClassName}`}
+          className={`${iconButtonSize} ${buttonClass} ${containerClassName} hover:cursor-pointer`}
         >
           {isLoading ? (
             <SpinnerSmall />
@@ -94,7 +94,7 @@ export default function IconButton({
             <Icon
               icon={icon}
               iconClassName={`${displayIconSize} ${iconClassName}`}
-              containerClassName={`flex w-full h-full justify-center items-center`}
+              containerClassName={`flex w-full h-full justify-center items-center hover:cursor-pointer`}
             />
           )}
         </Flex>

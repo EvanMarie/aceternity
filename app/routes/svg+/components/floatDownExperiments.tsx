@@ -25,7 +25,10 @@ export default function FloatDownExperiements() {
   const [advancedAnimationModal, setAdvancedAnimationModal] = useState(false);
   const [circleMovementModal, setCircleMovementOpen] = useState(false);
   const [circleMultiColors, setCircleMultiColors] = useState<string[]>([
-    "#00FFFF",
+    "#34d2eb",
+    "#ab95fc",
+    "#f783f0",
+    "#fff89c",
   ]);
 
   function ColorPicker({
@@ -67,14 +70,16 @@ export default function FloatDownExperiements() {
   const [numCircles, setNumCircles] = useState(50);
   const handleNumCircles = (value: number) => {
     setNumCircles(value);
+    setAnimationKey((prevKey) => prevKey + 1);
   };
   const handleMaxDelay = (value: number) => {
     setMaxDelay(value);
+    setAnimationKey((prevKey) => prevKey + 1);
   };
   const [maxDelay, setMaxDelay] = useState(5);
   const [minCircleMovements, setMinCircleMovements] = useState(4);
   const [maxCircleMovements, setMaxCircleMovements] = useState(8);
-  const [radiusMax, setRadiusMax] = useState(20);
+  const [radiusMax, setRadiusMax] = useState(50);
   const [radiusMin, setRadiusMin] = useState(5);
   const [horizontalMin, setHorizontalMin] = useState(5);
   const [horizontalMax, setHorizontalMax] = useState(200);
@@ -126,24 +131,89 @@ export default function FloatDownExperiements() {
   const [componentBackground, setComponentBackground] =
     useState("bg-100-radial6op75");
 
+  const sliderLabelStyles = "text-lg-tight xl:text-sm-tight xxl:text-md-tight";
+
+  const updateSettingAndReanimate = <T,>(
+    updateFunction: React.Dispatch<React.SetStateAction<T>>,
+    value: T
+  ) => {
+    updateFunction(value);
+    setAnimationKey((prevKey) => prevKey + 1);
+  };
+
+  // Default settings
+  const defaultSettings = {
+    numCircles: 50,
+    maxDelay: 5,
+    minCircleMovements: 4,
+    maxCircleMovements: 8,
+    radiusMax: 50,
+    radiusMin: 5,
+    horizontalMin: 5,
+    horizontalMax: 200,
+    verticalMin: 1,
+    verticalMax: 5,
+    minDuration: 5,
+    maxDuration: 23,
+    maxAnimationDuration: 5,
+    minAnimationDuration: 2,
+    animatedBorderColor: "#ffffff",
+    animatedBorderOpacity: 1,
+    minAnimatedBorderWidth: 0.8,
+    maxAnimatedBorderWidth: 8,
+    maxAnimatedBorderDelay: 2,
+    minBouncyScale: 0.5,
+    maxBouncyScale: 2,
+    componentBackground: "bg-100-radial6op75",
+  };
+
+  const resetSettingsToDefault = () => {
+    setNumCircles(defaultSettings.numCircles);
+    setMaxDelay(defaultSettings.maxDelay);
+    setMinCircleMovements(defaultSettings.minCircleMovements);
+    setMaxCircleMovements(defaultSettings.maxCircleMovements);
+    setRadiusMax(defaultSettings.radiusMax);
+    setRadiusMin(defaultSettings.radiusMin);
+    setHorizontalMin(defaultSettings.horizontalMin);
+    setHorizontalMax(defaultSettings.horizontalMax);
+    setVerticalMin(defaultSettings.verticalMin);
+    setVerticalMax(defaultSettings.verticalMax);
+    setMinDuration(defaultSettings.minDuration);
+    setMaxDuration(defaultSettings.maxDuration);
+    setMaxAnimationDuration(defaultSettings.maxAnimationDuration);
+    setMinAnimationDuration(defaultSettings.minAnimationDuration);
+    setAnimatedBorderColor(defaultSettings.animatedBorderColor);
+    setAnimatedBorderOpacity(defaultSettings.animatedBorderOpacity);
+    setMinAnimatedBorderWidth(defaultSettings.minAnimatedBorderWidth);
+    setMaxAnimatedBorderWidth(defaultSettings.maxAnimatedBorderWidth);
+    setMaxAnimatedBorderDelay(defaultSettings.maxAnimatedBorderDelay);
+    setMinBouncyScale(defaultSettings.minBouncyScale);
+    setMaxBouncyScale(defaultSettings.maxBouncyScale);
+    setComponentBackground(defaultSettings.componentBackground);
+    // Reset more settings as needed
+
+    // Trigger reanimation
+    setAnimationKey((prevKey) => prevKey + 1);
+  };
+
   return (
     <>
       <FlexFull className="justify-center">
-        <Flex className="w-95% xxl:w-80% h-fit justify-center overflow-y-auto bg-600-linear6op75">
-          <VStackFull className="h-fit pb-[2vh] px-[1vh]" gap="gap-[3vh]">
-            <Flex className="h-full items-center">
-              <Heading text="Fun with Floating Circles" className="py-[1vh]" />
-            </Flex>
-            <HStackFull className="justify-center ">
-              <VStackFull
-                className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100 hidden xl:flex"
-                gap="gap-[0.5vh]"
-              >
-                <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
-                  <Text className="text-lg-loose">Circle Movement: </Text>
-                </FlexFull>
-
+        <HStack className="w-95% xxl:w-85% h-fit justify-center overflow-y-auto bg-600-linear6op75 p-[1vh] shadowBroadLoose border-970-md ">
+          {/* circle movement sliders  */}
+          <Flex className="xl:px-[1vh] xxl:pl-[2vh]">
+            <VStack
+              className="w-fit h-full max-h-full overflow-y-auto bg-col-700 text-col-100 hidden xl:flex pb-[2vh]"
+              gap="gap-[0.5vh]"
+            >
+              <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
+                <Text className="text-md-loose xxl:text-lg-loose">
+                  Circle Movement:{" "}
+                </Text>
+              </FlexFull>
+              <VStack className="p-[1vh] px-[2vh] xxl:p-[3vh]">
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={0}
                   max={100}
                   value={numCircles}
@@ -151,20 +221,27 @@ export default function FloatDownExperiements() {
                   label="circle count"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={0}
                   max={100}
                   value={minDuration}
-                  onChange={setMinDuration}
+                  onChange={(newValue) =>
+                    updateSettingAndReanimate(setMinDuration, newValue)
+                  }
                   label="min duration"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={0}
                   max={100}
                   value={maxDuration}
-                  onChange={setMaxDuration}
+                  onChange={(newValue) =>
+                    updateSettingAndReanimate(setMaxDuration, newValue)
+                  }
                   label="max duration"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={0}
                   max={20}
                   value={maxDelay}
@@ -172,71 +249,115 @@ export default function FloatDownExperiements() {
                   label="max delay"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={0}
                   max={40}
                   value={minCircleMovements}
-                  onChange={setMinCircleMovements}
+                  onChange={(newValue) =>
+                    updateSettingAndReanimate(setMinCircleMovements, newValue)
+                  }
                   label="min movements"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={0}
                   max={40}
                   value={maxCircleMovements}
-                  onChange={setMaxCircleMovements}
+                  onChange={(newValue) =>
+                    updateSettingAndReanimate(setMaxCircleMovements, newValue)
+                  }
                   label="max movements"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={0}
                   max={500}
                   value={radiusMin}
-                  onChange={setRadiusMin}
+                  onChange={(newValue) =>
+                    updateSettingAndReanimate(setRadiusMin, newValue)
+                  }
                   label="min radius"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={0}
                   max={500}
                   value={radiusMax}
-                  onChange={setRadiusMax}
+                  onChange={(newValue) =>
+                    updateSettingAndReanimate(setRadiusMax, newValue)
+                  }
                   label="max radius"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={-500}
                   max={500}
                   value={horizontalMin}
-                  onChange={setHorizontalMin}
+                  onChange={(newValue) =>
+                    updateSettingAndReanimate(setHorizontalMin, newValue)
+                  }
                   label="horizontal min"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={-500}
                   max={500}
                   value={horizontalMax}
-                  onChange={setHorizontalMax}
+                  onChange={(newValue) =>
+                    updateSettingAndReanimate(setHorizontalMax, newValue)
+                  }
                   label="horizontal max"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={-500}
                   max={500}
                   value={verticalMin}
-                  onChange={setVerticalMin}
+                  onChange={(newValue) =>
+                    updateSettingAndReanimate(setVerticalMin, newValue)
+                  }
                   label="vertical min"
                 />
                 <Slider
+                  labelTextSizes={sliderLabelStyles}
                   min={-500}
                   max={500}
                   value={verticalMax}
-                  onChange={setVerticalMax}
+                  onChange={(newValue) =>
+                    updateSettingAndReanimate(setVerticalMax, newValue)
+                  }
                   label="vertical max"
                 />
-              </VStackFull>
-              <VStackFull>
-                <VStackFull gap="gap-[1vh]">
+              </VStack>
+            </VStack>
+          </Flex>
+          <VStackFull className="h-fit pb-[2vh] px-[1vh] py-[3vh]">
+            <HStackFull className="justify-around">
+              <VStack>
+                <VStack gap="gap-[1vh]">
+                  <HStackFull className="h-full items-center justify-between">
+                    <Heading
+                      text="Fun with Floating Circles"
+                      className="py-[1vh]"
+                      layout="text-xl-loose xl:text-too-big-loose"
+                    />
+                    <Button
+                      onClick={resetSettingsToDefault}
+                      buttonText="Reset All"
+                      iconLeft={RefreshIcon}
+                      type="smallNormal"
+                    />
+                  </HStackFull>
                   <Wrap className="gap-[2vh]">
                     <Wrap className="w-fit p-[1vh] shadowBroadNormal justify-evenly gap-x-[3vh] gap-y-[1vh] bg-col-970 items-center">
                       <Text className={headingStyles}>Advanced Animation:</Text>
                       {animations.map((e, i) => (
                         <Flex
                           key={i}
-                          onClick={() => setAnimation(e)}
+                          onClick={() => {
+                            setAnimation(e);
+                            setAnimationKey((prevKey) => prevKey + 1);
+                          }}
                           className={buttonStyles}
                         >
                           <Text
@@ -257,6 +378,7 @@ export default function FloatDownExperiements() {
                       />
                     </Flex>
                   </Wrap>
+                  {/* small screen buttons for modals  */}
                   <Wrap className="w-full gap-x-[3vh] gap-y-[1vh] items-center justify-evenly xl:hidden">
                     {" "}
                     <Button
@@ -275,11 +397,9 @@ export default function FloatDownExperiements() {
                       buttonText="advanced animation"
                     />
                   </Wrap>
-                  <Wrap className="w-full gap-x-[3vh] sm:gap-y-[0.5vh] md:gap-y-[1vh] items-center justify-evenly">
-                    {" "}
-                  </Wrap>
-                </VStackFull>
-                <Center className=" h-fit insetShadowXl relative">
+                </VStack>
+                {/* Animation window  */}
+                <Center className="h-fit insetShadowXl relative">
                   <Box className="absolute top-[1vh] right-[1vh] z-10">
                     <IconButton
                       onClick={handleReanimate}
@@ -292,8 +412,8 @@ export default function FloatDownExperiements() {
                     endAt={85}
                     key={animationKey}
                     containerBg={componentBackground}
-                    containerHeight="h-[90vw] sm:h-[70vw] md:h-[60vh] lg:h-[65vh]"
-                    containerWidth="w-[90vw] sm:w-[70vw] md:w-[60vh] lg:w-[80vh]"
+                    containerHeight="h-[90vw] sm:h-[70vw] md:h-[60vh] lg:h-[65vh] xxl:h-[75vh]"
+                    containerWidth="w-[90vw] sm:w-[70vw] md:w-[60vh] lg:w-[80vh] xxl:w-[85vh]"
                     viewBoxHeight={2000}
                     viewBoxWidth={2000}
                     circleAnimation={
@@ -328,74 +448,121 @@ export default function FloatDownExperiements() {
                     maxBouncyScale={maxBouncyScale}
                   />
                 </Center>
-              </VStackFull>
-              <VStackFull
-                className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100 hidden xl:flex"
+              </VStack>
+              {/* advanced animation sliders  */}
+              <VStack
+                className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100 hidden xl:flex pb-[2vh]"
                 gap="gap-[2.5vh]"
               >
                 <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
-                  <Text className="text-lg-loose">Advanced Animation: </Text>
+                  <Text className="text-md-loose xxl:text-lg-loose">
+                    Advanced Animation:{" "}
+                  </Text>
                 </FlexFull>
-                <Slider
-                  min={0}
-                  max={100}
-                  value={minAnimationDuration}
-                  onChange={setMinAnimationDuration}
-                  label="min anim duration"
-                />
-                <Slider
-                  min={0}
-                  max={100}
-                  value={maxAnimationDuration}
-                  onChange={setMaxAnimationDuration}
-                  label="max anim duration"
-                />
-                <Slider
-                  min={0.1}
-                  max={20}
-                  value={minBouncyScale}
-                  onChange={setMinBouncyScale}
-                  label="min bouncy scale"
-                />
-                <Slider
-                  min={0.1}
-                  max={20}
-                  value={maxBouncyScale}
-                  onChange={setMaxBouncyScale}
-                  label="max bouncy scale"
-                />
-                <Slider
-                  min={0}
-                  max={1}
-                  value={animatedBorderOpacity}
-                  onChange={setAnimatedBorderOpacity}
-                  label="border opacity"
-                />
-                <Slider
-                  min={0}
-                  max={20}
-                  value={minAnimatedBorderWidth}
-                  onChange={setMinAnimatedBorderWidth}
-                  label="min border width"
-                />
-                <Slider
-                  min={0}
-                  max={10}
-                  value={maxAnimatedBorderWidth}
-                  onChange={setMaxAnimatedBorderWidth}
-                  label="max border width"
-                />
-                <Slider
-                  min={0}
-                  max={10}
-                  value={maxAnimatedBorderDelay}
-                  onChange={setMaxAnimatedBorderDelay}
-                  label="max border delay"
-                />
-              </VStackFull>
+                <VStack className="p-[1vh] px-[2vh] xxl:p-[3vh]">
+                  <Slider
+                    labelTextSizes={sliderLabelStyles}
+                    min={0}
+                    max={100}
+                    value={minAnimationDuration}
+                    onChange={(newValue) =>
+                      updateSettingAndReanimate(
+                        setMinAnimationDuration,
+                        newValue
+                      )
+                    }
+                    label="min anim duration"
+                  />
+                  <Slider
+                    labelTextSizes={sliderLabelStyles}
+                    min={0}
+                    max={100}
+                    value={maxAnimationDuration}
+                    onChange={(newValue) =>
+                      updateSettingAndReanimate(
+                        setMaxAnimationDuration,
+                        newValue
+                      )
+                    }
+                    label="max anim duration"
+                  />
+                  <Slider
+                    labelTextSizes={sliderLabelStyles}
+                    min={0.1}
+                    max={20}
+                    value={minBouncyScale}
+                    onChange={(newValue) =>
+                      updateSettingAndReanimate(setMinBouncyScale, newValue)
+                    }
+                    label="min bouncy scale"
+                  />
+                  <Slider
+                    labelTextSizes={sliderLabelStyles}
+                    min={0.1}
+                    max={20}
+                    value={maxBouncyScale}
+                    onChange={(newValue) =>
+                      updateSettingAndReanimate(setMaxBouncyScale, newValue)
+                    }
+                    label="max bouncy scale"
+                  />
+                  <Slider
+                    labelTextSizes={sliderLabelStyles}
+                    min={0}
+                    max={1}
+                    value={animatedBorderOpacity}
+                    onChange={(newValue) =>
+                      updateSettingAndReanimate(
+                        setAnimatedBorderOpacity,
+                        newValue
+                      )
+                    }
+                    label="border opacity"
+                  />
+                  <Slider
+                    labelTextSizes={sliderLabelStyles}
+                    min={0}
+                    max={20}
+                    value={minAnimatedBorderWidth}
+                    onChange={(newValue) =>
+                      updateSettingAndReanimate(
+                        setMinAnimatedBorderWidth,
+                        newValue
+                      )
+                    }
+                    label="min border width"
+                  />
+                  <Slider
+                    labelTextSizes={sliderLabelStyles}
+                    min={0}
+                    max={10}
+                    value={maxAnimatedBorderWidth}
+                    onChange={(newValue) =>
+                      updateSettingAndReanimate(
+                        setMaxAnimatedBorderWidth,
+                        newValue
+                      )
+                    }
+                    label="max border width"
+                  />
+                  <Slider
+                    labelTextSizes={sliderLabelStyles}
+                    min={0}
+                    max={10}
+                    value={maxAnimatedBorderDelay}
+                    onChange={(newValue) =>
+                      updateSettingAndReanimate(
+                        setMaxAnimatedBorderDelay,
+                        newValue
+                      )
+                    }
+                    label="max border delay"
+                  />
+                </VStack>
+              </VStack>
             </HStackFull>
           </VStackFull>
-        </Flex>
+        </HStack>
       </FlexFull>
 
       {/* color modal */}
@@ -482,69 +649,93 @@ export default function FloatDownExperiements() {
         isOpen={advancedAnimationModal}
         setModalOpen={setAdvancedAnimationModal}
         onClose={() => setAdvancedAnimationModal(false)}
-        modalSize="w-[35vh] h-[80vh] "
+        modalSize="w-[35vh] h-[85vh] "
       >
         <VStackFull
-          className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100"
+          className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100 pb-[1vh] rounded-b-none"
           gap="gap-[2.5vh]"
         >
           <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
             <Text className="text-lg-loose">Advanced Animation: </Text>
           </FlexFull>
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={100}
             value={minAnimationDuration}
-            onChange={setMinAnimationDuration}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMinAnimationDuration, newValue)
+            }
             label="min anim duration"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={100}
             value={maxAnimationDuration}
-            onChange={setMaxAnimationDuration}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMaxAnimationDuration, newValue)
+            }
             label="max anim duration"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0.1}
             max={20}
             value={minBouncyScale}
-            onChange={setMinBouncyScale}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMinBouncyScale, newValue)
+            }
             label="min bouncy scale"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0.1}
             max={20}
             value={maxBouncyScale}
-            onChange={setMaxBouncyScale}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMaxBouncyScale, newValue)
+            }
             label="max bouncy scale"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={1}
             value={animatedBorderOpacity}
-            onChange={setAnimatedBorderOpacity}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setAnimatedBorderOpacity, newValue)
+            }
             label="border opacity"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={20}
             value={minAnimatedBorderWidth}
-            onChange={setMinAnimatedBorderWidth}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMinAnimatedBorderWidth, newValue)
+            }
             label="min border width"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={10}
             value={maxAnimatedBorderWidth}
-            onChange={setMaxAnimatedBorderWidth}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMaxAnimatedBorderWidth, newValue)
+            }
             label="max border width"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={10}
             value={maxAnimatedBorderDelay}
-            onChange={setMaxAnimatedBorderDelay}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMaxAnimatedBorderDelay, newValue)
+            }
             label="max border delay"
           />
         </VStackFull>
@@ -555,11 +746,11 @@ export default function FloatDownExperiements() {
         isOpen={circleMovementModal}
         setModalOpen={setCircleMovementOpen}
         onClose={() => setCircleMovementOpen(false)}
-        modalSize="w-[35vh] h-[80vh] "
+        modalSize="w-[35vh] h-[95vh] "
       >
         {" "}
         <VStackFull
-          className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100"
+          className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100 pb-[1vh] rounded-b-none"
           gap="gap-[0.5vh]"
         >
           <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
@@ -567,6 +758,7 @@ export default function FloatDownExperiements() {
           </FlexFull>
 
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={100}
             value={numCircles}
@@ -574,20 +766,27 @@ export default function FloatDownExperiements() {
             label="circle count"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={100}
             value={minDuration}
-            onChange={setMinDuration}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMinDuration, newValue)
+            }
             label="min duration"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={100}
             value={maxDuration}
-            onChange={setMaxDuration}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMaxDuration, newValue)
+            }
             label="max duration"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={20}
             value={maxDelay}
@@ -595,59 +794,83 @@ export default function FloatDownExperiements() {
             label="max delay"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={40}
             value={minCircleMovements}
-            onChange={setMinCircleMovements}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMinCircleMovements, newValue)
+            }
             label="min movements"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={40}
             value={maxCircleMovements}
-            onChange={setMaxCircleMovements}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setMaxCircleMovements, newValue)
+            }
             label="max movements"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={500}
             value={radiusMin}
-            onChange={setRadiusMin}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setRadiusMin, newValue)
+            }
             label="min radius"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={0}
             max={500}
             value={radiusMax}
-            onChange={setRadiusMax}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setRadiusMax, newValue)
+            }
             label="max radius"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={-500}
             max={500}
             value={horizontalMin}
-            onChange={setHorizontalMin}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setHorizontalMin, newValue)
+            }
             label="horizontal min"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={-500}
             max={500}
             value={horizontalMax}
-            onChange={setHorizontalMax}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setHorizontalMax, newValue)
+            }
             label="horizontal max"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={-500}
             max={500}
             value={verticalMin}
-            onChange={setVerticalMin}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setVerticalMin, newValue)
+            }
             label="vertical min"
           />
           <Slider
+            labelTextSizes={sliderLabelStyles}
             min={-500}
             max={500}
             value={verticalMax}
-            onChange={setVerticalMax}
+            onChange={(newValue) =>
+              updateSettingAndReanimate(setVerticalMax, newValue)
+            }
             label="vertical max"
           />
         </VStackFull>
