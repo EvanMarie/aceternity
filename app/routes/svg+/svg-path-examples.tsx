@@ -6,6 +6,7 @@ import { Reanimate } from "./components/reanimate";
 import { SimplePathRender } from "./components/simplePathRender";
 import Transition from "~/components/buildingBlocks/transition";
 import AnimatedYinYang from "./components/animatedYinYang";
+import FloatDownExperiements from "./components/floatDownExperiments";
 
 export default function SVGPathExamples() {
   return (
@@ -234,6 +235,7 @@ export default FloatDown;`}
           </Reanimate>
         </Wrap>
         <SVGTiming />
+        <FloatDownExperiements />
       </DescriptionModalContent>
     </Transition>
   );

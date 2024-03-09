@@ -5,6 +5,8 @@ import HStack from "./hStack";
 import Text from "./text";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import IconButton from "./iconButton";
+import FlexFull from "./flexFull";
+import HStackFull from "./hStackFull";
 
 interface SliderProps {
   label?: string;
@@ -46,7 +48,7 @@ const Slider: React.FC<SliderProps> = ({
   };
 
   return (
-    <Flex className={`${direction} gap-[0px]`}>
+    <FlexFull className={`${direction} gap-[0px]`}>
       {label && (
         <HStack
           className={` ${labelTextSizes} text-col-100 justify-center whitespace-nowrap`}
@@ -55,30 +57,32 @@ const Slider: React.FC<SliderProps> = ({
           <Text>{value}</Text>
         </HStack>
       )}
-      <Flex className="items-center space-x-2">
+      <HStackFull className="items-center">
         <IconButton
           type="smallUnstyled"
           icon={FiMinusCircle}
           onClick={decrementValue}
         />
-        <span className="text-sm text-col-100">{min}</span>
-        <input
-          type="range"
-          min={min}
-          max={max}
-          value={value}
-          step={step}
-          onChange={handleChange}
-          className="slider h-[0.5vh] w-full cursor-pointer appearance-none  bg-col-300 dark:bg-gray-700 focus:outline-none focus:ring focus:ring-col-400 shadowBroadTight"
-        />{" "}
-        <span className="text-sm text-col-100">{max}</span>
+        <span className="text-xs text-col-100">{min}</span>
+        <HStackFull className="items-center" gap="gap-[0.4vh]">
+          <input
+            type="range"
+            min={min}
+            max={max}
+            value={value}
+            step={step}
+            onChange={handleChange}
+            className="slider h-[0.5vh] w-full cursor-pointer appearance-none  bg-col-300 dark:bg-gray-700 focus:outline-none focus:ring focus:ring-col-400 shadowBroadTight"
+          />{" "}
+          <span className="text-xs text-col-100">{max}</span>
+        </HStackFull>
         <IconButton
           type="smallUnstyled"
           icon={FiPlusCircle}
           onClick={incrementValue}
         />
-      </Flex>
-    </Flex>
+      </HStackFull>
+    </FlexFull>
   );
 };
 
