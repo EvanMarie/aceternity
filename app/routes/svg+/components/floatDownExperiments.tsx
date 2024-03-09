@@ -131,8 +131,10 @@ export default function FloatDownExperiements() {
       <FlexFull className="justify-center">
         <Flex className="w-95% xxl:w-80% h-fit justify-center overflow-y-auto bg-600-linear6op75">
           <VStackFull className="h-fit pb-[2vh] px-[1vh]" gap="gap-[3vh]">
-            <Heading text="Fun with Floating Circles" className="py-[1vh]" />
-            <HStackFull className="justify-center hidden xl:flex">
+            <Flex className="h-full items-center">
+              <Heading text="Fun with Floating Circles" className="py-[1vh]" />
+            </Flex>
+            <HStackFull className="justify-center ">
               <VStackFull
                 className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100 hidden xl:flex"
                 gap="gap-[0.5vh]"
@@ -140,12 +142,27 @@ export default function FloatDownExperiements() {
                 <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
                   <Text className="text-lg-loose">Circle Movement: </Text>
                 </FlexFull>
+
                 <Slider
                   min={0}
                   max={100}
                   value={numCircles}
                   onChange={handleNumCircles}
                   label="circle count"
+                />
+                <Slider
+                  min={0}
+                  max={100}
+                  value={minDuration}
+                  onChange={setMinDuration}
+                  label="min duration"
+                />
+                <Slider
+                  min={0}
+                  max={100}
+                  value={maxDuration}
+                  onChange={setMaxDuration}
+                  label="max duration"
                 />
                 <Slider
                   min={0}
@@ -210,20 +227,6 @@ export default function FloatDownExperiements() {
                   onChange={setVerticalMax}
                   label="vertical max"
                 />
-                <Slider
-                  min={0}
-                  max={100}
-                  value={minAnimationDuration}
-                  onChange={setMinAnimationDuration}
-                  label="min anim duration"
-                />
-                <Slider
-                  min={0}
-                  max={100}
-                  value={maxAnimationDuration}
-                  onChange={setMaxAnimationDuration}
-                  label="max anim duration"
-                />
               </VStackFull>
               <VStackFull>
                 <VStackFull gap="gap-[1vh]">
@@ -246,8 +249,15 @@ export default function FloatDownExperiements() {
                         </Flex>
                       ))}
                     </Wrap>
+                    <Flex className="h-full items-center hidden xl:flex">
+                      <Button
+                        iconLeft={IoColorPaletteOutline}
+                        onClick={() => setColorModalOpen(true)}
+                        buttonText="colors"
+                      />
+                    </Flex>
                   </Wrap>
-                  <Wrap className="w-full gap-x-[3vh] sm:gap-y-[0.5vh] md:gap-y-[1vh] items-center justify-evenly">
+                  <Wrap className="w-full gap-x-[3vh] gap-y-[1vh] items-center justify-evenly xl:hidden">
                     {" "}
                     <Button
                       iconLeft={IoColorPaletteOutline}
@@ -267,20 +277,6 @@ export default function FloatDownExperiements() {
                   </Wrap>
                   <Wrap className="w-full gap-x-[3vh] sm:gap-y-[0.5vh] md:gap-y-[1vh] items-center justify-evenly">
                     {" "}
-                    <Slider
-                      min={0}
-                      max={100}
-                      value={minDuration}
-                      onChange={setMinDuration}
-                      label="min overall duration"
-                    />
-                    <Slider
-                      min={0}
-                      max={100}
-                      value={maxDuration}
-                      onChange={setMaxDuration}
-                      label="max overall duration"
-                    />
                   </Wrap>
                 </VStackFull>
                 <Center className=" h-fit insetShadowXl relative">
@@ -334,12 +330,26 @@ export default function FloatDownExperiements() {
                 </Center>
               </VStackFull>
               <VStackFull
-                className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100"
+                className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100 hidden xl:flex"
                 gap="gap-[2.5vh]"
               >
                 <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
                   <Text className="text-lg-loose">Advanced Animation: </Text>
                 </FlexFull>
+                <Slider
+                  min={0}
+                  max={100}
+                  value={minAnimationDuration}
+                  onChange={setMinAnimationDuration}
+                  label="min anim duration"
+                />
+                <Slider
+                  min={0}
+                  max={100}
+                  value={maxAnimationDuration}
+                  onChange={setMaxAnimationDuration}
+                  label="max anim duration"
+                />
                 <Slider
                   min={0.1}
                   max={20}
@@ -482,6 +492,20 @@ export default function FloatDownExperiements() {
             <Text className="text-lg-loose">Advanced Animation: </Text>
           </FlexFull>
           <Slider
+            min={0}
+            max={100}
+            value={minAnimationDuration}
+            onChange={setMinAnimationDuration}
+            label="min anim duration"
+          />
+          <Slider
+            min={0}
+            max={100}
+            value={maxAnimationDuration}
+            onChange={setMaxAnimationDuration}
+            label="max anim duration"
+          />
+          <Slider
             min={0.1}
             max={20}
             value={minBouncyScale}
@@ -532,7 +556,102 @@ export default function FloatDownExperiements() {
         setModalOpen={setCircleMovementOpen}
         onClose={() => setCircleMovementOpen(false)}
         modalSize="w-[35vh] h-[80vh] "
-      ></Modal>
+      >
+        {" "}
+        <VStackFull
+          className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100"
+          gap="gap-[0.5vh]"
+        >
+          <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
+            <Text className="text-lg-loose">Circle Movement: </Text>
+          </FlexFull>
+
+          <Slider
+            min={0}
+            max={100}
+            value={numCircles}
+            onChange={handleNumCircles}
+            label="circle count"
+          />
+          <Slider
+            min={0}
+            max={100}
+            value={minDuration}
+            onChange={setMinDuration}
+            label="min duration"
+          />
+          <Slider
+            min={0}
+            max={100}
+            value={maxDuration}
+            onChange={setMaxDuration}
+            label="max duration"
+          />
+          <Slider
+            min={0}
+            max={20}
+            value={maxDelay}
+            onChange={handleMaxDelay}
+            label="max delay"
+          />
+          <Slider
+            min={0}
+            max={40}
+            value={minCircleMovements}
+            onChange={setMinCircleMovements}
+            label="min movements"
+          />
+          <Slider
+            min={0}
+            max={40}
+            value={maxCircleMovements}
+            onChange={setMaxCircleMovements}
+            label="max movements"
+          />
+          <Slider
+            min={0}
+            max={500}
+            value={radiusMin}
+            onChange={setRadiusMin}
+            label="min radius"
+          />
+          <Slider
+            min={0}
+            max={500}
+            value={radiusMax}
+            onChange={setRadiusMax}
+            label="max radius"
+          />
+          <Slider
+            min={-500}
+            max={500}
+            value={horizontalMin}
+            onChange={setHorizontalMin}
+            label="horizontal min"
+          />
+          <Slider
+            min={-500}
+            max={500}
+            value={horizontalMax}
+            onChange={setHorizontalMax}
+            label="horizontal max"
+          />
+          <Slider
+            min={-500}
+            max={500}
+            value={verticalMin}
+            onChange={setVerticalMin}
+            label="vertical min"
+          />
+          <Slider
+            min={-500}
+            max={500}
+            value={verticalMax}
+            onChange={setVerticalMax}
+            label="vertical max"
+          />
+        </VStackFull>
+      </Modal>
     </>
   );
 }
