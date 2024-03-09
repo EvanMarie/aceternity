@@ -176,9 +176,11 @@ export default function FloatDownExperiements() {
   //  STYLES
   const animations = ["animatedBorder", "bouncy", "none"];
   const activeStyle =
-    "text-cyan-200 font-semibol px-[0.5vh] metallicEdgesSm textShadow";
-  const inactiveStyle = "text-col-100 textShadow";
-  const headingStyles = "text-cyan-200  text-md-normal md:text-lg-normal";
+    "text-cyan-200 font-semibol px-[0.5vh] metallicEdgesSm textShadow text-sm-tight sm:text-md-tight";
+  const inactiveStyle =
+    "text-col-100 textShadow text-sm-tight sm:text-md-tight";
+  const headingStyles =
+    "text-cyan-200  text-sm-normal sm:text-md-normal md:text-lg-normal";
   const labelStyles = "text-md-tight text-col-100 justify-center";
   const buttonStyles =
     "text-sm-tight md:text-md-tight md:px-[1vh] justify-center flex-shrink-0 hover:cursor-pointer";
@@ -229,7 +231,7 @@ export default function FloatDownExperiements() {
   return (
     <>
       <FlexFull className="justify-center">
-        <HStack className="w-95% xxl:w-85% h-fit justify-center overflow-y-auto bg-800-radial6op25 p-[1vh] shadowBroadLoose border-970-md ">
+        <HStack className="w-95% xxl:w-85% h-fit justify-center overflow-y-auto bg-800-radial6op25 p-[1vh] shadowBroadLoose border-970-md overflow-x-hidden">
           {/* circle movement sliders  */}
           <Flex className="xl:px-[1vh] xxl:pl-[2vh]">
             <VStack
@@ -370,7 +372,7 @@ export default function FloatDownExperiements() {
                     <Heading
                       text="Fun with Floating Circles"
                       className="py-[1vh]"
-                      layout="text-xl-loose xl:text-too-big-loose"
+                      layout="text-lg-loose sm:text-xl-loose xl:text-too-big-loose"
                     />
                     <Button
                       onClick={resetSettingsToDefault}
@@ -380,7 +382,7 @@ export default function FloatDownExperiements() {
                     />
                   </HStackFull>
                   <Wrap className="gap-[2vh]">
-                    <Wrap className="w-fit p-[1vh] shadowBroadNormal justify-evenly gap-x-[3vh] gap-y-[1vh] bg-col-970 items-center">
+                    <Wrap className="w-fit p-[1vh] shadowBroadNormal justify-evenly gap-x-[2vh] sm:gap-x-[3vh] gap-y-[1vh] bg-col-970 items-center">
                       <Text className={headingStyles}>Advanced Animation:</Text>
                       {animations.map((e, i) => (
                         <Flex
