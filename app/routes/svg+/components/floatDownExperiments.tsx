@@ -21,7 +21,9 @@ import HStackFull from "~/components/buildingBlocks/hStackFull";
 export default function FloatDownExperiements() {
   const [animationKey, setAnimationKey] = useState(0);
   const [circleColor, setCircleColor] = useState("#00ffff");
-  const [modalOpen, setModalOpen] = useState(false);
+  const [colorModalOpen, setColorModalOpen] = useState(false);
+  const [advancedAnimationModal, setAdvancedAnimationModal] = useState(false);
+  const [circleMovementModal, setCircleMovementOpen] = useState(false);
   const [circleMultiColors, setCircleMultiColors] = useState<string[]>([
     "#00FFFF",
   ]);
@@ -133,7 +135,7 @@ export default function FloatDownExperiements() {
               <Heading text="Fun with Floating Circles" className="py-[1vh]" />
               <Wrap className="gap-[2vh]">
                 <Wrap className="w-fit p-[1vh] shadowBroadNormal justify-evenly gap-x-[3vh] gap-y-[1vh] bg-col-970 items-center">
-                  <Text className={headingStyles}>Animation:</Text>
+                  <Text className={headingStyles}>Advanced Animation:</Text>
                   {animations.map((e, i) => (
                     <Flex
                       key={i}
@@ -150,152 +152,40 @@ export default function FloatDownExperiements() {
                     </Flex>
                   ))}
                 </Wrap>
+              </Wrap>
+              <Wrap className="w-full gap-x-[3vh] sm:gap-y-[0.5vh] md:gap-y-[1vh] items-center justify-evenly">
+                {" "}
                 <Button
                   iconLeft={IoColorPaletteOutline}
-                  onClick={() => setModalOpen(true)}
+                  onClick={() => setColorModalOpen(true)}
                   buttonText="colors"
+                />
+                <Button
+                  iconLeft={IoColorPaletteOutline}
+                  onClick={() => setCircleMovementOpen(true)}
+                  buttonText="circle movement"
+                />
+                <Button
+                  iconLeft={IoColorPaletteOutline}
+                  onClick={() => setAdvancedAnimationModal(true)}
+                  buttonText="advanced animation"
                 />
               </Wrap>
               <Wrap className="w-full gap-x-[3vh] sm:gap-y-[0.5vh] md:gap-y-[1vh] items-center justify-evenly">
-                <Slider
-                  min={0}
-                  max={100}
-                  value={numCircles}
-                  onChange={handleNumCircles}
-                  label="circle count"
-                />
-                <Slider
-                  min={0}
-                  max={20}
-                  value={maxDelay}
-                  onChange={handleMaxDelay}
-                  label="max delay"
-                />
-                <Slider
-                  min={0}
-                  max={40}
-                  value={minCircleMovements}
-                  onChange={setMinCircleMovements}
-                  label="min movements"
-                />
-                <Slider
-                  min={0}
-                  max={40}
-                  value={maxCircleMovements}
-                  onChange={setMaxCircleMovements}
-                  label="max movements"
-                />
-                <Slider
-                  min={0}
-                  max={500}
-                  value={radiusMin}
-                  onChange={setRadiusMin}
-                  label="min radius"
-                />
-                <Slider
-                  min={0}
-                  max={500}
-                  value={radiusMax}
-                  onChange={setRadiusMax}
-                  label="max radius"
-                />
-                <Slider
-                  min={-500}
-                  max={500}
-                  value={horizontalMin}
-                  onChange={setHorizontalMin}
-                  label="horizontal min"
-                />
-                <Slider
-                  min={-500}
-                  max={500}
-                  value={horizontalMax}
-                  onChange={setHorizontalMax}
-                  label="horizontal max"
-                />
-                <Slider
-                  min={-500}
-                  max={500}
-                  value={verticalMin}
-                  onChange={setVerticalMin}
-                  label="vertical min"
-                />
-                <Slider
-                  min={-500}
-                  max={500}
-                  value={verticalMax}
-                  onChange={setVerticalMax}
-                  label="vertical max"
-                />
+                {" "}
                 <Slider
                   min={0}
                   max={100}
                   value={minDuration}
                   onChange={setMinDuration}
-                  label="min duration"
+                  label="min overall duration"
                 />
                 <Slider
                   min={0}
                   max={100}
                   value={maxDuration}
                   onChange={setMaxDuration}
-                  label="max duration"
-                />
-                <Slider
-                  min={0}
-                  max={100}
-                  value={minAnimationDuration}
-                  onChange={setMinAnimationDuration}
-                  label="min anim duration"
-                />
-                <Slider
-                  min={0}
-                  max={100}
-                  value={maxAnimationDuration}
-                  onChange={setMaxAnimationDuration}
-                  label="max anim duration"
-                />
-                <Slider
-                  min={0}
-                  max={1}
-                  value={animatedBorderOpacity}
-                  onChange={setAnimatedBorderOpacity}
-                  label="border opacity"
-                />
-                <Slider
-                  min={0}
-                  max={20}
-                  value={minAnimatedBorderWidth}
-                  onChange={setMinAnimatedBorderWidth}
-                  label="min border width"
-                />
-                <Slider
-                  min={0}
-                  max={10}
-                  value={maxAnimatedBorderWidth}
-                  onChange={setMaxAnimatedBorderWidth}
-                  label="max border width"
-                />
-                <Slider
-                  min={0}
-                  max={10}
-                  value={maxAnimatedBorderDelay}
-                  onChange={setMaxAnimatedBorderDelay}
-                  label="max border delay"
-                />
-                <Slider
-                  min={0.1}
-                  max={20}
-                  value={minBouncyScale}
-                  onChange={setMinBouncyScale}
-                  label="min bouncy scale"
-                />
-                <Slider
-                  min={0.1}
-                  max={20}
-                  value={maxBouncyScale}
-                  onChange={setMaxBouncyScale}
-                  label="max bouncy scale"
+                  label="max overall duration"
                 />
               </Wrap>
             </VStackFull>
@@ -353,10 +243,11 @@ export default function FloatDownExperiements() {
         </Flex>
       </FlexFull>
 
+      {/* color modal */}
       <Modal
-        isOpen={modalOpen}
-        setModalOpen={setModalOpen}
-        onClose={() => setModalOpen(false)}
+        isOpen={colorModalOpen}
+        setModalOpen={setColorModalOpen}
+        onClose={() => setColorModalOpen(false)}
         modalSize="w-[35vh] h-[80vh] "
       >
         <VStackFull
@@ -412,7 +303,7 @@ export default function FloatDownExperiements() {
           </FlexFull>
           <Wrap className="w-full p-[1vh] gap-[1.5vh] justify-evenly">
             {backgroundChoices.map((bg, index) => (
-              <Flex className={`p-[0.5vh] `}>
+              <Flex className={`p-[0.5vh] `} key={index}>
                 <Box className="shadowBroadNormal">
                   <Box
                     key={index}
@@ -428,6 +319,166 @@ export default function FloatDownExperiements() {
               </Flex>
             ))}
           </Wrap>
+        </VStackFull>
+      </Modal>
+
+      {/* advanced animation modal */}
+      <Modal
+        isOpen={advancedAnimationModal}
+        setModalOpen={setAdvancedAnimationModal}
+        onClose={() => setAdvancedAnimationModal(false)}
+        modalSize="w-[35vh] h-[80vh] "
+      >
+        <VStackFull
+          className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100"
+          gap="gap-[2.5vh]"
+        >
+          <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
+            <Text className="text-lg-loose">Advanced Animation: </Text>
+          </FlexFull>
+          <Slider
+            min={0.1}
+            max={20}
+            value={minBouncyScale}
+            onChange={setMinBouncyScale}
+            label="min bouncy scale"
+          />
+          <Slider
+            min={0.1}
+            max={20}
+            value={maxBouncyScale}
+            onChange={setMaxBouncyScale}
+            label="max bouncy scale"
+          />
+          <Slider
+            min={0}
+            max={1}
+            value={animatedBorderOpacity}
+            onChange={setAnimatedBorderOpacity}
+            label="border opacity"
+          />
+          <Slider
+            min={0}
+            max={20}
+            value={minAnimatedBorderWidth}
+            onChange={setMinAnimatedBorderWidth}
+            label="min border width"
+          />
+          <Slider
+            min={0}
+            max={10}
+            value={maxAnimatedBorderWidth}
+            onChange={setMaxAnimatedBorderWidth}
+            label="max border width"
+          />
+          <Slider
+            min={0}
+            max={10}
+            value={maxAnimatedBorderDelay}
+            onChange={setMaxAnimatedBorderDelay}
+            label="max border delay"
+          />
+        </VStackFull>
+      </Modal>
+
+      {/* circle movement modal */}
+      <Modal
+        isOpen={circleMovementModal}
+        setModalOpen={setCircleMovementOpen}
+        onClose={() => setCircleMovementOpen(false)}
+        modalSize="w-[35vh] h-[80vh] "
+      >
+        <VStackFull
+          className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100"
+          gap="gap-[0.5vh]"
+        >
+          <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
+            <Text className="text-lg-loose">Circle Movement: </Text>
+          </FlexFull>
+          <Slider
+            min={0}
+            max={100}
+            value={numCircles}
+            onChange={handleNumCircles}
+            label="circle count"
+          />
+          <Slider
+            min={0}
+            max={20}
+            value={maxDelay}
+            onChange={handleMaxDelay}
+            label="max delay"
+          />
+          <Slider
+            min={0}
+            max={40}
+            value={minCircleMovements}
+            onChange={setMinCircleMovements}
+            label="min movements"
+          />
+          <Slider
+            min={0}
+            max={40}
+            value={maxCircleMovements}
+            onChange={setMaxCircleMovements}
+            label="max movements"
+          />
+          <Slider
+            min={0}
+            max={500}
+            value={radiusMin}
+            onChange={setRadiusMin}
+            label="min radius"
+          />
+          <Slider
+            min={0}
+            max={500}
+            value={radiusMax}
+            onChange={setRadiusMax}
+            label="max radius"
+          />
+          <Slider
+            min={-500}
+            max={500}
+            value={horizontalMin}
+            onChange={setHorizontalMin}
+            label="horizontal min"
+          />
+          <Slider
+            min={-500}
+            max={500}
+            value={horizontalMax}
+            onChange={setHorizontalMax}
+            label="horizontal max"
+          />
+          <Slider
+            min={-500}
+            max={500}
+            value={verticalMin}
+            onChange={setVerticalMin}
+            label="vertical min"
+          />
+          <Slider
+            min={-500}
+            max={500}
+            value={verticalMax}
+            onChange={setVerticalMax}
+            label="vertical max"
+          />
+          <Slider
+            min={0}
+            max={100}
+            value={minAnimationDuration}
+            onChange={setMinAnimationDuration}
+            label="min anim duration"
+          />
+          <Slider
+            min={0}
+            max={100}
+            value={maxAnimationDuration}
+            onChange={setMaxAnimationDuration}
+            label="max anim duration"
+          />
         </VStackFull>
       </Modal>
     </>
