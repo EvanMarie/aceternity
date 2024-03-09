@@ -199,11 +199,11 @@ export default function FloatDownExperiements() {
   return (
     <>
       <FlexFull className="justify-center">
-        <HStack className="w-95% xxl:w-85% h-fit justify-center overflow-y-auto bg-600-linear6op75 p-[1vh] shadowBroadLoose border-970-md ">
+        <HStack className="w-95% xxl:w-85% h-fit justify-center overflow-y-auto bg-800-radial6op25 p-[1vh] shadowBroadLoose border-970-md ">
           {/* circle movement sliders  */}
           <Flex className="xl:px-[1vh] xxl:pl-[2vh]">
             <VStack
-              className="w-fit h-full max-h-full overflow-y-auto bg-col-700 text-col-100 hidden xl:flex pb-[2vh]"
+              className="w-fit h-full max-h-full overflow-y-auto bg-col-700 text-col-100 hidden xl:flex pb-[2vh] shadowBroadLoose border-970-md"
               gap="gap-[0.5vh]"
             >
               <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
@@ -451,7 +451,7 @@ export default function FloatDownExperiements() {
               </VStack>
               {/* advanced animation sliders  */}
               <VStack
-                className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100 hidden xl:flex pb-[2vh]"
+                className="h-full max-h-full overflow-y-auto bg-col-700 text-col-100 hidden xl:flex pb-[2vh] shadowBroadLoose border-970-md"
                 gap="gap-[2.5vh]"
               >
                 <FlexFull className="bg-col-900 rounded-b-none py-[0.5vh] px-[1vh]">
