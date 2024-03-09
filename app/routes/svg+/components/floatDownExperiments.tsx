@@ -19,17 +19,135 @@ import Modal from "~/components/buildingBlocks/modal";
 import HStackFull from "~/components/buildingBlocks/hStackFull";
 
 export default function FloatDownExperiements() {
-  const [animationKey, setAnimationKey] = useState(0);
-  const [circleColor, setCircleColor] = useState("#00ffff");
+  // Default settings
+  const defaultSettings = {
+    circleColor: "#00FFFF",
+    numCircles: 50,
+    maxDelay: 5,
+    minCircleMovements: 4,
+    maxCircleMovements: 8,
+    radiusMax: 50,
+    radiusMin: 5,
+    horizontalMin: 5,
+    horizontalMax: 200,
+    verticalMin: 1,
+    verticalMax: 5,
+    minDuration: 5,
+    maxDuration: 23,
+    maxAnimationDuration: 5,
+    minAnimationDuration: 2,
+    animatedBorderColor: "#ffffff",
+    animatedBorderOpacity: 1,
+    minAnimatedBorderWidth: 0.8,
+    maxAnimatedBorderWidth: 8,
+    maxAnimatedBorderDelay: 2,
+    minBouncyScale: 0.5,
+    maxBouncyScale: 2,
+    componentBackground: "bg-100-radial6op75",
+    animationKey: 0,
+    animation: "none",
+  };
+
+  const resetSettingsToDefault = () => {
+    setCircleColor(defaultSettings.circleColor);
+    setNumCircles(defaultSettings.numCircles);
+    setMaxDelay(defaultSettings.maxDelay);
+    setMinCircleMovements(defaultSettings.minCircleMovements);
+    setMaxCircleMovements(defaultSettings.maxCircleMovements);
+    setRadiusMax(defaultSettings.radiusMax);
+    setRadiusMin(defaultSettings.radiusMin);
+    setHorizontalMin(defaultSettings.horizontalMin);
+    setHorizontalMax(defaultSettings.horizontalMax);
+    setVerticalMin(defaultSettings.verticalMin);
+    setVerticalMax(defaultSettings.verticalMax);
+    setMinDuration(defaultSettings.minDuration);
+    setMaxDuration(defaultSettings.maxDuration);
+    setMaxAnimationDuration(defaultSettings.maxAnimationDuration);
+    setMinAnimationDuration(defaultSettings.minAnimationDuration);
+    setAnimatedBorderColor(defaultSettings.animatedBorderColor);
+    setAnimatedBorderOpacity(defaultSettings.animatedBorderOpacity);
+    setMinAnimatedBorderWidth(defaultSettings.minAnimatedBorderWidth);
+    setMaxAnimatedBorderWidth(defaultSettings.maxAnimatedBorderWidth);
+    setMaxAnimatedBorderDelay(defaultSettings.maxAnimatedBorderDelay);
+    setMinBouncyScale(defaultSettings.minBouncyScale);
+    setMaxBouncyScale(defaultSettings.maxBouncyScale);
+    setComponentBackground(defaultSettings.componentBackground);
+    // Trigger reanimation
+    setAnimationKey((prevKey) => prevKey + 1);
+  };
+
+  //   MODAL STATES
   const [colorModalOpen, setColorModalOpen] = useState(false);
   const [advancedAnimationModal, setAdvancedAnimationModal] = useState(false);
   const [circleMovementModal, setCircleMovementOpen] = useState(false);
+
+  //   ALL SETTING STATE VARIABLES
+  const [animationKey, setAnimationKey] = useState(
+    defaultSettings.animationKey
+  );
+  const [circleColor, setCircleColor] = useState(defaultSettings.circleColor);
   const [circleMultiColors, setCircleMultiColors] = useState<string[]>([
     "#34d2eb",
     "#ab95fc",
     "#f783f0",
     "#fff89c",
   ]);
+  const [maxDelay, setMaxDelay] = useState(defaultSettings.maxDelay);
+  const [minCircleMovements, setMinCircleMovements] = useState(
+    defaultSettings.minCircleMovements
+  );
+  const [maxCircleMovements, setMaxCircleMovements] = useState(
+    defaultSettings.maxCircleMovements
+  );
+  const [radiusMax, setRadiusMax] = useState(defaultSettings.radiusMax);
+  const [radiusMin, setRadiusMin] = useState(defaultSettings.radiusMin);
+  const [horizontalMin, setHorizontalMin] = useState(
+    defaultSettings.horizontalMin
+  );
+  const [horizontalMax, setHorizontalMax] = useState(
+    defaultSettings.horizontalMax
+  );
+  const [verticalMin, setVerticalMin] = useState(defaultSettings.verticalMin);
+  const [verticalMax, setVerticalMax] = useState(defaultSettings.verticalMax);
+  const [minDuration, setMinDuration] = useState(defaultSettings.minDuration);
+  const [maxDuration, setMaxDuration] = useState(defaultSettings.maxDuration);
+  const [maxAnimationDuration, setMaxAnimationDuration] = useState(
+    defaultSettings.maxAnimationDuration
+  );
+  const [minAnimationDuration, setMinAnimationDuration] = useState(
+    defaultSettings.minAnimationDuration
+  );
+  const [animatedBorderColor, setAnimatedBorderColor] = useState(
+    defaultSettings.animatedBorderColor
+  );
+  const [animatedBorderOpacity, setAnimatedBorderOpacity] = useState(
+    defaultSettings.animatedBorderOpacity
+  );
+  const [minAnimatedBorderWidth, setMinAnimatedBorderWidth] = useState(
+    defaultSettings.minAnimatedBorderWidth
+  );
+  const [maxAnimatedBorderWidth, setMaxAnimatedBorderWidth] = useState(
+    defaultSettings.maxAnimatedBorderWidth
+  );
+  const [maxAnimatedBorderDelay, setMaxAnimatedBorderDelay] = useState(
+    defaultSettings.maxAnimatedBorderDelay
+  );
+  const [minBouncyScale, setMinBouncyScale] = useState(
+    defaultSettings.minBouncyScale
+  );
+  const [maxBouncyScale, setMaxBouncyScale] = useState(
+    defaultSettings.maxBouncyScale
+  );
+  const [animation, setAnimation] = useState(defaultSettings.animation);
+  const [numCircles, setNumCircles] = useState(defaultSettings.numCircles);
+
+  const updateSettingAndReanimate = <T,>(
+    updateFunction: React.Dispatch<React.SetStateAction<T>>,
+    value: T
+  ) => {
+    updateFunction(value);
+    setAnimationKey((prevKey) => prevKey + 1);
+  };
 
   function ColorPicker({
     onChange,
@@ -54,20 +172,21 @@ export default function FloatDownExperiements() {
     );
   }
 
-  const handleReanimate = () => {
-    setAnimationKey((prevKey) => prevKey + 1);
-  };
-
+  //  STYLES
   const animations = ["animatedBorder", "bouncy", "none"];
   const activeStyle =
     "text-cyan-200 font-semibol px-[0.5vh] metallicEdgesSm textShadow";
   const inactiveStyle = "text-col-100 textShadow";
-  const [animation, setAnimation] = useState("none");
   const headingStyles = "text-cyan-200  text-md-normal md:text-lg-normal";
   const labelStyles = "text-md-tight text-col-100 justify-center";
   const buttonStyles =
     "text-sm-tight md:text-md-tight md:px-[1vh] justify-center flex-shrink-0 hover:cursor-pointer";
-  const [numCircles, setNumCircles] = useState(50);
+  const sliderLabelStyles = "text-lg-tight xl:text-sm-tight xxl:text-md-tight";
+
+  // HANDLERS
+  const handleReanimate = () => {
+    setAnimationKey((prevKey) => prevKey + 1);
+  };
   const handleNumCircles = (value: number) => {
     setNumCircles(value);
     setAnimationKey((prevKey) => prevKey + 1);
@@ -76,40 +195,15 @@ export default function FloatDownExperiements() {
     setMaxDelay(value);
     setAnimationKey((prevKey) => prevKey + 1);
   };
-  const [maxDelay, setMaxDelay] = useState(5);
-  const [minCircleMovements, setMinCircleMovements] = useState(4);
-  const [maxCircleMovements, setMaxCircleMovements] = useState(8);
-  const [radiusMax, setRadiusMax] = useState(50);
-  const [radiusMin, setRadiusMin] = useState(5);
-  const [horizontalMin, setHorizontalMin] = useState(5);
-  const [horizontalMax, setHorizontalMax] = useState(200);
-  const [verticalMin, setVerticalMin] = useState(1);
-  const [verticalMax, setVerticalMax] = useState(5);
-  const [minDuration, setMinDuration] = useState(5);
-  const [maxDuration, setMaxDuration] = useState(23);
-  const [maxAnimationDuration, setMaxAnimationDuration] = useState(5);
-  const [minAnimationDuration, setMinAnimationDuration] = useState(2);
-  const [animatedBorderColor, setAnimatedBorderColor] = useState("#ffffff");
-  const [animatedBorderOpacity, setAnimatedBorderOpacity] = useState(1);
-  const [minAnimatedBorderWidth, setMinAnimatedBorderWidth] = useState(0.8);
-  const [maxAnimatedBorderWidth, setMaxAnimatedBorderWidth] = useState(8);
-  const [maxAnimatedBorderDelay, setMaxAnimatedBorderDelay] = useState(2);
-  const [minBouncyScale, setMinBouncyScale] = useState(0.5);
-  const [maxBouncyScale, setMaxBouncyScale] = useState(2);
-
-  // Function to add a new color to the array
   const [newColor, setNewColor] = useState("#ffffff"); // Step 1: State for new color
   const handleAddNewColor = () => {
     setCircleMultiColors([...circleMultiColors, newColor]);
   };
-
-  // Function to remove a color from the array
   const handleRemoveColor = (indexToRemove: number) => {
     setCircleMultiColors(
       circleMultiColors.filter((_, index) => index !== indexToRemove)
     );
   };
-
   const backgroundChoices = [
     "bg-100-radial6op75",
     "bg-100-linear2op75",
@@ -130,71 +224,6 @@ export default function FloatDownExperiements() {
   ];
   const [componentBackground, setComponentBackground] =
     useState("bg-100-radial6op75");
-
-  const sliderLabelStyles = "text-lg-tight xl:text-sm-tight xxl:text-md-tight";
-
-  const updateSettingAndReanimate = <T,>(
-    updateFunction: React.Dispatch<React.SetStateAction<T>>,
-    value: T
-  ) => {
-    updateFunction(value);
-    setAnimationKey((prevKey) => prevKey + 1);
-  };
-
-  // Default settings
-  const defaultSettings = {
-    numCircles: 50,
-    maxDelay: 5,
-    minCircleMovements: 4,
-    maxCircleMovements: 8,
-    radiusMax: 50,
-    radiusMin: 5,
-    horizontalMin: 5,
-    horizontalMax: 200,
-    verticalMin: 1,
-    verticalMax: 5,
-    minDuration: 5,
-    maxDuration: 23,
-    maxAnimationDuration: 5,
-    minAnimationDuration: 2,
-    animatedBorderColor: "#ffffff",
-    animatedBorderOpacity: 1,
-    minAnimatedBorderWidth: 0.8,
-    maxAnimatedBorderWidth: 8,
-    maxAnimatedBorderDelay: 2,
-    minBouncyScale: 0.5,
-    maxBouncyScale: 2,
-    componentBackground: "bg-100-radial6op75",
-  };
-
-  const resetSettingsToDefault = () => {
-    setNumCircles(defaultSettings.numCircles);
-    setMaxDelay(defaultSettings.maxDelay);
-    setMinCircleMovements(defaultSettings.minCircleMovements);
-    setMaxCircleMovements(defaultSettings.maxCircleMovements);
-    setRadiusMax(defaultSettings.radiusMax);
-    setRadiusMin(defaultSettings.radiusMin);
-    setHorizontalMin(defaultSettings.horizontalMin);
-    setHorizontalMax(defaultSettings.horizontalMax);
-    setVerticalMin(defaultSettings.verticalMin);
-    setVerticalMax(defaultSettings.verticalMax);
-    setMinDuration(defaultSettings.minDuration);
-    setMaxDuration(defaultSettings.maxDuration);
-    setMaxAnimationDuration(defaultSettings.maxAnimationDuration);
-    setMinAnimationDuration(defaultSettings.minAnimationDuration);
-    setAnimatedBorderColor(defaultSettings.animatedBorderColor);
-    setAnimatedBorderOpacity(defaultSettings.animatedBorderOpacity);
-    setMinAnimatedBorderWidth(defaultSettings.minAnimatedBorderWidth);
-    setMaxAnimatedBorderWidth(defaultSettings.maxAnimatedBorderWidth);
-    setMaxAnimatedBorderDelay(defaultSettings.maxAnimatedBorderDelay);
-    setMinBouncyScale(defaultSettings.minBouncyScale);
-    setMaxBouncyScale(defaultSettings.maxBouncyScale);
-    setComponentBackground(defaultSettings.componentBackground);
-    // Reset more settings as needed
-
-    // Trigger reanimation
-    setAnimationKey((prevKey) => prevKey + 1);
-  };
 
   return (
     <>
