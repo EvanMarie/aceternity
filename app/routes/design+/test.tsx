@@ -13,84 +13,93 @@ import FloatDownExperiements from "../svg+/components/floatDownExperiments";
 
 export default function Test() {
   const claudePaths = [
-    {
-      path: "M10 10 H 190 V 190 H 10 Z",
-      delay: 0,
-      duration: 2,
-      fill: "none",
-      stroke: "#ff0000",
-      strokeWidth: 2,
-      ease: "easeInOut",
-      repeat: 1,
-    },
-    {
-      path: "M50 50 L 100 100 L 150 50 L 200 100 L 250 50",
-      delay: 0.5,
-      duration: 1.5,
-      fill: "none",
-      stroke: "#00ff00",
-      strokeWidth: 4,
-      ease: "easeIn",
-      repeat: 2,
-    },
-    {
-      path: "M100 100 C 150 50, 200 150, 250 100 S 300 150, 350 100",
-      delay: 1,
-      duration: 3,
-      fill: "none",
-      stroke: "#0000ff",
-      strokeWidth: 3,
-      ease: "easeOut",
-      repeat: 0,
-    },
-    {
-      path: "M20 180 Q 100 100, 180 180 T 340 180",
-      delay: 0.2,
-      duration: 2.5,
-      fill: "none",
-      stroke: "#ffff00",
-      strokeWidth: 5,
-      ease: "easeInOut",
-      repeat: 3,
-    },
-    {
-      path: "M50 50 L 100 100 L 150 50 L 200 100 L 250 50 Z",
-      delay: 0.8,
-      duration: 1.8,
-      fill: "#ff00ff",
-      stroke: "none",
-      ease: "easeOut",
-      repeat: 1,
-    },
-    {
-      path: "M10 100 Q 50 50, 100 100 T 190 100",
-      delay: 1.2,
-      duration: 2.2,
-      fill: "none",
-      stroke: "#00ffff",
-      strokeWidth: 6,
-      ease: "easeInOut",
-      repeat: 2,
-    },
-    {
-      path: "M50 100 A 50 50 0 1 1 150 100 A 50 50 0 1 1 50 100 Z",
-      delay: 0.4,
-      duration: 3,
-      fill: "#800080",
-      stroke: "none",
-      ease: "easeIn",
-      repeat: 0,
-    },
-    {
-      path: "M100 50 L 200 50 L 150 100 Z",
-      delay: 0.6,
-      duration: 1.6,
-      fill: "#008000",
-      stroke: "#ffffff",
-      strokeWidth: 2,
-      ease: "easeOut",
-      repeat: 3,
-    },
+    // Square
+    // {
+    //   // SQUARE
+    //   path: "M10 10 H 500 V 500 H 10 Z",
+    //   delay: 0,
+    //   duration: 2,
+    //   fill: "none",
+    //   stroke: "#ff0000",
+    //   strokeWidth: 2,
+    //   ease: "easeInOut",
+    //   repeat: 1,
+    // },
+    // ZigZag
+    // {
+    //   path: "M50 50 L 100 100 L 150 50 L 200 100 L 250 50",
+    //   delay: 0.5,
+    //   duration: 1.5,
+    //   fill: "none",
+    //   stroke: "#00ff00",
+    //   strokeWidth: 4,
+    //   ease: "easeIn",
+    //   repeat: 2,
+    // },
+    // Narrow Squiggly Line
+    // {
+    //   path: "M100 100 C 150 50, 200 150, 250 100 S 300 150, 350 100",
+    //   delay: 1,
+    //   duration: 3,
+    //   fill: "none",
+    //   stroke: "#0000ff",
+    //   strokeWidth: 3,
+    //   ease: "easeOut",
+    //   repeat: 0,
+    // },
+    // Larger Wave
+    // {
+    //   path: "M20 180 Q 100 100, 180 180 T 340 180",
+    //   delay: 0.2,
+    //   duration: 2.5,
+    //   fill: "none",
+    //   stroke: "#ffff00",
+    //   strokeWidth: 5,
+    //   ease: "easeInOut",
+    //   repeat: 3,
+    // },
+    // Two Triangles
+    // {
+    //   path: "M50 50 L 100 100 L 150 50 L 200 100 L 250 50 Z",
+    //   delay: 0.8,
+    //   duration: 1.8,
+    //   fill: "#ff00ff",
+    //   stroke: "none",
+    //   ease: "easeOut",
+    //   repeat: 1,
+    // },
+    // Small Wave
+    // {
+    //   path: "M10 100 Q 50 50, 100 100 T 190 100",
+    //   delay: 1.2,
+    //   duration: 2.2,
+    //   fill: "none",
+    //   stroke: "#00ffff",
+    //   strokeWidth: 6,
+    //   ease: "easeInOut",
+    //   repeat: 2,
+    // },
+    // Circle
+    // {
+    //   path: "M50 100 A 50 50 0 1 1 150 100 A 50 50 0 1 1 50 100 Z",
+    //   delay: 0.4,
+    //   duration: 3,
+    //   fill: "#800080",
+    //   stroke: "none",
+    //   ease: "easeIn",
+    //   repeat: 0,
+    // },
+    // Trace Triangle
+    // {
+    //   path: "M100 50 L 200 50 L 150 100 Z",
+    //   delay: 0.6,
+    //   duration: 1.6,
+    //   fill: "#008000",
+    //   stroke: "#ffffff",
+    //   strokeWidth: 2,
+    //   ease: "easeOut",
+    //   repeat: 3,
+    // },
   ];
 
   const gptPaths = [
@@ -200,6 +209,74 @@ export default function Test() {
     },
   ];
 
+  const flowerOfLifeDefaults = {
+    fill: "none",
+    stroke: "cyan",
+    strokeWidth: 4,
+    duration: 1,
+  };
+
+  const clockwise = "1,1";
+  const counterClockwise = "1,0";
+
+  const paths = [
+    // Very Center
+    {
+      ...flowerOfLifeDefaults,
+      path: `M 500 500 m -200, 0 a 200,200 0 ${counterClockwise} 400,0 a 200,200 0 ${counterClockwise} -400,0`,
+      delay: 0,
+    },
+
+    // Top Center
+    {
+      ...flowerOfLifeDefaults,
+      path: `M 500 300 m -200, 0 a 200,200 0 ${clockwise} 400,0 a 200,200 0 ${clockwise} -400,0`,
+      delay: 1,
+    },
+
+    // Bottom Center
+    {
+      ...flowerOfLifeDefaults,
+      path: `M 500 700 m -200, 0 a 200,200 0 ${counterClockwise} 400,0 a 200,200 0 ${counterClockwise} -400,0`,
+      delay: 2,
+    },
+
+    // Top Right
+    {
+      ...flowerOfLifeDefaults,
+      path: `M 675 400 m -200, 0 a 200,200 0 ${clockwise} 400,0 a 200,200 0 ${clockwise} -400,0`,
+      delay: 3,
+    },
+
+    // Bottom Left
+    {
+      ...flowerOfLifeDefaults,
+      path: `M 325 600 m -200, 0 a 200,200 0 ${counterClockwise} 400,0 a 200,200 0 ${counterClockwise} -400,0`,
+      delay: 4,
+    },
+
+    // Bottom Right
+    {
+      ...flowerOfLifeDefaults,
+      path: `M 675 600 m -200, 0 a 200,200 0 ${clockwise} 400,0 a 200,200 0 ${clockwise} -400,0`,
+      delay: 5,
+    },
+
+    // Top Left
+    {
+      ...flowerOfLifeDefaults,
+      path: `M 325 400 m -200, 0 a 200,200 0 ${counterClockwise} 400,0 a 200,200 0 ${counterClockwise} -400,0`,
+      delay: 6,
+    },
+
+    // Enclosing Circle
+    {
+      ...flowerOfLifeDefaults,
+      path: `M 500 500 m -400, 0 a 400,400 0 ${clockwise} 800,0 a 400,400 0 ${clockwise} -800,0`,
+      delay: 7,
+    },
+  ];
+
   function ExampleContainer({
     children,
     width = "w-[40vh]",
@@ -222,8 +299,11 @@ export default function Test() {
 
   return (
     <FlexFull className="h-full py-[1vh] justify-center overflow-y-auto bg-100-diagonal5op50 ">
-      <VStackFull className="h-fit">
-        <FloatDownExperiements />
+      <FlexFull className="h-full justify-center items-center ">
+        <Flex className="bg-col-900">
+          <SVGMultiPaths paths={paths} viewBox="0 0 1000 1000" />
+        </Flex>
+
         {/* <ExampleContainer width="w-[70vh]" height="h-[70vh]">
           <SVGMultiPaths paths={yinYangPaths} viewBox="0 0 1000 1000" />
         </ExampleContainer>
@@ -243,7 +323,7 @@ export default function Test() {
         <ExampleContainer>
           <SVGMultiPaths paths={gptPaths} viewBox="0 0 1000 1000" />
         </ExampleContainer> */}
-      </VStackFull>
+      </FlexFull>
     </FlexFull>
   );
 }
