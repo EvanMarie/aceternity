@@ -7,6 +7,7 @@ import { SimplePathRender } from "./components/simplePathRender";
 import Transition from "~/components/buildingBlocks/transition";
 import AnimatedYinYang from "./components/animatedYinYang";
 import FloatDownExperiements from "./components/floatDownExperiments";
+import AnimatedFlowerOfLine from "./components/animatedFlowerOfLife";
 
 export default function SVGPathExamples() {
   return (
@@ -232,6 +233,82 @@ export default FloatDown;`}
             bg="bg-col-600"
           >
             <AnimatedYinYang />
+          </Reanimate>
+          <Reanimate
+            isPath={false}
+            title="Animated Flower of Life"
+            code={`  const flowerOfLifeDefaults = {
+    fill: "none",
+    stroke: "cyan",
+    strokeWidth: 4,
+    ease: "easeInOut",
+  };
+
+  const clockwise = "1,1";
+  const counterClockwise = "1,0";
+  const delayMultiplier = 0.25;
+  const durationMultiplier = 1;
+  
+  const paths = [
+  // Very Center
+  {
+    ...flowerOfLifeDefaults,
+    path: \`M 500 500 m -200, 0 a 200,200 0 \${counterClockwise} 400,0 a 200,200 0 \${counterClockwise} -400,0\`,
+    delay: 0 * delayMultiplier,
+    duration: 1 * durationMultiplier,
+  },
+  // Top Center
+  {
+    ...flowerOfLifeDefaults,
+    path: \`M 500 300 m -200, 0 a 200,200 0 \${clockwise} 400,0 a 200,200 0 \${clockwise} -400,0\`,
+    delay: 1 * delayMultiplier,
+    duration: 1.5 * durationMultiplier,
+  },
+  // Bottom Center
+  {
+    ...flowerOfLifeDefaults,
+    path: \`M 500 700 m -200, 0 a 200,200 0 \${counterClockwise} 400,0 a 200,200 0 \${counterClockwise} -400,0\`,
+    delay: 2 * delayMultiplier,
+    duration: 2 * durationMultiplier,
+  },
+  // Top Right
+  {
+    ...flowerOfLifeDefaults,
+    path: \`M 675 400 m -200, 0 a 200,200 0 \${clockwise} 400,0 a 200,200 0 \${clockwise} -400,0\`,
+    delay: 3 * delayMultiplier,
+    duration: 2.5 * durationMultiplier,
+  },
+  // Bottom Left
+  {
+    ...flowerOfLifeDefaults,
+    path: \`M 325 600 m -200, 0 a 200,200 0 \${counterClockwise} 400,0 a 200,200 0 \${counterClockwise} -400,0\`,
+    delay: 4 * delayMultiplier,
+    duration: 3 * durationMultiplier,
+  },
+  // Bottom Right
+  {
+    ...flowerOfLifeDefaults,
+    path: \`M 675 600 m -200, 0 a 200,200 0 \${clockwise} 400,0 a 200,200 0 \${clockwise} -400,0\`,
+    delay: 5 * delayMultiplier,
+    duration: 3.5 * durationMultiplier,
+  },
+  // Top Left
+  {
+    ...flowerOfLifeDefaults,
+    path: \`M 325 400 m -200, 0 a 200,200 0 \${counterClockwise} 400,0 a 200,200 0 \${counterClockwise} -400,0\`,
+    delay: 6 * delayMultiplier,
+    duration: 4 * durationMultiplier,
+  },
+  // Enclosing Circle
+  {
+    ...flowerOfLifeDefaults,
+    path: \`M 500 500 m -400, 0 a 400,400 0 \${clockwise} 800,0 a 400,400 0 \${clockwise} -800,0\`,
+    delay: 7 * delayMultiplier,
+    duration: 4.5 * durationMultiplier,
+  },
+];`}
+          >
+            <AnimatedFlowerOfLine />
           </Reanimate>
         </Wrap>
         <SVGTiming />

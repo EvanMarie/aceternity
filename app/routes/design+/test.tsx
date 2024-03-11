@@ -10,6 +10,8 @@ import Box from "~/components/buildingBlocks/box";
 import Transition from "~/components/buildingBlocks/transition";
 import FloatDown from "../svg+/components/floatDown";
 import FloatDownExperiements from "../svg+/components/floatDownExperiments";
+import Rain from "../css+/components/advancedExamples/rain";
+import Heading from "~/components/buildingBlocks/headingText";
 
 export default function Test() {
   const claudePaths = [
@@ -213,67 +215,76 @@ export default function Test() {
     fill: "none",
     stroke: "cyan",
     strokeWidth: 4,
-    duration: 1,
+    ease: "easeInOut",
   };
 
   const clockwise = "1,1";
   const counterClockwise = "1,0";
-
+  const delayMultiplier = 0.25;
+  const durationMultiplier = 1;
   const paths = [
     // Very Center
     {
       ...flowerOfLifeDefaults,
       path: `M 500 500 m -200, 0 a 200,200 0 ${counterClockwise} 400,0 a 200,200 0 ${counterClockwise} -400,0`,
-      delay: 0,
+      delay: 0 * delayMultiplier,
+      duration: 1 * durationMultiplier,
     },
 
     // Top Center
     {
       ...flowerOfLifeDefaults,
       path: `M 500 300 m -200, 0 a 200,200 0 ${clockwise} 400,0 a 200,200 0 ${clockwise} -400,0`,
-      delay: 1,
+      delay: 1 * delayMultiplier,
+      duration: 1.5 * durationMultiplier,
     },
 
     // Bottom Center
     {
       ...flowerOfLifeDefaults,
       path: `M 500 700 m -200, 0 a 200,200 0 ${counterClockwise} 400,0 a 200,200 0 ${counterClockwise} -400,0`,
-      delay: 2,
+      delay: 2 * delayMultiplier,
+      duration: 2 * durationMultiplier,
     },
 
     // Top Right
     {
       ...flowerOfLifeDefaults,
       path: `M 675 400 m -200, 0 a 200,200 0 ${clockwise} 400,0 a 200,200 0 ${clockwise} -400,0`,
-      delay: 3,
+      delay: 3 * delayMultiplier,
+      duration: 2.5 * durationMultiplier,
     },
 
     // Bottom Left
     {
       ...flowerOfLifeDefaults,
       path: `M 325 600 m -200, 0 a 200,200 0 ${counterClockwise} 400,0 a 200,200 0 ${counterClockwise} -400,0`,
-      delay: 4,
+      delay: 4 * delayMultiplier,
+      duration: 3 * durationMultiplier,
     },
 
     // Bottom Right
     {
       ...flowerOfLifeDefaults,
       path: `M 675 600 m -200, 0 a 200,200 0 ${clockwise} 400,0 a 200,200 0 ${clockwise} -400,0`,
-      delay: 5,
+      delay: 5 * delayMultiplier,
+      duration: 3.5 * durationMultiplier,
     },
 
     // Top Left
     {
       ...flowerOfLifeDefaults,
       path: `M 325 400 m -200, 0 a 200,200 0 ${counterClockwise} 400,0 a 200,200 0 ${counterClockwise} -400,0`,
-      delay: 6,
+      delay: 6 * delayMultiplier,
+      duration: 4 * durationMultiplier,
     },
 
     // Enclosing Circle
     {
       ...flowerOfLifeDefaults,
       path: `M 500 500 m -400, 0 a 400,400 0 ${clockwise} 800,0 a 400,400 0 ${clockwise} -800,0`,
-      delay: 7,
+      delay: 7 * delayMultiplier,
+      duration: 4.5 * durationMultiplier,
     },
   ];
 
@@ -299,10 +310,17 @@ export default function Test() {
 
   return (
     <FlexFull className="h-full py-[1vh] justify-center overflow-y-auto bg-100-diagonal5op50 ">
-      <FlexFull className="h-full justify-center items-center ">
-        <Flex className="bg-col-900">
-          <SVGMultiPaths paths={paths} viewBox="0 0 1000 1000" />
-        </Flex>
+      <VStackFull className="h-full justify-center items-center ">
+        <Box className="shadowBroadLoose">
+          <Flex className="bg-col-900 insetShadowXL border-970-lg">
+            <SVGMultiPaths
+              paths={paths}
+              viewBox="0 0 1000 1000"
+              width="w-[90vh] max-w-full"
+              height="h-[90vh] max-h-full"
+            />
+          </Flex>
+        </Box>
 
         {/* <ExampleContainer width="w-[70vh]" height="h-[70vh]">
           <SVGMultiPaths paths={yinYangPaths} viewBox="0 0 1000 1000" />
@@ -322,8 +340,8 @@ export default function Test() {
         </ExampleContainer>
         <ExampleContainer>
           <SVGMultiPaths paths={gptPaths} viewBox="0 0 1000 1000" />
-        </ExampleContainer> */}
-      </FlexFull>
+  </ExampleContainer>*/}
+      </VStackFull>
     </FlexFull>
   );
 }

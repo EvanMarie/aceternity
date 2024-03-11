@@ -3,12 +3,16 @@ import Box from "~/components/buildingBlocks/box";
 export default function Rain({
   rainColor = "bg-cyan-400",
   numDrops = 75,
+  className = "",
 }: {
   rainColor?: string;
   numDrops?: number;
+  className?: string;
 }) {
   return (
-    <Box className="relative w-full h-full overflow-hidden border-970-md">
+    <Box
+      className={`relative w-full h-full overflow-hidden border-970-md ${className}`}
+    >
       {Array.from({ length: numDrops }).map((_, index) => {
         // Generate random width and height within specified ranges
         const width = Math.max(0.13, Math.random() * 0.4); // Random width between 0.75rem and 2rem
@@ -17,7 +21,7 @@ export default function Rain({
         return (
           <div
             key={index}
-            className={`absolute ${rainColor} animate-rain shadow-lg rounded-raindrop`}
+            className={`absolute ${rainColor} animate-rain shadow-lg rounded-raindrop `}
             style={{
               width: `${width}vh`, // Apply random width
               height: `${height}vh`, // Apply random height

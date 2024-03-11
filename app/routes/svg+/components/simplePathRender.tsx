@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAnimation, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import VStack from "~/components/buildingBlocks/vStack";
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import HStackFull from "~/components/buildingBlocks/hStackFull";
@@ -27,31 +27,27 @@ export function SimplePathRender({
   title?: string;
   color?: string;
 }) {
-  const [animationKey, setAnimationKey] = useState(0);
-  const controls = useAnimation();
-
-  useEffect(() => {
-    controls.start({
-      pathLength: 1,
-      transition: { duration, ease: timingFunction },
-    });
-  }, [animationKey, controls, duration, timingFunction]);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleClickAnimation = () => {
-    setAnimationKey((prevKey) => prevKey + 1);
+    setIsAnimating(true);
   };
 
   function MapPath({
     path,
     viewBox,
     stroke,
-    controls,
+    isAnimating,
+    duration,
+    timingFunction,
     color,
   }: {
     path: string;
     viewBox: string;
     stroke: string;
-    controls: any;
+    isAnimating: boolean;
+    duration: number;
+    timingFunction: string;
     color: string;
   }) {
     return (
@@ -67,7 +63,8 @@ export function SimplePathRender({
           stroke={color}
           strokeWidth={stroke}
           initial={{ pathLength: 0 }}
-          animate={controls}
+          animate={{ pathLength: isAnimating ? 1 : 0 }}
+          transition={{ duration, ease: timingFunction }}
           filter="drop-shadow(0.4vh 0.4vh 0.4vh rgba(255, 255, 255, 0.7))"
         />
       </svg>
@@ -86,20 +83,21 @@ export function SimplePathRender({
       )}
       <HStackFull className="justify-evenly">
         <Button
-          buttonText="Reanimate"
+          buttonText="Animate"
           onClick={handleClickAnimation}
           iconLeft={RefreshIcon}
           type="smallNormal"
         />
         <CodeModal code={path} title={title ? title : ""} />
       </HStackFull>
-      <Flex className={`p-[1vh] h-full items-center justify-center `}>
+      <Flex className={`p-[1vh] h-full items-center justify-center`}>
         <MapPath
-          key={animationKey}
           path={path}
           viewBox={viewBox}
           stroke={stroke}
-          controls={controls}
+          isAnimating={isAnimating}
+          duration={duration}
+          timingFunction={timingFunction}
           color={color}
         />
       </Flex>

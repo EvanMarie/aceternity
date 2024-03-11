@@ -41,7 +41,8 @@ export default function CodeModal({
             <FlexFull className="h-full overflow-y-auto">
               <FlexFull className="h-fit py-[1vh] px-[2vh]">
                 <CodeExample>
-                  {isPath && "d="}"{code}"
+                  {isPath && "d=" + "{code}"}
+                  {code}
                 </CodeExample>
               </FlexFull>
             </FlexFull>

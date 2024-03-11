@@ -69,7 +69,7 @@ export default function FloatDown({
   containerBg = "bg-100-radial6op75",
   containerShadow = "insetShadowXL",
   containerBorder = "border-970-md",
-  numCircles = 53,
+  numCircles = 23,
   circleColors,
   startFrom = -30,
   endAt = 30,
