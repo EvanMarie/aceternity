@@ -234,11 +234,14 @@ export default function AnimationsOne() {
             color="text-col-100"
             text="GSAP Introduction"
             shadow="textShadow"
-            layout="text-xxl-loose"
+            layout="tex-lg-loose md:text-xl-loose text-xxl-loose"
           />
         </Flex>
       </FlexFull>
-      <Flex className="h-15% justify-center items-center w-full md:w-85% xl:w-65% px-[8vh]">
+      <FlexFull
+        className="h-15% justify-center items-center md:w-85% xl:w-65% bg-white
+      "
+      >
         <HorizontalScrollingSelector
           showCurrent={false}
           selectedOnTop={false}
@@ -251,11 +254,11 @@ export default function AnimationsOne() {
           showClose={false}
           buttonClassName="text-nowrap"
         />
-      </Flex>
+      </FlexFull>
 
-      <Flex className="justify-center items-center w-65% h-[70vh]">
+      <FlexFull className="justify-center items-center w-65% h-[70vh]">
         {createElement(animations[currentAnimationIndex].component)}
-      </Flex>
+      </FlexFull>
     </VStackFull>
   );
 }

@@ -11,10 +11,11 @@ export default function GSAPNav() {
         <IconButton icon={HomeIcon} type="smallNormal" to="/" />
         <HStackFull className="h-full items-center justify-around">
           <Button to="/gsap" buttonText="Intro" />{" "}
+          <Button to="/gsap/playground" buttonText="Play" />
           <Button
             to="https://gsap.com/docs/v3/"
             target="_blank"
-            buttonText="GSAP Docs"
+            buttonText="Docs"
           />
         </HStackFull>
       </HStackFull>

@@ -89,7 +89,7 @@ export default function AnimationsOne() {
   const actualClassName = animationsMapping[currentAnimation];
 
   return (
-    <Transition className="w-full h-full">
+    <Transition className="w-full h-full px-[1vh]">
       <VStackFull className="justify-evenly items-center h-full">
         <FlexFull className="h-15% items-center justify-center">
           <Flex className="bg-col-900 h-fit px-[2vh] py-[1vh] shadowBroadNormal">
@@ -97,11 +97,12 @@ export default function AnimationsOne() {
               color="text-col-100"
               text="Tailwind Default Animations and Added Animation Classes"
               shadow="textShadow"
-              layout="text-xxl-loose"
+              layout="text-md-loose md:text-lg-loose xl:text-xxl-loose"
+              noOfLines={2}
             />
           </Flex>
         </FlexFull>
-        <Flex className="h-15% justify-center items-center w-full md:w-85% xl:w-80% px-[8vh]">
+        <FlexFull className="h-15% justify-center items-center md:w-85% xl:w-80% ">
           <HorizontalScrollingSelector
             showCurrent={false}
             selectedOnTop={false}
@@ -113,9 +114,9 @@ export default function AnimationsOne() {
             border="border-980-md"
             showClose={false}
           />
-        </Flex>
+        </FlexFull>
         <FlexFull className="h-60% justify-center items-center">
-          <Flex className="justify-center items-center w-full md:w-85% xl:w-80% h-[50vh] px-[8vh]">
+          <FlexFull className="justify-center items-center md:w-85% xl:w-80% h-[50vh]">
             <FlexFull className="h-full bg-col-200 relative shadowBroadNormal border-970-md">
               <Box className="absolute top-[1vh] left-[1vh]">
                 <IconButton
@@ -125,7 +126,7 @@ export default function AnimationsOne() {
               </Box>
               <TailwindAnimationExample animation={actualClassName} />
             </FlexFull>
-          </Flex>
+          </FlexFull>
         </FlexFull>
       </VStackFull>
     </Transition>

@@ -35,7 +35,7 @@ const StaggerAnimationExample: React.FC<StaggerAnimationExampleProps> = ({
       {items.map((item, index) => (
         <Flex key={index} style={{ opacity: 0 }}>
           <Flex
-            className={`${item.bg} p-[1vh] text-col-100 justify-center items-center shadowBroadNormal textShadow border-970-md h-[10vh] w-[10vh]`}
+            className={`${item.bg} p-[1vh] text-col-100 justify-center items-center shadowBroadNormal textShadow border-970-md md:h-[10vh] md:w-[10vh]`}
           >
             {item.id}
           </Flex>

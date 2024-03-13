@@ -11,16 +11,19 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.0",
     "@pixi/react-pixi": "^7.0.0-alpha.0",
     "@remix-run/node": "^2.6.0",
     "@remix-run/react": "^2.6.0",
     "@remix-run/serve": "^2.6.0",
+    "@types/gsap": "^3.0.0",
     "framer-motion": "^11.0.8",
     "gsap": "^3.12.5",
     "isbot": "^4.1.0",
     "react-icons": "^5.0.1",
     "react-intersection-observer": "^9.8.1",
-    "remix-flat-routes": "^0.6.4"
+    "remix-flat-routes": "^0.6.4",
+    "remix-utils": "^7.5.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.6.0",
