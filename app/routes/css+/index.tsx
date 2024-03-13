@@ -154,7 +154,9 @@ export function ExampleChild({
     >
       {" "}
       <VStack gap="gap-[0px]">
-        <Text className="text-lg-loose font-semibold">Child Component</Text>
+        <Text className="text-md-normal md:text-lg-loose font-semibold">
+          Child Component
+        </Text>
         {children}
       </VStack>
     </Flex>
@@ -181,11 +183,19 @@ export function ExampleDescription({
   description?: string;
 }) {
   function Label({ children }: { children: React.ReactNode }) {
-    return <Text className="font-semibold text-lg-loose">{children}</Text>;
+    return (
+      <Text className="font-semibold text-md-normal md:text-lg-loose">
+        {children}
+      </Text>
+    );
   }
 
   function TailwindCSS({ children }: { children: React.ReactNode }) {
-    return <Text className="font-monospace text-lg-loose">{children}</Text>;
+    return (
+      <Text className="font-monospace text-md-normal md:text-lg-loose">
+        {children}
+      </Text>
+    );
   }
 
   return (
@@ -209,7 +219,7 @@ export default function CSSAnimation() {
           <FlexFull className="px-[2vh] pt-[1vh] justify-center">
             <Heading
               text="Default & Custom Timing Functions"
-              layout="text-too-big-normal"
+              layout="text-lg-normal lg:text-xl-normal xl:text-too-big-normal"
               shadow="textShadow"
               color="text-col-100"
               className="py-[0.7vh]"
@@ -221,7 +231,7 @@ export default function CSSAnimation() {
             </DescriptionModal>
             <Heading
               text="Cubic Bezier Timing Functions"
-              layout="text-xl-normal"
+              layout="text-lg-normal lg:text-xl-normal xl:text-xl-normal"
               shadow="textShadow"
               color="text-col-100"
               className="py-[0.7vh]"

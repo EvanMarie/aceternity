@@ -65,7 +65,7 @@ export default function HorizontalScrollingSelector({
           <FlexFull className="h-fit">
             <Heading
               text={heading}
-              layout="text-xxl-looser"
+              layout="text-lg-normal lg:text-xl-normal xl:text-xxl-looser"
               shadow="textShadow"
               color="text-col-100"
             />

@@ -182,7 +182,7 @@ export default function FloatDownExperiements() {
   const inactiveStyle =
     "text-col-100 textShadow text-sm-tight sm:text-md-tight";
   const headingStyles =
-    "text-cyan-200  text-sm-normal sm:text-md-normal md:text-lg-normal xl:text-md-normal xxl:text-lg-normal";
+    "text-cyan-200  text-sm-normal sm:text-md-normal md:text-lg-normal lg:text-xl-normal xl:text-md-normal xxl:text-lg-normal";
   const labelStyles = "text-md-tight text-col-100 justify-center";
   const buttonStyles =
     "text-sm-tight md:text-md-tight xl:text-sm-tight xxl:text-md-tight md:px-[1vh] justify-center flex-shrink-0 hover:cursor-pointer";
