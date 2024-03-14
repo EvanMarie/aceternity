@@ -2,7 +2,7 @@ import TransitionFullScreen from "~/components/buildingBlocks/transitionFullScre
 import CenterHorizontalFull from "~/components/buildingBlocks/centerHorizontalFull";
 
 import { ClientOnly } from "remix-utils/client-only";
-import { SimplestDemo } from "~/components/pixi/demo";
+import { SimplestDemo, Bunny } from "~/components/pixi/demo";
 
 export default function MyComponent() {
   // return (
