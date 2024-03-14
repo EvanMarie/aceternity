@@ -6,7 +6,6 @@ import HStackFull from "~/components/buildingBlocks/hStackFull";
 import Image from "~/components/buildingBlocks/image";
 import Modal from "~/components/buildingBlocks/modal";
 import ParallaxImage from "~/components/specialty/parallaxImage";
-import HorizontalParallaxImage from "~/components/specialty/parallaxImage";
 
 export default function HorizontalParallaxCarousel({
   images,
@@ -26,11 +25,9 @@ export default function HorizontalParallaxCarousel({
   function ImageComponent({
     src,
     className,
-    onClick,
   }: {
     src: string;
     className?: string;
-    onClick?: () => void;
   }) {
     return (
       <Flex
@@ -55,7 +52,7 @@ export default function HorizontalParallaxCarousel({
 
   return (
     <>
-      <Box className="pb-[1.5vh] overflow-x-auto overflow-y-hidden rounded-none">
+      <Box className="pb-[1.5vh] overflow-x-auto overflow-y-hidden rounded-none scrollbar-none">
         <Box className={`w-fit ${height}`}>
           <HStackFull
             className="w-maxContent rounded-none gap-[1.5vh]"
