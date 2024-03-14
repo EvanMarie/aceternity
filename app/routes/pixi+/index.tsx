@@ -1,14 +1,23 @@
 import TransitionFullScreen from "~/components/buildingBlocks/transitionFullScreen";
 import CenterHorizontalFull from "~/components/buildingBlocks/centerHorizontalFull";
 
-export const svgTextStyles = "text-lg-normal";
-export const svgheadingStyles =
-  "text-xl-loose font-semibold textShadow text-col-100";
+import { ClientOnly } from "remix-utils/client-only";
+import { SimplestDemo } from "~/components/pixi/demo";
 
-export default function SVGIntro() {
+export default function MyComponent() {
+  // return (
+  //   <ClientOnly
+  //     fallback={<CenterHorizontalFull>Loading...</CenterHorizontalFull>}
+  //   >
+  //     {() => <SimplestDemo />}
+  //   </ClientOnly>
+  // );
   return (
     <TransitionFullScreen>
-      <CenterHorizontalFull className="h-screen">THIS</CenterHorizontalFull>
+      <CenterHorizontalFull>
+        {" "}
+        <SimplestDemo />
+      </CenterHorizontalFull>
     </TransitionFullScreen>
   );
 }
