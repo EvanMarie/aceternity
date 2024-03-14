@@ -78,51 +78,6 @@ export default function Test() {
             />
           </FlexFull>
         </VStackFull>
-
-        {/* <FlexFull className="h-full overflow-x-auto justify-center">
-          <HStack className="w-fit">
-            <ParallaxImage
-              bgImage={`https://picsum.photos/seed/${
-                Math.floor(Math.random() * 100) + 1
-              }/500/900`}
-            />
-            <ParallaxImage
-              bgImage={`https://picsum.photos/seed/${
-                Math.floor(Math.random() * 100) + 1
-              }/500/900`}
-            />
-            <ParallaxImage
-              bgImage={`https://picsum.photos/seed/${
-                Math.floor(Math.random() * 100) + 1
-              }/500/900`}
-            />
-            <ParallaxImage
-              bgImage={`https://picsum.photos/seed/${
-                Math.floor(Math.random() * 100) + 1
-              }/500/900`}
-            />
-            <ParallaxImage
-              bgImage={`https://picsum.photos/seed/${
-                Math.floor(Math.random() * 100) + 1
-              }/500/900`}
-            />
-            <ParallaxImage
-              bgImage={`https://picsum.photos/seed/${
-                Math.floor(Math.random() * 100) + 1
-              }/500/900`}
-            />
-            <ParallaxImage
-              bgImage={`https://picsum.photos/seed/${
-                Math.floor(Math.random() * 100) + 1
-              }/500/900`}
-            />
-            <ParallaxImage
-              bgImage={`https://picsum.photos/seed/${
-                Math.floor(Math.random() * 100) + 1
-              }/500/900`}
-            />
-          </HStack>
-        </FlexFull> */}
       </CenterHorizontalFull>
     </TransitionFullScreen>
   );
