@@ -4,12 +4,17 @@ import { motion } from "framer-motion";
 interface AnimatedTextProps {
   text?: string;
   className?: string;
-  direction?: "top" | "bottom" | "left" | "right";
+  direction?: "top" | "bottom" | "left" | "right" | "fadeIn" | "custom";
   letterDelay?: number;
   textClassName?: string;
   damping?: number;
   stiffness?: number;
   overallDelay?: number;
+  overallDuration?: number;
+  yDistance?: number | string;
+  xDistance?: number | string;
+  fadeLetterDuration?: number;
+  distanceAsString?: boolean;
 }
 
 export default function AnimatedText({
@@ -20,6 +25,11 @@ export default function AnimatedText({
   damping = 12,
   stiffness = 100,
   overallDelay = 0.2,
+  overallDuration,
+  yDistance = 150,
+  xDistance = 150,
+  fadeLetterDuration = 0.5,
+  distanceAsString = false,
   textClassName = "text-[6vh] font-bold text-col-200 textShadow text-stroke-10-500",
 }: AnimatedTextProps) {
   const letters = text ? Array.from(text) : [];
@@ -35,21 +45,44 @@ export default function AnimatedText({
     }),
   };
 
+  const fadeLetterVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: fadeLetterDuration },
+    },
+  };
+
   const child = {
     visible: {
       opacity: 1,
       y: 0,
       x: 0,
       transition: {
-        type: "spring",
+        type: overallDuration ? "tween" : "spring",
+        duration: overallDuration,
         damping: damping,
         stiffness: stiffness,
       },
     },
     hidden: {
       opacity: 0,
-      y: direction === "top" ? -150 : direction === "bottom" ? 150 : 0,
-      x: direction === "left" ? -150 : direction === "right" ? 150 : 0,
+      y:
+        direction === "custom" || distanceAsString
+          ? yDistance
+          : direction === "top"
+          ? -yDistance
+          : direction === "bottom"
+          ? yDistance
+          : 0,
+      x:
+        direction === "custom" || distanceAsString
+          ? xDistance
+          : direction === "left"
+          ? -xDistance
+          : direction === "right"
+          ? xDistance
+          : 0,
     },
   };
 
@@ -61,7 +94,11 @@ export default function AnimatedText({
       animate="visible"
     >
       {letters.map((letter, index) => (
-        <motion.span key={index} variants={child} className={textClassName}>
+        <motion.span
+          key={index}
+          variants={direction === "fadeIn" ? fadeLetterVariants : child}
+          className={textClassName}
+        >
           {letter === " " ? "\u00A0" : letter}
         </motion.span>
       ))}
