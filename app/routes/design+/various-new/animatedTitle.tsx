@@ -11,6 +11,7 @@ interface AnimatedTextProps {
   stiffness?: number;
   overallDelay?: number;
   overallDuration?: number;
+  letterDuration?: number;
   yDistance?: number | string;
   xDistance?: number | string;
   fadeLetterDuration?: number;
@@ -26,6 +27,7 @@ export default function AnimatedText({
   stiffness = 100,
   overallDelay = 0.2,
   overallDuration,
+  letterDuration,
   yDistance = 150,
   xDistance = 150,
   fadeLetterDuration = 0.5,
@@ -41,6 +43,7 @@ export default function AnimatedText({
       transition: {
         staggerChildren: letterDelay,
         delayChildren: overallDelay * i,
+        duration: overallDuration,
       },
     }),
   };
@@ -59,8 +62,8 @@ export default function AnimatedText({
       y: 0,
       x: 0,
       transition: {
-        type: overallDuration ? "tween" : "spring",
-        duration: overallDuration,
+        type: letterDuration ? "tween" : "spring",
+        duration: letterDuration,
         damping: damping,
         stiffness: stiffness,
       },
