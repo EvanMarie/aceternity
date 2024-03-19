@@ -27,6 +27,7 @@ interface CounterInputProps {
   className?: string;
   stacked?: boolean;
   maxInputLength?: number;
+  incrementStep?: number;
 }
 
 const CounterInput: React.FC<CounterInputProps> = ({
@@ -47,23 +48,22 @@ const CounterInput: React.FC<CounterInputProps> = ({
   className,
   stacked = false,
   maxInputLength = 4,
+  incrementStep = 1,
 }) => {
-  const sliderValue = value ?? min;
   const [inputValue, setInputValue] = useState(value);
 
-  const step = max - min <= 5 ? 0.1 : 1;
-
-  // Update local state on increment and decrement
   const incrementValue = () => {
-    const newValue = Math.min(sliderValue + step, max);
-    onChange(newValue);
+    console.log("Increment Step:", incrementStep);
+    const newValue = Math.min(inputValue + incrementStep, max);
+    console.log("New Value:", newValue);
     setInputValue(newValue);
+    onChange(newValue);
   };
 
   const decrementValue = () => {
-    const newValue = Math.max(sliderValue - step, min);
-    onChange(newValue);
+    const newValue = Math.max(inputValue - incrementStep, min);
     setInputValue(newValue);
+    onChange(newValue);
   };
 
   // Update local state on input change
@@ -71,14 +71,6 @@ const CounterInput: React.FC<CounterInputProps> = ({
     const newValue = parseFloat(e.target.value);
     setInputValue(newValue);
   };
-
-  // Update parent state when the input value changes, after a debounce or on blur to minimize re-renders
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      onChange(inputValue);
-    }, 500); // 500ms debounce
-    return () => clearTimeout(timeoutId);
-  }, [inputValue, onChange]);
 
   return (
     <>
@@ -104,6 +96,7 @@ const CounterInput: React.FC<CounterInputProps> = ({
                 maxLength={maxInputLength}
                 className={inputWidth}
                 type="number"
+                step={incrementStep}
                 onBlur={() => onChange(inputValue)} // Update parent state on blur
               />
             ) : (
@@ -151,6 +144,7 @@ const CounterInput: React.FC<CounterInputProps> = ({
                 onChange={handleInputChange}
                 maxLength={maxInputLength}
                 className={inputWidth}
+                step={incrementStep}
                 type="number"
                 onBlur={() => onChange(inputValue)} // Update parent state on blur
               />

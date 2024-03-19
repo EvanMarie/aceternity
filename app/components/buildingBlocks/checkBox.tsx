@@ -40,7 +40,7 @@ export default function Checkbox({
   hoveredColor = "hover:text-col-900 transition-300",
   disabledBg = "bg-col-850 hover:bg-col-860 transition-300",
   disabledColor = "text-col-160 hover:text-col-180",
-  p = "pl-[0.5vh] pr-[0.2vh] py-[0px]",
+  p = "px-[0.6vh] py-[0px]",
   className = "",
   containerWidth = "w-full",
   onDisabledClick,

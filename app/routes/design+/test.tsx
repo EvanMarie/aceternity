@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AnimatedText, { AnimationType } from "./various-new/animatedTitle";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 import CenterFull from "~/components/buildingBlocks/centerFull";
@@ -11,6 +11,11 @@ import Button from "~/components/buildingBlocks/button";
 import useReanimate from "~/utils/useReanimate";
 import HStack from "~/components/buildingBlocks/hStack";
 import Checkbox from "~/components/buildingBlocks/checkBox";
+import VStack from "~/components/buildingBlocks/vStack";
+import TransitionFullScreen from "~/components/buildingBlocks/transitionFullScreen";
+import FlexFull from "~/components/buildingBlocks/flexFull";
+import Box from "~/components/buildingBlocks/box";
+import Heading from "~/components/buildingBlocks/headingText";
 
 export default function AnimatedTextRoute() {
   const [selectedAnimation, setSelectedAnimation] =
@@ -27,8 +32,23 @@ export default function AnimatedTextRoute() {
   const [animationMotion, setAnimationMotion] = useState<"spring" | "tween">(
     "spring"
   );
+  const [useVHUnits, setUseVHUnits] = useState(true);
 
   const [animationKey, reanimate] = useReanimate();
+  useEffect(() => {
+    reanimate();
+  }, [
+    letterDelay,
+    damping,
+    stiffness,
+    overallDelay,
+    letterDuration,
+    yDistance,
+    xDistance,
+    fadeLetterDuration,
+    animationMotion,
+    reanimate,
+  ]);
 
   function WrapItem({ children }: { children: React.ReactNode }) {
     return <Flex className="w-fit px-[1vh]">{children}</Flex>;
@@ -40,12 +60,14 @@ export default function AnimatedTextRoute() {
     value,
     min,
     max,
+    increment = 1,
   }: {
     onChange: (value: number) => void; // Update the type to match expected usage
     label: string;
     value: number;
     min?: number;
     max?: number;
+    increment?: number;
   }) {
     return (
       <WrapItem>
@@ -57,138 +79,194 @@ export default function AnimatedTextRoute() {
           stacked
           min={min}
           max={max}
+          incrementStep={increment}
         />
       </WrapItem>
     );
   }
 
+  const largeContainerStyles =
+    "bg-col-950 p-[1vh] border-900-sm shadowBroadNormal";
+  const checkboxContainerStyles =
+    "bg-200-diagonal1op25 py-[0.7vh] px-[1vh] insetShadowMd border-400-md";
+
+  const propSectionContainerStyles =
+    "bg-col-880 px-[0.7vh] py-[1vh] md:p-[1.5vh] insetShadowMd border-900-sm shadowBroadNormal";
+
+  const rowSectionStyles =
+    "justify-evenly items-center w-full lg:w-1/2 xxl:w-1/3";
   return (
-    <CenterFull>
+    <TransitionFullScreen className="p-[1.5vh]">
       <Flex className="w-full md:w-90% xl:w-80%">
-        <VStackFull>
-          <Wrap className="w-full items-center justify-evenly gap-y-[1vh]">
-            <Flex className="w-[20vh]">
-              <DropDownMenu
-                options={[
-                  "inFromTop",
-                  "inFromBottom",
-                  "inFromLeft",
-                  "inFromRight",
-                  "fadeIn",
-                  "custom",
-                ]}
-                buttonText="direction"
-                selectedOption={selectedAnimation}
-                setSelectedOption={setSelectedAnimation}
+        <VStackFull gap="gap-[2vh]">
+          <Heading
+            text="Animated Title"
+            layout="text-xxl-loose md:text-too-big-loose"
+          />
+          <FlexFull className={largeContainerStyles}>
+            <Wrap className="w-full items-center justify-evenly gap-y-[1vh]">
+              <HStack className={rowSectionStyles}>
+                {/* DELAYS  */}
+                <VStack className={propSectionContainerStyles}>
+                  <WrapInput
+                    onChange={setLetterDelay}
+                    label="letter delay"
+                    min={0}
+                    max={120}
+                    value={letterDelay}
+                    increment={0.01}
+                  />
+                  <WrapInput
+                    onChange={setOverallDelay}
+                    label="overall delay"
+                    min={0}
+                    max={30}
+                    value={overallDelay}
+                  />
+                </VStack>
+                {/* DISTANCE  */}
+                <VStack className={propSectionContainerStyles}>
+                  <HStack gap="gap-[3vh]" className={checkboxContainerStyles}>
+                    <Checkbox
+                      label="vh"
+                      isChecked={useVHUnits === true}
+                      onChange={() => setUseVHUnits((prev) => !prev)}
+                    />
+                    <Checkbox
+                      label="px"
+                      isChecked={useVHUnits === false}
+                      onChange={() => setUseVHUnits((prev) => !prev)}
+                    />
+                  </HStack>
+                  <HStack>
+                    <WrapInput
+                      onChange={setYDistance}
+                      label="y distance"
+                      min={-1000}
+                      max={1000}
+                      value={yDistance}
+                    />
+                    <WrapInput
+                      onChange={setXDistance}
+                      label="x distance"
+                      min={-1000}
+                      max={1000}
+                      value={xDistance}
+                    />
+                  </HStack>
+                </VStack>
+              </HStack>
+              {/* row two  */}
+              <HStack className={rowSectionStyles}>
+                {/* SPRING  */}
+                <VStack className={propSectionContainerStyles}>
+                  <HStack gap="gap-[3vh]" className={checkboxContainerStyles}>
+                    <Checkbox
+                      label="spring"
+                      isChecked={animationMotion === "spring"}
+                      onChange={() =>
+                        setAnimationMotion(
+                          animationMotion !== "spring" ? "spring" : "tween"
+                        )
+                      }
+                    />
+                  </HStack>
+                  <HStack>
+                    <WrapInput
+                      onChange={setDamping}
+                      label="damping"
+                      min={0}
+                      max={200}
+                      value={damping}
+                    />
+                    <WrapInput
+                      onChange={setStiffness}
+                      label="stiffness"
+                      min={0}
+                      max={500}
+                      value={stiffness}
+                      increment={10}
+                    />
+                  </HStack>
+                </VStack>
+                {/* TWEEN   */}
+                <VStack className={propSectionContainerStyles}>
+                  <HStack gap="gap-[3vh]" className={checkboxContainerStyles}>
+                    <Checkbox
+                      label="tween"
+                      isChecked={animationMotion === "tween"}
+                      onChange={() =>
+                        setAnimationMotion(
+                          animationMotion !== "tween" ? "tween" : "spring"
+                        )
+                      }
+                    />
+                  </HStack>
+                  <WrapInput
+                    onChange={setLetterDuration}
+                    label="letter duration"
+                    min={0}
+                    max={120}
+                    value={letterDuration}
+                  />
+                </VStack>
+              </HStack>
+              {/* row three  */}
+              <HStack className={rowSectionStyles}>
+                <HStack>
+                  {/* DIRECTION SELECTOR  */}
+                  <Flex className="w-[18vh] items-center">
+                    <DropDownMenu
+                      options={[
+                        "inFromTop",
+                        "inFromBottom",
+                        "inFromLeft",
+                        "inFromRight",
+                        "fadeIn",
+                        "custom",
+                      ]}
+                      buttonText="direction"
+                      selectedOption={selectedAnimation}
+                      setSelectedOption={setSelectedAnimation}
+                    />
+                  </Flex>
+                </HStack>
+                {/* BUTTON  */}
+                <WrapItem>
+                  <Button
+                    buttonText="reanimate"
+                    onClick={reanimate}
+                    type="smallNormal"
+                  />
+                </WrapItem>
+              </HStack>
+            </Wrap>
+          </FlexFull>
+          <CenterHorizontalFull
+            className={`h-[50vh] md:h-[45vh] lg:h-[60vh] xxl:h-[70vh] ${largeContainerStyles} `}
+          >
+            <Box className="text-wrap max-w-full">
+              <AnimatedText
+                key={animationKey}
+                text="I am some really great text!"
+                textClassName="text-[3.5vh] sm:text-[4.5vh] md:text-[6vh] font-bold text-col-200 textShadow text-stroke-10-500"
+                animationType={selectedAnimation as AnimationType}
+                animationMotion={animationMotion}
+                letterDelay={letterDelay}
+                damping={damping}
+                stiffness={stiffness}
+                overallDelay={overallDelay}
+                overallDuration={overallDuration || undefined}
+                letterDuration={letterDuration}
+                yDistance={yDistance}
+                xDistance={xDistance}
+                distanceAsVH={useVHUnits}
               />
-            </Flex>
-            <WrapInput
-              onChange={setLetterDelay}
-              label="letter delay"
-              min={0}
-              max={120}
-              value={letterDelay}
-            />
-
-            <WrapInput
-              onChange={setDamping}
-              label="damping"
-              min={0}
-              max={200}
-              value={damping}
-            />
-
-            <WrapInput
-              onChange={setStiffness}
-              label="stiffness"
-              min={0}
-              max={500}
-              value={stiffness}
-            />
-            <WrapInput
-              onChange={setOverallDelay}
-              label="overall delay"
-              min={0}
-              max={30}
-              value={overallDelay}
-            />
-            <WrapInput
-              onChange={setLetterDuration}
-              label="letter duration"
-              min={0}
-              max={120}
-              value={letterDuration}
-            />
-            <WrapInput
-              onChange={setYDistance}
-              label="y distance"
-              min={-1000}
-              max={1000}
-              value={yDistance}
-            />
-            <WrapInput
-              onChange={setXDistance}
-              label="x distance"
-              min={-1000}
-              max={1000}
-              value={xDistance}
-            />
-            <WrapInput
-              onChange={setFadeLetterDuration}
-              label="fade letter duration"
-              min={0}
-              max={120}
-              value={fadeLetterDuration}
-            />
-            <HStack gap="gap-[3vh]">
-              <Checkbox
-                label="spring"
-                isChecked={animationMotion === "spring"}
-                onChange={() =>
-                  setAnimationMotion(
-                    animationMotion !== "spring" ? "spring" : "tween"
-                  )
-                }
-              />
-              <Checkbox
-                label="tween"
-                isChecked={animationMotion === "tween"}
-                onChange={() =>
-                  setAnimationMotion(
-                    animationMotion !== "tween" ? "tween" : "spring"
-                  )
-                }
-              />
-            </HStack>
-            <WrapItem>
-              <Button
-                buttonText="reanimate"
-                onClick={reanimate}
-                type="smallNormal"
-              />
-            </WrapItem>
-          </Wrap>
-          <CenterHorizontalFull className="h-[45vh]">
-            <AnimatedText
-              key={animationKey}
-              text="I am some really great text!"
-              textClassName="text-too-big-loose md:text-insane-loose font-bold text-col-200 textShadow text-stroke-10-500"
-              animationType={selectedAnimation as AnimationType}
-              animationMotion={animationMotion}
-              letterDelay={letterDelay}
-              damping={damping}
-              stiffness={stiffness}
-              overallDelay={overallDelay}
-              overallDuration={overallDuration || undefined}
-              letterDuration={letterDuration}
-              yDistance={yDistance}
-              xDistance={xDistance}
-              fadeLetterDuration={fadeLetterDuration}
-            />
+            </Box>
           </CenterHorizontalFull>
         </VStackFull>
       </Flex>
-    </CenterFull>
+    </TransitionFullScreen>
   );
 }
 

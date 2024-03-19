@@ -23,7 +23,6 @@ interface AnimatedTextProps {
   letterDuration?: number;
   yDistance?: number;
   xDistance?: number;
-  fadeLetterDuration?: number;
   distanceAsVH?: boolean;
 }
 
@@ -37,10 +36,9 @@ export default function AnimatedText({
   stiffness = 100,
   overallDelay = 0.2,
   overallDuration,
-  letterDuration,
+  letterDuration = 0.5,
   yDistance = 150,
   xDistance = 150,
-  fadeLetterDuration = 0.5,
   distanceAsVH = false,
   textClassName = "text-[6vh] font-bold text-col-200 textShadow text-stroke-10-500",
 }: AnimatedTextProps) {
@@ -69,7 +67,7 @@ export default function AnimatedText({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { duration: fadeLetterDuration },
+      transition: { duration: letterDuration },
     },
   };
 
@@ -117,7 +115,7 @@ export default function AnimatedText({
         <motion.span
           key={index}
           variants={animationType === "fadeIn" ? fadeLetterVariants : child}
-          className={textClassName}
+          className={`${textClassName}`}
         >
           {letter === " " ? "\u00A0" : letter}
         </motion.span>
