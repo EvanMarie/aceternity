@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import HStackFull from "~/components/buildingBlocks/hStackFull";
@@ -48,7 +48,9 @@ export default function DropDownMenu({
   labelIsCursive?: boolean;
   labelShadow?: string;
   selectedOption: string | undefined;
-  setSelectedOption: (text: string) => void;
+  setSelectedOption:
+    | Dispatch<any | string | undefined>
+    | ((value: string | undefined) => void);
 }) {
   function DropDownElement({
     text,
@@ -71,9 +73,7 @@ export default function DropDownMenu({
   }
 
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  // const [selectedOption, setSelectedOption] = useState<string | undefined>(
-  //   undefined
-  // );
+
   return (
     <VStackFull gap="gap-[0px]" align="items-start">
       {label && labelSize === "small" && (

@@ -7,43 +7,43 @@ export default function AnimatedTitleExamples() {
       <AnimatedText
         text="I come in from the top!"
         className="text-insane-loose font-bold"
-        direction="top"
+        animationType="inFromTop"
         letterDelay={0.09}
       />
       <AnimatedText
         text="I arrive from the bottom."
         className="text-insane-loose font-bold"
-        direction="bottom"
+        animationType="inFromBottom"
         letterDelay={0.09}
       />
       <AnimatedText
         text="I fly in from the left!"
         className="text-insane-loose font-bold"
-        direction="left"
+        animationType="inFromLeft"
         letterDelay={0.09}
       />
       <AnimatedText
         text="I fly in from the right!"
         className="text-insane-loose font-bold"
-        direction="right"
+        animationType="inFromRight"
         letterDelay={0.09}
       />
       <AnimatedText
         text="I fade in from the void!"
         className="text-insane-loose font-bold"
-        direction="fadeIn"
+        animationType="fadeIn"
         letterDelay={0.1}
       />
       <AnimatedText
         text="I am some really great text!"
         className="text-insane-loose font-bold"
-        direction="custom"
+        animationType="custom"
         overallDuration={3}
         letterDuration={0.5}
         letterDelay={0.1}
-        distanceAsString
-        xDistance="-100vh"
-        yDistance="-100vh"
+        distanceAsVH
+        xDistance={-100}
+        yDistance={-100}
       />
     </VStackFull>
   );

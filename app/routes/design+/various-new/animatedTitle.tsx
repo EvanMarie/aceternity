@@ -1,10 +1,19 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { distance, motion } from "framer-motion";
+
+export type AnimationType =
+  | "inFromTop"
+  | "inFromBottom"
+  | "inFromLeft"
+  | "inFromRight"
+  | "fadeIn"
+  | "custom";
 
 interface AnimatedTextProps {
   text?: string;
   className?: string;
-  direction?: "top" | "bottom" | "left" | "right" | "fadeIn" | "custom";
+  animationType?: AnimationType;
+  animationMotion?: "spring" | "tween";
   letterDelay?: number;
   textClassName?: string;
   damping?: number;
@@ -12,16 +21,17 @@ interface AnimatedTextProps {
   overallDelay?: number;
   overallDuration?: number;
   letterDuration?: number;
-  yDistance?: number | string;
-  xDistance?: number | string;
+  yDistance?: number;
+  xDistance?: number;
   fadeLetterDuration?: number;
-  distanceAsString?: boolean;
+  distanceAsVH?: boolean;
 }
 
 export default function AnimatedText({
   text,
   className = "",
-  direction = "top",
+  animationType = "inFromTop",
+  animationMotion = "spring",
   letterDelay = 0.09,
   damping = 12,
   stiffness = 100,
@@ -31,10 +41,17 @@ export default function AnimatedText({
   yDistance = 150,
   xDistance = 150,
   fadeLetterDuration = 0.5,
-  distanceAsString = false,
+  distanceAsVH = false,
   textClassName = "text-[6vh] font-bold text-col-200 textShadow text-stroke-10-500",
 }: AnimatedTextProps) {
   const letters = text ? Array.from(text) : [];
+  const xStringDistance = distanceAsVH ? String(xDistance) + "vh" : undefined;
+  const yStringDistance = distanceAsVH ? String(yDistance) + "vh" : undefined;
+
+  const useXDistance = distanceAsVH ? xStringDistance : xDistance;
+  const useNegXDistance = distanceAsVH ? "-" + xStringDistance : -xDistance;
+  const useYDistance = distanceAsVH ? yStringDistance : yDistance;
+  const useNegYDistance = distanceAsVH ? "-" + yStringDistance : -yDistance;
 
   const container = {
     hidden: { opacity: 0 },
@@ -62,7 +79,7 @@ export default function AnimatedText({
       y: 0,
       x: 0,
       transition: {
-        type: letterDuration ? "tween" : "spring",
+        type: animationMotion,
         duration: letterDuration,
         damping: damping,
         stiffness: stiffness,
@@ -71,20 +88,20 @@ export default function AnimatedText({
     hidden: {
       opacity: 0,
       y:
-        direction === "custom" || distanceAsString
-          ? yDistance
-          : direction === "top"
-          ? -yDistance
-          : direction === "bottom"
-          ? yDistance
+        animationType === "custom"
+          ? useYDistance
+          : animationType === "inFromTop"
+          ? useNegYDistance
+          : animationType === "inFromBottom"
+          ? useYDistance
           : 0,
       x:
-        direction === "custom" || distanceAsString
-          ? xDistance
-          : direction === "left"
-          ? -xDistance
-          : direction === "right"
-          ? xDistance
+        animationType === "custom"
+          ? useXDistance
+          : animationType === "inFromLeft"
+          ? useNegXDistance
+          : animationType === "inFromRight"
+          ? useXDistance
           : 0,
     },
   };
@@ -99,7 +116,7 @@ export default function AnimatedText({
       {letters.map((letter, index) => (
         <motion.span
           key={index}
-          variants={direction === "fadeIn" ? fadeLetterVariants : child}
+          variants={animationType === "fadeIn" ? fadeLetterVariants : child}
           className={textClassName}
         >
           {letter === " " ? "\u00A0" : letter}
