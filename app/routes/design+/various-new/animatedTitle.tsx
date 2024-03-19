@@ -5,16 +5,22 @@ interface AnimatedTextProps {
   text?: string;
   className?: string;
   direction?: "top" | "bottom" | "left" | "right";
-  delay?: number;
+  letterDelay?: number;
   textClassName?: string;
+  damping?: number;
+  stiffness?: number;
+  overallDelay?: number;
 }
 
 export default function AnimatedText({
   text,
   className = "",
   direction = "top",
-  delay = 0.1,
-  textClassName = "text-[6vh] font-bold text-col-100 textShadow text-stroke-10-900",
+  letterDelay = 0.09,
+  damping = 12,
+  stiffness = 100,
+  overallDelay = 0.2,
+  textClassName = "text-[6vh] font-bold text-col-200 textShadow text-stroke-10-500",
 }: AnimatedTextProps) {
   const letters = text ? Array.from(text) : [];
 
@@ -22,7 +28,10 @@ export default function AnimatedText({
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: delay, delayChildren: 0.1 * i },
+      transition: {
+        staggerChildren: letterDelay,
+        delayChildren: overallDelay * i,
+      },
     }),
   };
 
@@ -33,8 +42,8 @@ export default function AnimatedText({
       x: 0,
       transition: {
         type: "spring",
-        damping: 12,
-        stiffness: 100,
+        damping: damping,
+        stiffness: stiffness,
       },
     },
     hidden: {
