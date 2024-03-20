@@ -7,6 +7,7 @@ import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import IconButton from "./iconButton";
 import FlexFull from "./flexFull";
 import HStackFull from "./hStackFull";
+import RoundToDecimal from "~/utils/roundDecPlace";
 
 interface SliderProps {
   label?: string;
@@ -15,6 +16,7 @@ interface SliderProps {
   min?: number;
   max?: number;
   value?: number;
+  increment?: number;
   labelTextSizes?: string;
   onChange: (value: number) => void;
 }
@@ -24,6 +26,7 @@ const Slider: React.FC<SliderProps> = ({
   direction = "flex-col",
   min = 0,
   max = 100,
+  increment = 1,
   value,
   labelColor = "text-cyan-200 textShadow",
   labelTextSizes = "text-sm-tight md:text-md-tight",
@@ -34,7 +37,7 @@ const Slider: React.FC<SliderProps> = ({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(Number(event.target.value));
   };
-  const step = max - min <= 5 ? 0.1 : 1;
+  const step = increment ? increment : max - min <= 5 ? 0.1 : 1;
 
   // Increment and decrement now use sliderValue
   const incrementValue = () => {
@@ -54,7 +57,7 @@ const Slider: React.FC<SliderProps> = ({
           className={` ${labelTextSizes} text-col-100 justify-center whitespace-nowrap`}
         >
           <Text className={`${labelColor}`}>{label}: </Text>
-          <Text>{value}</Text>
+          <Text>{RoundToDecimal(value || 0, 3)}</Text>
         </HStack>
       )}
       <HStackFull className="items-center">
@@ -62,6 +65,7 @@ const Slider: React.FC<SliderProps> = ({
           type="smallUnstyled"
           icon={FiMinusCircle}
           onClick={decrementValue}
+          iconClassName="text-col-100"
         />
         <span className="text-xs text-col-100">{min}</span>
         <HStackFull className="items-center" gap="gap-[0.4vh]">
@@ -80,6 +84,7 @@ const Slider: React.FC<SliderProps> = ({
           type="smallUnstyled"
           icon={FiPlusCircle}
           onClick={incrementValue}
+          iconClassName="text-col-100"
         />
       </HStackFull>
     </FlexFull>

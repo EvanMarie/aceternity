@@ -95,8 +95,8 @@ const CounterInput: React.FC<CounterInputProps> = ({
                 onChange={handleInputChange}
                 maxLength={maxInputLength}
                 className={inputWidth}
-                type="number"
                 step={incrementStep}
+                type="text"
                 onBlur={() => onChange(inputValue)} // Update parent state on blur
               />
             ) : (
@@ -144,8 +144,8 @@ const CounterInput: React.FC<CounterInputProps> = ({
                 onChange={handleInputChange}
                 maxLength={maxInputLength}
                 className={inputWidth}
+                type="text"
                 step={incrementStep}
-                type="number"
                 onBlur={() => onChange(inputValue)} // Update parent state on blur
               />
             ) : (

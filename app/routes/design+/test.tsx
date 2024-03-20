@@ -16,10 +16,11 @@ import TransitionFullScreen from "~/components/buildingBlocks/transitionFullScre
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import Box from "~/components/buildingBlocks/box";
 import Heading from "~/components/buildingBlocks/headingText";
+import Slider from "~/components/buildingBlocks/slider";
 
 export default function AnimatedTextRoute() {
   const [selectedAnimation, setSelectedAnimation] =
-    useState<AnimationType>("inFromTop");
+    useState<AnimationType>("custom");
   const [letterDelay, setLetterDelay] = useState(0.09);
   const [damping, setDamping] = useState(12);
   const [stiffness, setStiffness] = useState(100);
@@ -71,15 +72,13 @@ export default function AnimatedTextRoute() {
   }) {
     return (
       <WrapItem>
-        <CounterInput
+        <Slider
           value={value}
           onChange={(newValue: number) => onChange(newValue)} // Directly use the newValue
           label={label}
-          inputWidth="w-[8vh]"
-          stacked
           min={min}
           max={max}
-          incrementStep={increment}
+          increment={increment}
         />
       </WrapItem>
     );
@@ -91,21 +90,21 @@ export default function AnimatedTextRoute() {
     "bg-200-diagonal1op25 py-[0.7vh] px-[1vh] insetShadowMd border-400-md";
 
   const propSectionContainerStyles =
-    "bg-col-880 px-[0.7vh] py-[1vh] md:p-[1.5vh] insetShadowMd border-900-sm shadowBroadNormal";
+    "bg-col-880 px-[0.7vh] py-[1vh] md:p-[1.5vh] insetShadowXl border-900-md shadowBroadNormal";
 
   const rowSectionStyles =
-    "justify-evenly items-center w-full lg:w-1/2 xxl:w-1/3";
+    "justify-evenly items-center flex-col w-full lg:w-1/2 xxl:w-1/3";
   return (
     <TransitionFullScreen className="p-[1.5vh]">
-      <Flex className="w-full md:w-90% xl:w-80%">
-        <VStackFull gap="gap-[2vh]">
+      <Flex className="w-full md:w-98% xxl:w-95%">
+        <VStackFull gap="gap-[1.5vh]">
           <Heading
             text="Animated Title"
-            layout="text-xxl-loose md:text-too-big-loose"
+            layout="text-xxl-normal md:text-too-big-normal"
           />
           <FlexFull className={largeContainerStyles}>
             <Wrap className="w-full items-center justify-evenly gap-y-[1vh]">
-              <HStack className={rowSectionStyles}>
+              <Flex className={rowSectionStyles}>
                 {/* DELAYS  */}
                 <VStack className={propSectionContainerStyles}>
                   <WrapInput
@@ -126,6 +125,24 @@ export default function AnimatedTextRoute() {
                 </VStack>
                 {/* DISTANCE  */}
                 <VStack className={propSectionContainerStyles}>
+                  <HStack>
+                    <WrapInput
+                      onChange={setYDistance}
+                      label="y distance"
+                      min={-2000}
+                      max={2000}
+                      increment={25}
+                      value={yDistance}
+                    />
+                    <WrapInput
+                      onChange={setXDistance}
+                      label="x distance"
+                      min={-2000}
+                      max={2000}
+                      increment={25}
+                      value={xDistance}
+                    />
+                  </HStack>
                   <HStack gap="gap-[3vh]" className={checkboxContainerStyles}>
                     <Checkbox
                       label="vh"
@@ -138,26 +155,10 @@ export default function AnimatedTextRoute() {
                       onChange={() => setUseVHUnits((prev) => !prev)}
                     />
                   </HStack>
-                  <HStack>
-                    <WrapInput
-                      onChange={setYDistance}
-                      label="y distance"
-                      min={-1000}
-                      max={1000}
-                      value={yDistance}
-                    />
-                    <WrapInput
-                      onChange={setXDistance}
-                      label="x distance"
-                      min={-1000}
-                      max={1000}
-                      value={xDistance}
-                    />
-                  </HStack>
                 </VStack>
-              </HStack>
+              </Flex>
               {/* row two  */}
-              <HStack className={rowSectionStyles}>
+              <Flex className={rowSectionStyles}>
                 {/* SPRING  */}
                 <VStack className={propSectionContainerStyles}>
                   <HStack gap="gap-[3vh]" className={checkboxContainerStyles}>
@@ -176,16 +177,16 @@ export default function AnimatedTextRoute() {
                       onChange={setDamping}
                       label="damping"
                       min={0}
-                      max={200}
+                      max={25}
                       value={damping}
                     />
                     <WrapInput
                       onChange={setStiffness}
                       label="stiffness"
                       min={0}
-                      max={500}
+                      max={250}
                       value={stiffness}
-                      increment={10}
+                      increment={1}
                     />
                   </HStack>
                 </VStack>
@@ -206,11 +207,12 @@ export default function AnimatedTextRoute() {
                     onChange={setLetterDuration}
                     label="letter duration"
                     min={0}
-                    max={120}
+                    max={5}
+                    increment={0.01}
                     value={letterDuration}
                   />
                 </VStack>
-              </HStack>
+              </Flex>
               {/* row three  */}
               <HStack className={rowSectionStyles}>
                 <HStack>
