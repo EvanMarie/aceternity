@@ -7,7 +7,9 @@ export type AnimationType =
   | "inFromLeft"
   | "inFromRight"
   | "fadeIn"
-  | "custom";
+  | "custom"
+  | "spinInPlace"
+  | "spinOnScreen";
 
 interface AnimatedTextProps {
   text?: string;
@@ -24,6 +26,7 @@ interface AnimatedTextProps {
   yDistance?: number;
   xDistance?: number;
   distanceAsVH?: boolean;
+  numSpins?: number;
 }
 
 export default function AnimatedText({
@@ -41,6 +44,7 @@ export default function AnimatedText({
   xDistance = 150,
   distanceAsVH = false,
   textClassName = "text-[6vh] font-bold text-col-200 textShadow text-stroke-10-500",
+  numSpins = 2,
 }: AnimatedTextProps) {
   const letters = text ? Array.from(text) : [];
   const xStringDistance = distanceAsVH ? String(xDistance) + "vh" : undefined;
@@ -62,6 +66,53 @@ export default function AnimatedText({
       },
     }),
   };
+
+  const spinInPlaceVariant = {
+    hidden: {
+      opacity: 0,
+      rotate: -360,
+      x: -50,
+    },
+    visible: {
+      opacity: 1,
+      rotate: 0,
+      x: 0,
+      transition: {
+        type: "spring",
+        damping: 20,
+        stiffness: 300,
+      },
+    },
+  };
+
+  const spinOnScreenVariant = (numSpins: number) => ({
+    hidden: {
+      opacity: 0,
+      rotate: -360 * numSpins,
+      x: useXDistance,
+      y: useYDistance,
+    },
+    visible: {
+      opacity: 1,
+      rotate: 0,
+      x: 0,
+      y: 0,
+      transition: {
+        type: "tween",
+        duration: letterDuration,
+        times: [0, 0.8, 1],
+        rotate: {
+          duration: letterDuration,
+          ease: "linear",
+          times: Array.from(
+            { length: numSpins },
+            (_, i) => (i + 1) / (numSpins + 1)
+          ),
+          repeat: numSpins - 1,
+        },
+      },
+    },
+  });
 
   const fadeLetterVariants = {
     hidden: { opacity: 0 },
@@ -114,7 +165,15 @@ export default function AnimatedText({
       {letters.map((letter, index) => (
         <motion.span
           key={index}
-          variants={animationType === "fadeIn" ? fadeLetterVariants : child}
+          variants={
+            animationType === "fadeIn"
+              ? fadeLetterVariants
+              : animationType === "spinInPlace"
+              ? spinInPlaceVariant
+              : animationType === "spinOnScreen"
+              ? spinOnScreenVariant(numSpins)
+              : child
+          }
           className={`${textClassName}`}
         >
           {letter === " " ? "\u00A0" : letter}

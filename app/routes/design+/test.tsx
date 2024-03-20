@@ -17,6 +17,7 @@ import FlexFull from "~/components/buildingBlocks/flexFull";
 import Box from "~/components/buildingBlocks/box";
 import Heading from "~/components/buildingBlocks/headingText";
 import Slider from "~/components/buildingBlocks/slider";
+import Text from "~/components/buildingBlocks/text";
 
 export default function AnimatedTextRoute() {
   const [selectedAnimation, setSelectedAnimation] =
@@ -34,6 +35,7 @@ export default function AnimatedTextRoute() {
     "spring"
   );
   const [useVHUnits, setUseVHUnits] = useState(true);
+  const [easeFunction, setEaseFunction] = useState("easeInOut");
 
   const [animationKey, reanimate] = useReanimate();
   useEffect(() => {
@@ -87,13 +89,13 @@ export default function AnimatedTextRoute() {
   const largeContainerStyles =
     "bg-col-950 p-[1vh] border-900-sm shadowBroadNormal";
   const checkboxContainerStyles =
-    "bg-200-diagonal1op25 py-[0.7vh] px-[1vh] insetShadowMd border-400-md";
+    "bg-200-diagonal1op25 py-[0.7vh] px-[1vh] insetShadowMd border-400-md gap-[0.5vh]";
 
   const propSectionContainerStyles =
     "bg-col-880 px-[0.7vh] py-[1vh] md:p-[1.5vh] insetShadowXl border-900-md shadowBroadNormal";
 
   const rowSectionStyles =
-    "justify-evenly items-center flex-col w-full lg:w-1/2 xxl:w-1/3";
+    "justify-evenly items-center flex-col gap-[1.5vh] w-full lg:w-1/2 xxl:w-1/3";
   return (
     <TransitionFullScreen className="p-[1.5vh]">
       <Flex className="w-full md:w-98% xxl:w-95%">
@@ -111,7 +113,7 @@ export default function AnimatedTextRoute() {
                     onChange={setLetterDelay}
                     label="letter delay"
                     min={0}
-                    max={120}
+                    max={2}
                     value={letterDelay}
                     increment={0.01}
                   />
@@ -214,10 +216,13 @@ export default function AnimatedTextRoute() {
                 </VStack>
               </Flex>
               {/* row three  */}
-              <HStack className={rowSectionStyles}>
+              <Flex className={rowSectionStyles}>
                 <HStack>
                   {/* DIRECTION SELECTOR  */}
-                  <Flex className="w-[18vh] items-center">
+                  <VStack className="w-[18vh] justify-center">
+                    <Text className="text-sm-tight md:text-md-tight text-cyan-200">
+                      Animation Style:
+                    </Text>
                     <DropDownMenu
                       options={[
                         "inFromTop",
@@ -225,23 +230,21 @@ export default function AnimatedTextRoute() {
                         "inFromLeft",
                         "inFromRight",
                         "fadeIn",
+                        "spinOnScreen",
+                        "spinInPlace",
                         "custom",
                       ]}
                       buttonText="direction"
                       selectedOption={selectedAnimation}
                       setSelectedOption={setSelectedAnimation}
                     />
-                  </Flex>
+                  </VStack>
                 </HStack>
                 {/* BUTTON  */}
                 <WrapItem>
-                  <Button
-                    buttonText="reanimate"
-                    onClick={reanimate}
-                    type="smallNormal"
-                  />
+                  <Button buttonText="reanimate" onClick={reanimate} />
                 </WrapItem>
-              </HStack>
+              </Flex>
             </Wrap>
           </FlexFull>
           <CenterHorizontalFull
