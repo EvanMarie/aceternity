@@ -3,16 +3,17 @@ import { useRef } from "react";
 import Center from "~/components/buildingBlocks/center";
 import CenterFull from "~/components/buildingBlocks/centerFull";
 import Flex from "~/components/buildingBlocks/flex";
+import FlexFull from "~/components/buildingBlocks/flexFull";
 import Text from "~/components/buildingBlocks/text";
 
 export default function InteractivePerspectiveContainer({
-  width = "w-[60vw]",
-  height = "h-[60vh]",
+  width = "w-[80vw]",
+  height = "h-[80vh]",
   bg = "bg-900-radial3op75",
   shadow = "shadowBroadLooser",
   perspective = "1000px",
   scale = 1.02,
-  rotateAmount = 45,
+  rotateAmount = 20,
   children,
 }: {
   width: string;
@@ -32,8 +33,18 @@ export default function InteractivePerspectiveContainer({
       const rect = card.getBoundingClientRect();
       const mouseX = event.clientX - rect.left;
       const mouseY = event.clientY - rect.top;
-      const rotateY = (mouseX / rect.width - 0.5) * rotateAmount;
-      const rotateX = (mouseY / rect.height - 0.5) * -rotateAmount;
+
+      // Calculate the position of the mouse relative to the center of the element
+      const centerX = mouseX / rect.width - 0.5;
+      const centerY = mouseY / rect.height - 0.5;
+
+      // Apply a damping factor to smooth out the rotation near the edges
+      const dampingFactor = 0.5; // You can adjust this value to get the desired smoothness
+      const rotateY =
+        centerX * rotateAmount * (1 - Math.abs(centerX) * dampingFactor);
+      const rotateX =
+        centerY * -rotateAmount * (1 - Math.abs(centerY) * dampingFactor);
+
       const style: MotionStyle = {
         transform: `perspective(${perspective}) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`,
       };
@@ -61,9 +72,10 @@ export default function InteractivePerspectiveContainer({
           onMouseLeave={handleMouseLeave}
           style={{ transformStyle: "preserve-3d" }}
         >
-          <Center className={`absolute inset-0 ${bg} ${shadow}`}>
-            {/* {children} */}
-            <Text className="text-insane-loose">"Hello"</Text>
+          <Center className={`absolute inset-0 p-[2vh]`}>
+            <CenterFull className={`${bg} ${shadow} h-full`}>
+              {children}
+            </CenterFull>
           </Center>
         </motion.div>
       </Center>
