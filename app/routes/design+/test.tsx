@@ -13,6 +13,8 @@ import CounterInput from "~/components/buildingBlocks/counterInput";
 import CenterHorizontalFull from "~/components/buildingBlocks/centerHorizontalFull";
 import HStack from "~/components/buildingBlocks/hStack";
 import Checkbox from "~/components/buildingBlocks/checkBox";
+import Wrap from "~/components/buildingBlocks/wrap";
+import Flex from "~/components/buildingBlocks/flex";
 
 // const HoverDiv3D = () => {
 //   return (
@@ -89,46 +91,71 @@ export default function App() {
   const [transitionType, setTransitionType] = useState<"spring" | "tween">(
     "spring"
   );
+
+  function Counter({
+    value,
+    onChange,
+    label,
+    min,
+    max,
+    increment,
+  }: {
+    value: number;
+    onChange: any;
+    label: string;
+    min: number;
+    max: number;
+    increment: number;
+  }) {
+    return (
+      <Flex className="w-[18vh]">
+        <CounterInput
+          showButtons
+          showInput={false}
+          label={label}
+          min={min}
+          max={max}
+          incrementStep={increment}
+          value={value}
+          onChange={(newValue) => onChange(newValue)}
+          labelTextSizes="text-sm-tight"
+        />
+      </Flex>
+    );
+  }
+
   const checkboxContainerStyles =
-    "bg-200-diagonal1op25 py-[0.7vh] px-[1vh] insetShadowMd border-400-md gap-[0.5vh]";
+    "w-fit bg-200-diagonal1op25 py-[0.7vh] px-[1vh] insetShadowMd border-400-md gap-[0.5vh]";
+
   return (
-    <CenterFull>
-      <VStackFull className="h-screen">
-        <VStackFull className="h-[20vh] justify-center items-center">
+    <FlexFull className="h-screen overflow-hidden">
+      <VStackFull className="h-fit py-[1vh]">
+        <VStackFull className="h-[25vh] md:h-[20vh] justify-center items-center">
           <Heading text="Animated Carousel" layout="text-xxl-loose" />
-          <HStackFull>
-            <CounterInput
-              showButtons
-              showInput={false}
+          <Wrap className="w-full gap-[1vh] justify-evenly">
+            <Counter
+              value={imageSize}
+              onChange={setImageSize}
               label="Image Size"
               min={20}
               max={50}
-              incrementStep={10}
-              value={imageSize}
-              onChange={(newValue) => setImageSize(newValue)}
-              labelTextSizes="text-sm-tight"
+              increment={5}
             />
-            <CounterInput
-              showButtons
-              showInput={false}
+            <Counter
+              value={xOffsetFactor}
+              onChange={setXOffsetFactor}
               label="X Offset Factor"
               min={0.1}
               max={2}
-              incrementStep={0.1}
-              value={xOffsetFactor}
-              onChange={(newValue) => setXOffsetFactor(newValue)}
-              labelTextSizes="text-sm-tight"
+              increment={0.1}
             />
-            <CounterInput
-              showButtons
-              showInput={false}
+            <Counter
+              value={yOffsetFactor}
+              onChange={setYOffsetFactor}
               label="Y Offset Factor"
               min={0.1}
               max={2}
-              incrementStep={0.1}
-              value={yOffsetFactor}
-              onChange={(newValue) => setYOffsetFactor(newValue)}
-              labelTextSizes="text-sm-tight"
+              increment={0.1}
             />
             <HStack gap="gap-[3vh]" className={checkboxContainerStyles}>
               <Checkbox
@@ -142,45 +169,39 @@ export default function App() {
                 onChange={() => setTransitionType("tween")}
               />
             </HStack>
+
             {transitionType === "tween" && (
-              <CounterInput
-                showButtons
-                showInput={false}
-                label="Shift Duration Offset"
-                min={0}
-                max={2}
-                incrementStep={0.1}
+              <Counter
+                label={"Shift Duration Offset"}
                 value={shiftOffset}
-                onChange={(newValue) => setShiftOffset(newValue)}
-                labelTextSizes="text-sm-tight"
+                onChange={setShiftOffset}
+                min={0}
+                max={1}
+                increment={0.1}
               />
             )}
+
             {transitionType === "spring" && (
-              <CounterInput
-                showButtons
-                showInput={false}
+              <Counter
+                value={damping}
+                onChange={setDamping}
                 label="Damping"
                 min={1}
                 max={50}
-                value={damping}
-                onChange={(newValue) => setDamping(newValue)}
-                labelTextSizes="text-sm-tight"
+                increment={1}
               />
             )}
             {transitionType === "spring" && (
-              <CounterInput
-                showButtons
-                showInput={false}
+              <Counter
+                value={stiffness}
+                onChange={setStiffness}
                 label="Stiffness"
                 min={0}
                 max={200}
-                incrementStep={5}
-                value={stiffness}
-                onChange={(newValue) => setStiffness(newValue)}
-                labelTextSizes="text-sm-tight"
+                increment={5}
               />
             )}
-          </HStackFull>
+          </Wrap>
         </VStackFull>
         <CenterHorizontalFull className="h-[75vh]">
           <AnimatedCarousel
@@ -195,6 +216,6 @@ export default function App() {
           />
         </CenterHorizontalFull>
       </VStackFull>
-    </CenterFull>
+    </FlexFull>
   );
 }

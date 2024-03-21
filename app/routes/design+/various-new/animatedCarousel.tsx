@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Button from "~/components/buildingBlocks/button";
 import CenterFull from "~/components/buildingBlocks/centerFull";
+import RoundToDecimal from "~/utils/roundDecPlace";
 
 export default function AnimatedCarousel({
   images,
@@ -9,7 +10,7 @@ export default function AnimatedCarousel({
   xOffsetFactor = 0.53,
   yOffsetFactor = 0.2,
   rounded = "rounded-[6vh]",
-  containerDimensions,
+  containerDimensions = "w-full",
   frontShadow = "border-100-md metallicEdgesSm",
   backShadow = "border-900-md shadowBroadLooser",
   backImageEffects = "brightness(40%) blur(2px)",
@@ -39,8 +40,9 @@ export default function AnimatedCarousel({
     return null;
   }
   const imageDimensions = `w-[${imageSize}vh] h-[${imageSize}vh]`;
-  const backImageXOffset = imageSize * xOffsetFactor + "vh";
-  const backImageYOffset = imageSize * yOffsetFactor + "vh";
+  console.log("imageDimensions", imageDimensions);
+  const backImageXOffset = RoundToDecimal(imageSize * xOffsetFactor, 0) + "vh";
+  const backImageYOffset = RoundToDecimal(imageSize * yOffsetFactor, 0) + "vh";
   const imageContainerClassName = `absolute ${imageDimensions} ${rounded} bg-center bg-cover bg-no-repeat`;
   const imageClassName = `w-full h-full ${rounded} ${backShadow}`;
   const frontImageClassName = `${imageClassName} ${frontShadow}`;
