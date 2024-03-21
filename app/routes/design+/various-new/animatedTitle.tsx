@@ -1,5 +1,4 @@
-import React from "react";
-import { distance, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 export type AnimationType =
   | "inFromTop"
@@ -27,6 +26,12 @@ interface AnimatedTextProps {
   xDistance?: number;
   distanceAsVH?: boolean;
   numSpins?: number;
+  gradient?: Gradient;
+}
+
+interface Gradient {
+  colors: string[];
+  direction?: string;
 }
 
 export default function AnimatedText({
@@ -43,6 +48,7 @@ export default function AnimatedText({
   yDistance = 150,
   xDistance = 150,
   distanceAsVH = false,
+  gradient,
   textClassName = "text-[6vh] font-bold text-col-200 textShadow text-stroke-10-500",
   numSpins = 2,
 }: AnimatedTextProps) {
@@ -155,6 +161,17 @@ export default function AnimatedText({
     },
   };
 
+  // Gradient style handling
+  const gradientStyle = gradient
+    ? {
+        background: `linear-gradient(${
+          gradient.direction || "to right"
+        }, ${gradient.colors.join(", ")})`,
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+      }
+    : {};
+
   return (
     <motion.div
       className={`flex justify-center items-center ${className}`}
@@ -174,6 +191,7 @@ export default function AnimatedText({
               ? spinOnScreenVariant(numSpins)
               : child
           }
+          style={gradientStyle}
           className={`${textClassName}`}
         >
           {letter === " " ? "\u00A0" : letter}
