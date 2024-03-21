@@ -6,16 +6,23 @@ import CenterFull from "~/components/buildingBlocks/centerFull";
 export default function AnimatedCarousel({
   images,
   imageSize = 50,
+  xOffsetFactor = 0.53,
+  yOffsetFactor = 0.2,
   rounded = "rounded-[6vh]",
   containerDimensions,
   frontShadow = "border-100-md metallicEdgesSm",
   backShadow = "border-900-md shadowBroadLooser",
   backImageEffects = "brightness(40%) blur(2px)",
-  shiftDurationOffset = 2,
+  shiftDurationOffset = 0.3,
   buttonGap = "gap-[12vh]",
+  damping = 15,
+  stiffness = 50,
+  transitionType = "spring",
 }: {
   images?: string[];
   imageSize?: number;
+  xOffsetFactor?: number;
+  yOffsetFactor?: number;
   rounded?: string;
   backImageEffects?: string;
   backImageBlur?: string;
@@ -24,13 +31,16 @@ export default function AnimatedCarousel({
   containerDimensions?: string;
   buttonGap?: string;
   shiftDurationOffset?: number;
+  damping?: number;
+  stiffness?: number;
+  transitionType?: "spring" | "tween";
 }) {
   if (!Array.isArray(images)) {
     return null;
   }
   const imageDimensions = `w-[${imageSize}vh] h-[${imageSize}vh]`;
-  const backImageXOffset = imageSize * 0.53 + "vh";
-  const backImageYOffset = imageSize * 0.2 + "vh";
+  const backImageXOffset = imageSize * xOffsetFactor + "vh";
+  const backImageYOffset = imageSize * yOffsetFactor + "vh";
   const imageContainerClassName = `absolute ${imageDimensions} ${rounded} bg-center bg-cover bg-no-repeat`;
   const imageClassName = `w-full h-full ${rounded} ${backShadow}`;
   const frontImageClassName = `${imageClassName} ${frontShadow}`;
@@ -88,11 +98,11 @@ export default function AnimatedCarousel({
       filter: "brightness(100%)",
       backgroundImage: "url(" + images[FrontId] + ")",
       transition: {
-        type: "spring",
+        type: transitionType,
         duration: 1 * shiftDurationOffset,
         filter: { type: "tween" },
-        stiffness: 50,
-        damping: 15,
+        stiffness: stiffness,
+        damping: damping,
       },
     },
     left: {
@@ -104,11 +114,11 @@ export default function AnimatedCarousel({
       backgroundImage: "url(" + images[leftImage] + ")",
       zIndex: "4",
       transition: {
-        type: "spring",
+        type: transitionType,
         duration: 2 * shiftDurationOffset,
         filter: { type: "tween" },
-        stiffness: 50,
-        damping: 15,
+        stiffness: stiffness,
+        damping: damping,
       },
     },
     right: {
@@ -120,11 +130,11 @@ export default function AnimatedCarousel({
       scale: 1,
       zIndex: "3",
       transition: {
-        type: "spring",
+        type: transitionType,
         duration: 3 * shiftDurationOffset,
         filter: { type: "tween" },
-        stiffness: 50,
-        damping: 15,
+        stiffness: stiffness,
+        damping: damping,
       },
     },
     rightHidden: {

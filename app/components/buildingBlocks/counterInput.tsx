@@ -8,6 +8,7 @@ import FlexFull from "./flexFull";
 import HStackFull from "./hStackFull";
 import Input from "./input";
 import VStack from "./vStack";
+import RoundToDecimal from "~/utils/roundDecPlace";
 
 interface CounterInputProps {
   label?: string;
@@ -100,7 +101,7 @@ const CounterInput: React.FC<CounterInputProps> = ({
                 onBlur={() => onChange(inputValue)} // Update parent state on blur
               />
             ) : (
-              <Text>{value}</Text>
+              <Text>{RoundToDecimal(value, 2)}</Text>
             )}
             <IconButton
               type="smallUnstyled"
@@ -149,7 +150,7 @@ const CounterInput: React.FC<CounterInputProps> = ({
                 onBlur={() => onChange(inputValue)} // Update parent state on blur
               />
             ) : (
-              <Text>{value}</Text>
+              <Text>{RoundToDecimal(value, 2)}</Text>
             )}
 
             <IconButton
