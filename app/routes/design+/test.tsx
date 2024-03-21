@@ -1,84 +1,207 @@
-import { motion, MotionStyle } from "framer-motion";
-import { useRef } from "react";
-import Center from "~/components/buildingBlocks/center";
-import CenterFull from "~/components/buildingBlocks/centerFull";
-import Flex from "~/components/buildingBlocks/flex";
-import FlexFull from "~/components/buildingBlocks/flexFull";
-import Text from "~/components/buildingBlocks/text";
+// import React from "react";
+// import { motion } from "framer-motion";
 
-export default function InteractivePerspectiveContainer({
-  width = "w-[80vw]",
-  height = "h-[80vh]",
-  bg = "bg-900-radial3op75",
-  shadow = "shadowBroadLooser",
-  perspective = "1000px",
-  scale = 1.02,
-  rotateAmount = 20,
-  children,
-}: {
-  width: string;
-  height: string;
-  bg: string;
-  shadow: string;
-  perspective: string;
-  scale: number;
-  rotateAmount: number;
-  children: React.ReactNode;
-}) {
-  const cardRef = useRef<HTMLDivElement>(null);
+// const HoverDiv3D = () => {
+//   return (
+//     <motion.div
+//       className="w-[20vh] h-[20vh] bg-col-400 overflow-hidden"
+//       animate={{
+//         x: 0,
+//         y: 0,
+//         //   border:"2px solid #000",
+//         boxShadow: "-0rem 0rem 0 #252525",
+//         rotate: "0deg",
+//       }}
+//       whileHover={{
+//         x: 5,
+//         y: -5,
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    const card = cardRef.current;
-    if (card) {
-      const rect = card.getBoundingClientRect();
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
+//         boxShadow: "-0.5rem 0.5rem 0 #fff ",
+//         rotate: "0.7deg",
+//       }}
+//     >
+//       <h1>Hey Hover Me</h1>
+//       <motion.p
+//         animate={{
+//           overflow: "hidden",
+//           textOverflow: "ellipsis",
+//           display: "-webkit-box",
+//           WebkitLineClamp: 2,
+//           WebkitBoxOrient: "vertical",
+//           wordBreak: "break-word",
+//         }}
+//       >
+//         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus ad
+//         distinctio voluptatem necessitatibus, non, obcaecati voluptate amet
+//         suscipit alias nesciunt nostrum deserunt cum, totam corrupti in
+//         cupiditate debitis quas? Excepturi!
+//       </motion.p>
+//     </motion.div>
+//   );
+// };
 
-      // Calculate the position of the mouse relative to the center of the element
-      const centerX = mouseX / rect.width - 0.5;
-      const centerY = mouseY / rect.height - 0.5;
+// export default HoverDiv3D;
 
-      // Apply a damping factor to smooth out the rotation near the edges
-      const dampingFactor = 0.5; // You can adjust this value to get the desired smoothness
-      const rotateY =
-        centerX * rotateAmount * (1 - Math.abs(centerX) * dampingFactor);
-      const rotateX =
-        centerY * -rotateAmount * (1 - Math.abs(centerY) * dampingFactor);
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+// import "./carousel.scss";
+import { useEffect } from "react";
+const Carousel = ({ Data }) => {
+  const [FlowDirection, setFlowDirection] = useState(true);
+  const [CenterId, setCenterId] = useState(0);
+  const [LeftId, setLeftId] = useState(Data.length - 1);
+  const [RightId, setRightId] = useState(1);
 
-      const style: MotionStyle = {
-        transform: `perspective(${perspective}) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`,
-      };
-      card.style.transform = style.transform as string;
+  const nextBtn = () => {
+    if (LeftId === Data.length - 1) {
+      setLeftId(0);
+    } else {
+      setLeftId(LeftId + 1);
+    }
+    if (CenterId === Data.length - 1) {
+      setCenterId(0);
+    } else {
+      setCenterId(CenterId + 1);
+    }
+
+    if (RightId === Data.length - 1) {
+      setRightId(0);
+    } else {
+      setRightId(RightId + 1);
+    }
+    setFlowDirection(true);
+  };
+  const prevBtn = () => {
+    setFlowDirection(false);
+    if (LeftId === 0) {
+      setLeftId(Data.length - 1);
+    } else {
+      setLeftId(LeftId - 1);
+    }
+    if (CenterId === 0) {
+      setCenterId(Data.length - 1);
+    } else {
+      setCenterId(CenterId - 1);
+    }
+    if (RightId === 0) {
+      setRightId(Data.length - 1);
+    } else {
+      setRightId(RightId - 1);
     }
   };
 
-  const handleMouseLeave = () => {
-    const card = cardRef.current;
-    if (card) {
-      const style: MotionStyle = {
-        transform: `perspective(${perspective}) rotateX(0deg) rotateY(0deg) scale(1)`,
-      };
-      card.style.transform = style.transform as string;
-    }
+  const variants = {
+    center: {
+      x: "0rem",
+      opacity: 1,
+      scale: 1.1,
+      zIndex: "5",
+      filter: "brightness(100%)",
+      backgroundImage: "url(" + Data[CenterId] + ")",
+      boxShadow: "0px 0px 30px 0px rgba(0,0,0,0.3)",
+      transition: {
+        type: "spring",
+        duration: 1,
+      },
+    },
+    left: {
+      x: "-6rem",
+      opacity: 1,
+      filter: "brightness(40%)",
+      scale: 1,
+      backgroundImage: "url(" + Data[LeftId] + ")",
+      zIndex: "4",
+      boxShadow: "unset",
+      transition: {
+        type: "spring",
+        duration: 1,
+      },
+    },
+    right: {
+      backgroundImage: "url(" + Data[RightId] + ")",
+      x: "6rem",
+      opacity: 1,
+      filter: "brightness(40%)",
+      scale: 1,
+      boxShadow: "unset",
+      zIndex: "3",
+      transition: {
+        type: "spring",
+        duration: 1,
+      },
+    },
+    rightHidden: {
+      x: "8rem",
+      scale: 0,
+      opacity: 0,
+    },
+    leftHidden: {
+      x: "-8rem",
+      scale: 0,
+      opacity: 0,
+    },
   };
-
   return (
-    <CenterFull className="bg-col-300">
-      <Center className={`${width} ${height}`}>
-        <motion.div
-          ref={cardRef}
-          className={`relative ${width} ${height} cursor-pointer`}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-          style={{ transformStyle: "preserve-3d" }}
+    <motion.div className="carousel-wrapper">
+      <motion.div className="carousel-content">
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={LeftId}
+            variants={variants}
+            initial={FlowDirection ? "center" : "leftHidden"}
+            animate="left"
+            exit={"leftHidden"}
+            className="carousel-item"
+          ></motion.div>
+          <motion.div
+            variants={variants}
+            key={CenterId}
+            initial={FlowDirection ? "right" : "left"}
+            animate="center"
+            className="carousel-item"
+          ></motion.div>
+          <motion.div
+            key={RightId}
+            variants={variants}
+            initial={FlowDirection ? "rightHidden" : "center"}
+            animate="right"
+            exit={"rightHidden"}
+            className="carousel-item"
+          ></motion.div>
+        </AnimatePresence>
+      </motion.div>
+      <div className="carousel-btns">
+        <motion.button
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            type: "spring",
+            duration: 0.5,
+          }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.8 }}
+          className="bwd-btn"
+          onClick={prevBtn}
         >
-          <Center className={`absolute inset-0 p-[2vh]`}>
-            <CenterFull className={`${bg} ${shadow} h-full`}>
-              {children}
-            </CenterFull>
-          </Center>
-        </motion.div>
-      </Center>
-    </CenterFull>
+          Back
+        </motion.button>
+        <motion.button
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            type: "spring",
+            duration: 0.5,
+          }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.8 }}
+          className="fwd-btn"
+          onClick={nextBtn}
+        >
+          Next
+        </motion.button>
+      </div>
+    </motion.div>
   );
-}
+};
+
+export default Carousel;
