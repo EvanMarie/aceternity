@@ -3,6 +3,9 @@
 
 import CenterFull from "~/components/buildingBlocks/centerFull";
 import AnimatedCarousel from "./various-new/animatedCarousel";
+import VStackFull from "~/components/buildingBlocks/vStackFull";
+import Heading from "~/components/buildingBlocks/headingText";
+import FlexFull from "~/components/buildingBlocks/flexFull";
 
 // const HoverDiv3D = () => {
 //   return (
@@ -69,7 +72,12 @@ const images = [
 export default function App() {
   return (
     <CenterFull>
-      <AnimatedCarousel images={images} />
+      <VStackFull className="h-screen">
+        <FlexFull className="h-[20vh] justify-center items-center">
+          <Heading text="Animated Carousel" layout="text-too-big-loose" />
+        </FlexFull>
+        <AnimatedCarousel images={images} />
+      </VStackFull>
     </CenterFull>
   );
 }

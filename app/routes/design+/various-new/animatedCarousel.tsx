@@ -5,7 +5,7 @@ import CenterFull from "~/components/buildingBlocks/centerFull";
 
 export default function AnimatedCarousel({
   images,
-  imageSize = 60,
+  imageSize = 50,
   rounded = "rounded-[6vh]",
   containerDimensions,
   frontShadow = "border-100-md metallicEdgesSm",
