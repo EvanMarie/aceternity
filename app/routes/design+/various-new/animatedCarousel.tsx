@@ -10,17 +10,18 @@ export default function AnimatedCarousel({
   xOffsetFactor = 0.53,
   yOffsetFactor = 0.2,
   rounded = "rounded-[6vh]",
-  containerDimensions = "w-full",
+  containerDimensions = "w-full h-full",
   frontShadow = "border-100-md metallicEdgesSm",
   backShadow = "border-900-md shadowBroadLooser",
   backImageEffects = "brightness(40%) blur(2px)",
   shiftDurationOffset = 0.3,
-  buttonGap = "gap-[12vh]",
+  buttonGap = "gap-[18vh]",
   damping = 15,
   stiffness = 50,
   transitionType = "spring",
+  frontScale = 1.2,
 }: {
-  images?: string[];
+  images: string[];
   imageSize?: number;
   xOffsetFactor?: number;
   yOffsetFactor?: number;
@@ -35,10 +36,17 @@ export default function AnimatedCarousel({
   damping?: number;
   stiffness?: number;
   transitionType?: "spring" | "tween";
+  frontScale?: number;
 }) {
+  const [leftImage, setleftImage] = useState(images.length - 1);
+  const [rightImage, setrightImage] = useState(1);
+  const [shift, setshift] = useState(true);
+  const [FrontId, setFrontId] = useState(0);
+
   if (!Array.isArray(images)) {
     return null;
   }
+
   const imageDimensions = `w-[${imageSize}vh] h-[${imageSize}vh]`;
   console.log("imageDimensions", imageDimensions);
   const backImageXOffset = RoundToDecimal(imageSize * xOffsetFactor, 0) + "vh";
@@ -47,11 +55,6 @@ export default function AnimatedCarousel({
   const imageClassName = `w-full h-full ${rounded} ${backShadow}`;
   const frontImageClassName = `${imageClassName} ${frontShadow}`;
   const backImageClassName = `${imageClassName} ${backShadow}`;
-  const [shift, setshift] = useState(true);
-  const [FrontId, setFrontId] = useState(0);
-  const [leftImage, setleftImage] = useState(images.length - 1);
-  const [rightImage, setrightImage] = useState(1);
-
   const handleNextClick = () => {
     if (leftImage === images.length - 1) {
       setleftImage(0);
@@ -92,10 +95,10 @@ export default function AnimatedCarousel({
 
   const variants = {
     center: {
-      x: "0vh",
-      y: "0vh",
+      x: "0",
+      y: "3vh",
       opacity: 1,
-      scale: 1.15,
+      scale: frontScale,
       zIndex: "5",
       filter: "brightness(100%)",
       backgroundImage: "url(" + images[FrontId] + ")",
@@ -152,7 +155,7 @@ export default function AnimatedCarousel({
   };
   return (
     <motion.div
-      className={`flex flex-col ${buttonGap} items-center ${rounded} ${containerDimensions}`}
+      className={`flex flex-col ${buttonGap} items-center justify-between ${rounded} ${containerDimensions}`}
     >
       <motion.div className={`relative ${imageDimensions}`}>
         <AnimatePresence initial={false}>
@@ -199,9 +202,13 @@ export default function AnimatedCarousel({
           </motion.div>
         </AnimatePresence>
       </motion.div>
-      <div className="mt-8 mb-8 flex justify-center space-x-4 z-10">
-        <Button onClick={handlePreviousClick} buttonText="Previous" />
-        <Button onClick={handleNextClick} buttonText="Next" />
+      <div className="flex justify-center gap-[5vh] p-[2vh]">
+        <Button
+          onClick={handlePreviousClick}
+          buttonText="Previous"
+          width="w-[12vh]"
+        />
+        <Button onClick={handleNextClick} buttonText="Next" width="w-[12vh]" />
       </div>
     </motion.div>
   );
