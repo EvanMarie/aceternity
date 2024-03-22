@@ -1,43 +1,24 @@
 import CenterFull from "~/components/buildingBlocks/centerFull";
-import Text from "~/components/buildingBlocks/text";
-import MovingImage from "./various-new/movingImage";
+
 import FlexFull from "~/components/buildingBlocks/flexFull";
+import MovingImage from "./various-new/movingImage";
+import Text from "~/components/buildingBlocks/text";
+import Cube3D from "./various-new/cube3D";
+import Cube3DSpinning from "./various-new/cube3Dspinning";
+import Flex from "~/components/buildingBlocks/flex";
 
 export default function Test() {
   return (
-    <FlexFull>
-      <MovingImage />
-      <Text>This</Text>
-    </FlexFull>
+    <CenterFull>
+      <Flex className="w-[80vh] h-[80vh] bg-col-800 shadowBroadNormal border-900-md">
+        <Cube3D />
+        {/* <Cube3DSpinning /> */}
+      </Flex>
+    </CenterFull>
   );
 }
 
 // ---------------------------------------------------- //
-//  3D CUBE
-// import { Canvas } from "@react-three/fiber";
-// import { motion } from "framer-motion";
-// import { OrbitControls } from "@react-three/drei";
-
-// export const Experience = () => {
-//   return (
-//     <>
-//       <OrbitControls />
-//       <mesh>
-//         <boxGeometry />
-//         <meshNormalMaterial />
-//       </mesh>
-//     </>
-//   );
-// };
-
-// export default function Test() {
-//   return (
-//     <Canvas shadows camera={{ position: [3, 3, 3], fov: 30 }}>
-//       <color attach="background" args={["#222"]} />
-//       <Experience />
-//     </Canvas>
-//   );
-// }
 
 // ---------------------------------------------------- //
 // HOVER CARD
