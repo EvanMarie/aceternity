@@ -6,13 +6,19 @@ import Text from "~/components/buildingBlocks/text";
 import Cube3D from "./various-new/cube3D";
 import Cube3DSpinning from "./various-new/cube3Dspinning";
 import Flex from "~/components/buildingBlocks/flex";
+import Cube3DSpinningRounded from "./various-new/cube3DspinningRounded";
+import DoubleRectangularBoxes from "./various-new/framer3DStar/doubleRectangularBoxes";
+import Cube3DShades from "./various-new/cube3Dshades";
 
 export default function Test() {
   return (
     <CenterFull>
       <Flex className="w-[80vh] h-[80vh] bg-col-800 shadowBroadNormal border-900-md">
-        <Cube3D />
+        {/* <Cube3D /> */}
         {/* <Cube3DSpinning /> */}
+        {/* <Cube3DSpinningRounded /> */}
+        {/* <DoubleRectangularBoxes /> */}
+        <Cube3DShades />
       </Flex>
     </CenterFull>
   );
