@@ -9,6 +9,8 @@ import Flex from "~/components/buildingBlocks/flex";
 import Cube3DSpinningRounded from "./various-new/cube3DspinningRounded";
 import DoubleRectangularBoxes from "./various-new/framer3DStar/doubleRectangularBoxes";
 import Cube3DShades from "./various-new/cube3Dshades";
+import TextWave from "./various-new/animateInPlaceText";
+import { Box } from "@react-three/drei";
 
 export default function Test() {
   return (
@@ -18,7 +20,10 @@ export default function Test() {
         {/* <Cube3DSpinning /> */}
         {/* <Cube3DSpinningRounded /> */}
         {/* <DoubleRectangularBoxes /> */}
-        <Cube3DShades />
+        {/* <Cube3DShades /> */}
+        <Box>
+          <TextWave text="Hello World" isWave />
+        </Box>
       </Flex>
     </CenterFull>
   );
