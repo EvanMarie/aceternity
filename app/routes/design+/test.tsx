@@ -20,10 +20,7 @@ export default function Test() {
         {/* <Cube3DSpinning /> */}
         {/* <Cube3DSpinningRounded /> */}
         {/* <DoubleRectangularBoxes /> */}
-        {/* <Cube3DShades /> */}
-        <Box>
-          <TextWave text="Hello World" isWave />
-        </Box>
+        <Cube3DShades />
       </Flex>
     </CenterFull>
   );
