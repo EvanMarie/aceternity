@@ -33,6 +33,7 @@ export default function App() {
           <ScrollRestoration />
           <Scripts />
         </LayoutContainer>
+        <div id="modal-root"></div>
       </body>
     </html>
   );
