@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, forwardRef } from "react";
 
 interface CenterProps {
   children?: ReactNode;
@@ -11,35 +11,43 @@ interface CenterProps {
   onMouseLeave?: () => void;
 }
 
-export default function Center({
-  children,
-  style,
-  onClick,
-  onKeyDown,
-  className = "",
-  id,
-  onMouseEnter,
-  onMouseLeave,
-}: CenterProps) {
-  const interactiveProps = onClick
-    ? {
-        role: "presentation",
-        tabIndex: 0,
-        onClick,
-        onKeyDown,
-      }
-    : {};
+const Center = forwardRef<HTMLDivElement, CenterProps>(
+  (
+    {
+      children,
+      style,
+      onClick,
+      onKeyDown,
+      className = "",
+      id,
+      onMouseEnter,
+      onMouseLeave,
+    },
+    ref
+  ) => {
+    const interactiveProps = onClick
+      ? {
+          role: "presentation",
+          tabIndex: 0,
+          onClick,
+          onKeyDown,
+        }
+      : {};
 
-  return (
-    <div
-      id={id}
-      className={`flex justify-center items-center ${className}`}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      style={style}
-      {...interactiveProps}
-    >
-      {children}
-    </div>
-  );
-}
+    return (
+      <div
+        ref={ref}
+        id={id}
+        className={`flex justify-center items-center ${className}`}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        style={style}
+        {...interactiveProps}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+export default Center;

@@ -29,6 +29,7 @@ interface Props {
   animation?: Animations;
   xOffset?: string;
   yOffset?: string;
+  triggerPercent?: number;
   zoomInFrom?: number;
   zoomOutFrom?: number;
   zoomOutXOffset?: string;
@@ -38,6 +39,7 @@ interface Props {
   damping?: number;
   stiffness?: number;
   useSpring?: boolean;
+  runOnce?: boolean;
 }
 
 const AnimatedComponentSpring: React.FC<Props> = ({
@@ -45,6 +47,7 @@ const AnimatedComponentSpring: React.FC<Props> = ({
   animation = "slideInY",
   xOffset = "40vw",
   yOffset = "20vh",
+  triggerPercent = 0.6,
   zoomInFrom = 0.1,
   zoomOutFrom = 2.5,
   zoomOutXOffset = "60vw",
@@ -54,9 +57,10 @@ const AnimatedComponentSpring: React.FC<Props> = ({
   delay = 0.2,
   className,
   useSpring = true,
+  runOnce = false,
 }) => {
+  const [hasPlayed, setHasPlayed] = useState(false);
   const getTransition = (isVisible: boolean) => {
-    // If useSpring is true or if damping and stiffness are provided, use a spring transition
     if (useSpring || (damping !== undefined && stiffness !== undefined)) {
       return {
         type: "spring",
@@ -258,11 +262,21 @@ const AnimatedComponentSpring: React.FC<Props> = ({
 
   useEffect(() => {
     const currentRef = ref.current;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        // Check runOnce and hasPlayed to decide if we should trigger the animation
+        if (
+          (runOnce && !hasPlayed && entry.intersectionRatio > triggerPercent) ||
+          (!runOnce && entry.intersectionRatio > triggerPercent)
+        ) {
+          setIsVisible(true);
+          if (runOnce) {
+            setHasPlayed(true);
+          }
+        }
       },
-      { threshold: 0.1 }
+      { threshold: [0.9, triggerPercent] }
     );
 
     if (currentRef) {
@@ -274,7 +288,7 @@ const AnimatedComponentSpring: React.FC<Props> = ({
         observer.unobserve(currentRef);
       }
     };
-  }, []);
+  }, [triggerPercent, runOnce, hasPlayed]); // Add runOnce to the dependency array
 
   const variants = animationVariants[animation];
 
