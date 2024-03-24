@@ -21,6 +21,7 @@ export default function StaggerMenu({
   stiffness = 100,
   buttonText,
   buttonIcon,
+  staggerDuration = 0.3,
 }: {
   enterFrom?: string;
   menuItems: string[];
@@ -35,6 +36,7 @@ export default function StaggerMenu({
   stiffness?: number;
   buttonText?: string;
   buttonIcon?: React.ComponentType<{ className?: string }>;
+  staggerDuration?: number;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -57,7 +59,11 @@ export default function StaggerMenu({
       x: 0,
       y: 0,
       opacity: 1,
-      transition: { type: "spring", damping, stiffness },
+      transition: {
+        type: "spring",
+        damping,
+        stiffness,
+      },
     },
     exit: (enterFrom: string) => {
       switch (enterFrom) {
@@ -79,13 +85,13 @@ export default function StaggerMenu({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { when: "beforeChildren", staggerChildren: 0.3 },
+      transition: { when: "beforeChildren", staggerChildren: staggerDuration },
     },
     exit: {
       opacity: 0,
       transition: {
         when: "afterChildren",
-        staggerChildren: 0.3,
+        staggerChildren: staggerDuration,
         staggerDirection: -1,
       },
     },
@@ -119,9 +125,12 @@ export default function StaggerMenu({
                   variants={itemVariants}
                   custom={enterFrom}
                   exit={itemVariants.exit(enterFrom)}
-                  className={`hover:cursor-pointer ${itemPadding} ${itemStyle} ${itemHoverStyle} ${itemHoverAnimation}`}
                 >
-                  {item}
+                  <Flex
+                    className={`hover:cursor-pointer ${itemPadding} ${itemStyle} ${itemHoverStyle} ${itemHoverAnimation}`}
+                  >
+                    {item}
+                  </Flex>
                 </motion.div>
               ))}
             </Flex>
