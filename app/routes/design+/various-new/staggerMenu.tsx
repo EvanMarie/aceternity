@@ -1,25 +1,46 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Flex from "~/components/buildingBlocks/flex";
+import Button from "~/components/buildingBlocks/button";
+import IconButton from "~/components/buildingBlocks/iconButton";
+import { CgSmile } from "react-icons/cg";
 
 const tempItems = ["Item 1", "Item 2", "Item 3", "Item 4"];
 
 export default function StaggerMenu({
-  direction = "top",
+  enterFrom = "bottom",
   menuItems = tempItems,
   menuDirection = "flex-col",
+  menuGap = "gap-[1vh]",
   containerClassName,
+  itemPadding = "px-[1.5vh] py-[0.5vh]",
+  itemStyle = "bg-col-300",
+  itemHoverStyle = "hover:bg-col-200 transition-400",
+  itemHoverAnimation = "hover:animate-wiggle",
+  damping = 10,
+  stiffness = 100,
+  buttonText,
+  buttonIcon,
 }: {
-  direction?: string;
+  enterFrom?: string;
   menuItems: string[];
   menuDirection?: string;
+  menuGap?: string;
   containerClassName?: string;
+  itemStyle?: string;
+  itemHoverStyle?: string;
+  itemHoverAnimation?: string;
+  itemPadding?: string;
+  damping?: number;
+  stiffness?: number;
+  buttonText?: string;
+  buttonIcon?: React.ComponentType<{ className?: string }>;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const itemVariants = {
-    hidden: (direction: string) => {
-      switch (direction) {
+    hidden: (enterFrom: string) => {
+      switch (enterFrom) {
         case "left":
           return { x: -100, opacity: 0 };
         case "right":
@@ -36,10 +57,10 @@ export default function StaggerMenu({
       x: 0,
       y: 0,
       opacity: 1,
-      transition: { type: "spring", stiffness: 100 },
+      transition: { type: "spring", damping, stiffness },
     },
-    exit: (direction: string) => {
-      switch (direction) {
+    exit: (enterFrom: string) => {
+      switch (enterFrom) {
         case "left":
           return { x: -100, opacity: 0 }; // Exit to the left
         case "right":
@@ -72,7 +93,15 @@ export default function StaggerMenu({
 
   return (
     <>
-      <button onClick={() => setIsOpen(!isOpen)}>Toggle Menu</button>
+      {buttonText ? (
+        <Button
+          onClick={() => setIsOpen(!isOpen)}
+          buttonText="Open Menu"
+          iconLeft={buttonIcon ? buttonIcon : undefined}
+        />
+      ) : (
+        <IconButton onClick={() => setIsOpen(!isOpen)} icon={CgSmile} />
+      )}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -81,13 +110,16 @@ export default function StaggerMenu({
             exit="exit"
             variants={containerVariants}
           >
-            <Flex className={`${menuDirection} ${containerClassName}`}>
+            <Flex
+              className={`${menuDirection} ${menuGap} ${containerClassName}`}
+            >
               {menuItems.map((item, index) => (
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  custom={direction}
-                  exit={itemVariants.exit(direction)}
+                  custom={enterFrom}
+                  exit={itemVariants.exit(enterFrom)}
+                  className={`hover:cursor-pointer ${itemPadding} ${itemStyle} ${itemHoverStyle} ${itemHoverAnimation}`}
                 >
                   {item}
                 </motion.div>
