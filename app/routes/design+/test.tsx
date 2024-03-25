@@ -1,37 +1,32 @@
-import { motion } from "framer-motion";
-import Button from "~/components/buildingBlocks/button";
-import Center from "~/components/buildingBlocks/center";
 import CenterFull from "~/components/buildingBlocks/centerFull";
-import VStack from "~/components/buildingBlocks/vStack";
-import useReanimate from "~/utils/useReanimate";
+import AnimatedCounter from "./various-new/animatedCounter";
+import Center from "~/components/buildingBlocks/center";
+import { useState } from "react";
 
-const variants = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -20 },
-};
+export default function Test() {
+  const [counterValue, setCounterValue] = useState(500.0);
 
-export default function TestComponent() {
-  const [animationKey, reanimate] = useReanimate();
+  const getBackgroundSize = (value: number) => {
+    return { backgroundSize: `${(value * 100) / 1000}% 100%` };
+  };
+
   return (
-    <CenterFull className="h-full text-col-100">
-      <VStack gap="gap-[2vh]">
-        <Button onClick={reanimate} buttonText="reanimate" />
-        <Center className="w-[40vh] h-[40vh]">
-          <motion.div
-            key={animationKey}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={variants}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className="text-[5vh] textShadow font-semibold">
-              Framer Motion
-            </h1>
-          </motion.div>
-        </Center>
-      </VStack>
+    <CenterFull>
+      <Center className="w-[30vh] h-[10vh] bg-col-200">
+        <div className="flex flex-col items-center justify-center h-fit bg-col-300 w-full">
+          <AnimatedCounter value={counterValue} fontSize="text-4xl" />
+          <input
+            type="range"
+            min="1"
+            max="999"
+            onChange={(e) => setCounterValue(parseFloat(e.target.value))}
+            step="0.01"
+            style={getBackgroundSize(counterValue)}
+            value={counterValue}
+            className="w-full h-[0.5vh] mt-6 bg-white bg-opacity-80 rounded-[1vh] appearance-none focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+          />
+        </div>
+      </Center>
     </CenterFull>
   );
 }
