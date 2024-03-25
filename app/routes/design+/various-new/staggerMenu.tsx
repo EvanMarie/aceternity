@@ -31,7 +31,7 @@ export default function StaggerMenu({
   buttonIcon,
   staggerDuration = 0.2,
   overlayStyle = "fixed inset-0 bg-col-120",
-  menuStyle = "fixed top-0 right-0",
+  menuStyle = "fixed top-1/3 right-0",
   closeButtonDelay = 1,
 }: {
   enterFrom?: string;
