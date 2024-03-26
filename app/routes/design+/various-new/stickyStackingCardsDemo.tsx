@@ -11,12 +11,14 @@ function Section({
   title,
   height = "h-screen",
   innerWidth = "w-full",
+  innerHeight = "h-full",
   position,
   bg,
 }: {
   title: string;
   height?: string;
   innerWidth?: string;
+  innerHeight?: string;
   position: string;
   bg?: string;
 }) {
@@ -26,7 +28,7 @@ function Section({
     >
       <FlexFull className="h-full p-[2vh] ">
         <VStack
-          className={`${bg} ${innerWidth} h-full py-[1vh] justify-between shadowBroadLoose border-970-md`}
+          className={`${bg} ${innerWidth} ${innerHeight} py-[1vh] justify-between shadowBroadLoose border-970-md`}
         >
           <CenterHorizontalFull className="text-insane-loose">
             {title}
@@ -65,6 +67,7 @@ export default function StickStackingCards() {
           bg="bg-col-700"
           height="h-[88vh]"
           innerWidth="w-95%"
+          innerHeight="h-[80vh]"
         />
         <Section
           title="Section 3"
@@ -72,6 +75,7 @@ export default function StickStackingCards() {
           bg="bg-col-600"
           height="h-[76vh]"
           innerWidth="w-90%"
+          innerHeight="h-[70vh]"
         />
         <Section
           title="Section 4"
@@ -79,6 +83,7 @@ export default function StickStackingCards() {
           bg="bg-col-500"
           height="h-[64vh]"
           innerWidth="w-85%"
+          innerHeight="h-[60vh]"
         />
       </VStackFull>
     </FlexFull>
