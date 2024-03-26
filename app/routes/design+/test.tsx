@@ -3,6 +3,6 @@ import StickyStackingCards from "./various-new/stickyStackingCardsDemo";
 import HorizontalParallaxScroll from "./various-new/horizontalScroll";
 
 export default function Test() {
-  // return <HorizontalParallaxScroll />;
-  return <StickyStackingCards />;
+  return <HorizontalParallaxScroll />;
+  // return <StickyStackingCards />;
 }
