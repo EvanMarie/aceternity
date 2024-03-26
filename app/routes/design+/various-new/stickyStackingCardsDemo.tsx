@@ -22,6 +22,8 @@ function Section({
   position: string;
   bg?: string;
 }) {
+  const contentStyles =
+    "h-[30vh] w-30% bg-col-100 text-too-big-loose shadow-shadowBroadLoose";
   return (
     <CenterFull
       className={`w-screen ${height} sticky ${position} flex-shrink-0 text-col-100 text-too-big-loose font-semibold`}
@@ -34,15 +36,9 @@ function Section({
             {title}
           </CenterHorizontalFull>
           <HStackFull className="justify-evenly text-col-900 h-fit">
-            <Center className="h-[30vh] w-30% bg-col-100 text-too-big-loose">
-              Content 1
-            </Center>
-            <Center className="h-[30vh] w-30% bg-col-100 text-too-big-loose">
-              Content 2
-            </Center>
-            <Center className="h-[30vh]   w-30% bg-col-100 text-too-big-loose">
-              Content 3
-            </Center>
+            <Center className={contentStyles}>Content 1</Center>
+            <Center className={contentStyles}>Content 2</Center>
+            <Center className={contentStyles}>Content 3</Center>
           </HStackFull>
           <CenterHorizontalFull className="text-insane-loose">
             {title}
