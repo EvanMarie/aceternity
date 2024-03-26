@@ -26,8 +26,11 @@
     "pixi.js": "^7.3.3",
     "react-icons": "^5.0.1",
     "react-intersection-observer": "^9.8.1",
+    "react-scroll-percentage": "^4.3.2",
     "remix-flat-routes": "^0.6.4",
     "remix-utils": "^7.5.0",
+    "resize-observer-polyfill": "^1.5.1",
+    "scrollmagic": "^2.0.8",
     "three": "^0.162.0"
   },
   "devDependencies": {
