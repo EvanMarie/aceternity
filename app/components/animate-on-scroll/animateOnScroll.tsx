@@ -36,6 +36,7 @@ interface Props {
   zoomOutYOffset?: string;
   delay?: number;
   className?: string;
+  visibilityThreshold?: number;
 }
 
 const AnimatedComponent: React.FC<Props> = ({
@@ -50,6 +51,7 @@ const AnimatedComponent: React.FC<Props> = ({
   zoomOutYOffset = "40vh",
   delay = 0.2,
   className,
+  visibilityThreshold = 0.9,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -262,7 +264,7 @@ const AnimatedComponent: React.FC<Props> = ({
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: visibilityThreshold }
     );
 
     if (currentRef) {

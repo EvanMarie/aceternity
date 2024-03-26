@@ -11,21 +11,17 @@ import HStackFull from "~/components/buildingBlocks/hStackFull";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 import RoundToDecimal from "~/utils/roundDecPlace";
 import { motion } from "framer-motion";
+import AnimatedComponent from "~/components/animate-on-scroll/animateOnScroll";
+import HStack from "~/components/buildingBlocks/hStack";
 
-function Section({
-  title,
-  height = "h-screen",
-  position,
-  bg,
+function ContentContainer({
   scrollPosition,
-  triggerPositions,
+  triggerPosition,
+  children,
 }: {
-  title: string;
-  height?: string;
-  position: string;
-  bg?: string;
   scrollPosition: number;
-  triggerPositions: number[];
+  triggerPosition: number;
+  children: React.ReactNode;
 }) {
   const contentContainer = "h-[30vh] w-30% bg-col-100 text-too-big-loose";
   const MotionCenter = motion(Center);
@@ -33,53 +29,44 @@ function Section({
     visible: { opacity: 1, scale: 1 },
     hidden: { opacity: 0, scale: 0 },
   };
+  return (
+    <MotionCenter
+      className={contentContainer}
+      variants={animationVariants}
+      initial="hidden"
+      animate={triggerPosition <= scrollPosition ? "visible" : "hidden"}
+    >
+      {children}
+    </MotionCenter>
+  );
+}
 
-  const visibilityRefs = useRef([false, false, false]);
-
-  useEffect(() => {
-    visibilityRefs.current = visibilityRefs.current.map((visibility, index) => {
-      return scrollPosition >= triggerPositions[index] || visibility;
-    });
-  }, [scrollPosition, triggerPositions]);
-
+function Section({
+  title,
+  height = "h-screen",
+  position,
+  bg,
+  children,
+}: {
+  title: string;
+  height?: string;
+  position: string;
+  bg?: string;
+  children: React.ReactNode;
+}) {
   return (
     <CenterFull
-      className={`w-screen ${height} sticky ${position} flex-shrink-0 text-col-100 text-too-big-loose font-semibold`}
+      className={`w-screen ${height} sticky ${position} flex-shrink-0 text-col-100 overflow-x-hidden text-too-big-loose font-semibold`}
     >
-      <FlexFull className="h-full p-[2vh] ">
+      <FlexFull className="h-full p-[2vh]">
         <VStackFull
-          className={` ${bg} h-full py-[1vh] justify-between shadowBroadLoose border-970-md`}
+          className={`${bg} h-full py-[1vh] justify-between shadowBroadLoose border-970-md`}
         >
           <CenterHorizontalFull className="text-insane-loose">
             {title}
           </CenterHorizontalFull>
           <HStackFull className="justify-evenly text-col-900 h-fit">
-            <MotionCenter
-              className={contentContainer}
-              variants={animationVariants}
-              initial="hidden"
-              animate={visibilityRefs.current[0] ? "visible" : "hidden"}
-            >
-              Content 1
-            </MotionCenter>
-
-            <MotionCenter
-              className={contentContainer}
-              variants={animationVariants}
-              initial="hidden"
-              animate={visibilityRefs.current[1] ? "visible" : "hidden"}
-            >
-              Content 1
-            </MotionCenter>
-
-            <MotionCenter
-              className={contentContainer}
-              variants={animationVariants}
-              initial="hidden"
-              animate={visibilityRefs.current[2] ? "visible" : "hidden"}
-            >
-              Content 1
-            </MotionCenter>
+            {children}
           </HStackFull>
           <CenterHorizontalFull className="text-insane-loose">
             {title}
@@ -90,16 +77,19 @@ function Section({
   );
 }
 
-function Spacer({ height = "h-screen" }: { height?: string }) {
+function Spacer({ height = "h-[200vh]" }: { height?: string }) {
   return (
     <CenterFull className={`w-screen ${height} flex-shrink-0 text-transparent`}>
       .
     </CenterFull>
   );
 }
+const singleContentStyles =
+  "w-[50vh] h-[50vh] p-[7vh] bg-col-390 border-970-md shadowBroadLoose text-too-big-loose text-col-900 flex-shrink-0";
 
-export default function HorizontalParallaxScroll() {
+function HorizontalParallaxScroll() {
   const mainContainerRef = useRef<HTMLDivElement>(null);
+  const hStackRef = useRef<HTMLDivElement>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
@@ -107,9 +97,10 @@ export default function HorizontalParallaxScroll() {
       const handleScroll = () => {
         if (mainContainerRef.current) {
           const scrolled = mainContainerRef.current.scrollTop;
-          const percentage =
-            (scrolled / mainContainerRef.current.scrollHeight) * 100;
-          setScrollPosition(percentage);
+          const totalScrollRange =
+            mainContainerRef.current.scrollHeight - window.innerHeight;
+          const scrollRatio = scrolled / totalScrollRange;
+          setScrollPosition(scrollRatio);
         }
       };
       mainContainerRef.current.addEventListener("scroll", handleScroll);
@@ -121,66 +112,40 @@ export default function HorizontalParallaxScroll() {
     }
   }, [mainContainerRef.current]);
 
+  useEffect(() => {
+    if (hStackRef.current) {
+      const hStackWidth = hStackRef.current.scrollWidth;
+      const containerWidth = window.innerWidth;
+      const scrollRange = hStackWidth - containerWidth;
+      const scrollTranslation = scrollPosition * scrollRange;
+      hStackRef.current.style.transform = `translateX(-${scrollTranslation}px)`;
+    }
+  }, [scrollPosition]);
+
   return (
     <FlexFull
-      className="h-screen fixed top-0 left-0 overflow-y-auto"
+      className="h-screen fixed top-0 left-0 overflow-y-auto scrollbar-hide"
       ref={mainContainerRef}
     >
       <VStackFull
         className="bg-col-200 h-fit flex-shrink-0 relative"
         gap="gap-[0.1vh]"
       >
-        <Box className="fixed top-0 left-0 p-[1vh] bg-col-180 z-10 w-[13vh]">{`Scrolled ${RoundToDecimal(
-          scrollPosition,
+        <Box className="absolute top-0 left-0 p-[1vh] bg-col-180 z-10 w-[13vh]">{`Scrolled ${RoundToDecimal(
+          scrollPosition * 100,
           3
-        )}`}</Box>
-        <Section
-          title="Section 1"
-          position="top-0"
-          bg="bg-col-900"
-          scrollPosition={scrollPosition}
-          triggerPositions={[3, 6, 9]}
-        />
+        )}%`}</Box>
+
+        <FlexFull className="overflow-x-hidden p-[1vh] sticky top-0 left-0">
+          <HStack
+            className="w-fit h-screen py-[1vh] items-center"
+            ref={hStackRef}
+          >
+            {/* ... Flex components ... */}
+          </HStack>
+        </FlexFull>
+
         <Spacer />
-        <Section
-          title="Section 2"
-          position="top-0"
-          bg="bg-col-800"
-          scrollPosition={scrollPosition}
-          triggerPositions={[18, 24, 27]}
-        />
-        <Spacer />
-        <Section
-          title="Section 3"
-          position="top-0"
-          bg="bg-col-700"
-          scrollPosition={scrollPosition}
-          triggerPositions={[36, 40, 43]}
-        />
-        <Spacer />
-        <Section
-          title="Section 4"
-          position="top-0"
-          bg="bg-col-600"
-          scrollPosition={scrollPosition}
-          triggerPositions={[54, 57, 60]}
-        />
-        <Spacer />
-        <Section
-          title="Section 5"
-          position="top-0"
-          bg="bg-col-500"
-          scrollPosition={scrollPosition}
-          triggerPositions={[73, 77, 81]}
-        />
-        <Spacer />
-        <Section
-          title="Section 6"
-          position="top-0"
-          bg="bg-col-400"
-          scrollPosition={scrollPosition}
-          triggerPositions={[88, 89, 90]}
-        />
       </VStackFull>
     </FlexFull>
   );
