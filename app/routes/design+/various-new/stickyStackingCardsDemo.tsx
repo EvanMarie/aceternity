@@ -63,28 +63,37 @@ export default function StickStackingCards() {
         <Section title="Section 1" position="top-0" bg="bg-col-800" />
         <Section
           title="Section 2"
-          position="top-[12vh]"
+          position="top-[10vh]"
           bg="bg-col-700"
-          height="h-[88vh]"
+          height="h-[90vh]"
           innerWidth="w-95%"
           innerHeight="h-[80vh]"
         />
         <Section
           title="Section 3"
-          position="top-[24vh]"
+          position="top-[20vh]"
           bg="bg-col-600"
-          height="h-[76vh]"
+          height="h-[80vh]"
           innerWidth="w-90%"
           innerHeight="h-[70vh]"
         />
         <Section
           title="Section 4"
-          position="top-[36vh]"
+          position="top-[30vh]"
           bg="bg-col-500"
-          height="h-[64vh]"
+          height="h-[70vh]"
           innerWidth="w-85%"
           innerHeight="h-[60vh]"
         />
+        <Section
+          title="Section 4"
+          position="top-[40vh]"
+          bg="bg-col-400"
+          height="h-[60vh]"
+          innerWidth="w-75%"
+          innerHeight="h-[50vh]"
+        />
+        <Section title="Section 1" position="top-0" bg="bg-col-300" />
       </VStackFull>
     </FlexFull>
   );
