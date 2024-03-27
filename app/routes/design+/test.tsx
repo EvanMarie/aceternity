@@ -92,6 +92,7 @@ export default function Test() {
           </FramerReanimate>
           <FramerReanimate
             title="gestures"
+            showReanimate={false}
             code={`<motion.div
         className="bg-100-radial3op50 h-[23vh] w-[23vh] rounded-[2vh] shadowBroadTight"
         whileHover={{ scale: 1.2, rotate: 90 }}
@@ -106,6 +107,7 @@ export default function Test() {
           </FramerReanimate>
           <FramerReanimate
             title="drag"
+            showReanimate={false}
             code={`const constraintsRef = useRef(null);
             <motion.div
         ref={constraintsRef}
@@ -203,15 +205,121 @@ export default function Test() {
             {" "}
             <ExampleSix />
           </FramerReanimate>
-          <FramerReanimate title="seven" code={``}>
+          <FramerReanimate
+            title="motion values"
+            showReanimate={false}
+            code={`const x = useMotionValue(0);
+  const xInput = [-100, 0, 100];
+  const background = useTransform(x, xInput, [
+    "linear-gradient(180deg, #ffeede 0%, #025373 100%)",
+    "linear-gradient(180deg, #F27D72 0%, #45233e 100%)",
+    "linear-gradient(180deg, #9C6892 0%, #F2B680 100%)",
+  ]);
+  const color = useTransform(x, xInput, [
+    "rgb(69, 35, 62)",
+    "rgb(2, 83, 115)",
+    "rgb(156, 104, 146)",
+  ]);
+  const tickPath = useTransform(x, [10, 100], [0, 1]);
+  const crossPathA = useTransform(x, [-10, -55], [0, 1]);
+  const crossPathB = useTransform(x, [-50, -100], [0, 1]);
+
+  return (
+    <motion.div className="w-full h-full relative" style={{ background }}>
+      <motion.div
+        className="bg-100-linear2op25 w-[10vh] h-[10vh] absolute top-1/3 left-1/3 flex justify-center items-center rounded-[2vh] shadowBroadTight border-970-md"
+        style={{ x }}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+      >
+        <svg className="w-80% h-80%" viewBox="0 0 50 50">
+          <motion.path
+            fill="none"
+            strokeWidth="2"
+            stroke={color}
+            d="M 0, 20 a 20, 20 0 1,0 40,0 a 20, 20 0 1,0 -40,0"
+            style={{ translateX: 5, translateY: 5 }}
+          />
+          <motion.path
+            fill="none"
+            strokeWidth="2"
+            stroke={color}
+            d="M14,26 L 22,33 L 35,16"
+            strokeDasharray="0 1"
+            style={{ pathLength: tickPath }}
+          />
+          <motion.path
+            fill="none"
+            strokeWidth="2"
+            stroke={color}
+            d="M17,17 L33,33"
+            strokeDasharray="0 1"
+            style={{ pathLength: crossPathA }}
+          />
+          <motion.path
+            fill="none"
+            strokeWidth="2"
+            stroke={color}
+            d="M33,17 L17,33"
+            strokeDasharray="0 1"
+            style={{ pathLength: crossPathB }}
+          />
+        </svg>
+      </motion.div>
+    </motion.div>
+  );`}
+          >
             {" "}
             <ExampleSeven />
           </FramerReanimate>
-          <FramerReanimate title="eight" code={``}>
+          <FramerReanimate
+            title="layout 1"
+            showReanimate={false}
+            code={`
+    <Flex className={\`\${isOn ? "bg-col-200" : "bg-col-500"} px-[5vh] py-[7vh] insetShadowXl transition-500 border-900-md\`}>
+      <div
+        className={\`w-[13vh] h-[7vh] bg-500-radial6op75 flex \${
+          isOn === true ? "justify-start" : "justify-end"
+        } rounded-[5vh] p-[1vh] cursor-pointer shadowBroadTight border-970-md\`}
+        data-isOn={isOn}
+        onClick={toggleSwitch}
+      >
+        <motion.div
+          className="h-[5vh] bg-100-radial5op50 w-[5vh] rounded-full shadowBroadTight border-970-md"
+          layout
+          transition={spring}
+        />
+      </div>
+    </Flex>
+  `}
+          >
             {" "}
             <ExampleEight />
           </FramerReanimate>
-          <FramerReanimate title="nine" code={``}>
+          <FramerReanimate
+            title="layout 2"
+            showReanimate={false}
+            code={`
+    const [isOpen, setIsOpen] = useState(false);
+    
+    return (
+      <motion.div
+        layout
+        data-isOpen={isOpen}
+        initial={{ borderRadius: 50 }}
+        className={\`bg-col-200 w-[10vh] h-[10vh] flex justify-center items-center shadowBroadTight border-900-md \${
+          isOpen === true ? "w-80% h-80%" : "w-50% h-50%"
+        }\`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <motion.div
+          layout
+          className="w-[4vh] h-[4vh] bg-col-800 rounded-full shadowBroadTight border-900-md"
+        />
+      </motion.div>
+    );
+  `}
+          >
             {" "}
             <ExampleNine />
           </FramerReanimate>

@@ -69,7 +69,7 @@ export function InteractiveKeyFrames() {
   return (
     <FlexFull className="p-[3vh]">
       <VStackFull className="bg-800-radial6op75 p-[2vh] border-500-md shadowBroadTight">
-        <Heading text="Keyframe Experiments" layout="text-xxl-looser" />
+        <Heading text="Keyframes Experiments" layout="text-xxl-looser" />
         <Wrap className="w-full justify-center gap-[1vh] p-[2vh]">
           {keyframes.map((keyframe, index) => (
             <VStack
@@ -141,7 +141,7 @@ export function InteractiveKeyFrames() {
             </Text>
             <Input
               type="number"
-              className="text-[1.5vh] font-semibold"
+              className="text-[1.2vh] font-semibold h-[2.5vh]"
               step="0.1"
               value={duration}
               onChange={(e) => handleDurationChange(parseFloat(e.target.value))}
@@ -151,7 +151,7 @@ export function InteractiveKeyFrames() {
             <Text className="text-[1.3vh] text-col-100 textShadow">Repeat</Text>
             <Input
               type="number"
-              className="text-[1.5vh] font-semibold"
+              className="text-[1.2vh] font-semibold h-[2.5vh]"
               step="0.1"
               value={numRepeats}
               onChange={(e) => handleRepeatsChange(parseFloat(e.target.value))}
@@ -163,7 +163,7 @@ export function InteractiveKeyFrames() {
             </Text>
             <Input
               type="number"
-              className="text-[1.5vh] font-semibold w-30%"
+              className="text-[1.2vh] font-semibold h-[2.5vh] w-30%"
               step="0.1"
               value={numRepeats}
               onChange={(e) => handleRepeatsChange(parseFloat(e.target.value))}

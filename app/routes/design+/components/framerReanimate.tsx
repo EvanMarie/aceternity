@@ -15,12 +15,13 @@ export function FramerReanimate({
   code,
   children,
   bg = "bg-600-linear6op75",
-
+  showReanimate = true,
   handleClickAnimation,
 }: {
   code?: string;
   title?: string;
   bg?: string;
+  showReanimate?: boolean;
   children?: React.ReactNode;
 
   handleClickAnimation?: () => void;
@@ -51,11 +52,13 @@ export function FramerReanimate({
                 useIcon
               />
             )}
-            <IconButton
-              onClick={onClick}
-              icon={RefreshIcon}
-              type="smallNormal"
-            />
+            {showReanimate && (
+              <IconButton
+                onClick={onClick}
+                icon={RefreshIcon}
+                type="smallNormal"
+              />
+            )}
           </HStack>
         </HStackFull>
       )}
