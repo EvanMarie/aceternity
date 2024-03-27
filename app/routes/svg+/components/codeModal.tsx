@@ -3,8 +3,10 @@ import { CodeIcon } from "styles";
 import Box from "~/components/buildingBlocks/box";
 import Button from "~/components/buildingBlocks/button";
 import Center from "~/components/buildingBlocks/center";
+import CenterHorizontalFull from "~/components/buildingBlocks/centerHorizontalFull";
 import CodeExample from "~/components/buildingBlocks/codeExample";
 import FlexFull from "~/components/buildingBlocks/flexFull";
+import IconButton from "~/components/buildingBlocks/iconButton";
 import Modal from "~/components/buildingBlocks/modal";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 import { SVGHeading } from "~/components/main/formattingComponents";
@@ -13,32 +15,47 @@ export default function CodeModal({
   code,
   title,
   isPath = true,
+  useIcon = false,
 }: {
   code: string;
   title: string;
   isPath?: boolean;
+  useIcon?: boolean;
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   return (
     <>
-      <Box>
-        <Button
-          iconLeft={CodeIcon}
+      {useIcon ? (
+        <IconButton
+          icon={CodeIcon}
           onClick={() => setModalOpen(true)}
-          buttonText={isPath ? "View Path" : "View Code"}
           type="smallNormal"
         />
-      </Box>
+      ) : (
+        <Box>
+          <Button
+            iconLeft={CodeIcon}
+            onClick={() => setModalOpen(true)}
+            buttonText={isPath ? "View Path" : "View Code"}
+            type="smallNormal"
+          />
+        </Box>
+      )}
       <Modal
         isOpen={modalOpen}
         setModalOpen={setModalOpen}
         onClose={() => setModalOpen(false)}
         modalSize="w-full h-fit max-h-[90vh] sm:w-80% md:w-70% lg:w-60% xl:w-50% 2xl:w-40%"
       >
-        <FlexFull className=" h-full max-h-[70vh] p-[1vh] text-col-100 py-[2vh] bg-col-700 ">
-          <VStackFull gap="gap-[2vh]" className="overflow-y-hidden">
-            <SVGHeading>{title}</SVGHeading>
-            <FlexFull className="h-full overflow-y-auto">
+        <FlexFull className=" h-full max-h-[70vh] text-col-100  bg-col-500 border-900-md">
+          <VStackFull
+            gap="gap-[0px]"
+            className="overflow-y-hidden rounded-none"
+          >
+            <CenterHorizontalFull className="bg-col-700 rounded-b-none">
+              <SVGHeading className="text-[3vh] font-bold">{title}</SVGHeading>
+            </CenterHorizontalFull>
+            <FlexFull className="h-full overflow-y-auto rounded-none insetShadowXl">
               <FlexFull className="h-fit py-[1vh] px-[2vh]">
                 <CodeExample>
                   {isPath && "d=" + "{code}"}

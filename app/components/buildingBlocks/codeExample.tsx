@@ -8,7 +8,7 @@ export default function CodeExample({
 }) {
   return (
     <FlexFull className="justify-center">
-      <Flex className="p-[1vh] bg-col-950 shadowBroadNormal border-900-md">
+      <Flex className="p-[1vh] bg-col-970 shadowBroadNormal border-900-md">
         <pre style={{ whiteSpace: "pre-wrap", overflowWrap: "break-word" }}>
           <code
             className="text-xs leading-tight "
