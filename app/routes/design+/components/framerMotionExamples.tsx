@@ -370,8 +370,66 @@ export function ExampleTen() {
 }
 
 // EXAMPLE ELEVEN
+
+interface Item {
+  id: number;
+  text: string;
+}
+
+export function ItemComponent({
+  item,
+  isSelected,
+  onClick,
+}: {
+  item: Item;
+  isSelected: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <motion.div
+      layout
+      onClick={onClick}
+      initial={{ borderRadius: 10 }}
+      className={`p-[1vh] cursor-pointer w-full flex flex-col shadowBroadTight border-900-md ${
+        isSelected ? "bg-blue-300 h-45%" : "bg-col-200 h-23%"
+      }`}
+    >
+      {item.text}
+      {isSelected && (
+        <CenterFull className="h-full">
+          <motion.div
+            layoutId={`expandable-${item.id}`}
+            className="overflow-hidden bg-col-960 text-col-100 p-[1vh] w-full"
+            initial={false}
+          >
+            Detailed view of {item.text}
+          </motion.div>
+        </CenterFull>
+      )}
+    </motion.div>
+  );
+}
+
 export function ExampleEleven() {
-  return <motion.div>this</motion.div>;
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const items: Item[] = [
+    { id: 1, text: "Item 1" },
+    { id: 2, text: "Item 2" },
+    { id: 3, text: "Item 3" },
+  ];
+
+  return (
+    <VStackFull className="h-full p-[1vh]">
+      {items.map((item) => (
+        <ItemComponent
+          key={item.id}
+          item={item}
+          isSelected={selectedId === item.id}
+          onClick={() => setSelectedId(selectedId === item.id ? null : item.id)}
+        />
+      ))}
+    </VStackFull>
+  );
 }
 
 // EXAMPLE TWELVE

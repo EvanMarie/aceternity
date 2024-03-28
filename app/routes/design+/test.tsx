@@ -333,11 +333,12 @@ export default function Test() {
             <ExampleNine />
           </FramerReanimate>
           {/* TEN  */}
-          <FramerReanimate title="layoutId" code={``}>
+          <FramerReanimate title="layoutId 1" code={``}>
             {" "}
             <ExampleTen />
           </FramerReanimate>
-          <FramerReanimate title="eleven" code={``}>
+          {/* ELEVEN  */}
+          <FramerReanimate title="layoutId 2" code={``}>
             {" "}
             <ExampleEleven />
           </FramerReanimate>
