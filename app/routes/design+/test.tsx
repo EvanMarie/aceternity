@@ -333,7 +333,69 @@ export default function Test() {
             <ExampleNine />
           </FramerReanimate>
           {/* TEN  */}
-          <FramerReanimate title="layoutId 1" code={``}>
+          <FramerReanimate
+            title="layoutId 1"
+            code={`interface Item {
+      id: number;
+      icon: string;
+      label: string;
+    }
+    
+    const allItems: Item[] = [
+      { id: 0, icon: "💜", label: "Heart" },
+      { id: 1, icon: "🦄", label: "Uni" },
+      { id: 2, icon: "🔥", label: "Fire" },
+      { id: 3, icon: "👽", label: "Alien" },
+    ];
+    
+    const [selectedTab, setSelectedTab] = useState<Item>(allItems[0]);
+    
+    return (
+      <VStackFull className="w-full h-full overflow-hidden">
+        <main className="flex-1 flex justify-center items-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedTab ? selectedTab.label : "empty"}
+              initial={{ y: -50, x: -50, opacity: 0 }}
+              animate={{ y: 0, x: 0, opacity: 1 }}
+              exit={{ y: 50, x: 50, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="text-[20vh]"
+            >
+              {selectedTab ? selectedTab.icon : "😋"}
+            </motion.div>
+          </AnimatePresence>
+        </main>
+        <nav className="w-full">
+          <ul className={\`flex justify-around bg-col-980\`}>
+            {allItems.map((item) => (
+              <li
+                key={item.id}
+                className={\`cursor-pointer w-25% py-[0.5vh] relative flex justify-center items-center font-semibold \${
+                  selectedTab.id === item.id ? "text-col-900" : "text-col-100"
+                }\`}
+                onClick={() => setSelectedTab(item)}
+              >
+                {/* Animated background */}
+                {selectedTab.id === item.id && (
+                  <motion.div
+                    layoutId="active-background"
+                    className="absolute inset-0 bg-col-200"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+                {/* Tab content */}
+                <div className="z-10">
+                  {item.icon} {item.label}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </VStackFull>
+    );
+  `}
+          >
             {" "}
             <ExampleTen />
           </FramerReanimate>

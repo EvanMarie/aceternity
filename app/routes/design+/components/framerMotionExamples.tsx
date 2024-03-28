@@ -370,7 +370,6 @@ export function ExampleTen() {
 }
 
 // EXAMPLE ELEVEN
-
 interface Item {
   id: number;
   text: string;
@@ -385,22 +384,54 @@ export function ItemComponent({
   isSelected: boolean;
   onClick: () => void;
 }) {
+  const containerVariants = {
+    visible: {
+      borderRadius: "2vh",
+      transition: {
+        type: "spring",
+        stiffness: 700,
+        damping: 30,
+      },
+    },
+  };
+
+  const detailVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        delay: 0.3,
+      },
+    },
+  };
+
   return (
     <motion.div
       layout
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
       onClick={onClick}
-      initial={{ borderRadius: 10 }}
       className={`p-[1vh] cursor-pointer w-full flex flex-col shadowBroadTight border-900-md ${
-        isSelected ? "bg-blue-300 h-45%" : "bg-col-200 h-23%"
+        isSelected ? "bg-col-300 h-45%" : "bg-col-200 h-23%"
       }`}
     >
-      {item.text}
+      <Text
+        className={`${
+          isSelected ? "font-bold text-[2.3vh]" : "font-semibold text-[2vh]"
+        }`}
+      >
+        {item.text}
+      </Text>
       {isSelected && (
         <CenterFull className="h-full">
           <motion.div
             layoutId={`expandable-${item.id}`}
-            className="overflow-hidden bg-col-960 text-col-100 p-[1vh] w-full"
-            initial={false}
+            variants={detailVariants}
+            initial="hidden"
+            animate="visible"
+            className="overflow-hidden bg-col-960 text-col-100 p-[1vh] w-full textShadow shadow-shadowBroadTight border-900-md rounded-[2vh] h-fit"
           >
             Detailed view of {item.text}
           </motion.div>
