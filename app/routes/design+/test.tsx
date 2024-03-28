@@ -29,14 +29,18 @@ import { FramerReanimate } from "./components/framerReanimate";
 import Wrap from "~/components/buildingBlocks/wrap";
 import { InteractiveKeyFrames } from "./components/interactiveKeyframes";
 import Text from "~/components/buildingBlocks/text";
-import { BulletListItem, HeadingText } from "./components/infoComponents";
+import {
+  BulletListItem,
+  HeadingText,
+  NestedBulletListItem,
+} from "./components/infoComponents";
 
 export default function Test() {
   return (
     <FlexFull className="h-screen overflow-y-auto overflow-x-hidden">
       <VStackFull>
         <Wrap className="w-full h-fit justify-evenly p-[1.5vh] gap-[1.5vh] ">
-          {/* ONE  */}
+          {/* animation  */}
           <FramerReanimate
             title="animation"
             code={`<motion.div
@@ -52,7 +56,7 @@ export default function Test() {
           >
             <ExampleOne />
           </FramerReanimate>
-          {/* TWO  */}
+          {/* variants  */}
           <FramerReanimate
             title="variants"
             code={`const container = {
@@ -94,7 +98,7 @@ export default function Test() {
             {" "}
             <ExampleTwo />
           </FramerReanimate>
-          {/* THREE  */}
+          {/* gestures  */}
           <FramerReanimate
             title="gestures"
             showReanimate={false}
@@ -110,7 +114,7 @@ export default function Test() {
           >
             <ExampleThree />
           </FramerReanimate>
-          {/* FOUR  */}
+          {/* drag  */}
           <FramerReanimate
             title="drag"
             showReanimate={false}
@@ -129,7 +133,7 @@ export default function Test() {
             {" "}
             <ExampleFour />
           </FramerReanimate>
-          {/* FIVE  */}
+          {/* path  */}
           <FramerReanimate
             title="path"
             code={`const icon = {
@@ -191,7 +195,7 @@ export default function Test() {
             {" "}
             <ExampleFive />
           </FramerReanimate>
-          {/* SIX  */}
+          {/* keyframes  */}
           <FramerReanimate
             title="keyframes"
             code={`<motion.div
@@ -209,11 +213,93 @@ export default function Test() {
           repeatDelay: 1,
         }}
             />`}
+            infoTitle="keyframes"
+            info={
+              <VStackFull align="items-start">
+                <BulletListItem highlighted="">
+                  Keyframes in Framer Motion are used to define a sequence of
+                  values that an animation should go through over time, allowing
+                  for complex and multi-step animations. They are akin to
+                  keyframes in traditional animation and CSS animations,
+                  specifying the target values at various points during the
+                  animation.
+                </BulletListItem>
+                <HeadingText heading="Usage of Keyframes in this component" />
+                <BulletListItem>
+                  In this component, keyframes are used to animate multiple
+                  properties of a motion.div element over time:
+                </BulletListItem>
+                <BulletListItem highlighted="Background Color: ">
+                  The background property transitions through a sequence of
+                  colors, creating a gradient effect that changes over time.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Scale: ">
+                  The scale property is animated through a series of values,
+                  making the element grow and shrink in a rhythmic pattern.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Rotation: ">
+                  The rotate property makes the element turn clockwise and
+                  counterclockwise through a set of angles.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Border Radius: ">
+                  The borderRadius property changes, making the corners of the
+                  element transition from sharp to rounded and back.
+                </BulletListItem>
+                <HeadingText heading="How Keyframes Work in Framer Motion " />
+                <BulletListItem
+                  highlighted="Defining the Animation
+                  Sequence: "
+                >
+                  Keyframes are defined as arrays of values that the animated
+                  property will transition through during the animation.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Control Over Timing: ">
+                  The times array in the transition prop can be used to control
+                  the timing of each keyframe, defining what proportion of the
+                  animation duration each keyframe should occur at.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Repeating Animations: ">
+                  The repeat and repeatDelay properties in the transition object
+                  allow the animation to loop a specified number of times, with
+                  a delay between repetitions.
+                </BulletListItem>
+                <HeadingText heading="Additional aspects of keyframes" />
+                <BulletListItem highlighted="Ease and Duration: ">
+                  The ease and duration properties in the transition object
+                  define the pacing and total runtime of the animation,
+                  respectively. The ease function applies to the transitions
+                  between each keyframe, not just the start and end of the
+                  entire animation.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Versatility: ">
+                  Keyframes can be used to animate almost any property or
+                  attribute in Framer Motion, including colors, sizes,
+                  positions, and SVG paths.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Dynamic Animations: ">
+                  Unlike static CSS animations, keyframes in Framer Motion can
+                  be dynamically updated based on component state or props,
+                  making them highly adaptable to user interactions and other
+                  runtime conditions.
+                </BulletListItem>
+                <HeadingText heading="Summary" />
+                <BulletListItem highlighted="">
+                  Keyframes in Framer Motion offer a powerful way to create
+                  detailed and complex animations by defining specific values at
+                  multiple points during the animation sequence. In this
+                  example, they are used to create a dynamic and engaging
+                  animation that cycles through changes in color, size,
+                  rotation, and border radius, demonstrating the flexibility and
+                  control that keyframes provide in designing interactive and
+                  visually compelling animations.
+                </BulletListItem>
+              </VStackFull>
+            }
           >
             {" "}
             <ExampleSix />
           </FramerReanimate>
-          {/* SEVEN  */}
+          {/* motion values  */}
           <FramerReanimate
             title="motion values"
             showReanimate={false}
@@ -277,11 +363,89 @@ export default function Test() {
       </motion.div>
     </motion.div>
   );`}
+            infoTitle="motion values"
+            info={
+              <VStackFull align="items-start">
+                <BulletListItem>
+                  Motion values in Framer Motion are used to create reactive
+                  animations and effects that can respond to state changes, user
+                  input, or other dynamic conditions in your application. They
+                  provide a way to interpolate values over time or in response
+                  to user interactions, such as dragging, scrolling, or
+                  hovering.
+                </BulletListItem>
+                <HeadingText heading="Usage of Motion Values this component" />
+                <BulletListItem>
+                  Here, motion values are extensively used to create dynamic,
+                  data-driven animations:
+                </BulletListItem>
+                <BulletListItem highlighted="useMotionValue(0): ">
+                  This initializes a motion value for x starting at 0. This
+                  value can be updated dynamically, and it can drive animations
+                  or transformations in the component.
+                </BulletListItem>
+                <BulletListItem highlighted="useTransform: ">
+                  This function creates a new motion value that is the result of
+                  transforming another motion value through a function or range
+                  of values. For example, here:
+                </BulletListItem>
+                <NestedBulletListItem highlighted=" background, color, tickPath, crossPathA, and crossPathB ">
+                  are derived from the x motion value.
+                </NestedBulletListItem>
+                <NestedBulletListItem>
+                  These derived motion values are used to dynamically update the
+                  background gradient, stroke color, and the path lengths of SVG
+                  elements based on the x position of the draggable element.
+                </NestedBulletListItem>
+                <BulletListItem highlighted=" Drag Interaction: ">
+                  The drag="x" prop on the inner motion.div allows the element
+                  to be dragged along the x-axis. The x motion value is updated
+                  based on this interaction, which in turn updates the derived
+                  motion values and consequently the visual appearance of the
+                  component.
+                </BulletListItem>
+                <HeadingText heading="How Motion Values Work" />
+                <BulletListItem highlighted="Reactivity: ">
+                  Motion values are reactive. When their value changes, anything
+                  bound to them updates automatically. This makes it easy to
+                  create animations that respond to user input or other dynamic
+                  conditions.
+                </BulletListItem>
+                <BulletListItem highlighted="Performance: ">
+                  Motion values are optimized for performance. They allow Framer
+                  Motion to update animations at the optimal frame rate without
+                  causing unnecessary re-renders of the entire React component
+                  tree.
+                </BulletListItem>
+                <BulletListItem highlighted="Integration with Animations: ">
+                  Motion values can be integrated with the animation utilities
+                  in Framer Motion, enabling smooth transitions between states
+                  or along motion paths.
+                </BulletListItem>
+                <HeadingText heading="General Aspects of Motion Values" />
+                <BulletListItem highlighted="Continuous Updates: ">
+                  Unlike React state, updating a motion value doesn’t trigger a
+                  re-render of the component. Instead, it directly updates the
+                  value in the DOM, leading to smoother animations and
+                  interactions.
+                </BulletListItem>
+                <BulletListItem highlighted="Use with animate: ">
+                  Motion values can be used as targets for the animate prop of
+                  motion components, allowing for complex animations and
+                  transitions based on the changing values.
+                </BulletListItem>
+                <BulletListItem highlighted="Use in Gestures: ">
+                  They are particularly useful in gesture-based animations (like
+                  dragging, pinching, or scrolling) where the values change
+                  rapidly and continuously.
+                </BulletListItem>
+              </VStackFull>
+            }
           >
             {" "}
             <ExampleSeven />
           </FramerReanimate>
-          {/* EIGHT  */}
+          {/* layout 1  */}
           <FramerReanimate
             title="layout 1"
             showReanimate={false}
@@ -302,11 +466,75 @@ export default function Test() {
       </div>
     </Flex>
   `}
+            infoTitle="layout"
+            info={
+              <VStackFull align="items-start">
+                <HeadingText heading="General Use of layout" />
+                <BulletListItem highlighted="Automatic Animation: ">
+                  When you apply the layout prop to a component, Framer Motion
+                  tracks changes to its layout and automatically creates
+                  animations for any changes detected between renders. This
+                  means that if the component's dimensions, position, or
+                  visibility change, Framer Motion will calculate the necessary
+                  animation to transition from the old state to the new state
+                  smoothly.
+                </BulletListItem>
+                <BulletListItem highlighted="Shared Layout Animation: ">
+                  By using the layout prop on multiple components with the same
+                  layoutId, you can animate layout changes between these
+                  components, even if they move between different parts of the
+                  DOM.
+                </BulletListItem>
+                <HeadingText heading="In the Context of This Example" />
+                <BulletListItem>
+                  In this component, the layout prop is used on the motion.div
+                  that represents the toggle button inside the switch. Here’s
+                  how it functions: When the isOn state changes (the switch is
+                  toggled), the position of the button (motion.div) changes
+                  within its parent div.
+                </BulletListItem>
+                <BulletListItem>
+                  The layout prop on the motion.div tells Framer Motion to
+                  animate this position change. So, instead of the button just
+                  jumping from one side to the other, it moves smoothly,
+                  creating a more natural switch effect.
+                </BulletListItem>
+                <BulletListItem>
+                  The transition prop defines how this animation behaves. In
+                  this case, a spring animation is used, which gives a bouncy
+                  and natural feel to the movement of the toggle button.
+                </BulletListItem>
+                <HeadingText heading="General Aspects of layout" />
+                <BulletListItem highlighted="Performance: ">
+                  While the layout animation is powerful, it's important to use
+                  it judiciously as it can be performance-intensive, especially
+                  with complex components or large lists.
+                </BulletListItem>
+                <BulletListItem highlighted="Nested Animations: ">
+                  If you have nested elements with layout, their animations will
+                  be coordinated. This can lead to complex and delightful
+                  animations but can also introduce complexity in managing these
+                  animations.
+                </BulletListItem>
+                <BulletListItem highlighted="Optimization: ">
+                  Sometimes, you might need to optimize animations by disabling
+                  layout animations on certain components (using layout={false})
+                  or tweaking the transition settings to achieve the desired
+                  performance.
+                </BulletListItem>
+                <BulletListItem highlighted="Orchestration: ">
+                  You can orchestrate complex animations by combining the layout
+                  prop with other animation features in Framer Motion, such as
+                  variants and the AnimatePresence component, to control the
+                  sequence and timing of animations.
+                </BulletListItem>
+              </VStackFull>
+            }
           >
             {" "}
             <ExampleEight />
           </FramerReanimate>
-          {/* NINE  */}
+          {/* layout 2  */}
           <FramerReanimate
             title="layout 2"
             showReanimate={false}
@@ -334,7 +562,7 @@ export default function Test() {
             {" "}
             <ExampleNine />
           </FramerReanimate>
-          {/* TEN  */}
+          {/* layoutId 1  */}
           <FramerReanimate
             title="layoutId 1"
             code={`interface Item {
@@ -401,7 +629,7 @@ export default function Test() {
             {" "}
             <ExampleTen />
           </FramerReanimate>
-          {/* ELEVEN  */}
+          {/* layoutId 2  */}
           <FramerReanimate
             title="layoutId 2"
             code={`interface Item {
