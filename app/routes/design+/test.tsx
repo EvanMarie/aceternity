@@ -111,6 +111,89 @@ export default function Test() {
           borderRadius: "100%",
         }}
             />`}
+            infoTitle="gestures"
+            info={
+              <VStackFull align="items-start">
+                <BulletListItem>
+                  In Framer Motion, gestures are interactions that can trigger
+                  animations or actions on UI elements, such as hovering,
+                  tapping, panning, and more. These interactions allow for more
+                  engaging and dynamic user experiences.
+                </BulletListItem>
+                <HeadingText heading="Gestures in this component" />
+                <BulletListItem>
+                  In this example, two gesture-related props are used:
+                  whileHover and whileTap. Here's how they function:
+                </BulletListItem>
+                <BulletListItem highlighted="whileHover: ">
+                  This prop defines the animation that should occur when the
+                  user hovers over the element. In this case, the element scales
+                  up to 1.2 times its original size and rotates 90 degrees.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="whileTap: ">
+                  This prop specifies the animation that should occur when the
+                  element is tapped or clicked. The element scales down to 0.8
+                  times its original size, rotates -90 degrees, and its border
+                  radius changes to "100%", making it fully rounded (circle).
+                </BulletListItem>
+                <HeadingText heading="How Gestures Work in Framer Motion" />
+                <BulletListItem highlighted="Direct Interaction: ">
+                  Gestures allow users to interact directly with elements in the
+                  UI, triggering animations or actions in response to those
+                  interactions.
+                </BulletListItem>
+                <BulletListItem highlighted="Dynamic Response: ">
+                  The component responds dynamically to user interactions. For
+                  instance, when the user hovers over or taps the element, the
+                  specified animations are triggered immediately.
+                </BulletListItem>
+                <BulletListItem highlighted="Styling Changes: ">
+                  In addition to triggering animations, gestures can be used to
+                  apply immediate styling changes, such as color changes,
+                  opacity, or other CSS properties.
+                </BulletListItem>
+                <HeadingText heading="Implementation in this example" />
+                <BulletListItem>
+                  The motion.div element is enhanced with gesture capabilities
+                  using whileHover and whileTap props, allowing it to react to
+                  hover and tap events with specific animations.
+                </BulletListItem>
+                <BulletListItem>
+                  The animations are declaratively defined in the props, making
+                  the component concise and easy to understand.
+                </BulletListItem>
+                <BulletListItem>
+                  Framer Motion under the hood handles the complexity of adding
+                  event listeners and managing the lifecycle of these
+                  interactions.
+                </BulletListItem>
+                <HeadingText heading="General aspects of gestures" />
+                <BulletListItem highlighted="Ease of Use: ">
+                  Framer Motion's API for gestures is designed to be intuitive,
+                  allowing developers to easily add interactive animations to
+                  their components.
+                </BulletListItem>
+
+                <BulletListItem highlighted="Integration with React: ">
+                  Gesture animations in Framer Motion integrate seamlessly with
+                  React, maintaining the component's reactivity and
+                  statefulness.
+                </BulletListItem>
+                <BulletListItem highlighted="Performance: ">
+                  Framer Motion optimizes gesture animations for performance,
+                  ensuring smooth and responsive interactions even with complex
+                  animations.
+                </BulletListItem>
+                <HeadingText heading="Summary" />
+                <BulletListItem>
+                  This component demonstrates the use of hover and tap gestures
+                  to create interactive animations in Framer Motion. These
+                  gestures enhance the user experience by providing immediate
+                  visual feedback in response to user interactions, making the
+                  UI more dynamic and engaging.
+                </BulletListItem>
+              </VStackFull>
+            }
           >
             <ExampleThree />
           </FramerReanimate>
@@ -129,8 +212,87 @@ export default function Test() {
           dragConstraints={constraintsRef}
         />
             </motion.div>`}
+            infoTitle="drag"
+            info={
+              <VStackFull align="items-start">
+                <BulletListItem>
+                  In Framer Motion, the drag functionality allows elements to be
+                  moved around within the viewport or within specified
+                  constraints, providing an interactive and dynamic user
+                  experience. This functionality can be easily added to motion
+                  components to make them draggable.
+                </BulletListItem>
+                <HeadingText
+                  heading="Drag as used in this component
+                "
+                />
+                <BulletListItem>
+                  In this example, the drag prop is used to make a motion.div
+                  draggable. Here’s how it works:
+                </BulletListItem>
+                <BulletListItem highlighted="Draggable Element: ">
+                  The inner motion.div is made draggable by adding the drag
+                  prop. This allows the user to click and drag this element
+                  across the screen.
+                </BulletListItem>
+                <BulletListItem highlighted="Constraints: ">
+                  The dragConstraints prop limits the draggable area to the
+                  boundaries of another element. In this case, the outer
+                  motion.div acts as the boundary. The ref= constraintsRef is
+                  used to reference this outer motion.div, and
+                  dragConstraints=constraintsRef applies these constraints to
+                  the inner motion.div.
+                </BulletListItem>
+                <HeadingText
+                  heading="How Drag Works in Framer Motion
+                "
+                />
+                <BulletListItem highlighted="Enabling Drag: ">
+                  By setting the drag prop on a motion component, it becomes
+                  interactive and can be moved by user input.
+                </BulletListItem>
+                <BulletListItem highlighted="Constraint Boundaries: ">
+                  The dragConstraints prop defines the area within which the
+                  element can be dragged. This prevents the element from being
+                  moved outside a specified area, which can be particularly
+                  useful for creating bounded draggable interfaces.
+                </BulletListItem>
+                <BulletListItem highlighted="Reference to Constraints: ">
+                  useRef(null) is used to create a reference (constraintsRef) to
+                  the outer motion.div. This reference is then used in
+                  dragConstraints to establish the draggable area for the inner
+                  motion.div.
+                </BulletListItem>
+                <HeadingText heading="Additional Drag-related Features in Framer Motion" />
+                <BulletListItem highlighted="Axis-specific Drag: ">
+                  You can restrict dragging to a single axis (horizontal or
+                  vertical) by setting the drag prop to "x" or "y".
+                </BulletListItem>
+                <BulletListItem highlighted="Drag Elasticity and Inertia: ">
+                  Customize the drag experience by adjusting properties like
+                  dragElastic (how much the element can stretch past its
+                  constraints) and dragMomentum (whether the element should
+                  continue moving after being released based on the user's drag
+                  speed).
+                </BulletListItem>
+                <BulletListItem highlighted="Event Handlers: ">
+                  Framer Motion provides event handlers like onDragStart,
+                  onDragEnd, and onDrag that allow you to execute custom
+                  functions during the drag lifecycle, providing additional
+                  control over the drag behavior.
+                </BulletListItem>
+
+                <HeadingText heading="Summary" />
+                <BulletListItem>
+                  In this component, the drag functionality creates a tactile
+                  interaction where the user can move the element within a
+                  defined area, demonstrating how Framer Motion's drag
+                  capabilities can be used to enhance the interactivity and user
+                  engagement of web elements.
+                </BulletListItem>
+              </VStackFull>
+            }
           >
-            {" "}
             <ExampleFour />
           </FramerReanimate>
           {/* path  */}
@@ -191,6 +353,89 @@ export default function Test() {
         </motion.svg>
             </div>
           );`}
+            infoTitle="motion.path"
+            info={
+              <VStackFull align="items-start">
+                <BulletListItem>
+                  motion.path in Framer Motion is a special component used to
+                  animate SVG paths. It allows for the control and animation of
+                  path properties like pathLength, stroke, fill, and opacity,
+                  among others. This capability makes it incredibly useful for
+                  creating complex and visually engaging animations directly
+                  within SVG elements.
+                </BulletListItem>
+                <HeadingText heading="motion.path in this component" />
+                <BulletListItem>
+                  In this example, motion.path is used to animate an SVG path
+                  element. The animation is defined through variants (icon) and
+                  involves changes in opacity, path length, and fill color.
+                </BulletListItem>
+                <BulletListItem highlighted="Opacity: ">
+                  The animation transitions the opacity of the path from 0 to 1,
+                  making the path gradually appear as the animation progresses.
+                </BulletListItem>
+                <BulletListItem highlighted="Path Length: ">
+                  The pathLength property is animated from 0 to 1. This makes it
+                  seem like the path is being drawn progressively. At 0, none of
+                  the path is visible, and at 1, the entire path is drawn.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Fill: ">
+                  The color of the path fills gradually changes from transparent
+                  (rgba(0, 100, 100, 0)) to a solid cyan color (rgba(0, 255,
+                  255, 1)), creating a filling effect as the path gets drawn.
+                </BulletListItem>
+                <HeadingText heading="How motion.path Works " />
+                <BulletListItem highlighted="SVG Path Animation: ">
+                  motion.path extends the capabilities of SVG path elements,
+                  allowing them to be animated using Framer Motion's powerful
+                  animation and transition features.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Control and Flexibility: ">
+                  By using motion.path, you get fine-grained control over how
+                  the path's properties change over time, either in response to
+                  user interactions or as part of predefined animations.
+                </BulletListItem>
+                <HeadingText heading="Transition and Animation Control " />
+                <BulletListItem>
+                  The transition property in motion.path controls how the
+                  animation between variant states occurs. In this component,
+                  separate transition configurations are provided for the
+                  default properties and the fill color, allowing for different
+                  easing and duration settings for different aspects of the
+                  animation.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="easeInOut">
+                  easing is used for most properties, providing a smooth start
+                  and end to the animation, while the fill color has a custom
+                  easing array to fine-tune its animation effect.
+                </BulletListItem>
+                <HeadingText heading="Importion aspects of motion.path " />
+                <BulletListItem highlighted="Enhanced SVG Animations: ">
+                  motion.path uses Framer Motion's animation engine to enhance
+                  the capabilities of SVG path animations, going beyond simple
+                  CSS animations.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Interactivity and Responsiveness: ">
+                  Animations can be tied to user interactions, such as hover or
+                  click events, making SVGs more interactive and dynamic.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Performance: ">
+                  Framer Motion optimizes the performance of animations,
+                  ensuring that they run smoothly even when complex paths are
+                  animated.
+                </BulletListItem>
+                <HeadingText heading="Summary" />
+                <BulletListItem>
+                  motion.path in Framer Motion provides a flexible way to
+                  animate SVG paths, offering detailed control over the
+                  animation of path properties and enabling the creation of
+                  intricate and dynamic visual effects in web applications. In
+                  this component, it is used to craft a detailed path drawing
+                  animation that enhances the visual appeal and interactivity of
+                  the SVG graphic.
+                </BulletListItem>
+              </VStackFull>
+            }
           >
             {" "}
             <ExampleFive />
