@@ -94,6 +94,100 @@ export default function Test() {
           />
         ))}
             </motion.ul>`}
+            infoTitle="variants"
+            info={
+              <VStackFull align="items-start">
+                <BulletListItem>
+                  Variants in Framer Motion are predefined sets of style
+                  properties and animations that can be applied to motion
+                  components. They provide a way to organize and reuse animation
+                  definitions, making it easier to manage complex animations and
+                  transitions.
+                </BulletListItem>
+                <HeadingText heading="Variants in this example" />
+                <BulletListItem>
+                  In this component, two variants are defined: container and
+                  item.
+                </BulletListItem>
+                <BulletListItem highlighted="container Variant: ">
+                  This variant is applied to the motion.ul element. It defines
+                  two states:
+                </BulletListItem>
+                <NestedBulletListItem highlighted=" hidden: ">
+                  Sets the opacity to 1 and scale to 0, effectively making the
+                  container invisible initially (though fully opaque).
+                </NestedBulletListItem>
+                <NestedBulletListItem highlighted="visible: ">
+                  Changes the scale to 1, making the container fully visible. It
+                  also includes transition properties like delayChildren, which
+                  delays the animation of child components, and staggerChildren,
+                  which staggers the animations of child components in sequence.
+                </NestedBulletListItem>
+                <BulletListItem highlighted="item Variant:">
+                  Applied to each motion.li element, representing individual
+                  items within the container. It also has two states:
+                </BulletListItem>
+                <NestedBulletListItem highlighted="hidden: ">
+                  Positions the item 20 pixels down (y: 20) and sets its opacity
+                  to 0, making it invisible at the start.
+                </NestedBulletListItem>
+                <NestedBulletListItem highlighted="visible: ">
+                  Moves the item to its original position (y: 0) and fades it in
+                  to full opacity (opacity: 1).
+                </NestedBulletListItem>
+                <HeadingText heading="How Variants Work in Framer Motion" />
+                <BulletListItem highlighted="State Management: ">
+                  Variants represent different states of a component (like
+                  hidden and visible) and the style or animation properties
+                  associated with those states.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Animation Control: ">
+                  When the animate prop of a motion component is set to a
+                  variant name (e.g., visible), Framer Motion automatically
+                  applies the defined properties and transitions to the
+                  component.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted=" Hierarchy and Inheritance: ">
+                  Variants allow for hierarchical animation control. In this
+                  example, the container variant controls the overall container
+                  animation and its relation to the child components (item
+                  variants), allowing for coordinated animations like staggered
+                  effects.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted=" Reusability: ">
+                  Variants can be reused across different components or
+                  instances, promoting consistency and reducing redundancy in
+                  animation code.
+                </BulletListItem>
+                <HeadingText heading="Benefits of Using Variants" />
+                <BulletListItem highlighted="Simplification: ">
+                  They simplify the animation code by abstracting the animation
+                  definitions away from the component, making the component code
+                  cleaner and more readable.
+                </BulletListItem>
+                <BulletListItem highlighted="Consistency: ">
+                  By defining animations in one place and reusing them across
+                  components, variants help ensure consistent animations
+                  throughout the application.
+                </BulletListItem>
+                <BulletListItem
+                  highlighted="Complex Animation
+                  Sequences: "
+                >
+                  Variants, especially when combined with transition properties
+                  like staggerChildren, make it easier to create complex
+                  animation sequences and orchestrate the timing between parent
+                  and child components.
+                </BulletListItem>
+                <HeadingText heading="Summary" />
+                <BulletListItem>
+                  In this example, variants are effectively used to manage the
+                  animations of the list container and its items, demonstrating
+                  how variants can be used to create complex, coordinated
+                  animations in a concise and manageable way.
+                </BulletListItem>
+              </VStackFull>
+            }
           >
             {" "}
             <ExampleTwo />
