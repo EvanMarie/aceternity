@@ -1138,11 +1138,427 @@ export function ExampleEleven() {
             {" "}
             <ExampleEleven />
           </FramerReanimate>
-          <FramerReanimate title="twelve" code={``}>
+          <FramerReanimate
+            title="useAnimation"
+            code={`function Component() {
+  const controls = useAnimation();
+  const backgroundOne = "radial-gradient(circle, #ffeede 0%, #9C6892 100%)";
+  const backgroundTwo = "radial-gradient(circle, #F2B680 0%, #03738C 100%)";
+  const backgroundThree = "radial-gradient(circle, #45233e 0%, #F27D72 100%)";
+  const backgroundFour = "radial-gradient(circle, #032533 0%, #F2B680 100%)";
+  const lightFont = "#fff";
+  const darkFont = "#000";
+
+    useEffect(() => {
+    const sequence = async () => {
+      // Start the sequence by moving to the right and partially fading
+      await controls.start({
+        x: 100,
+        y: -100,
+        opacity: 0.7,
+        borderRadius: "50%",
+        background: backgroundOne,
+        color: darkFont,
+        transition: { duration: 2 },
+      });
+
+      await controls.start({
+        x: 0,
+        y: -100,
+      });
+
+      // Move back to the original position and fully fade in
+      await controls.start({
+        x: 0,
+        opacity: 1,
+        borderRadius: "20%",
+        background: backgroundTwo,
+        color: lightFont,
+        transition: { duration: 1 },
+      });
+
+      // Scale up
+      await controls.start({ scale: 1.25, transition: { duration: 1.5 } });
+
+      // Rotate while scaling down
+      await controls.start({
+        scale: 1,
+        rotate: -180,
+        borderRadius: "50%",
+        background: backgroundThree,
+        color: lightFont,
+        transition: { duration: 1.75 },
+      });
+
+      // Move to the left and partially fading
+      await controls.start({
+        x: -100,
+        opacity: 0.7,
+        borderRadius: "20%",
+        background: backgroundFour,
+        color: lightFont,
+        transition: { duration: 0.25 },
+      });
+
+      // Move back to the original position and fully fade in
+      await controls.start({
+        x: 0,
+        opacity: 1,
+        borderRadius: "50%",
+        background: backgroundOne,
+        color: darkFont,
+        transition: { duration: 2 },
+      });
+
+      await controls.start({
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        borderRadius: "20%",
+        background: backgroundTwo,
+        color: lightFont,
+        transition: { duration: 1 },
+      });
+
+      await controls.start({
+        y: -100,
+        x: 0,
+        opacity: 1,
+        borderRadius: "50%",
+        background: backgroundOne,
+        color: darkFont,
+        transition: { duration: 2 },
+      });
+
+      await controls.start({
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        borderRadius: "20%",
+        background: backgroundTwo,
+        color: lightFont,
+        transition: { duration: 1 },
+      });
+
+      // Scale up
+      await controls.start({
+        scale: 1.25,
+        transition: { duration: 0.5 },
+        background: backgroundTwo,
+        color: lightFont,
+      });
+
+      // Rotate while scaling down
+      await controls.start({
+        scale: 1,
+        rotate: 0,
+        borderRadius: "20%",
+        background: backgroundThree,
+        color: lightFont,
+        transition: { duration: 0.5 },
+      });
+
+      await controls.start({
+        scale: 0.5,
+        borderRadius: "50%",
+        transition: { duration: 0.3 },
+      });
+
+      // fast rotation
+      await controls.start({ rotate: 720, transition: { duration: 1 } });
+
+      // scale, and fade out slightly
+      await controls.start({
+        scale: 2,
+        opacity: 0.9,
+        transition: { duration: 1 },
+      });
+      // fast rotation
+      await controls.start({
+        rotate: -720,
+        transition: { duration: 1 },
+        scale: 1,
+        background: backgroundOne,
+        color: darkFont,
+      });
+    };
+
+    sequence();
+  }, [controls]);
+
+    sequence();
+  }, [controls]);
+
+  return (
+    <motion.div
+      className="w-[12vh] h-[12vh] flex justify-center items-center text-center font-semibold text-[2vh] metallicEdgesLg border-900-md"
+      animate={controls}
+    >
+      <Text>Controlled Animation</Text>
+    </motion.div>
+  );
+`}
+            infoTitle="useAnimation"
+            info={
+              <VStackFull align="items-start">
+                <BulletListItem>
+                  This example uses Framer Motion's useAnimation hook for
+                  creating complex, programmatically controlled animations.
+                  Here's an in-depth look at how it utilizes various features of
+                  Framer Motion:
+                </BulletListItem>
+                <HeadingText heading="Complex Animation Sequences" />
+                <BulletListItem>
+                  The component demonstrates a sequence of animations that
+                  change the properties of a motion.div element over time,
+                  including position, opacity, scale, rotation, border radius,
+                  background, and text color. This sequence is orchestrated
+                  using the useAnimation hook, allowing for precise control over
+                  the timing and order of animations.
+                </BulletListItem>
+                <HeadingText heading="Animation Control with useAnimation" />
+                <BulletListItem highlighted="Programmatic Control: ">
+                  useAnimation provides a controls object used to start
+                  animations in a specified sequence. This approach offers more
+                  control compared to declarative animations, allowing for
+                  complex choreographies.{" "}
+                </BulletListItem>
+                <BulletListItem
+                  highlighted="Sequential
+                  Execution: "
+                >
+                  The await keyword is used to wait for one animation to
+                  complete before starting the next, ensuring the animations
+                  play out in a sequential and orderly fashion.{" "}
+                </BulletListItem>
+                <BulletListItem
+                  highlighted="Transition
+                  Customization: "
+                >
+                  Each animation can have its transition properties, allowing
+                  for varied timing, easing, and duration settings that match
+                  the desired feel of each animation step.
+                </BulletListItem>
+                <HeadingText heading="Use of Async/Await for Sequential Animations" />
+                <BulletListItem>
+                  The use of async/await in the sequence function within
+                  useEffect ensures that each animation step completes before
+                  the next one begins, allowing for the creation of intricate
+                  animation sequences that unfold over time.
+                </BulletListItem>
+                <HeadingText heading="useAnimation vs Keyframes" />
+                <BulletListItem>
+                  Creating a sequence of animations using the useAnimation hook
+                  versus keyframes in Framer Motion offers different levels of
+                  control and complexity in how animations are defined and
+                  managed. Here’s how they differ:
+                </BulletListItem>
+                <HeadingText heading="useAnimation Hook" />
+                <BulletListItem highlighted="Programmatic Control: ">
+                  useAnimation provides a more imperative approach to animation,
+                  where you can programmatically control the start, stop, and
+                  sequence of animations. It allows for dynamic and conditional
+                  animations based on application state or user interactions.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Complex Sequencing: ">
+                  {" "}
+                  With useAnimation, you can create complex sequences of
+                  animations that depend on each other's completion, using
+                  async/await to wait for one animation to finish before
+                  starting another. This is useful for creating intricate
+                  animation sequences where each step might depend on the
+                  completion of the previous one.{" "}
+                </BulletListItem>
+                <BulletListItem
+                  highlighted="Runtime
+                  Dynamics: "
+                >
+                  Animations can be dynamically altered at runtime based on
+                  logic or state changes in your application. This means the
+                  animation can react to user inputs or other programmatic
+                  conditions.
+                </BulletListItem>
+
+                <HeadingText heading="Keyframes" />
+                <BulletListItem highlighted="Declarative and Predefined: ">
+                  Keyframe animations are more declarative, defined upfront in
+                  the component's props or variants. They describe the animation
+                  steps at specific points along a timeline, and Framer Motion
+                  interpolates the values between these points.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Simpler to Define: ">
+                  Keyframe animations are easier to set up for straightforward
+                  sequences and are defined in a more static manner. They are
+                  suitable for animations that do not require conditional logic
+                  or dynamic sequences.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Less Granular Control: ">
+                  While keyframe animations can be controlled to an extent (such
+                  as paused, played, or reversed), they don't offer the same
+                  level of granular control as the useAnimation hook, especially
+                  in terms of sequencing and conditional logic.
+                </BulletListItem>
+
+                <HeadingText heading="Example Comparison" />
+                <BulletListItem>
+                  Using useAnimation, you might programmatically create an
+                  animation sequence that responds to user actions or
+                  application state. For instance, you could start an animation,
+                  then wait for a user's input before proceeding to the next
+                  stage of the sequence.
+                </BulletListItem>
+                <BulletListItem>
+                  With keyframes, you would define all the stages of the
+                  animation upfront, and the animation would run through these
+                  stages automatically once triggered. The control over starting
+                  and stopping at specific points is more limited compared to
+                  useAnimation.
+                </BulletListItem>
+
+                <HeadingText heading="Conclusion" />
+                <BulletListItem>
+                  useAnimation is more flexible and powerful for complex,
+                  conditional, or multi-step animations where each step might
+                  require custom logic or waiting on external events.
+                </BulletListItem>
+                <BulletListItem>
+                  Keyframe animations are simpler and more declarative, suitable
+                  for straightforward, predefined animation sequences where
+                  granular control over each step is not necessary.
+                </BulletListItem>
+                <BulletListItem>
+                  In essence, the choice between useAnimation and keyframe
+                  animations depends on the complexity and dynamic needs of the
+                  animations within your application. For intricate and
+                  interactive animations, useAnimation offers the necessary
+                  control, while keyframe animations are sufficient for simpler,
+                  self-contained sequences.
+                </BulletListItem>
+
+                <HeadingText heading="Key useAnimation Takeaways" />
+                <BulletListItem highlighted="Manual Animation Sequencing: ">
+                  The example demonstrates how to manually control a sequence of
+                  animations, providing a high level of customization and
+                  control over the animation logic.
+                </BulletListItem>
+                <BulletListItem highlighted="Dynamic Styling: ">
+                  The animation changes the visual style dynamically, including
+                  complex properties like radial gradients and color schemes.
+                </BulletListItem>
+                <BulletListItem highlighted="Interactivity and Engagement: ">
+                  Through user interaction or automated sequences, the animation
+                  creates an engaging and interactive user experience.
+                </BulletListItem>
+              </VStackFull>
+            }
+          >
             {" "}
             <ExampleTwelve />
           </FramerReanimate>
-          <FramerReanimate title="thirteen" code={``}>
+          <FramerReanimate
+            title="useAnimation YoYo"
+            showReanimate={false}
+            code={`function YoYoAnimation() {
+  const controls = useAnimation();
+  const gradientOne = "radial-gradient(circle, #ffeede 0%, #9C6892 100%)";
+  const gradientTwo = "radial-gradient(circle, #F2B680 0%, #03738C 100%)";
+  const [isAnimating, setIsAnimating] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true; // Track if the component is mounted
+
+    const sequence = async () => {
+      while (isAnimating && isMounted) {
+        await controls.start({
+          y: "100%",
+          rotate: 180,
+          borderRadius: "50%",
+          scale: 0.8,
+          background: gradientOne,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+        if (!isAnimating || !isMounted) break;
+
+        await controls.start({
+          y: "0%",
+          rotate: 360,
+          borderRadius: "20%",
+          scale: 1,
+          background: gradientTwo,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+        if (!isAnimating || !isMounted) break;
+
+        // Define a yo-yo movement pattern
+        await controls.start({
+          y: "100%", // Move down
+          rotate: 180,
+          borderRadius: "50%",
+          scale: 0.8,
+          background: gradientOne,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+
+        await controls.start({
+          y: "0%", // Move back up
+          rotate: 360,
+          borderRadius: "20%",
+          scale: 1,
+          background: gradientTwo,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+
+        await controls.start({
+          y: "-100%", // Move up above the starting point
+          rotate: 540,
+          borderRadius: "50%",
+          scale: 1.2,
+          background: gradientOne,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+
+        await controls.start({
+          y: "0%", // Return to starting point
+          rotate: 720,
+          borderRadius: "20%",
+          scale: 1,
+          background: gradientTwo,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+      }
+    };
+
+    if (isAnimating) {
+      sequence();
+    }
+
+    return () => {
+      isMounted = false; // Set isMounted to false when the component unmounts
+      controls.stop(); // Stop the animation when the component unmounts or isAnimating changes
+    };
+  }, [isAnimating, controls]);
+
+  return (
+    <CenterFull className="relative">
+      <motion.div
+        className="w-[12vh] h-[12vh] flex justify-center items-center text-center font-semibold text-[2vh] metallicEdgesLg border-900-md"
+        animate={controls}
+      >
+        Yo-Yo Animation
+      </motion.div>
+      <Box className="absolute bottom-[1vh] left-[1vh]">
+        <IconButton
+          onClick={() => setIsAnimating(!isAnimating)}
+          icon={isAnimating ? FaStop : FaPlay}
+          type="smallNormal"
+        />
+      </Box>
+    </CenterFull>
+  );
+}`}
+          >
             {" "}
             <ExampleThirteen />
           </FramerReanimate>

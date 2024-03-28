@@ -1,17 +1,17 @@
+import Box from "~/components/buildingBlocks/box";
 import {
   AnimatePresence,
   motion,
+  useAnimation,
   useMotionValue,
   useTransform,
-  useViewportScroll,
 } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { FaPlay, FaStop } from "react-icons/fa";
 import CenterFull from "~/components/buildingBlocks/centerFull";
 import Flex from "~/components/buildingBlocks/flex";
-import FlexFull from "~/components/buildingBlocks/flexFull";
-import HStack from "~/components/buildingBlocks/hStack";
+import IconButton from "~/components/buildingBlocks/iconButton";
 import Text from "~/components/buildingBlocks/text";
-import VStack from "~/components/buildingBlocks/vStack";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 
 // EXAMPLE ONE
@@ -306,7 +306,7 @@ export function ExampleNine() {
   );
 }
 
-// EXAMPLE TEN
+// EXAMPLE TEN - LayoutID 1
 export function ExampleTen() {
   interface Item {
     id: number;
@@ -369,7 +369,7 @@ export function ExampleTen() {
   );
 }
 
-// EXAMPLE ELEVEN
+// EXAMPLE ELEVEN - LayoutID 2
 interface Item {
   id: number;
   text: string;
@@ -463,14 +463,280 @@ export function ExampleEleven() {
   );
 }
 
-// EXAMPLE TWELVE
+// EXAMPLE TWELVE - Dynamic Variants
+function Component() {
+  const controls = useAnimation();
+  const backgroundOne = "radial-gradient(circle, #ffeede 0%, #9C6892 100%)";
+  const backgroundTwo = "radial-gradient(circle, #F2B680 0%, #03738C 100%)";
+  const backgroundThree = "radial-gradient(circle, #45233e 0%, #F27D72 100%)";
+  const backgroundFour = "radial-gradient(circle, #032533 0%, #F2B680 100%)";
+  const lightFont = "#fff";
+  const darkFont = "#000";
+
+  useEffect(() => {
+    const sequence = async () => {
+      // Start the sequence by moving to the right and partially fading
+      await controls.start({
+        x: 100,
+        y: -100,
+        opacity: 0.7,
+        borderRadius: "50%",
+        background: backgroundOne,
+        color: darkFont,
+        transition: { duration: 2 },
+      });
+
+      await controls.start({
+        x: 0,
+        y: -100,
+      });
+
+      // Move back to the original position and fully fade in
+      await controls.start({
+        x: 0,
+        opacity: 1,
+        borderRadius: "20%",
+        background: backgroundTwo,
+        color: lightFont,
+        transition: { duration: 1 },
+      });
+
+      // Scale up
+      await controls.start({ scale: 1.25, transition: { duration: 1.5 } });
+
+      // Rotate while scaling down
+      await controls.start({
+        scale: 1,
+        rotate: -180,
+        borderRadius: "50%",
+        background: backgroundThree,
+        color: lightFont,
+        transition: { duration: 1.75 },
+      });
+
+      // Move to the left and partially fading
+      await controls.start({
+        x: -100,
+        opacity: 0.7,
+        borderRadius: "20%",
+        background: backgroundFour,
+        color: lightFont,
+        transition: { duration: 0.25 },
+      });
+
+      // Move back to the original position and fully fade in
+      await controls.start({
+        x: 0,
+        opacity: 1,
+        borderRadius: "50%",
+        background: backgroundOne,
+        color: darkFont,
+        transition: { duration: 2 },
+      });
+
+      await controls.start({
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        borderRadius: "20%",
+        background: backgroundTwo,
+        color: lightFont,
+        transition: { duration: 1 },
+      });
+
+      await controls.start({
+        y: -100,
+        x: 0,
+        opacity: 1,
+        borderRadius: "50%",
+        background: backgroundOne,
+        color: darkFont,
+        transition: { duration: 2 },
+      });
+
+      await controls.start({
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        borderRadius: "20%",
+        background: backgroundTwo,
+        color: lightFont,
+        transition: { duration: 1 },
+      });
+
+      // Scale up
+      await controls.start({
+        scale: 1.25,
+        transition: { duration: 0.5 },
+        background: backgroundTwo,
+        color: lightFont,
+      });
+
+      // Rotate while scaling down
+      await controls.start({
+        scale: 1,
+        rotate: 0,
+        borderRadius: "20%",
+        background: backgroundThree,
+        color: lightFont,
+        transition: { duration: 0.5 },
+      });
+
+      await controls.start({
+        scale: 0.5,
+        borderRadius: "50%",
+        transition: { duration: 0.3 },
+      });
+
+      // fast rotation
+      await controls.start({ rotate: 720, transition: { duration: 1 } });
+
+      // scale, and fade out slightly
+      await controls.start({
+        scale: 2,
+        opacity: 0.9,
+        transition: { duration: 1 },
+      });
+      // fast rotation
+      await controls.start({
+        rotate: -720,
+        transition: { duration: 1 },
+        scale: 1,
+        background: backgroundOne,
+        color: darkFont,
+      });
+    };
+
+    sequence();
+  }, [controls]);
+
+  return (
+    <motion.div
+      className="w-[12vh] h-[12vh]  flex justify-center items-center text-center font-semibold text-[2vh] metallicEdgesLg border-900-md"
+      animate={controls}
+    >
+      <Text>Controlled Animation</Text>
+    </motion.div>
+  );
+}
+
 export function ExampleTwelve() {
-  return <motion.div>this</motion.div>;
+  return (
+    <AnimatePresence>
+      <Component key="example" />
+    </AnimatePresence>
+  );
 }
 
 // EXAMPLE THIRTEEN
+
+function Component2() {
+  const controls = useAnimation();
+  const gradientOne = "radial-gradient(circle, #ffeede 0%, #9C6892 100%)";
+  const gradientTwo = "radial-gradient(circle, #F2B680 0%, #03738C 100%)";
+  const [isAnimating, setIsAnimating] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true; // Track if the component is mounted
+
+    const sequence = async () => {
+      while (isAnimating && isMounted) {
+        // Perform the animation only if isAnimating is true and component is mounted
+        await controls.start({
+          y: "100%",
+          rotate: 180,
+          borderRadius: "50%",
+          scale: 0.8,
+          background: gradientOne,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+        if (!isAnimating || !isMounted) break;
+
+        await controls.start({
+          y: "0%",
+          rotate: 360,
+          borderRadius: "20%",
+          scale: 1,
+          background: gradientTwo,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+        if (!isAnimating || !isMounted) break;
+
+        // Define a yo-yo movement pattern
+        await controls.start({
+          y: "100%", // Move down
+          rotate: 180,
+          borderRadius: "50%",
+          scale: 0.8,
+          background: gradientOne,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+
+        await controls.start({
+          y: "0%", // Move back up
+          rotate: 360,
+          borderRadius: "20%",
+          scale: 1,
+          background: gradientTwo,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+
+        await controls.start({
+          y: "-100%", // Move up above the starting point
+          rotate: 540,
+          borderRadius: "50%",
+          scale: 1.2,
+          background: gradientOne,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+
+        await controls.start({
+          y: "0%", // Return to starting point
+          rotate: 720,
+          borderRadius: "20%",
+          scale: 1,
+          background: gradientTwo,
+          transition: { duration: 1, ease: "easeInOut" },
+        });
+      }
+    };
+    if (isAnimating) {
+      sequence();
+    }
+
+    return () => {
+      isMounted = false; // Set isMounted to false when the component unmounts
+      controls.stop(); // Stop the animation when the component unmounts or isAnimating changes
+    };
+  }, [isAnimating, controls]);
+
+  return (
+    <CenterFull className="relative">
+      <motion.div
+        className="w-[12vh] h-[12vh] flex justify-center items-center text-center font-semibold text-[2vh] metallicEdgesLg border-900-md"
+        animate={controls}
+      >
+        Yo-Yo
+      </motion.div>
+      <Box className="absolute bottom-[1vh] left-[1vh]">
+        <IconButton
+          onClick={() => setIsAnimating(!isAnimating)}
+          icon={isAnimating ? FaStop : FaPlay}
+          type="smallNormal"
+        />
+      </Box>
+    </CenterFull>
+  );
+}
+
 export function ExampleThirteen() {
-  return <motion.div>this</motion.div>;
+  return (
+    <AnimatePresence>
+      <Component2 key="yo-yo" />
+    </AnimatePresence>
+  );
 }
 
 // EXAMPLE FOURTEEN
