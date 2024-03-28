@@ -28,6 +28,8 @@ import Heading from "~/components/buildingBlocks/headingText";
 import { FramerReanimate } from "./components/framerReanimate";
 import Wrap from "~/components/buildingBlocks/wrap";
 import { InteractiveKeyFrames } from "./components/interactiveKeyframes";
+import Text from "~/components/buildingBlocks/text";
+import { BulletListItem, HeadingText } from "./components/infoComponents";
 
 export default function Test() {
   return (
@@ -400,7 +402,172 @@ export default function Test() {
             <ExampleTen />
           </FramerReanimate>
           {/* ELEVEN  */}
-          <FramerReanimate title="layoutId 2" code={``}>
+          <FramerReanimate
+            title="layoutId 2"
+            code={`interface Item {
+  id: number;
+  text: string;
+}
+
+export function ItemComponent({
+  item,
+  isSelected,
+  onClick,
+}: {
+  item: Item;
+  isSelected: boolean;
+  onClick: () => void;
+}) {
+  const containerVariants = {
+    visible: {
+      borderRadius: "2vh",
+      transition: {
+        type: "spring",
+        stiffness: 700,
+        damping: 30,
+      },
+    },
+  };
+
+  const detailVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        delay: 0.3,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      layout
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      onClick={onClick}
+      className={\`p-[1vh] cursor-pointer w-full flex flex-col shadowBroadTight border-900-md \${
+        isSelected ? "bg-col-300 h-45%" : "bg-col-200 h-23%"
+      }\`}
+    >
+      <Text
+        className={\`\${
+          isSelected ? "font-bold text-[2.3vh]" : "font-semibold text-[2vh]"
+        }\`}
+      >
+        {item.text}
+      </Text>
+      {isSelected && (
+        <CenterFull className="h-full">
+          <motion.div
+            layoutId={\`expandable-\${item.id}\`}
+            variants={detailVariants}
+            initial="hidden"
+            animate="visible"
+            className="overflow-hidden bg-col-960 text-col-100 p-[1vh] w-full textShadow shadow-shadowBroadTight border-900-md rounded-[2vh] h-fit"
+          >
+            Detailed view of {item.text}
+          </motion.div>
+        </CenterFull>
+      )}
+    </motion.div>
+  );
+}
+
+export function ExampleEleven() {
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const items: Item[] = [
+    { id: 1, text: "Item 1" },
+    { id: 2, text: "Item 2" },
+    { id: 3, text: "Item 3" },
+  ];
+
+  return (
+    <VStackFull className="h-full p-[1vh]">
+      {items.map((item) => (
+        <ItemComponent
+          key={item.id}
+          item={item}
+          isSelected={selectedId === item.id}
+          onClick={() => setSelectedId(selectedId === item.id ? null : item.id)}
+        />
+      ))}
+    </VStackFull>
+  );
+}`}
+            infoTitle="LayoutId"
+            info={
+              <VStackFull className="w-full h-fit" align="items-start">
+                <HeadingText heading="Purpose of layoutId" />
+                <BulletListItem highlighted="Animate Layout Changes:">
+                  layoutId is used by Framer Motion to identify and animate
+                  layout changes of components across different renders. When
+                  two or more components in a React tree have the same layoutId,
+                  Framer Motion understands that these components are linked and
+                  should animate between them as their layout changes.
+                </BulletListItem>{" "}
+                <BulletListItem highlighted="Shared Element Transition: ">
+                  This is especially useful for shared element transitions where
+                  an element moves from one part of the application to another
+                  and you want to animate this transition smoothly.
+                </BulletListItem>{" "}
+                <HeadingText heading="How layoutId is Used in Your Component" />
+                <BulletListItem>
+                  In the ItemComponent, layoutId is applied to a motion.div
+                  inside the component. This motion.div becomes the target for
+                  layout animations when the component's state changes (e.g.,
+                  when an item is selected).
+                </BulletListItem>{" "}
+                <BulletListItem>
+                  When an item is selected (isSelected is true), the motion.div
+                  with the specific layoutId (expandable-{"itemId"}) appears. If
+                  the item is deselected, the component with that layoutId will
+                  disappear or change its layout.
+                </BulletListItem>
+                <BulletListItem>
+                  Framer Motion automatically calculates the animation needed to
+                  transition the motion.div from its initial layout to its final
+                  layout (and vice versa) when the item is selected or
+                  deselected.
+                </BulletListItem>
+                <HeadingText heading="Detailed Flow" />
+                <BulletListItem highlighted="Initial Render: ">
+                  When ItemComponent is first rendered, the motion.div with
+                  layoutId (expandable-{"itemId"}) is either rendered in its
+                  collapsed state or not rendered at all, depending on whether
+                  the item is selected.
+                </BulletListItem>
+                <BulletListItem highlighted="Selection Change: ">
+                  When a user clicks on an item, the onClick handler updates the
+                  state in the parent component, which then passes down new
+                  props to ItemComponent, triggering a re-render.
+                </BulletListItem>
+                <BulletListItem highlighted="Animation Trigger: ">
+                  Upon re-render, if the state has changed (an item is selected
+                  or deselected), Framer Motion finds the elements with matching
+                  layoutIds and animates the transition between their initial
+                  and final states. In this case, it animates the expansion or
+                  collapse of the detailed view inside ItemComponent.
+                </BulletListItem>
+                <BulletListItem highlighted="Unique layoutId: ">
+                  By using (expandable-{"itemId"}) as the layoutId, each item
+                  gets a unique identifier, ensuring that Framer Motion
+                  correctly associates the layout changes with the specific item
+                  that has been selected or deselected.
+                </BulletListItem>
+                <BulletListItem>
+                  By utilizing layoutId in this way, Framer Motion enables the
+                  creation of complex animations based on changes in the
+                  component layout without manually managing the animation
+                  details. The library takes care of interpolating the styles
+                  and layout properties needed to transition between the
+                  different states smoothly.
+                </BulletListItem>
+              </VStackFull>
+            }
+          >
             {" "}
             <ExampleEleven />
           </FramerReanimate>

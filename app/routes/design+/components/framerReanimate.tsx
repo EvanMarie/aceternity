@@ -9,17 +9,22 @@ import Center from "~/components/buildingBlocks/center";
 import CodeModal from "~/routes/svg+/components/codeModal";
 import IconButton from "~/components/buildingBlocks/iconButton";
 import HStack from "~/components/buildingBlocks/hStack";
+import InfoModal from "./infoModal";
 
 export function FramerReanimate({
   title,
   code,
   children,
   bg = "bg-600-linear6op75",
+  info,
+  infoTitle,
   showReanimate = true,
   handleClickAnimation,
 }: {
   code?: string;
   title?: string;
+  info?: React.ReactNode;
+  infoTitle?: string;
   bg?: string;
   showReanimate?: boolean;
   children?: React.ReactNode;
@@ -51,6 +56,11 @@ export function FramerReanimate({
                 isPath={false}
                 useIcon
               />
+            )}
+            {info && (
+              <InfoModal title={infoTitle ? infoTitle : "More Information"}>
+                {info}
+              </InfoModal>
             )}
             {showReanimate && (
               <IconButton
