@@ -6,7 +6,13 @@ import {
   useViewportScroll,
 } from "framer-motion";
 import { useRef, useState } from "react";
+import CenterFull from "~/components/buildingBlocks/centerFull";
 import Flex from "~/components/buildingBlocks/flex";
+import FlexFull from "~/components/buildingBlocks/flexFull";
+import HStack from "~/components/buildingBlocks/hStack";
+import Text from "~/components/buildingBlocks/text";
+import VStack from "~/components/buildingBlocks/vStack";
+import VStackFull from "~/components/buildingBlocks/vStackFull";
 
 // EXAMPLE ONE
 export function ExampleOne() {
@@ -260,7 +266,7 @@ export function ExampleEight() {
         className={`w-[13vh] h-[7vh] bg-500-radial6op75 flex ${
           isOn === true ? "justify-start" : "justify-end"
         } rounded-[5vh] p-[1vh] cursor-pointer shadowBroadTight border-970-md`}
-        data-isOn={isOn}
+        data-ison={isOn}
         onClick={toggleSwitch}
       >
         <motion.div
@@ -275,106 +281,91 @@ export function ExampleEight() {
 
 // EXAMPLE NINE
 export function ExampleNine() {
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isExpanded, setIsExpanded] = useState(false);
   return (
-    <motion.div
-      layout
-      data-isOpen={isOpen}
-      initial={{ borderRadius: 50 }}
-      className={`bg-col-200 w-[10vh] h-[10vh] flex justify-center items-center shadowBroadTight border-900-md ${
-        isOpen === true ? "w-80% h-80%" : "w-50% h-50%"
-      }`}
-      onClick={() => setIsOpen(!isOpen)}
-    >
-      <motion.div
-        layout
-        transition={{ duration: 0.9 }}
-        className="w-[4vh] h-[4vh] bg-col-800 rounded-full shadowBroadTight border-900-md"
-      />
-    </motion.div>
+    <VStackFull className="h-full">
+      {" "}
+      <CenterFull className="h-full">
+        <motion.div
+          layout
+          data-isopen={isExpanded}
+          initial={{ borderRadius: 50 }}
+          className={`bg-col-200 w-[10vh] h-[10vh] flex justify-center items-center shadowBroadTight border-900-md ${
+            isExpanded === true ? "w-[25vh] h-25vh" : "w-[10vh] h-[10vh]"
+          }`}
+        >
+          <motion.div
+            layout
+            transition={{ duration: 0.9 }}
+            className="w-[4vh] h-[4vh] bg-col-800 rounded-full shadowBroadTight border-900-md cursor-pointer"
+            onClick={() => setIsExpanded(!isExpanded)}
+          />
+        </motion.div>
+      </CenterFull>
+    </VStackFull>
   );
 }
 
 // EXAMPLE TEN
 export function ExampleTen() {
-  interface Ingredient {
+  interface Item {
+    id: number;
     icon: string;
     label: string;
   }
-
-  function removeItem<T>([...arr]: T[], item: T) {
-    const index = arr.indexOf(item);
-    index > -1 && arr.splice(index, 1);
-    return arr;
-  }
-
-  function closestItem<T>(arr: T[], item: T) {
-    const index = arr.indexOf(item);
-    if (index === -1) {
-      return arr[0];
-    } else if (index === arr.length - 1) {
-      return arr[arr.length - 2];
-    } else {
-      return arr[index + 1];
-    }
-  }
-
-  const allIngredients = [
-    { icon: "🍅", label: "Tomato" },
-    { icon: "🥬", label: "Lettuce" },
-    { icon: "🧀", label: "Cheese" },
-    { icon: "🥕", label: "Carrot" },
-    { icon: "🍌", label: "Banana" },
-    { icon: "🫐", label: "Blueberries" },
-    { icon: "🥂", label: "Champers?" },
+  const allItems: Item[] = [
+    { id: 0, icon: "💜", label: "Heart" },
+    { id: 1, icon: "🦄", label: "Uni" },
+    { id: 2, icon: "🔥", label: "Fire" },
+    { id: 3, icon: "👽", label: "Alien" },
   ];
 
-  const [tomato, lettuce, cheese] = allIngredients;
-  const tabs = [tomato, lettuce, cheese];
+  const [selectedTab, setSelectedTab] = useState<Item>(allItems[0]);
 
-  function getNextIngredient(
-    ingredients: Ingredient[]
-  ): Ingredient | undefined {
-    const existing = new Set(ingredients);
-    return allIngredients.find((ingredient) => !existing.has(ingredient));
-  }
-  const [selectedTab, setSelectedTab] = useState(tabs[0]);
   return (
-    <div className="w-95% h-95% bg-col-980 overflow-hidden shadowBroadTight flex flex-col">
-      <nav className="bg-col-880 rounded-b-none border-b-100-sm h-[4vh]">
-        <ul className="list-none font-semibold flex w-full">
-          {tabs.map((item) => (
-            <li
-              key={item.label}
-              className={item === selectedTab ? "selected" : ""}
-              onClick={() => setSelectedTab(item)}
-            >
-              {`${item.icon} ${item.label}`}
-              {item === selectedTab ? (
-                <motion.div
-                  className="absolute left-0 right-0 bg-col-200"
-                  layoutId="underline"
-                />
-              ) : null}
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <main>
+    <VStackFull className="w-full h-full overflow-hidden ">
+      <main className="flex-1 flex justify-center items-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedTab ? selectedTab.label : "empty"}
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -10, opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            initial={{ y: -50, x: -50, opacity: 0 }}
+            animate={{ y: 0, x: 0, opacity: 1 }}
+            exit={{ y: 50, x: 50, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="text-[20vh]"
           >
             {selectedTab ? selectedTab.icon : "😋"}
           </motion.div>
         </AnimatePresence>
       </main>
-    </div>
+      <nav className="w-full">
+        <ul className={`flex justify-around bg-col-980 `}>
+          {allItems.map((item) => (
+            <li
+              key={item.id}
+              className={`cursor-pointer w-25% py-[0.5vh] relative flex justify-center items-center font-semibold ${
+                selectedTab.id === item.id ? "text-col-900" : "text-col-100"
+              }`}
+              onClick={() => setSelectedTab(item)}
+            >
+              {/* Animated background */}
+              {selectedTab.id === item.id && (
+                <motion.div
+                  layoutId="active-background"
+                  className="absolute inset-0 bg-col-200"
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                />
+              )}
+
+              {/* Tab content */}
+              <div className="z-10">
+                {item.icon} {item.label}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </VStackFull>
   );
 }
 

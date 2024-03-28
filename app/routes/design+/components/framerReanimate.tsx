@@ -36,7 +36,7 @@ export function FramerReanimate({
   return (
     <VStack
       className={`${bg} shadowBroadLoose border-700-md h-[40vh] w-[40vh]`}
-      gap="gap-[1vh]"
+      gap="gap-[0vh]"
     >
       {title && (
         <HStackFull className="justify-between bg-col-980 rounded-b-none px-[1vh] border-b-170-sm items-center">
