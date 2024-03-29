@@ -1,12 +1,7 @@
-import FlexFull from "~/components/buildingBlocks/flexFull";
+import CenterFull from "~/components/buildingBlocks/centerFull";
 import FramerExperiments from "./various-new/framerExperiments";
-import RadialScrollProgressExample from "./various-new/radialScrollProgress";
 
 export default function Test() {
   return <FramerExperiments />;
-  // return (
-  //   <FlexFull className="h-[60vh]">
-  //     <RadialScrollProgressExample />
-  //   </FlexFull>
-  // );
+  // return <CenterFull>This</CenterFull>;
 }

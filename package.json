@@ -19,6 +19,7 @@
     "@remix-run/react": "^2.6.0",
     "@remix-run/serve": "^2.6.0",
     "@types/gsap": "^3.0.0",
+    "flubber": "^0.4.2",
     "framer-motion": "^11.0.18",
     "framer-motion-3d": "^11.0.18",
     "gsap": "^3.12.5",

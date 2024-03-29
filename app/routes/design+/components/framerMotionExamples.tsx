@@ -2,6 +2,7 @@ import Box from "~/components/buildingBlocks/box";
 import {
   AnimatePresence,
   MotionValue,
+  animate,
   motion,
   useAnimation,
   useMotionValue,
@@ -26,6 +27,11 @@ import { VerticalScrollProgressContainer } from "../various-new/snapScrollProgre
 import CenterHorizontalFull from "~/components/buildingBlocks/centerHorizontalFull";
 import RadialScrollProgressExample from "../various-new/radialScrollProgress";
 import RadialScrollProgressContainer from "../various-new/radialScrollProgress";
+import {
+  useFlubber,
+  getIndex,
+  useFlubberInterpolation,
+} from "~/utils/useFlubber";
 
 // EXAMPLE ONE
 export function ExampleOne() {
@@ -653,7 +659,7 @@ function Component2() {
   const controls = useAnimation();
   const gradientOne = "radial-gradient(circle, #ffeede 0%, #9C6892 100%)";
   const gradientTwo = "radial-gradient(circle, #F2B680 0%, #03738C 100%)";
-  const [isAnimating, setIsAnimating] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false);
   const sineFunction = { duration: 0.7, ease: [0.445, 0.05, 0.55, 0.95] };
 
   useEffect(() => {
@@ -751,6 +757,7 @@ function ScrollItem({ label }: { label: string }) {
         <Image
           src={`https://picsum.photos/id/${random}/400/400.jpg`}
           alt="an example"
+          className="w-full h-full object-cover"
         />
       </Center>
     </Box>
@@ -761,7 +768,11 @@ export function ExampleFourteen() {
   const items = Array.from({ length: 10 }, (_, i) => i);
   return (
     <FlexFull className="h-full p-[1vh]">
-      <RadialScrollProgressContainer itemComponent={ScrollItem} items={items} />
+      <RadialScrollProgressContainer
+        itemComponent={ScrollItem}
+        items={items}
+        title="scroll horizontally"
+      />
     </FlexFull>
   );
 }
@@ -808,7 +819,41 @@ export function ExampleFifteen() {
   );
 }
 
-// EXAMPLESIXTEEN
+// EXAMPLE SIXTEEN
 export function ExampleSixteen() {
+  const starPath =
+    "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
+  const heartPath =
+    "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+
+  const { path, animateShape, controls } = useFlubberInterpolation(
+    starPath,
+    heartPath
+  );
+
+  return (
+    <svg width="200" height="200" onClick={animateShape}>
+      <motion.path d={path} fill="red" animate={controls} />
+    </svg>
+  );
+}
+
+// EXAMPLE SEVENTEEN
+export function ExampleSeventeen() {
+  return <motion.div>this</motion.div>;
+}
+
+// EXAMPLE EIGHTEEN
+export function ExampleEighteen() {
+  return <motion.div>this</motion.div>;
+}
+
+// EXAMPLE NINETEEN
+export function ExampleNineteen() {
+  return <motion.div>this</motion.div>;
+}
+
+// EXAMPLE TWENTY
+export function ExampleTwenty() {
   return <motion.div>this</motion.div>;
 }
