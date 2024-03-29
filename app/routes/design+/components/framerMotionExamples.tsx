@@ -743,10 +743,10 @@ export function ExampleFourteen() {
   function ScrollItem({ label }: { label: string }) {
     const random = Math.floor(Math.random() * 100) + 1;
     return (
-      <Box className="p-[1.5vh]">
+      <Box className="p-[1.5vh pb-[2vh]">
         <Center className="w-[38vh] h-[36vh] bg-col-770 shadowBroadTight border-970-md flex-shrink-0 overflow-hidden">
           <Image
-            src={`https://picsum.photos/id/${random}/500/500.jpg`}
+            src={`https://picsum.photos/id/${random}/400/400.jpg`}
             alt="an example"
           />
         </Center>
@@ -762,11 +762,11 @@ export function ExampleFourteen() {
 
   return (
     <CenterFull className="w-full h-full relative bg-100-linear2op50">
-      <Box className="absolute top-0 left-0">
+      <Box className="absolute top-[0.5vh] left-[0.5vh]">
         <svg
           className="-rotate-90"
-          width="8vh"
-          height="8vh"
+          width="5vh"
+          height="5vh"
           viewBox="0 0 100 100"
         >
           <circle
@@ -774,18 +774,18 @@ export function ExampleFourteen() {
             cy="50"
             r="40"
             pathLength="1"
-            className="stroke-cyan-300 opacity-30"
-            style={{ fill: "none", strokeWidth: "2vh" }}
+            className="stroke-pink-600 opacity-30"
+            style={{ fill: "none", strokeWidth: "0.7vh" }}
           />
           <motion.circle
             cx="50"
             cy="50"
             r="40"
             pathLength="1"
-            className="stroke-cyan-700"
+            className="stroke-pink-600"
             style={{
               fill: "none",
-              strokeWidth: "2vh",
+              strokeWidth: "0.7vh",
               pathLength: scrollXProgress,
             }}
           />
@@ -809,52 +809,45 @@ export function ExampleFourteen() {
 
 // EXAMPLE FIFTEEN
 export function ExampleFifteen() {
-  function useParallax(value: MotionValue<number>, distance: number) {
-    return useTransform(value, [0, 1], [-distance, distance]);
-  }
-  const items = Array.from({ length: 10 }, (_, i) => i);
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ container: ref });
+  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]); // Ensure it scales from 0 to 100%
 
-  function Image({ id }: { id: number }) {
-    const ref = useRef(null);
-    const { scrollYProgress } = useScroll({ target: ref });
-    const y = useParallax(scrollYProgress, 300);
-    const random = Math.floor(Math.random() * 100) + 1;
+  function Image({ id, random }: { id: number; random: number }) {
     return (
-      <section className="h-full flex justify-center items-center relative snap-center perspective-200">
-        <div
-          ref={ref}
-          className="w-30vh h-40vh relative max-h-40vh bg-white overflow-hidden"
-        >
+      <section className="flex justify-center items-center relative snap-center perspective-200 h-[30vh]">
+        <div className="w-[30vh] h-[30vh] relative overflow-hidden">
           <img
-            src={`https://picsum.photos/id/${random}/200/300.jpg`}
-            alt="image"
+            src={`https://picsum.photos/id/${random}/300/300`}
+            alt={`image ${id}`}
             className="absolute top-0 left-0 right-0 bottom-0 w-full h-full"
           />
         </div>
-        <motion.h2
-          className="text-col-100 text-[3vh]"
-          style={{ y }}
-        >{`#00${id}`}</motion.h2>
       </section>
     );
   }
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+  const items = Array.from({ length: 10 }, (_, i) => ({
+    id: i + 1,
+    random: Math.floor(Math.random() * 100) + 1,
+  }));
 
   return (
-    <FlexFull className="h-full snap-mandatory snap-y flex-col overflow-y-auto">
-      {[1, 2, 3, 4, 5].map((image) => (
-        <Image id={image} />
-      ))}
+    <FlexFull
+      ref={ref}
+      className="relative insetShadowXl h-[44vh] overflow-y-auto"
+    >
+      {" "}
+      {/* Progress bar */}
       <motion.div
-        className="fixed left-0 right-0 h-[1vh] bg-col-200 bottom-[10vh]"
-        style={{ scaleX }}
+        className="sticky top-0 left-0 h-[1vh] bg-cyan-400"
+        style={{ scaleX, width: "100vw", zIndex: "2" }} // Make sure the bar has a base width to scale from
       />
+      <VStackFull className="absolute top-0 left-0 h-fit py-[1.5vh] snap-mandatory snap-y flex-col gap-[2vh]">
+        {items.map(({ id, random }) => (
+          <Image key={id} id={id} random={random} />
+        ))}
+      </VStackFull>
     </FlexFull>
   );
 }

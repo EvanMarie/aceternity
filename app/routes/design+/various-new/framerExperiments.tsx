@@ -1546,11 +1546,69 @@ export function ExampleEleven() {
             {" "}
             <ExampleThirteen />
           </FramerReanimate>
-          <FramerReanimate title="useScroll" code={``}>
+          <FramerReanimate
+            title="useScroll Progress 1"
+            code={`export function UseScrollExample() {
+  function ScrollItem({ label }: { label: string }) {
+    const random = Math.floor(Math.random() * 100) + 1;
+    return (
+      <Box className="p-[1.5vh pb-[2vh]">
+        <Center className="w-[38vh] h-[36vh] bg-col-770 shadowBroadTight border-970-md flex-shrink-0 overflow-hidden">
+          <Image src={\`https://picsum.photos/id/\${random}/400/400.jpg\`} alt="an example" />
+        </Center>
+      </Box>
+    );
+  }
+
+  const items = Array.from({ length: 10 }, (_, i) => i);
+  const scrollRef = useRef(null);
+  const { scrollXProgress } = useScroll({
+    container: scrollRef,
+  });
+
+  return (
+    <CenterFull className="w-full h-full relative bg-100-linear2op50">
+      <Box className="absolute top-[0.5vh] left-[0.5vh]">
+        <svg className="-rotate-90" width="5vh" height="5vh" viewBox="0 0 100 100">
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            pathLength="1"
+            className="stroke-pink-500 opacity-30"
+            style={{ fill: "none", strokeWidth: "1vh" }}
+          />
+          <motion.circle
+            cx="50"
+            cy="50"
+            r="40"
+            pathLength="1"
+            className="stroke-pink-500"
+            style={{ fill: "none", strokeWidth: "1vh", pathLength: scrollXProgress }}
+          />
+        </svg>
+      </Box>
+      <Box className="p-[0.5vh] bg-col-270 insetShadowXl border-970-md overflow-x-hidden">
+        <FlexFull
+          className="w-[45vh] h-[38vh] overflow-x-auto overflow-y-hidden"
+          ref={scrollRef}
+        >
+          <HStackFull className="w-fit h-full items-center">
+            {items.map((i) => (
+              <ScrollItem key={i} label={i.toString()} />
+            ))}
+          </HStackFull>
+        </FlexFull>
+      </Box>
+    </CenterFull>
+  );
+}`}
+            showReanimate={false}
+          >
             {" "}
             <ExampleFourteen />
           </FramerReanimate>
-          <FramerReanimate title="fifteen" code={``}>
+          <FramerReanimate title="useScroll Progress 2" code={``}>
             {" "}
             <ExampleFifteen />
           </FramerReanimate>
