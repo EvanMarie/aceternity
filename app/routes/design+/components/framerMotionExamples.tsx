@@ -1,10 +1,12 @@
 import Box from "~/components/buildingBlocks/box";
 import {
   AnimatePresence,
+  MotionValue,
   motion,
   useAnimation,
   useMotionValue,
   useScroll,
+  useSpring,
   useTransform,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -19,6 +21,7 @@ import FlexFull from "~/components/buildingBlocks/flexFull";
 import HStack from "~/components/buildingBlocks/hStack";
 import HStackFull from "~/components/buildingBlocks/hStackFull";
 import Center from "~/components/buildingBlocks/center";
+import Image from "~/components/buildingBlocks/image";
 
 // EXAMPLE ONE
 export function ExampleOne() {
@@ -737,6 +740,21 @@ export function ExampleThirteen() {
 
 // EXAMPLE FOURTEEN
 export function ExampleFourteen() {
+  function ScrollItem({ label }: { label: string }) {
+    const random = Math.floor(Math.random() * 100) + 1;
+    return (
+      <Box className="p-[1.5vh]">
+        <Center className="w-[38vh] h-[36vh] bg-col-770 shadowBroadTight border-970-md flex-shrink-0 overflow-hidden">
+          <Image
+            src={`https://picsum.photos/id/${random}/500/500.jpg`}
+            alt="an example"
+          />
+        </Center>
+      </Box>
+    );
+  }
+
+  const items = Array.from({ length: 10 }, (_, i) => i);
   const scrollRef = useRef(null);
   const { scrollXProgress } = useScroll({
     container: scrollRef,
@@ -773,24 +791,15 @@ export function ExampleFourteen() {
           />
         </svg>
       </Box>
-      <Box className="p-[0.5vh] bg-col-270 insetShadowXl border-970-md">
-        <FlexFull className="w-[45vh] h-[40vh] overflow-x-auto" ref={scrollRef}>
-          <HStackFull className="w-fit h-full p-[1vh] items-center">
-            <Center className="w-[35vh] h-[35vh] bg-col-770 shadowBroadLoose border-970-md flex-shrink-0">
-              this
-            </Center>
-            <Center className="w-[35vh] h-[35vh] bg-col-770 shadowBroadLoose border-970-md flex-shrink-0">
-              this
-            </Center>
-            <Center className="w-[35vh] h-[35vh] bg-col-770 shadowBroadLoose border-970-md flex-shrink-0">
-              this
-            </Center>
-            <Center className="w-[35vh] h-[35vh] bg-col-770 shadowBroadLoose border-970-md flex-shrink-0">
-              this
-            </Center>
-            <Center className="w-[35vh] h-[35vh] bg-col-770 shadowBroadLoose border-970-md flex-shrink-0">
-              this
-            </Center>
+      <Box className="p-[0.5vh] bg-col-270 insetShadowXl border-970-md overflow-x-hidden">
+        <FlexFull
+          className="w-[45vh] h-[38vh] overflow-x-auto overflow-y-hidden"
+          ref={scrollRef}
+        >
+          <HStackFull className="w-fit h-full items-center">
+            {items.map((i) => (
+              <ScrollItem key={i} label={i.toString()} />
+            ))}
           </HStackFull>
         </FlexFull>
       </Box>
@@ -800,7 +809,54 @@ export function ExampleFourteen() {
 
 // EXAMPLE FIFTEEN
 export function ExampleFifteen() {
-  return <motion.div>this</motion.div>;
+  function useParallax(value: MotionValue<number>, distance: number) {
+    return useTransform(value, [0, 1], [-distance, distance]);
+  }
+  const items = Array.from({ length: 10 }, (_, i) => i);
+
+  function Image({ id }: { id: number }) {
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({ target: ref });
+    const y = useParallax(scrollYProgress, 300);
+    const random = Math.floor(Math.random() * 100) + 1;
+    return (
+      <section className="h-full flex justify-center items-center relative snap-center perspective-200">
+        <div
+          ref={ref}
+          className="w-30vh h-40vh relative max-h-40vh bg-white overflow-hidden"
+        >
+          <img
+            src={`https://picsum.photos/id/${random}/200/300.jpg`}
+            alt="image"
+            className="absolute top-0 left-0 right-0 bottom-0 w-full h-full"
+          />
+        </div>
+        <motion.h2
+          className="text-col-100 text-[3vh]"
+          style={{ y }}
+        >{`#00${id}`}</motion.h2>
+      </section>
+    );
+  }
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  return (
+    <FlexFull className="h-full snap-mandatory snap-y flex-col overflow-y-auto">
+      {[1, 2, 3, 4, 5].map((image) => (
+        <Image id={image} />
+      ))}
+      <motion.div
+        className="fixed left-0 right-0 h-[1vh] bg-col-200 bottom-[10vh]"
+        style={{ scaleX }}
+      />
+    </FlexFull>
+  );
 }
 
 // EXAMPLESIXTEEN
