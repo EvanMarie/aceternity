@@ -22,6 +22,10 @@ import HStack from "~/components/buildingBlocks/hStack";
 import HStackFull from "~/components/buildingBlocks/hStackFull";
 import Center from "~/components/buildingBlocks/center";
 import Image from "~/components/buildingBlocks/image";
+import { VerticalScrollProgressContainer } from "../various-new/snapScrollProgress";
+import CenterHorizontalFull from "~/components/buildingBlocks/centerHorizontalFull";
+import RadialScrollProgressExample from "../various-new/radialScrollProgress";
+import RadialScrollProgressContainer from "../various-new/radialScrollProgress";
 
 // EXAMPLE ONE
 export function ExampleOne() {
@@ -739,116 +743,68 @@ export function ExampleThirteen() {
 }
 
 // EXAMPLE FOURTEEN
-export function ExampleFourteen() {
-  function ScrollItem({ label }: { label: string }) {
-    const random = Math.floor(Math.random() * 100) + 1;
-    return (
-      <Box className="p-[1.5vh pb-[2vh]">
-        <Center className="w-[38vh] h-[36vh] bg-col-770 shadowBroadTight border-970-md flex-shrink-0 overflow-hidden">
-          <Image
-            src={`https://picsum.photos/id/${random}/400/400.jpg`}
-            alt="an example"
-          />
-        </Center>
-      </Box>
-    );
-  }
-
-  const items = Array.from({ length: 10 }, (_, i) => i);
-  const scrollRef = useRef(null);
-  const { scrollXProgress } = useScroll({
-    container: scrollRef,
-  });
-
+function ScrollItem({ label }: { label: string }) {
+  const random = Math.floor(Math.random() * 100) + 1;
   return (
-    <CenterFull className="w-full h-full relative bg-100-linear2op50">
-      <Box className="absolute top-[0.5vh] left-[0.5vh]">
-        <svg
-          className="-rotate-90"
-          width="5vh"
-          height="5vh"
-          viewBox="0 0 100 100"
-        >
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            pathLength="1"
-            className="stroke-pink-600 opacity-30"
-            style={{ fill: "none", strokeWidth: "0.7vh" }}
-          />
-          <motion.circle
-            cx="50"
-            cy="50"
-            r="40"
-            pathLength="1"
-            className="stroke-pink-600"
-            style={{
-              fill: "none",
-              strokeWidth: "0.7vh",
-              pathLength: scrollXProgress,
-            }}
-          />
-        </svg>
-      </Box>
-      <Box className="p-[0.5vh] bg-col-270 insetShadowXl border-970-md overflow-x-hidden">
-        <FlexFull
-          className="w-[45vh] h-[38vh] overflow-x-auto overflow-y-hidden"
-          ref={scrollRef}
-        >
-          <HStackFull className="w-fit h-full items-center">
-            {items.map((i) => (
-              <ScrollItem key={i} label={i.toString()} />
-            ))}
-          </HStackFull>
-        </FlexFull>
-      </Box>
-    </CenterFull>
+    <Box className="p-[0.5vh]">
+      <Center className="w-[41vh] h-[34vh] bg-col-770 shadowBroadTight border-970-md flex-shrink-0 overflow-hidden">
+        <Image
+          src={`https://picsum.photos/id/${random}/400/400.jpg`}
+          alt="an example"
+        />
+      </Center>
+    </Box>
+  );
+}
+
+export function ExampleFourteen() {
+  const items = Array.from({ length: 10 }, (_, i) => i);
+  return (
+    <FlexFull className="h-full p-[1vh]">
+      <RadialScrollProgressContainer itemComponent={ScrollItem} items={items} />
+    </FlexFull>
   );
 }
 
 // EXAMPLE FIFTEEN
-export function ExampleFifteen() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ container: ref });
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]); // Ensure it scales from 0 to 100%
-
-  function Image({ id, random }: { id: number; random: number }) {
-    return (
-      <section className="flex justify-center items-center relative snap-center perspective-200 h-[30vh]">
-        <div className="w-[30vh] h-[30vh] relative overflow-hidden">
-          <img
-            src={`https://picsum.photos/id/${random}/300/300`}
-            alt={`image ${id}`}
-            className="absolute top-0 left-0 right-0 bottom-0 w-full h-full"
-          />
-        </div>
-      </section>
-    );
-  }
-
-  const items = Array.from({ length: 10 }, (_, i) => ({
-    id: i + 1,
-    random: Math.floor(Math.random() * 100) + 1,
-  }));
-
+function ScrollBox({ label, content }: { label: string; content: string }) {
+  const random = Math.floor(Math.random() * 100) + 1;
   return (
-    <FlexFull
-      ref={ref}
-      className="relative insetShadowXl h-[44vh] overflow-y-auto"
-    >
-      {" "}
-      {/* Progress bar */}
-      <motion.div
-        className="sticky top-0 left-0 h-[1vh] bg-cyan-400"
-        style={{ scaleX, width: "100vw", zIndex: "2" }} // Make sure the bar has a base width to scale from
-      />
-      <VStackFull className="absolute top-0 left-0 h-fit py-[1.5vh] snap-mandatory snap-y flex-col gap-[2vh]">
-        {items.map(({ id, random }) => (
-          <Image key={id} id={id} random={random} />
-        ))}
-      </VStackFull>
-    </FlexFull>
+    <div className="w-[50vh] h-[45vh] relative overflow-hidden rounded-none p-[1.5vh] pt-[2vh] bg-col-930">
+      <CenterHorizontalFull className="h-full bg-500-radial3op50 shadowBroadLoose border-980-md">
+        <VStackFull gap="gap-[1.5vh] ">
+          <VStack className="p-[1vh] bg-col-970 insetShadowXl border-900-md">
+            <Text className="text-[2.5vh] font-semibold text-col-100 textShadow">
+              {label}
+            </Text>
+          </VStack>
+          <Box className="w-[40vh] h-[28vh] overflow-hidden shadowBroadLoose border-980-md">
+            <img
+              src={`https://picsum.photos/id/${random}/600/600`}
+              alt={`image ex`}
+              className="w-full h-full"
+            />
+          </Box>
+        </VStackFull>
+      </CenterHorizontalFull>
+    </div>
+  );
+}
+
+const testItems = Array.from({ length: 15 }, (_, i) => ({
+  label: `Item ${i + 1}`,
+  content: `This is some content for item ${i + 1}`,
+}));
+
+export function ExampleFifteen() {
+  return (
+    <VerticalScrollProgressContainer
+      items={testItems}
+      itemComponent={ScrollBox}
+      progressHeight="h-[0.7vh]"
+      height="h-full"
+      width="w-full"
+    />
   );
 }
 

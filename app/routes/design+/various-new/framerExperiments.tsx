@@ -23,17 +23,15 @@ import {
   ExampleTwelve,
   ExampleTwo,
 } from "../components/framerMotionExamples";
-import VStack from "~/components/buildingBlocks/vStack";
-import Heading from "~/components/buildingBlocks/headingText";
 import { FramerReanimate } from "../components/framerReanimate";
 import Wrap from "~/components/buildingBlocks/wrap";
 import { InteractiveKeyFrames } from "../components/interactiveKeyframes";
-import Text from "~/components/buildingBlocks/text";
 import {
   BulletListItem,
   HeadingText,
   NestedBulletListItem,
 } from "../components/infoComponents";
+import CodeExample from "~/components/buildingBlocks/codeExample";
 
 export default function FramerExperiments() {
   return (
@@ -1608,12 +1606,318 @@ export function ExampleEleven() {
             {" "}
             <ExampleFourteen />
           </FramerReanimate>
-          <FramerReanimate title="useScroll Progress 2" code={``}>
+          <FramerReanimate
+            title="useScroll Progress 2"
+            code={`type ItemComponent = React.ComponentType<any>;
+export function VerticalScrollProgressContainer({
+  position = "top",
+  height = "h-\[85vh\]",
+  width = "w-\[70vh\]",
+  padding = "p-\[0vh\]",
+  gap = "gap-\[0vh\]",
+  progressColor = "bg-cyan-500",
+  itemComponent: ItemComponent,
+  progressHeight = "h-\[1vh\]",
+  items,
+  snapScroll = true,
+  itemClassName = "",
+  springScroll = true,
+}: {
+  position?: "top" | "bottom";
+  height?: string;
+  width?: string;
+  padding?: string;
+  progressHeight?: string;
+  gap?: string;
+  progressColor?: string;
+  itemComponent: ItemComponent;
+  items: any\[\];
+  snapScroll?: boolean;
+  itemClassName?: string;
+  springScroll?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ container: ref });
+
+  const springScrollScaleX = useSpring(
+    useTransform(scrollYProgress, \[0, 1\], \[0, 1\])
+  );
+  const normalScaleX = useTransform(scrollYProgress, \[0, 1\], \[0, 1\]);
+
+  // Ensure it scales from 0 to 100%
+  const placement =
+    position === "top"
+      ? "top-0 left-0 "
+      : position === "bottom"
+      ? "bottom-0 left-0 "
+      : "";
+
+  const scaleX = springScroll ? springScrollScaleX : normalScaleX;
+
+  return (
+    <div
+      ref={ref}
+      className={\`\${width} \${height} relative insetShadowXl border-980-lg overflow-y-auto scrollbar-hide \${
+        snapScroll ? "snap-mandatory snap-y" : ""
+      }\`}
+    >
+      {/\* Progress bar \*/}
+      <motion.div
+        className={\`sticky \${placement} \${progressHeight} \${progressColor}\`}
+        style={{ scaleX, zIndex: "2" }}
+      />
+      <div className={\`absolute top-0 left-0 h-fit \${padding} flex flex-col\`} style={{ gap }}>
+        {items.map((item, index) => (
+          <Flex
+            key={index}
+            className={
+              snapScroll ? \`snap-center snap-always \${itemClassName}\` : itemClassName
+            }
+          >
+            <ItemComponent {...item} />
+          </Flex>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ScrollBox({ label, content }: { label: string; content: string }) {
+  const random = Math.floor(Math.random() \* 100) + 1;
+  return (
+    <div className="w-\[50vh\] h-\[45vh\] relative overflow-hidden rounded-none p-\[1.5vh\] pt-\[2vh\] bg-col-930">
+      <CenterHorizontalFull className="h-full bg-500-radial3op50 shadowBroadLoose border-980-md">
+        <VStackFull gap="gap-\[1.5vh\]">
+          <VStack className="p-\[1vh\] bg-col-970 insetShadowXl border-900-md">
+            <Text className="text-\[2.5vh\] font-semibold text-col-100 textShadow">
+              {label}
+            </Text>
+          </VStack>
+          <Box className="w-\[40vh\] h-\[28vh\] overflow-hidden shadowBroadLoose border-980-md">
+            <img
+              src={\`https://picsum.photos/id/\${random}/600/600\`}
+              alt={\`image ex\`}
+              className="w-full h-full"
+            />
+          </Box>
+        </VStackFull>
+      </CenterHorizontalFull>
+    </div>
+  );
+}
+
+const testItems = Array.from({ length: 15 }, (\_, i) => ({
+  label: \`Item \${i + 1}\`,
+  content: \`This is some content for item \${i + 1}\`,
+}));
+
+export function ScrollProgressExample() {
+  return (
+    <VerticalScrollProgressContainer
+      items={testItems}
+      itemComponent={ScrollBox}
+      progressHeight="h-\[0.7vh\]"
+      height="h-full"
+      width="w-full"
+    />
+  );
+}`}
+            showReanimate={false}
+            infoTitle="useScroll"
+            info={
+              <VStackFull align="items-start">
+                <BulletListItem>
+                  Framer Motion's useScroll hook provides a way to react to
+                  scroll events and translate them into motion values that can
+                  be used to create dynamic and responsive animations. In the
+                  provided VerticalScrollProgressContainer component, various
+                  facets of useScroll are demonstrated. Here's a detailed
+                  explanation of each aspect:
+                </BulletListItem>
+                <HeadingText heading=" useScroll and its context useScroll Hook: " />
+                <BulletListItem highlighted="">
+                  It captures the scroll progress of a container element. In the
+                  example, it's used to track the vertical scroll progress
+                  within a div element referenced by ref.
+                </BulletListItem>
+                <CodeExample>{`const { scrollYProgress } = useScroll({ container: ref });`}</CodeExample>
+                <BulletListItem>
+                  The scrollYProgress is a motion value that represents the
+                  scroll position as a fraction between 0 and 1, where 0 is the
+                  top of the container and 1 is the bottom.
+                </BulletListItem>
+                <HeadingText heading="Scroll Progress and Transformations" />
+                <BulletListItem highlighted="Transforming Scroll Progress: ">
+                  The scroll progress (0 to 1) is transformed to a scaleX value,
+                  which is used to scale a progress bar horizontally as the user
+                  scrolls.
+                </BulletListItem>
+                <CodeExample>
+                  {`const normalScaleX = useTransform(scrollYProgress, [0, 1], [0,
+                  1]);`}
+                </CodeExample>
+                <BulletListItem>
+                  This transformation ensures the progress bar's width scales
+                  directly with the scroll progress.
+                </BulletListItem>
+                <BulletListItem highlighted=" Spring Animation: ">
+                  Optionally, a spring animation can be applied to the scroll
+                  progress to create a smoother, more natural movement.
+                </BulletListItem>
+                <CodeExample>{`const springScrollScaleX = useSpring(useTransform(scrollYProgress, [0, 1], [0, 1]));
+`}</CodeExample>
+                <BulletListItem>
+                  This creates a spring effect, making the progress bar's
+                  movement more dynamic and less linear.
+                </BulletListItem>
+                <HeadingText heading="Component Props and Styling" />
+                <BulletListItem highlighted="Customization through Props: ">
+                  {" "}
+                  The component allows customization of its appearance and
+                  behavior through props like position, height, width, padding,
+                  gap, progressColor, and progressHeight.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted="Dynamic Styling: ">
+                  {" "}
+                  The placement and scaleX variables are used to dynamically set
+                  the position and scaling of the progress bar, allowing it to
+                  be placed at the top or bottom and scale appropriately as the
+                  user scrolls.{" "}
+                </BulletListItem>
+                <BulletListItem highlighted=" Scroll Snapping and Item Rendering: ">
+                  The component supports scroll snapping, controlled by the
+                  snapScroll prop. It renders a list of items, each wrapped in a
+                  Flex component, and applies the snap-center snap-always
+                  classes if snapScroll is true.
+                </BulletListItem>
+
+                <HeadingText heading="Overall Functionality" />
+                <BulletListItem>
+                  The VerticalScrollProgressContainer creates a scrollable
+                  container with a progress bar at the top or bottom. As the
+                  user scrolls, the progress bar scales horizontally to indicate
+                  the scroll position. The scroll behavior can be smooth (spring
+                  animation) or direct (linear scaling), and the container can
+                  optionally snap to its child elements.
+                </BulletListItem>
+                <BulletListItem>
+                  This component effectively demonstrates how Framer Motion's
+                  useScroll can be integrated into a React component to create
+                  interactive and responsive scroll-based animations, enhancing
+                  the user experience by providing visual feedback on the scroll
+                  position.
+                </BulletListItem>
+              </VStackFull>
+            }
+          >
             {" "}
             <ExampleFifteen />
           </FramerReanimate>
-          <FramerReanimate title="sixteen" code={``}>
-            {" "}
+          <FramerReanimate
+            title="sixteen"
+            code={`function ScrollItem({ label }: { label: string }) { const random = Math.floor(Math.random() * 100) + 1; return ( <Box className="p-\\[0.5vh\\]"> <Center className="w-\\[41vh\\] h-\\[34vh\\] bg-col-770 shadowBroadTight border-970-md flex-shrink-0 overflow-hidden"> <Image src={\`https://picsum.photos/id/\${random}/400/400.jpg\`} alt="an example" /> </Center> </Box> ); }
+export function ExampleFourteen() {
+const items = Array.from({ length: 10 }, (_, i) => i);
+return (
+<FlexFull className="h-full p-\\[1vh\\]">
+<RadialScrollProgressContainer itemComponent={ScrollItem} items={items} />
+</FlexFull>
+);
+}
+
+type ItemComponent = React.ComponentType<any>;
+
+export default function RadialScrollProgressContainer({
+items,
+itemComponent: ItemComponent,
+containerPadding = "p-\[2vh\]",
+bg = "bg-100-linear2op50",
+innerBg = "bg-col-270",
+innerPadding = "p-\[0.5vh\]",
+itemClassName = "",
+title = "Content Title",
+topPadding = "pt-\[5vh\]",
+trackOpacity = "opacity-30",
+titlePosition = "top-\[1vh\] right-\[1vh\]",
+titleClassName = "h-\[3.2vh\] pr-\[2vh\] text-\[2.5vh\] font-bold",
+progressPosition = "top-\[0.3vh\] left-\[0.3vh\]",
+progressColor = "stroke-cyan-600",
+progressWidth = "1.2vh",
+radius = 40,
+progressCircleSize = "4.5vh",
+snapScroll = true,
+}: {
+items: any[];
+itemComponent: ItemComponent;
+containerPadding?: string;
+bg?: string;
+innerBg?: string;
+innerPadding?: string;
+topPadding?: string;
+itemClassName?: string;
+title?: string;
+titlePosition?: string;
+titleClassName?: string;
+trackOpacity?: string;
+progressPosition?: string;
+progressColor?: string;
+progressWidth?: string;
+radius?: number;
+progressCircleSize?: string;
+snapScroll?: boolean;
+}) {
+const scrollRef = useRef(null);
+const { scrollXProgress } = useScroll({
+container: scrollRef,
+});
+
+return (
+<CenterFull className={\`w-full h-full relative \${bg} \${topPadding} \${containerPadding}\`}>
+<Box className={\`absolute \${progressPosition}\`}>
+<svg className="-rotate-90" width={progressCircleSize} height={progressCircleSize} viewBox="0 0 100 100">
+<circle
+cx="50"
+cy="50"
+r={radius}
+pathLength="1"
+className={\`\${progressColor} \${trackOpacity}\`}
+style={{ fill: "none", strokeWidth: progressWidth }}
+/>
+<motion.circle
+cx="50"
+cy="50"
+r={radius}
+pathLength="1"
+className={progressColor}
+style={{
+fill: "none",
+strokeWidth: progressWidth,
+pathLength: scrollXProgress,
+}}
+/>
+</svg>
+</Box>
+<Flex className={\`absolute items-center \${titlePosition} \${titleClassName}\`}>
+<Text>{title}</Text>
+</Flex>
+<Box className={\`\${innerPadding} \${innerBg} insetShadowXl border-970-md overflow-x-hidden\`}>
+<FlexFull
+className={\`overflow-x-auto overflow-y-hidden scrollbar-hide \${
+snapScroll ? "snap-mandatory snap-x" : ""
+}\`}
+ref={scrollRef}
+>
+<HStackFull className="w-fit h-full items-center">
+{items.map((i, index) => (
+<Flex
+key={index}
+className={
+snapScroll ? \`snap-center snap-always \${itemClassName}\\\` : itemClassName}\`}
+    >
+      <ItemComponent key={i} label={i.toString()} />
+    </Flex>
+  \`}`}
+          >
             <ExampleSixteen />
           </FramerReanimate>
         </Wrap>
