@@ -1,20 +1,16 @@
+import React from "react";
 import HStack from "./hStack";
 
-export default function HStackFull({
-  children,
-  className,
-  gap,
-  ref,
-  onClick,
-  style,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  gap?: string;
-  ref?: React.RefObject<HTMLDivElement>;
-  onClick?: () => void;
-  style?: React.CSSProperties;
-}) {
+const HStackFull = React.forwardRef<
+  HTMLDivElement,
+  {
+    children: React.ReactNode;
+    className?: string;
+    gap?: string;
+    onClick?: () => void;
+    style?: React.CSSProperties;
+  }
+>(({ children, className, gap, onClick, style }, ref) => {
   return (
     <HStack
       className={`w-full ${gap} ${className}`}
@@ -25,4 +21,6 @@ export default function HStackFull({
       {children}
     </HStack>
   );
-}
+});
+
+export default HStackFull;

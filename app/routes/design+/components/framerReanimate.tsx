@@ -40,7 +40,7 @@ export function FramerReanimate({
   const onClick = handleClickAnimation ? handleClickAnimation : handleReanimate;
   return (
     <VStack
-      className={`${bg} shadowBroadLoose border-700-md h-[40vh] w-[40vh]`}
+      className={`${bg} shadowBroadLoose border-700-md h-[40vh] w-[40vh] sm:w-[50vh] sm:h-[50vh]`}
       gap="gap-[0vh]"
     >
       {title && (

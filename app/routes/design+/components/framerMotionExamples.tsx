@@ -4,6 +4,7 @@ import {
   motion,
   useAnimation,
   useMotionValue,
+  useScroll,
   useTransform,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -13,6 +14,11 @@ import Flex from "~/components/buildingBlocks/flex";
 import IconButton from "~/components/buildingBlocks/iconButton";
 import Text from "~/components/buildingBlocks/text";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
+import VStack from "~/components/buildingBlocks/vStack";
+import FlexFull from "~/components/buildingBlocks/flexFull";
+import HStack from "~/components/buildingBlocks/hStack";
+import HStackFull from "~/components/buildingBlocks/hStackFull";
+import Center from "~/components/buildingBlocks/center";
 
 // EXAMPLE ONE
 export function ExampleOne() {
@@ -122,7 +128,7 @@ export function ExampleFive() {
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
-        className="w-50% overflow-visible stroke-cyan-700 stroke-[0.2vh]"
+        className="w-75% overflow-visible stroke-cyan-700 stroke-[0.2vh]"
       >
         <motion.path
           d="
@@ -204,7 +210,7 @@ export function ExampleSeven() {
   return (
     <motion.div className="w-full h-full relative" style={{ background }}>
       <motion.div
-        className="bg-100-linear2op25 w-[10vh] h-[10vh] absolute top-1/3 left-1/3 flex justify-center items-center rounded-[2vh] shadowBroadTight border-970-md"
+        className="bg-100-linear2op25 w-[10vh] h-[10vh] absolute top-[40%] left-[40%] flex justify-center items-center rounded-[2vh] shadowBroadTight border-970-md"
         style={{ x }}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
@@ -260,17 +266,17 @@ export function ExampleEight() {
     <Flex
       className={`${
         isOn ? "bg-col-200" : "bg-col-500"
-      } px-[5vh] py-[7vh] insetShadowXl transition-500 border-900-md`}
+      } px-[8vh] py-[9vh] insetShadowXl transition-500 border-900-md`}
     >
       <div
-        className={`w-[13vh] h-[7vh] bg-500-radial6op75 flex ${
+        className={`w-[20vh] h-[10vh] bg-500-radial6op75 flex ${
           isOn === true ? "justify-start" : "justify-end"
         } rounded-[5vh] p-[1vh] cursor-pointer shadowBroadTight border-970-md`}
         data-ison={isOn}
         onClick={toggleSwitch}
       >
         <motion.div
-          className="h-[5vh] bg-100-radial5op50 w-[5vh] rounded-full shadowBroadTight border-970-md"
+          className="h-[8vh] bg-100-radial5op50 w-[8vh] rounded-full shadowBroadTight border-970-md"
           layout
           transition={spring}
         />
@@ -290,14 +296,14 @@ export function ExampleNine() {
           layout
           data-isopen={isExpanded}
           initial={{ borderRadius: 50 }}
-          className={`bg-col-200 w-[10vh] h-[10vh] flex justify-center items-center shadowBroadTight border-900-md ${
-            isExpanded === true ? "w-[25vh] h-25vh" : "w-[10vh] h-[10vh]"
+          className={`bg-col-200 w-[15vh] h-[15vh] flex justify-center items-center shadowBroadTight border-900-md ${
+            isExpanded === true ? "w-[35vh] h-[35vh]" : "w-[12vh] h-[12vh]"
           }`}
         >
           <motion.div
             layout
             transition={{ duration: 0.9 }}
-            className="w-[4vh] h-[4vh] bg-col-800 rounded-full shadowBroadTight border-900-md cursor-pointer"
+            className="w-[6vh] h-[6vh] bg-col-800 rounded-full shadowBroadTight border-900-md cursor-pointer"
             onClick={() => setIsExpanded(!isExpanded)}
           />
         </motion.div>
@@ -332,7 +338,7 @@ export function ExampleTen() {
             animate={{ y: 0, x: 0, opacity: 1 }}
             exit={{ y: 50, x: 50, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="text-[20vh]"
+            className="text-[25vh]"
           >
             {selectedTab ? selectedTab.icon : "😋"}
           </motion.div>
@@ -358,7 +364,7 @@ export function ExampleTen() {
               )}
 
               {/* Tab content */}
-              <div className="z-10">
+              <div className="z-10 text-[2vh]">
                 {item.icon} {item.label}
               </div>
             </li>
@@ -613,12 +619,16 @@ function Component() {
   }, [controls]);
 
   return (
-    <motion.div
-      className="w-[12vh] h-[12vh]  flex justify-center items-center text-center font-semibold text-[2vh] metallicEdgesLg border-900-md"
-      animate={controls}
-    >
-      <Text>Controlled Animation</Text>
-    </motion.div>
+    <FlexFull className="h-full p-[1vh]">
+      <CenterFull className="relative insetShadowXl bg-col-520 border-980-md">
+        <motion.div
+          className="w-[12vh] h-[12vh] flex justify-center items-center text-center font-semibold text-[2vh] lightGlowSm border-500-lg"
+          animate={controls}
+        >
+          <Text>Controlled Animation</Text>
+        </motion.div>
+      </CenterFull>
+    </FlexFull>
   );
 }
 
@@ -637,51 +647,32 @@ function Component2() {
   const gradientOne = "radial-gradient(circle, #ffeede 0%, #9C6892 100%)";
   const gradientTwo = "radial-gradient(circle, #F2B680 0%, #03738C 100%)";
   const [isAnimating, setIsAnimating] = useState(true);
+  const sineFunction = { duration: 0.7, ease: [0.445, 0.05, 0.55, 0.95] };
 
   useEffect(() => {
     let isMounted = true; // Track if the component is mounted
 
     const sequence = async () => {
       while (isAnimating && isMounted) {
-        // Perform the animation only if isAnimating is true and component is mounted
-        await controls.start({
-          y: "100%",
-          rotate: 180,
-          borderRadius: "50%",
-          scale: 0.8,
-          background: gradientOne,
-          transition: { duration: 1, ease: "easeInOut" },
-        });
-        if (!isAnimating || !isMounted) break;
-
-        await controls.start({
-          y: "0%",
-          rotate: 360,
-          borderRadius: "20%",
-          scale: 1,
-          background: gradientTwo,
-          transition: { duration: 1, ease: "easeInOut" },
-        });
-        if (!isAnimating || !isMounted) break;
-
-        // Define a yo-yo movement pattern
         await controls.start({
           y: "100%", // Move down
           rotate: 180,
           borderRadius: "50%",
           scale: 0.8,
           background: gradientOne,
-          transition: { duration: 1, ease: "easeInOut" },
+          transition: sineFunction,
         });
+        if (!isAnimating || !isMounted) break;
 
         await controls.start({
-          y: "0%", // Move back up
+          y: "0%", // Move up to the original position
           rotate: 360,
           borderRadius: "20%",
           scale: 1,
           background: gradientTwo,
-          transition: { duration: 1, ease: "easeInOut" },
+          transition: sineFunction,
         });
+        if (!isAnimating || !isMounted) break;
 
         await controls.start({
           y: "-100%", // Move up above the starting point
@@ -689,8 +680,9 @@ function Component2() {
           borderRadius: "50%",
           scale: 1.2,
           background: gradientOne,
-          transition: { duration: 1, ease: "easeInOut" },
+          transition: sineFunction,
         });
+        if (!isAnimating || !isMounted) break;
 
         await controls.start({
           y: "0%", // Return to starting point
@@ -698,10 +690,12 @@ function Component2() {
           borderRadius: "20%",
           scale: 1,
           background: gradientTwo,
-          transition: { duration: 1, ease: "easeInOut" },
+          transition: sineFunction,
         });
+        if (!isAnimating || !isMounted) break;
       }
     };
+
     if (isAnimating) {
       sequence();
     }
@@ -713,21 +707,23 @@ function Component2() {
   }, [isAnimating, controls]);
 
   return (
-    <CenterFull className="relative">
-      <motion.div
-        className="w-[12vh] h-[12vh] flex justify-center items-center text-center font-semibold text-[2vh] metallicEdgesLg border-900-md"
-        animate={controls}
-      >
-        Yo-Yo
-      </motion.div>
-      <Box className="absolute bottom-[1vh] left-[1vh]">
-        <IconButton
-          onClick={() => setIsAnimating(!isAnimating)}
-          icon={isAnimating ? FaStop : FaPlay}
-          type="smallNormal"
-        />
-      </Box>
-    </CenterFull>
+    <FlexFull className="h-full p-[1vh]">
+      <CenterFull className="relative insetShadowXl bg-col-520 border-980-md">
+        <motion.div
+          className="w-[12vh] h-[12vh] flex justify-center items-center text-center font-semibold text-[2vh] metallicEdgesLg border-900-md"
+          animate={controls}
+        >
+          Yo-Yo
+        </motion.div>
+        <Box className="absolute bottom-[1vh] left-[1vh]">
+          <IconButton
+            onClick={() => setIsAnimating(!isAnimating)}
+            icon={isAnimating ? FaStop : FaPlay}
+            type="smallNormal"
+          />
+        </Box>
+      </CenterFull>
+    </FlexFull>
   );
 }
 
@@ -741,7 +737,65 @@ export function ExampleThirteen() {
 
 // EXAMPLE FOURTEEN
 export function ExampleFourteen() {
-  return <motion.div>this</motion.div>;
+  const scrollRef = useRef(null);
+  const { scrollXProgress } = useScroll({
+    container: scrollRef,
+  });
+
+  return (
+    <CenterFull className="w-full h-full relative bg-100-linear2op50">
+      <Box className="absolute top-0 left-0">
+        <svg
+          className="-rotate-90"
+          width="8vh"
+          height="8vh"
+          viewBox="0 0 100 100"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            pathLength="1"
+            className="stroke-cyan-300 opacity-30"
+            style={{ fill: "none", strokeWidth: "2vh" }}
+          />
+          <motion.circle
+            cx="50"
+            cy="50"
+            r="40"
+            pathLength="1"
+            className="stroke-cyan-700"
+            style={{
+              fill: "none",
+              strokeWidth: "2vh",
+              pathLength: scrollXProgress,
+            }}
+          />
+        </svg>
+      </Box>
+      <Box className="p-[0.5vh] bg-col-270 insetShadowXl border-970-md">
+        <FlexFull className="w-[45vh] h-[40vh] overflow-x-auto" ref={scrollRef}>
+          <HStackFull className="w-fit h-full p-[1vh] items-center">
+            <Center className="w-[35vh] h-[35vh] bg-col-770 shadowBroadLoose border-970-md flex-shrink-0">
+              this
+            </Center>
+            <Center className="w-[35vh] h-[35vh] bg-col-770 shadowBroadLoose border-970-md flex-shrink-0">
+              this
+            </Center>
+            <Center className="w-[35vh] h-[35vh] bg-col-770 shadowBroadLoose border-970-md flex-shrink-0">
+              this
+            </Center>
+            <Center className="w-[35vh] h-[35vh] bg-col-770 shadowBroadLoose border-970-md flex-shrink-0">
+              this
+            </Center>
+            <Center className="w-[35vh] h-[35vh] bg-col-770 shadowBroadLoose border-970-md flex-shrink-0">
+              this
+            </Center>
+          </HStackFull>
+        </FlexFull>
+      </Box>
+    </CenterFull>
+  );
 }
 
 // EXAMPLE FIFTEEN

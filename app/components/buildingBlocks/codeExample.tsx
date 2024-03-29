@@ -11,7 +11,7 @@ export default function CodeExample({
       <Flex className="p-[1vh] bg-col-970 shadowBroadNormal border-900-md">
         <pre style={{ whiteSpace: "pre-wrap", overflowWrap: "break-word" }}>
           <code
-            className="text-xs leading-tight "
+            className="text-xs "
             style={{ whiteSpace: "pre-wrap", overflowWrap: "break-word" }}
           >
             {children}
