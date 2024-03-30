@@ -29,6 +29,7 @@ export default function Index() {
           <HStack className="animate-slideInUp50vh duration-2200">
             {" "}
             <Button to="/design" buttonText="Design" />
+            <Button to="/use-spring" buttonText="useSpring" />
             <Button to="/pixi" buttonText="PixiJS" />
             <Button to="/css" buttonText="CSS & Tailwind" />
             <Button to="/svg" buttonText="SVG" />

@@ -1894,7 +1894,7 @@ export function ScrollProgressExample() {
           </FramerReanimate>
           {/* DESCRIPTION */}
           <FramerReanimate title="nineteen" code={``}>
-            <ExampleSixteen />
+            <ExampleNineteen />
           </FramerReanimate>
           {/* DESCRIPTION */}
           <FramerReanimate title="twenty" code={``}>

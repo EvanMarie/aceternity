@@ -1,13 +1,9 @@
 import Box from "~/components/buildingBlocks/box";
 import {
   AnimatePresence,
-  MotionValue,
-  animate,
   motion,
   useAnimation,
   useMotionValue,
-  useScroll,
-  useSpring,
   useTransform,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -18,20 +14,12 @@ import IconButton from "~/components/buildingBlocks/iconButton";
 import Text from "~/components/buildingBlocks/text";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 import VStack from "~/components/buildingBlocks/vStack";
-import FlexFull from "~/components/buildingBlocks/flexFull";
-import HStack from "~/components/buildingBlocks/hStack";
-import HStackFull from "~/components/buildingBlocks/hStackFull";
 import Center from "~/components/buildingBlocks/center";
 import Image from "~/components/buildingBlocks/image";
 import { VerticalScrollProgressContainer } from "../various-new/snapScrollProgress";
 import CenterHorizontalFull from "~/components/buildingBlocks/centerHorizontalFull";
-import RadialScrollProgressExample from "../various-new/radialScrollProgress";
 import RadialScrollProgressContainer from "../various-new/radialScrollProgress";
-import {
-  useFlubber,
-  getIndex,
-  useFlubberInterpolation,
-} from "~/utils/useFlubber";
+import FlexFull from "~/components/buildingBlocks/flexFull";
 
 // EXAMPLE ONE
 export function ExampleOne() {
@@ -819,23 +807,8 @@ export function ExampleFifteen() {
   );
 }
 
-// EXAMPLE SIXTEEN
 export function ExampleSixteen() {
-  const starPath =
-    "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
-  const heartPath =
-    "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
-
-  const { path, animateShape, controls } = useFlubberInterpolation(
-    starPath,
-    heartPath
-  );
-
-  return (
-    <svg width="200" height="200" onClick={animateShape}>
-      <motion.path d={path} fill="red" animate={controls} />
-    </svg>
-  );
+  return <motion.div>this</motion.div>;
 }
 
 // EXAMPLE SEVENTEEN
