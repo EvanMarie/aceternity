@@ -17,6 +17,7 @@ interface AnimateInPlaceTextProps {
   damping?: number;
   stiffness?: number;
   gradient?: string;
+  style?: React.CSSProperties;
 }
 
 export default function AnimateInPlaceText({
@@ -36,6 +37,7 @@ export default function AnimateInPlaceText({
   textClassName,
   damping = 3,
   stiffness = 125,
+  style,
 }: AnimateInPlaceTextProps) {
   const letters = Array.from(text);
 
@@ -88,7 +90,7 @@ export default function AnimateInPlaceText({
           variants={child}
           custom={index}
           className={`inline-block ${textSize} ${textColor} ${textShadow} ${fontStyle} ${textSpacing} ${textClassName} ${gradientClassName}`}
-          style={{ ...gradientStyle, overflow: "visible" }}
+          style={{ ...style, ...gradientStyle, overflow: "visible" }}
         >
           {letter === " " ? "\u00A0" : letter}
         </motion.span>

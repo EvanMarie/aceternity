@@ -12,19 +12,19 @@ const MenuItems = [
     to: "/use-spring",
   },
   {
-    title: "Parallax Pages",
+    title: "P1",
     to: "/use-spring/parallax-pages",
   },
   {
-    title: "",
+    title: " P2",
     to: "/use-spring/characters",
   },
   {
-    title: "",
+    title: "P3",
     to: "/use-spring/",
   },
   {
-    title: "",
+    title: "P4",
     to: "/use-spring/",
   },
   //   {
@@ -35,8 +35,9 @@ const MenuItems = [
 
 export default function SpringNav({ activePanel }: { activePanel: string }) {
   const baseStyles = "px-[1vh] py-[0.3vh]";
-  const activeStyle = "metallicEdgesMd bg-col-210 hover:metallicEdgesMd";
-  const inactiveStyle = "mainInset bg-col-210 mainBorder transition-400 ";
+  const activeStyle = "metallicEdgesMd bg-col-950 hover:metallicEdgesMd";
+  const inactiveStyle =
+    "mainInset bg-col-960 mainBorder transition-400 border-900-md";
   return (
     <HStackFull
       gap="gap-[3vh]"
@@ -48,22 +49,27 @@ export default function SpringNav({ activePanel }: { activePanel: string }) {
       {MenuItems.map((item) => (
         <HStackFull>
           <NavLink key={item.title} to={item.to}>
-            <AnimatedInPlaceText
-              text={item.title}
-              isScale
-              gradient={
+            <Flex
+              className={
                 activePanel === item.title
                   ? "activeGradient"
                   : "inactiveGradient group-hover:logoGradient"
               }
-              textSize="text-md-normal md:text-lg-normal lg:text-xl-normal"
-              scaleSize={1.2}
-              textShadow=""
-              containerClassName={` ${baseStyles} cursor-pointer
-                ${
-                  activePanel === item.title ? activeStyle : inactiveStyle
-                } transition-400`}
-            />
+            >
+              <AnimatedInPlaceText
+                fontStyle=""
+                textSize="text-[2vh]"
+                text={item.title}
+                isScale
+                style={{}}
+                scaleSize={1.2}
+                textShadow=""
+                containerClassName={` ${baseStyles} cursor-pointer
+                  ${
+                    activePanel === item.title ? activeStyle : inactiveStyle
+                  } transition-400`}
+              />
+            </Flex>
           </NavLink>
         </HStackFull>
       ))}
