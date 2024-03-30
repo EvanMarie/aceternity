@@ -3087,6 +3087,18 @@ export default {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         },
+        ".logoGradient": {
+          backgroundImage:
+            "linear-gradient(to right, #fffacc, #ffef5c, #FFAB34,  #ffef5c, #fffacc);",
+        },
+        ".inactiveGradient": {
+          backgroundImage:
+            "linear-gradient(to right, #012a5e, #293c54, #012a5e)",
+        },
+        ".activeGradient": {
+          backgroundImage:
+            "linear-gradient(to right, #A7BDD9, #e4edf5, #A7BDD9)",
+        },
       });
     }),
     // INPUT AND TEXTAREA PLUGIN

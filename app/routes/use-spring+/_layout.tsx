@@ -5,11 +5,7 @@ import SpringNav from "./components/springNav";
 export default function RouteIndex() {
   return (
     <LayoutContainer>
-      {" "}
-      <SpringNav />
-      <LayoutContainer className="pt-nav">
-        <Outlet />
-      </LayoutContainer>
+      <Outlet />
     </LayoutContainer>
   );
 }

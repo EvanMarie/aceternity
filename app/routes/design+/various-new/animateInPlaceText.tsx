@@ -1,7 +1,6 @@
-import React from "react";
 import { motion } from "framer-motion";
 
-interface AnimatedInPlaceTextProps {
+interface AnimateInPlaceTextProps {
   text: string;
   containerClassName?: string;
   textClassName?: string;
@@ -17,9 +16,10 @@ interface AnimatedInPlaceTextProps {
   fontStyle?: string;
   damping?: number;
   stiffness?: number;
+  gradient?: string;
 }
 
-export default function AnimatedInPlaceText({
+export default function AnimateInPlaceText({
   text,
   containerClassName,
   isWave,
@@ -29,13 +29,14 @@ export default function AnimatedInPlaceText({
   textShadow = "textShadow",
   textSpacing = "tracking-wider",
   fontStyle = "font-cursive",
+  gradient,
   letterDelay = 0.08,
   waveSize = -12,
   scaleSize = 1.4,
   textClassName,
   damping = 3,
   stiffness = 125,
-}: AnimatedInPlaceTextProps) {
+}: AnimateInPlaceTextProps) {
   const letters = Array.from(text);
 
   const container = {
@@ -64,20 +65,30 @@ export default function AnimatedInPlaceText({
     }),
   };
 
+  const gradientClassName = gradient ? `${gradient}` : "";
+  const gradientStyle = gradient
+    ? {
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+      }
+    : {};
+
   return (
     <motion.div
-      className={`inline-block ${containerClassName}`}
+      className={`inline-block ${containerClassName} group`}
       variants={container}
       initial="hidden"
       animate="visible"
       whileHover="hover"
+      whileTap={{ rotate: 15, scale: 0.75, transition: { duration: 0.3 } }}
     >
       {letters.map((letter, index) => (
         <motion.span
           key={index}
           variants={child}
           custom={index}
-          className={`inline-block ${textSize} ${textColor} ${textShadow} ${fontStyle} ${textSpacing} ${textClassName}`}
+          className={`inline-block ${textSize} ${textColor} ${textShadow} ${fontStyle} ${textSpacing} ${textClassName} ${gradientClassName}`}
+          style={{ ...gradientStyle, overflow: "visible" }}
         >
           {letter === " " ? "\u00A0" : letter}
         </motion.span>

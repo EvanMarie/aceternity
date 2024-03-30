@@ -7,6 +7,7 @@ import Text from "~/components/buildingBlocks/text";
 import VStack from "~/components/buildingBlocks/vStack";
 import DescriptionModal from "./components/descriptionModal";
 import CodeExample from "~/components/buildingBlocks/codeExample";
+import SpringNav from "./components/springNav";
 
 export default function ParallaxPages() {
   const verticalCenter = "flex items-center";
@@ -43,6 +44,7 @@ export default function ParallaxPages() {
   }
   return (
     <TransitionFull className="h-full bg-radial3op50 relative">
+      <SpringNav activePanel="Parallax Pages" />
       <Box className="absolute bottom-[1vh] left-[1vh] z-10">
         <DescriptionModal title="Parallax Pages">
           <CodeExample textColor="text-col-100" textSize="text-sm">
