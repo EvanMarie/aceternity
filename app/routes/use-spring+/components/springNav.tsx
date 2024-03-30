@@ -12,19 +12,19 @@ const MenuItems = [
     to: "/use-spring",
   },
   {
-    title: "P1",
+    title: "Ex 1",
     to: "/use-spring/parallax-pages",
   },
   {
-    title: " P2",
-    to: "/use-spring/characters",
+    title: "Ex 2",
+    to: "/use-spring/parallax-two",
   },
   {
-    title: "P3",
-    to: "/use-spring/",
+    title: "Ex 3",
+    to: "/use-spring/parallax-three",
   },
   {
-    title: "P4",
+    title: "Ex 4",
     to: "/use-spring/",
   },
   //   {
@@ -41,21 +41,24 @@ export default function SpringNav({ activePanel }: { activePanel: string }) {
   return (
     <HStackFull
       gap="gap-[3vh]"
-      className="absolute top-0 left-0 justify-between pt-[1vh] z-10"
+      className="absolute top-0 left-0 justify-between z-10 shadowBroadTight h-[5vh] items-center "
     >
-      <Center className="w-[8vh] flex-shrink-0">
+      <Center className="w-[8vh] flex-shrink-0 ">
         <IconButton icon={HomeIcon} type="smallNormal" to="/" />
       </Center>
-      {MenuItems.map((item) => (
-        <HStackFull>
-          <NavLink key={item.title} to={item.to}>
-            <Flex
-              className={
-                activePanel === item.title
-                  ? "activeGradient"
-                  : "inactiveGradient group-hover:logoGradient"
-              }
-            >
+      {MenuItems.map((item, index) => (
+        <HStackFull
+          key={index}
+          className={`h-full items-center ${
+            activePanel === item.title ? "activeStyle" : "inactiveStyle"
+          }`}
+        >
+          <NavLink
+            key={item.title}
+            to={item.to}
+            className="flex h-full items-center"
+          >
+            <Flex className="h-full items-center ">
               <AnimatedInPlaceText
                 fontStyle=""
                 textSize="text-[2vh]"

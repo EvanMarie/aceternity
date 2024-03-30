@@ -8,7 +8,6 @@ import VStack from "~/components/buildingBlocks/vStack";
 import DescriptionModal from "./components/descriptionModal";
 import CodeExample from "~/components/buildingBlocks/codeExample";
 import SpringNav from "./components/springNav";
-import CenterFull from "~/components/buildingBlocks/centerFull";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 
 export default function ParallaxPages() {
@@ -53,7 +52,7 @@ export default function ParallaxPages() {
     );
   }
   return (
-    <TransitionFull className="h-full bg-radial3op50 relative pt-[6vh]">
+    <TransitionFull className="h-full bg-radial3op50 relative pt-[5vh]">
       <SpringNav activePanel="P1" />
       <Box className="absolute bottom-[1vh] left-[1vh] z-10">
         <DescriptionModal title="Parallax Pages">
