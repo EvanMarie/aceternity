@@ -9,12 +9,14 @@ import Image from "~/components/buildingBlocks/image";
 import HStackFull from "~/components/buildingBlocks/hStackFull";
 import IconButton from "~/components/buildingBlocks/iconButton";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import { motion, useAnimation } from "framer-motion";
 
 interface PageProps {
   offset: number;
   backClick: () => void | undefined;
   forwardClick: () => void | undefined;
   className?: string;
+  totalPages?: number;
 }
 
 const Page: React.FC<PageProps> = ({
@@ -22,13 +24,50 @@ const Page: React.FC<PageProps> = ({
   backClick,
   forwardClick,
   className,
+  totalPages = 10,
 }) => {
+  const glowAnimation = useAnimation();
   const bgClass = className ? className : "bg-radial5op75"; // Default background class
-  const backDisabled = backClick === undefined;
-  const forwardDisabled = forwardClick === undefined;
+
+  const handleButtonClick = async (direction: "forward" | "back") => {
+    // Start a more pronounced glow effect
+    glowAnimation
+      .start({
+        scale: 1.05,
+        background:
+          "radial-gradient(circle, rgba(69, 35, 62, 0.5) 0%, rgba(156, 104, 146, 0.5) 100%)",
+        transition: {
+          duration: 1,
+          ease: "linear",
+        },
+      })
+      .then(() => {
+        // After the glow, return to normal
+        glowAnimation.start({
+          scale: 1.1,
+          background:
+            "radial-gradient(circle, rgba(156, 104, 146, 0.5) 0%, rgba(69, 35, 62, 0.5) 100%)",
+          transition: {
+            duration: 1,
+            ease: "linear",
+          },
+        });
+      });
+
+    if (direction === "forward" && offset < totalPages - 1) {
+      forwardClick();
+    } else if (direction === "back" && offset > 0) {
+      backClick();
+    }
+  };
+
   return (
     <>
-      <ParallaxLayer offset={offset} speed={0.2}>
+      <ParallaxLayer
+        offset={offset}
+        speed={0.2}
+        className="snap-center snap-always w-screen h-screen"
+      >
         <div
           className={`absolute w-full h-full`}
           style={{
@@ -39,35 +78,40 @@ const Page: React.FC<PageProps> = ({
         />
       </ParallaxLayer>
       <ParallaxLayer offset={offset} speed={0.6}>
-        <div
+        <motion.div
           className={`absolute w-full h-full`}
           style={{
             clipPath: "circle(40% at 50% 50%)",
             boxShadow: "0 0 10px 5px rgba(0, 0, 0, 0.5)",
             background:
               "radial-gradient(circle, rgba(242, 125, 114, 0.5) 0%, rgba(156, 104, 146, 0.5) 100%)",
-          }} // Smaller circle at the center
+          }}
+          animate={glowAnimation}
         />
       </ParallaxLayer>
       <ParallaxLayer offset={offset} speed={1.2}>
         <CenterFull>
-          <VStack className="bg-col-960 p-[2vh] border-900-md shadowBroadTight">
-            <span className="text-insane-looser text-col-100">
+          <VStack className="bg-col-660 p-[2vh] border-900-md shadowBroadTight">
+            <span className="text-insane-looser text-col-100 textShadow">
               Panel {offset + 1}
             </span>
             <HStackFull className="justify-between">
-              <IconButton
-                icon={BiChevronLeft}
-                // type="unstyled"
-                onClick={forwardClick}
-                isDisabled={forwardDisabled}
-              />
-              <IconButton
-                icon={BiChevronRight}
-                // type="unstyled"
-                onClick={backClick}
-                isDisabled={backDisabled}
-              />
+              {offset >= 1 ? (
+                <IconButton
+                  icon={BiChevronLeft}
+                  onClick={() => handleButtonClick("back")}
+                />
+              ) : (
+                <div className="text-transparent">_</div>
+              )}
+              {offset < totalPages - 1 ? (
+                <IconButton
+                  icon={BiChevronRight}
+                  onClick={() => handleButtonClick("forward")}
+                />
+              ) : (
+                <></>
+              )}
             </HStackFull>
             <Box>
               <Image
@@ -97,23 +141,26 @@ export default function Parallax2() {
   const pages = Array.from({ length: totalPages });
 
   return (
-    <div className="bg-100-radial3op25 w-full h-full">
+    <div className="bg-100-radial3op25 w-full h-full overflow-x-scroll snap-x snap-always">
       <Parallax ref={parallax} pages={totalPages} horizontal>
         {pages.map((page, index) => (
           <Page
+            totalPages={totalPages}
             key={index}
             offset={index}
             forwardClick={() => {
-              if (index === pages.length - 1) {
-                scroll(0);
+              if (index < pages.length - 1) {
+                scroll(index + 1);
               }
             }}
             backClick={() => {
-              if (index === 0) {
-                scroll(pages.length - 1);
+              if (index > 0) {
+                scroll(index - 1);
+              } else {
+                undefined;
               }
             }}
-            className="flex justify-center items-center bg-radial5op50"
+            className="flex justify-center items-center bg-radial5op50 "
           />
         ))}
       </Parallax>
