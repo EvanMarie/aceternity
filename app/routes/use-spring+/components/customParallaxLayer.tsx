@@ -12,6 +12,7 @@ export default function CustomParallaxLayer({
   info,
   opacity,
   children,
+  bg,
 }: {
   offset?: number;
   speed?: number;
@@ -21,13 +22,14 @@ export default function CustomParallaxLayer({
   info?: string[];
   opacity?: number;
   children?: React.ReactNode;
+  bg?: string;
 }) {
   return (
     <ParallaxLayer
       offset={offset}
       speed={speed}
       sticky={sticky}
-      className={className}
+      className={`${className} ${bg}`}
       style={{ opacity: opacity }}
     >
       {" "}
@@ -36,12 +38,12 @@ export default function CustomParallaxLayer({
         {children}
         <VStack
           gap="gap-[0px]"
-          className="bg-100-linear4op50 shadowBroadTight h-[40vh] w-[40vh] justify-evenly border-900-md"
+          className={`shadowBroadTight h-[40vh] w-[40vh] justify-evenly border-900-md bg-500-radial6op25 text-col-100 textShadow rounded-[2vh]`}
         >
           <Text className="text-[3vh] font-semibold">
             Parallax Layer: {layerNum}
           </Text>
-          <VStack className="text-[2.4vh]" gap="gap-[0px]">
+          <VStack className="text-[2vh] font-mono" gap="gap-[0px]">
             <Text>
               <b>Offset: </b>
               {offset}
