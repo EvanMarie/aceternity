@@ -41,29 +41,42 @@ const Page: React.FC<PageProps> = ({
   const glowAnimation = useAnimation();
   const bgClass = className ? className : "bg-radial5op75"; // Default background class
 
+  const randomOpacity = Math.random() * (0.7 - 0.3) + 0.3;
   const handleButtonClick = async (
     direction: "forward" | "back" | "start" | "end"
   ) => {
     // Start a more pronounced glow effect
     glowAnimation
       .start({
-        scale: 0.75,
+        scale: 0.9,
         background:
-          "radial-gradient(circle, rgba(69, 35, 62, 0.5) 0%, rgba(156, 104, 146, 0.5) 100%)",
+          "radial-gradient(circle, rgba(242, 181, 128, 0.5) 0%, rgba(156, 104, 146, 0.5) 100%)",
         transition: {
-          duration: 0.6,
+          duration: 0.4,
           ease: "easeOut",
         },
       })
       .then(() => {
-        // After the glow, return to normal
-        glowAnimation.start({
-          scale: 1.4,
+        // First change to a different state
+        return glowAnimation.start({
+          scale: 1.3,
           background:
-            "radial-gradient(circle, rgba(156, 104, 146, 0.5) 0%, rgba(69, 35, 62, 0.5) 100%)",
+            "radial-gradient(circle, rgba(242, 141, 128, 0.5) 0%, rgba(122, 71, 112, 0.5) 100%)",
           transition: {
-            duration: 1.4,
+            duration: 0.7,
             ease: "easeInOut",
+          },
+        });
+      })
+      .then(() => {
+        // Then return to the original state
+        return glowAnimation.start({
+          scale: 1,
+          background:
+            "radial-gradient(circle, rgba(242, 181, 128, 0.5) 0%, rgba(156, 104, 146, 0.5) 100%)",
+          transition: {
+            duration: 0.9,
+            ease: "easeIn",
           },
         });
       });
@@ -87,33 +100,56 @@ const Page: React.FC<PageProps> = ({
         className="snap-center snap-always w-screen h-screen"
       >
         <div
-          className={`absolute w-full h-full`}
+          className="absolute w-full h-full"
           style={{
             clipPath: "circle(50% at 50% 50%)",
             background:
-              "radial-gradient(circle, rgba(242, 181, 128, 0.5) 0%, rgba(3, 115, 140, 0.5) 100%)",
-          }} // Circle at the center
+              "radial-gradient(circle, rgba(242, 181, 128, 0.3) 0%, rgba(3, 115, 140, 0.3) 100%)",
+          }} // Outer circle (acts as border)
         />
       </ParallaxLayer>
+      <ParallaxLayer offset={offset} speed={0.4}>
+        <div
+          className="absolute w-full h-full"
+          style={{
+            clipPath: "circle(44% at 50% 50%)", // Slightly smaller to show the layer beneath as a border
+            background:
+              "radial-gradient(circle, rgba(242, 125, 114, 0.3) 0%, rgba(3, 115, 140, 0.3) 100%)",
+          }}
+        />
+      </ParallaxLayer>{" "}
       <ParallaxLayer offset={offset} speed={0.6}>
         <motion.div
-          className={`absolute w-full h-full`}
+          className="absolute w-full h-full"
           style={{
             clipPath: "circle(32% at 50% 50%)",
-            boxShadow: "0 0 10px 5px rgba(0, 0, 0, 0.5)",
             background:
-              "radial-gradient(circle, rgba(242, 125, 114, 0.5) 0%, rgba(156, 104, 146, 0.5) 100%)",
+              "radial-gradient(circle, rgba(242, 181, 128, 0.3) 0%, rgba(3, 115, 140, 0.3) 100%)",
           }}
           animate={glowAnimation}
         />
       </ParallaxLayer>
-      <ParallaxLayer offset={offset} speed={1.2}>
+      <ParallaxLayer offset={offset} speed={0.8}>
+        <motion.div
+          className="absolute w-full h-full"
+          style={{
+            clipPath: "circle(31% at 50% 50%)",
+            background:
+              "radial-gradient(circle, rgba(242, 181, 128, 0.3) 0%, rgba(3, 115, 140, 0.3) 100%)",
+          }}
+          animate={glowAnimation}
+        />
+      </ParallaxLayer>
+      <ParallaxLayer offset={offset} speed={1}>
         <CenterFull>
-          <VStack className="bg-col-660 p-[2vh] border-900-md shadowBroadTight">
+          <VStack className="bg-col-880 p-[3vh] border-900-md shadowBroadTight">
             <HStackFull className="justify-between">
               <VStack className="flex-shrink-0">
                 {offset >= 2 ? (
                   <IconButton
+                    type="unstyled"
+                    iconClassName="text-col-100 text-[3.5vh]"
+                    containerClassName="border-270-md hover:metallicEdgesSm"
                     icon={BiChevronsLeft}
                     onClick={() => handleButtonClick("start")} // Changed from "back" to "start"
                   />
@@ -122,6 +158,9 @@ const Page: React.FC<PageProps> = ({
                 )}
                 {offset >= 1 ? (
                   <IconButton
+                    type="unstyled"
+                    iconClassName="text-col-100 text-[3.5vh]"
+                    containerClassName="border-270-md hover:metallicEdgesSm"
                     icon={BiChevronLeft}
                     onClick={() => handleButtonClick("back")}
                   />
@@ -137,6 +176,9 @@ const Page: React.FC<PageProps> = ({
               <VStack className="flex-shrink-0">
                 {offset < totalPages - 1 ? (
                   <IconButton
+                    type="unstyled"
+                    iconClassName="text-col-100 text-[3.5vh]"
+                    containerClassName="border-270-md hover:metallicEdgesSm"
                     icon={BiChevronsRight}
                     onClick={() => handleButtonClick("end")} // Changed from "forward" to "end"
                   />
@@ -145,6 +187,9 @@ const Page: React.FC<PageProps> = ({
                 )}
                 {offset < totalPages - 1 ? (
                   <IconButton
+                    type="unstyled"
+                    iconClassName="text-col-100 text-[3.5vh]"
+                    containerClassName="border-270-md hover:metallicEdgesSm"
                     icon={BiChevronRight}
                     onClick={() => handleButtonClick("forward")}
                   />
@@ -181,7 +226,7 @@ export default function Parallax2() {
   const pages = Array.from({ length: totalPages });
 
   return (
-    <div className="bg-100-radial3op25 w-full h-full overflow-x-scroll snap-x snap-always">
+    <div className="bg-radial3op50 w-full h-full overflow-x-scroll snap-x snap-always">
       <Parallax ref={parallax} pages={totalPages} horizontal>
         {pages.map((page, index) => (
           <Page
