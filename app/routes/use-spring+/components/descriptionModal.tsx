@@ -14,11 +14,13 @@ import VStackFull from "~/components/buildingBlocks/vStackFull";
 export default function DescriptionModal({
   title,
   useIcon = true,
+  useCodeIcon = true,
   children,
   buttonText,
 }: {
   title: string;
   useIcon?: boolean;
+  useCodeIcon?: boolean;
   children: React.ReactNode;
   buttonText?: string;
 }) {
@@ -27,14 +29,14 @@ export default function DescriptionModal({
     <>
       {useIcon ? (
         <IconButton
-          icon={InfoIcon}
+          icon={useCodeIcon ? CodeIcon : InfoIcon}
           onClick={() => setModalOpen(true)}
           type="smallNormal"
         />
       ) : (
         <Box>
           <Button
-            iconLeft={InfoIcon}
+            iconLeft={useCodeIcon ? CodeIcon : InfoIcon}
             onClick={() => setModalOpen(true)}
             buttonText={buttonText ? buttonText : "Info"}
             type="smallNormal"

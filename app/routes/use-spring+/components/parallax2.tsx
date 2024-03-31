@@ -94,11 +94,7 @@ const Page: React.FC<PageProps> = ({
 
   return (
     <>
-      <ParallaxLayer
-        offset={offset}
-        speed={0.2}
-        className="snap-center snap-always w-screen h-screen"
-      >
+      <ParallaxLayer offset={offset} speed={0.2} className="w-screen h-screen">
         <div
           className="absolute w-full h-full"
           style={{
@@ -226,7 +222,7 @@ export default function Parallax2() {
   const pages = Array.from({ length: totalPages });
 
   return (
-    <div className="bg-radial3op50 w-full h-full overflow-x-scroll snap-x snap-always">
+    <div className="bg-radial3op50 w-full h-full overflow-x-scroll">
       <Parallax ref={parallax} pages={totalPages} horizontal>
         {pages.map((page, index) => (
           <Page
