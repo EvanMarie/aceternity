@@ -5,8 +5,9 @@ import CodeExample from "~/components/buildingBlocks/codeExample";
 import DescriptionModal from "./components/descriptionModal";
 import Parallax2 from "./components/parallax2";
 import Parallax3 from "./components/parallax3";
+import Parallax4 from "./components/parallax4";
 
-export default function ParallaxThree() {
+export default function ParallaxFour() {
   return (
     <TransitionFull className="h-full bg-radial3op50 relative pt-[5vh]">
       <SpringNav activePanel="Ex 3" />
@@ -17,7 +18,7 @@ export default function ParallaxThree() {
           </CodeExample>
         </DescriptionModal>
       </Box>
-      <Parallax3 />
+      <Parallax4 />
     </TransitionFull>
   );
 }
