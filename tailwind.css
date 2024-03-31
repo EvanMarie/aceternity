@@ -41,6 +41,16 @@ p {
   font-size: inherit;
 }
 
+span {
+  padding: 0.2rem;
+  font-size: inherit;
+}
+
+b {
+  padding: 0.2rem;
+  font-size: inherit;
+}
+
 ol {
   padding: 1rem;
 }

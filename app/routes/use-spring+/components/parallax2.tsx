@@ -138,7 +138,7 @@ const Page: React.FC<PageProps> = ({
       </ParallaxLayer>
       <ParallaxLayer offset={offset} speed={1}>
         <CenterFull>
-          <VStack className="bg-col-880 p-[3vh] border-900-md shadowBroadTight">
+          <VStack className="bg-col-880 p-[3vh] border-900-md shadowBroadTight min-h-[70vh] min-w-[30vw]">
             <HStackFull className="justify-between">
               <VStack className="flex-shrink-0">
                 {offset >= 2 ? (
