@@ -6,56 +6,21 @@ import CenterFull from "~/components/buildingBlocks/centerFull";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 import VStack from "~/components/buildingBlocks/vStack";
 import Text from "~/components/buildingBlocks/text";
+import CustomParallaxLayer from "./customParallaxLayer";
+import { ParallaxEmoji } from "./parallaxEmoji";
 
-function CustomParallaxLayer({
-  offset,
-  speed,
-  className,
-  sticky,
-  layerNum,
-  info,
-}: {
-  offset?: number;
-  speed?: number;
-  className?: string;
-  sticky?: { start: number; end: number };
-  layerNum?: string;
-  info?: string[];
-}) {
+function ParallaxItem({ item }: { item?: React.ReactElement }) {
   return (
-    <ParallaxLayer
-      offset={offset}
-      speed={speed}
-      sticky={sticky}
-      className={className}
+    <Box
+      style={{
+        display: "block",
+      }}
+      className="p-[2vh] absolute top-[20vh] right-[20vh]"
     >
-      <CenterFull>
-        <VStack
-          gap="gap-[0px]"
-          className="bg-100-linear4op50 shadowBroadTight h-[40vh] w-[40vh] justify-evenly border-900-md"
-        >
-          <Text className="text-[3vh] font-semibold">
-            Layer Number: {layerNum}
-          </Text>
-          <VStack className="text-[2.4vh]">
-            <Text>
-              <b>Offset: </b>
-              {offset}
-            </Text>
-            <Text>
-              <b>Speed:</b> {speed}
-            </Text>
-          </VStack>
-
-          {info?.map((text, i) => (
-            <Text key={i}>{text}</Text>
-          ))}
-        </VStack>
-      </CenterFull>
-    </ParallaxLayer>
+      {item}
+    </Box>
   );
 }
-
 export default function Parallax4() {
   const parallax = useRef<IParallax>(null!);
   return (
@@ -63,15 +28,28 @@ export default function Parallax4() {
       <Parallax
         ref={parallax}
         pages={6}
-        config={{ mass: 1, tension: 280, friction: 60 }}
+        config={{ mass: 1, tension: 350, friction: 60 }}
       >
         <CustomParallaxLayer
           offset={0}
           speed={1}
-          className="bg-col-950"
+          className="bg-col-410"
           layerNum="One"
         />
-        <ParallaxLayer offset={2} speed={1} className="bg-col-850" />
+        <ParallaxEmoji speed={2} emoji="dragon" />
+        <CustomParallaxLayer
+          offset={0.9}
+          speed={0.2}
+          className="bg-col-510"
+          layerNum="Two"
+        />
+        <CustomParallaxLayer
+          offset={2}
+          speed={1}
+          className="bg-col-610"
+          layerNum="Three"
+          opacity={0.9}
+        />
         {/* 
         <ParallaxLayer offset={0} speed={0} factor={3} className="bg-col-750" />
 
