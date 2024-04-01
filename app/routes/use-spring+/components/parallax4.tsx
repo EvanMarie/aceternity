@@ -7,7 +7,7 @@ import AnimateOnScrollParallax from "./animateOnScrollParallax";
 
 export default function Parallax4() {
   const parallax = useRef<IParallax>(null!);
-
+  const containerRef = useRef<HTMLDivElement>(null);
   return (
     <Flex className="w-screen h-screen bg-radial6op75 relative">
       <Parallax
@@ -16,8 +16,12 @@ export default function Parallax4() {
         config={{ mass: 1, tension: 300, friction: 60 }}
       >
         {/* POSITION MARKERS  */}
-        <ParallaxPositions numPages={6} />
-        <AnimateOnScrollParallax offset={0} speed={0.2} />
+        {/* <ParallaxPositions numPages={6} /> */}
+        <AnimateOnScrollParallax
+          offset={0}
+          speed={0.2}
+          containerRef={containerRef}
+        />
       </Parallax>
     </Flex>
   );

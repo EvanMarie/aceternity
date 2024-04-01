@@ -2,8 +2,10 @@ import { ParallaxLayer } from "@react-spring/parallax";
 import Box from "~/components/buildingBlocks/box";
 import VStack from "~/components/buildingBlocks/vStack";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import CenterFull from "~/components/buildingBlocks/centerFull";
+import VStackFull from "~/components/buildingBlocks/vStackFull";
+import FlexFull from "~/components/buildingBlocks/flexFull";
 
 export default function AnimateOnScrollParallax({
   offset,
@@ -18,6 +20,7 @@ export default function AnimateOnScrollParallax({
   bottom,
   transform,
   animationClassName,
+  containerRef,
 }: {
   offset?: number;
   bg?: string;
@@ -32,72 +35,87 @@ export default function AnimateOnScrollParallax({
   emojiSize?: string;
   transform?: string;
   animationClassName?: string;
+  containerRef: RefObject<HTMLDivElement>;
 }) {
-  const containerRef = useRef(null);
-  //   const targetRef = useRef(null);
-  //   const { scrollYProgress } = useScroll({
-  //     target: targetRef,
-  //     offset: ["start end", "end start"],
-  //     // offset: ["start start", "end start"],
-  //   });
-
-  //   const rotate = useTransform(scrollYProgress, [0, 1], ["0deg", "180deg"]);
   const ref = useRef(null);
 
   const isInView = useInView(ref, {
     amount: "all",
+
+    margin: "300%",
   });
 
-  useEffect(() => {
-    console.log(`The element ${isInView ? "is" : "is NOT"} in view`);
-  }, [isInView]);
+  const targetRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    container: containerRef,
+    target: targetRef,
+  });
+
+  const rotate = useTransform(scrollYProgress, [0, 1], ["0deg", "360deg"]);
   return (
-    <ParallaxLayer
-      offset={2}
-      speed={speed}
-      sticky={sticky}
-      className={`${bg} ${className}`}
-      style={{ opacity: opacity }}
-    >
-      <CenterFull ref={containerRef}>
-        <div
-          ref={ref}
-          className="relative mx-auto grid h-32 w-96 place-content-center"
-        >
-          <h1 className="relative z-0 text-3xl font-black uppercase">
-            Show me on scroll
-          </h1>
-          <motion.div
-            animate={{
-              y: isInView ? "-100%" : "0%",
-            }}
-            className="absolute bottom-0 left-0 top-0 z-10 w-1/3 bg-indigo-500"
-          />
-          <motion.div
-            animate={{
-              y: isInView ? "100%" : "0%",
-            }}
-            className="absolute bottom-0 left-1/3 top-0 z-10 w-1/3 bg-indigo-500"
-          />
-          <motion.div
-            animate={{
-              y: isInView ? "-100%" : "0%",
-            }}
-            className="absolute bottom-0 left-2/3 top-0 z-10 w-1/3 bg-indigo-500"
-          />
-        </div>
-        {/* <motion.div
-        ref={targetRef}
-        style={{ rotate }}
-        className={`p-[2vh] absolute ${top} ${right} ${left} ${bottom} ${transform}`}
+    <>
+      <ParallaxLayer
+        offset={0}
+        className={`${bg} ${className}`}
+        style={{ opacity: opacity }}
       >
-        <Box
-          className={`${animationClassName} bg-purple-400 p-[4vh] text-[6vh]`}
-        >
-          This
-        </Box>
-      </motion.div> */}
-      </CenterFull>
-    </ParallaxLayer>
+        <CenterFull className="text-[6vh] text-col-100">One</CenterFull>
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={0.5}
+        speed={0.5}
+        className={`${bg} ${className}`}
+        style={{ opacity: opacity }}
+      >
+        <CenterFull className="text-[6vh] text-col-100">Two</CenterFull>
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={2}
+        className={`${bg} ${className}`}
+        style={{ opacity: opacity }}
+      >
+        <CenterFull ref={targetRef}>
+          <div ref={ref} className="relative">
+            <h1 className="relative z-0 text-[7vh] text-white  uppercase">
+              animated emojis
+            </h1>
+            <motion.div
+              animate={{
+                opacity: isInView ? 1 : 0,
+                y: isInView ? "0" : "-100vh",
+                x: isInView ? "0" : "100vh",
+              }}
+              transition={{ duration: 0.5 }}
+              className="text-[10vh]"
+            >
+              😍
+            </motion.div>
+            <motion.div
+              animate={{
+                opacity: isInView ? 1 : 0,
+                y: isInView ? "10vh" : "0%",
+                x: isInView ? "10vw" : "0%",
+              }}
+              transition={{ duration: 0.75 }}
+              className="text-[10vh]"
+            >
+              👽
+            </motion.div>
+            <motion.div
+              animate={{
+                opacity: isInView ? 1 : 0,
+                y: isInView ? "-20vh" : "0%",
+                x: isInView ? "40vw" : "0%",
+              }}
+              transition={{ duration: 1 }}
+              className="text-[10vh]"
+            >
+              🦄
+            </motion.div>
+          </div>
+        </CenterFull>
+      </ParallaxLayer>
+    </>
   );
 }

@@ -122,12 +122,12 @@ const UseScrollBasic = () => {
   );
 };
 
-const UseScrollAdvanced = () => {
+export const UseScrollAdvanced = () => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start end", "end start"],
-    // offset: ["start start", "end start"],
+    // offset: ["start end", "end start"],
+    offset: ["start start", "end start"],
   });
 
   const rotate = useTransform(scrollYProgress, [0, 1], ["0deg", "180deg"]);
