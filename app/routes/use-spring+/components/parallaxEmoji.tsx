@@ -19,6 +19,7 @@ export function ParallaxEmoji({
   emojiSize = "text-[10vh]",
   emoji = "unicorn",
   showInfo = true,
+  animationClassName,
 }: {
   offset?: number;
   bg?: string;
@@ -33,6 +34,7 @@ export function ParallaxEmoji({
   emojiSize?: string;
   transform?: string;
   showInfo?: boolean;
+  animationClassName?: string;
   emoji?:
     | "unicorn"
     | "cat"
@@ -141,7 +143,9 @@ export function ParallaxEmoji({
               )}
             </VStack>
           )}
-          <Text className={emojiSize}>{emojiMap[emoji]}</Text>
+          <Box className={animationClassName}>
+            <Text className={emojiSize}>{emojiMap[emoji]}</Text>
+          </Box>
         </VStack>
       </Box>
     </ParallaxLayer>

@@ -3,7 +3,6 @@ import SpringNav from "./components/springNav";
 import Box from "~/components/buildingBlocks/box";
 import CodeExample from "~/components/buildingBlocks/codeExample";
 import DescriptionModal from "./components/descriptionModal";
-import Parallax2 from "./components/parallax2";
 import Parallax3 from "./components/parallax3";
 
 export default function ParallaxThree() {
@@ -16,7 +15,7 @@ export default function ParallaxThree() {
             {``}
           </CodeExample>
         </DescriptionModal>
-      </Box>
+      </Box>{" "}
       <Parallax3 />
     </TransitionFull>
   );

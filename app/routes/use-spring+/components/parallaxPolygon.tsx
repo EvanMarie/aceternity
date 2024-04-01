@@ -17,10 +17,10 @@ export function ParallaxPolygon({
   bottom,
   transform,
   radius = "50vh",
-  polygon = "triangleUp",
+  polygon = "octagon",
   showInfo = true,
   color = "rgba(161, 3, 252, 0.2",
-  animation,
+  animationClassName,
 }: {
   offset?: number;
   bg?: string;
@@ -36,7 +36,7 @@ export function ParallaxPolygon({
   transform?: string;
   showInfo?: boolean;
   color?: string;
-  animation?: string;
+  animationClassName?: string;
   polygon?:
     | "triangleUp"
     | "triangleDown"
@@ -72,8 +72,8 @@ export function ParallaxPolygon({
       case "triangleUp":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: "0",
               height: "0",
               borderLeft: `${radius} solid transparent`,
@@ -85,8 +85,8 @@ export function ParallaxPolygon({
       case "triangleDown":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: "0",
               height: "0",
               borderLeft: `${radius} solid transparent`,
@@ -98,8 +98,8 @@ export function ParallaxPolygon({
       case "triangleLeft":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: "0",
               height: "0",
               borderTop: `${radius} solid transparent`,
@@ -111,8 +111,8 @@ export function ParallaxPolygon({
       case "triangleRight":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: "0",
               height: "0",
               borderTop: `${radius} solid transparent`,
@@ -124,8 +124,8 @@ export function ParallaxPolygon({
       case "triangleUpRight":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: "0",
               height: "0",
               borderBottom: `${radius} solid transparent`,
@@ -138,8 +138,8 @@ export function ParallaxPolygon({
       case "triangleUpLeft":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: "0",
               height: "0",
               borderBottom: `${radius} solid transparent`,
@@ -152,8 +152,8 @@ export function ParallaxPolygon({
       case "triangleDownRight":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: "0",
               height: "0",
               borderTop: `${radius} solid transparent`,
@@ -166,8 +166,8 @@ export function ParallaxPolygon({
       case "triangleDownLeft":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: "0",
               height: "0",
               borderTop: `${radius} solid transparent`,
@@ -180,8 +180,8 @@ export function ParallaxPolygon({
       case "circle":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: radius,
               height: radius,
               borderRadius: "50%",
@@ -192,8 +192,8 @@ export function ParallaxPolygon({
       case "square":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: radius,
               height: radius,
               backgroundColor: color,
@@ -203,8 +203,8 @@ export function ParallaxPolygon({
       case "rectangle":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: `calc(2 * ${radius})`,
               height: radius,
               backgroundColor: color,
@@ -215,8 +215,8 @@ export function ParallaxPolygon({
       case "pentagon":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: radius,
               height: radius,
               backgroundColor: color,
@@ -227,8 +227,8 @@ export function ParallaxPolygon({
       case "hexagon":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: radius,
               height: radius,
               backgroundColor: color,
@@ -240,8 +240,8 @@ export function ParallaxPolygon({
       case "heptagon":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: radius,
               height: radius,
               backgroundColor: color,
@@ -253,8 +253,8 @@ export function ParallaxPolygon({
       case "octagon":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: radius,
               height: radius,
               backgroundColor: color,
@@ -266,8 +266,8 @@ export function ParallaxPolygon({
       case "nonagon":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: radius,
               height: radius,
               backgroundColor: color,
@@ -279,8 +279,8 @@ export function ParallaxPolygon({
       case "decagon":
         return (
           <Box
+            className={`${animationClassName}`}
             style={{
-              animation: animation,
               width: radius,
               height: radius,
               backgroundColor: color,
