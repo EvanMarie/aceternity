@@ -57,6 +57,7 @@ const WhileInView = () => {
 
 const UseInView = () => {
   const ref = useRef(null);
+
   const isInView = useInView(ref, {
     amount: "all",
   });
