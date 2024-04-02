@@ -24,8 +24,8 @@ const MenuItems = [
     to: "/use-spring/parallax-three",
   },
   {
-    title: "Ex 4",
-    to: "/use-spring/parallax-four",
+    title: "Experiments",
+    to: "/use-spring/parallax-exp",
   },
   //   {
   //     title: "Item 4",
