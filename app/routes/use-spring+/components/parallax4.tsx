@@ -1,9 +1,8 @@
-import { IParallax, Parallax } from "@react-spring/parallax";
-import { useReducer, useRef } from "react";
+import { IParallax, Parallax, ParallaxLayer } from "@react-spring/parallax";
+import { useRef } from "react";
 import Flex from "~/components/buildingBlocks/flex";
-import ParallaxPositions from "./parallaxPoisitons";
-import CustomParallaxLayer from "./customParallaxLayer";
-import AnimateOnScrollParallax from "./animateOnScrollParallax";
+import ParallaxAnimateOnScroll from "./animateOnScrollParallax";
+import Center from "~/components/buildingBlocks/center";
 
 export default function Parallax4() {
   const parallax = useRef<IParallax>(null!);
@@ -15,13 +14,18 @@ export default function Parallax4() {
         pages={6}
         config={{ mass: 1, tension: 300, friction: 60 }}
       >
-        {/* POSITION MARKERS  */}
-        {/* <ParallaxPositions numPages={6} /> */}
-        <AnimateOnScrollParallax
-          offset={0}
-          speed={0.2}
-          containerRef={containerRef}
-        />
+        <ParallaxLayer offset={0.5} speed={1.4} className="bg-blue-200" />
+        <ParallaxAnimateOnScroll
+          offset={1}
+          speed={-0.02}
+          className="bg-red-200"
+          animation="inFromTopLeft"
+          inViewMargin="100%"
+        >
+          <Center className="w-20vh h-[10vh] bg-gray-800 text-col-100">
+            I AM ANIMATED
+          </Center>
+        </ParallaxAnimateOnScroll>
       </Parallax>
     </Flex>
   );
