@@ -4,6 +4,7 @@ import Center from "~/components/buildingBlocks/center";
 import Flex from "~/components/buildingBlocks/flex";
 import HStackFull from "~/components/buildingBlocks/hStackFull";
 import IconButton from "~/components/buildingBlocks/iconButton";
+import Text from "~/components/buildingBlocks/text";
 import AnimatedInPlaceText from "~/routes/design+/various-new/animateInPlaceText";
 
 const MenuItems = [
@@ -34,13 +35,14 @@ const MenuItems = [
 ];
 
 export default function SpringNav({ activePanel }: { activePanel: string }) {
-  const baseStyles = "px-[1vh] py-[0.3vh]";
-  const activeStyle = "metallicEdgesMd bg-col-950 hover:metallicEdgesMd";
+  const baseStyles = "text-[1.2vh] md:text-[2vh] px-[1vh] py-[0.3vh]";
+  const activeStyle =
+    "metallicEdgesMd bg-col-200 hover:metallicEdgesMd text-col-900 lightTextShadow";
   const inactiveStyle =
-    "mainInset bg-col-960 mainBorder transition-400 border-900-md";
+    "mainInset bg-col-960 mainBorder transition-400 border-900-md text-col-100 textShadow";
   return (
     <HStackFull
-      gap="gap-[3vh]"
+      gap="gap-[1.5vh]"
       className="absolute top-0 left-0 justify-between z-10 shadowBroadTight h-[5vh] items-center "
     >
       <Center className="w-[8vh] flex-shrink-0 ">
@@ -49,7 +51,7 @@ export default function SpringNav({ activePanel }: { activePanel: string }) {
       {MenuItems.map((item, index) => (
         <HStackFull
           key={index}
-          className={`h-full items-center ${
+          className={`h-full items-center pr-[1vh] ${
             activePanel === item.title ? "activeStyle" : "inactiveStyle"
           }`}
         >
@@ -59,19 +61,12 @@ export default function SpringNav({ activePanel }: { activePanel: string }) {
             className="flex h-full items-center"
           >
             <Flex className="h-full items-center ">
-              <AnimatedInPlaceText
-                fontStyle=""
-                textSize="text-[2vh]"
-                text={item.title}
-                isScale
-                style={{}}
-                scaleSize={1.2}
-                textShadow=""
-                containerClassName={` ${baseStyles} cursor-pointer
+              <Text
+                className={` ${baseStyles} cursor-pointer
                   ${
                     activePanel === item.title ? activeStyle : inactiveStyle
                   } transition-400`}
-              />
+              >{`${item.title}`}</Text>
             </Flex>
           </NavLink>
         </HStackFull>
@@ -79,36 +74,3 @@ export default function SpringNav({ activePanel }: { activePanel: string }) {
     </HStackFull>
   );
 }
-
-//   return (
-//     <NavContainer>
-//       <HStackFull className="px-[1vh] justify-between">
-//         <IconButton icon={HomeIcon} type="smallNormal" to="/" />
-//         <HStackFull className="h-full items-center justify-around">
-//           <Button to="/use-spring" buttonText="Intro" type="smallNormal" />
-//           <Button
-//             to="/use-spring/parallax-pages"
-//             buttonText="parallax pages"
-//             type="smallNormal"
-//           />
-//           {/* <Button
-//             to="/svg/svg-paths-intro"
-//             buttonText="Paths"
-//             type="smallNormal"
-//           />
-//           <Button
-//             to="/svg/svg-path-examples"
-//             buttonText="Playground"
-//             type="smallNormal"
-//           />
-//           <Button
-//             to="https://www.framer.com/motion/introduction/"
-//             buttonText="Docs"
-//             type="smallNormal"
-//             target="_blank"
-//           /> */}
-//         </HStackFull>
-//       </HStackFull>
-//     </NavContainer>
-//   );
-// }

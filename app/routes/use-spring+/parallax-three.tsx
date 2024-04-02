@@ -3,8 +3,6 @@ import SpringNav from "./components/springNav";
 import Box from "~/components/buildingBlocks/box";
 import CodeExample from "~/components/buildingBlocks/codeExample";
 import DescriptionModal from "./components/descriptionModal";
-import Parallax4 from "./components/parallax3";
-import { ScrollAnimations } from "./components/framerMotionScroll";
 import Parallax3 from "./components/parallax3";
 
 export default function ParallaxFour() {

@@ -18,7 +18,7 @@ export default function ParallaxAnimateOnScroll({
   bg,
   className,
   ease = "easeInOut",
-  transitionType = "spring",
+  transitionType = "tween",
   damping = 30,
   mass = 1,
   stiffness = 50,
@@ -27,6 +27,7 @@ export default function ParallaxAnimateOnScroll({
   layerOpacity,
   runOnce = false,
   inViewMargin = "0%",
+  animationClassName,
   children,
 }: {
   animation?:
@@ -37,7 +38,14 @@ export default function ParallaxAnimateOnScroll({
     | "inFromRight"
     | "inFromLeft"
     | "inFromTop"
-    | "inFromBottom";
+    | "inFromBottom"
+    | "spinInFromRight"
+    | "spinInFromLeft"
+    | "spinInFromTop"
+    | "spinInFromBottom"
+    | "spinIn"
+    | "spinOut"
+    | "fadeIn";
   offset?: number;
   yStart?: string;
   xStart?: string;
@@ -114,6 +122,37 @@ export default function ParallaxAnimateOnScroll({
       y: isInView ? "0" : "100vh",
       x: isInView ? "0" : "0",
     },
+    spinInFromRight: {
+      opacity: isInView ? opacity : startOpacity,
+      x: isInView ? "0" : "100vh",
+      rotate: isInView ? "0deg" : "360deg",
+    },
+    spinInFromLeft: {
+      opacity: isInView ? opacity : startOpacity,
+      x: isInView ? "0" : "-100vh",
+      rotate: isInView ? "0deg" : "-360deg",
+    },
+    spinInFromTop: {
+      opacity: isInView ? opacity : startOpacity,
+      y: isInView ? "0" : "-100vh",
+      rotate: isInView ? "0deg" : "360deg",
+    },
+    spinInFromBottom: {
+      opacity: isInView ? opacity : startOpacity,
+      y: isInView ? "0" : "100vh",
+      rotate: isInView ? "0deg" : "-360deg",
+    },
+    spinIn: {
+      opacity: isInView ? opacity : startOpacity,
+      rotate: isInView ? "0deg" : "360deg",
+    },
+    spinOut: {
+      opacity: isInView ? startOpacity : opacity,
+      rotate: isInView ? "360deg" : "0deg",
+    },
+    fadeIn: {
+      opacity: isInView ? opacity : startOpacity,
+    },
   };
 
   return (
@@ -145,7 +184,7 @@ export default function ParallaxAnimateOnScroll({
                   mass: mass,
                   stiffness: stiffness,
                 }}
-                className="text-[10vh]"
+                className={animationClassName}
               >
                 {children}
               </motion.div>

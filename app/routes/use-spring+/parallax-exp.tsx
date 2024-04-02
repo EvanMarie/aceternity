@@ -9,7 +9,7 @@ import ParallaxExp from "./components/parallaxExp";
 export default function ParallaxThree() {
   return (
     <TransitionFull className="h-full bg-radial3op50 relative pt-[5vh]">
-      <SpringNav activePanel="Ex 3" />
+      <SpringNav activePanel="Experiments" />
       <Box className="absolute bottom-[1vh] left-[1vh] z-10">
         <DescriptionModal title="Parallax">
           <CodeExample textColor="text-col-100" textSize="text-sm">
