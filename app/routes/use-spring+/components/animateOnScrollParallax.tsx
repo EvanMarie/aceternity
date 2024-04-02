@@ -97,12 +97,12 @@ export default function ParallaxAnimateOnScroll({
     inFromRight: {
       opacity: isInView ? opacity : startOpacity,
       y: isInView ? "0" : "0",
-      x: isInView ? "0" : "-100vh",
+      x: isInView ? "0" : "100vh",
     },
     inFromLeft: {
       opacity: isInView ? opacity : startOpacity,
       y: isInView ? "0" : "0",
-      x: isInView ? "0" : "100vh",
+      x: isInView ? "0" : "-100vh",
     },
     inFromTop: {
       opacity: isInView ? opacity : startOpacity,

@@ -19,8 +19,8 @@ export default function Parallax4() {
           offset={1}
           speed={-0.02}
           className="bg-red-200"
-          animation="inFromTopLeft"
-          inViewMargin="100%"
+          animation="inFromLeft"
+          inViewMargin="100% 0% 200% 0%"
         >
           <Center className="w-20vh h-[10vh] bg-gray-800 text-col-100">
             I AM ANIMATED
